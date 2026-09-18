@@ -457,157 +457,137 @@ button[disabled]{opacity:.45; cursor:not-allowed}
     onLogout: null,
     panes: { login: paneLogin, signup: paneSignup, welcome: paneWelcome, admin: paneAdmin }
   };
+
+  /* 인증 모듈(module 스크립트)이 끝내 뜨지 않으면 폼을 잠그고 이유를 알린다 */
+  setTimeout(function () {
+    if (window.DGA.authReady) return;
+    var note = '인증 모듈을 불러오지 못했습니다. 새로고침하거나 네트워크 연결을 확인해 주세요.';
+    say($('#loginMsg'), note);
+    say($('#signupMsg'), note);
+    busy(paneLogin, true);
+    busy(paneSignup, true);
+  }, 8000);
 })();
 </script>
 
 <script type="module">
-/* ── 인증 (Firebase Authentication · 이메일/비밀번호) ────────────
-   이 게임은 이메일이 아니라 아이디로 입장하므로, 아이디를
-   <아이디>@demigod-academy.example 로 바꿔 파이어베이스에 넘긴다.
-   (.example 은 실제로 존재할 수 없는 예약 도메인이다.)
-
-   firebaseConfig 값은 비밀이 아니다 — 파이어베이스 웹 앱 설정은 공개를 전제로
-   설계돼 있고, 실제 보호는 콘솔의 인증 설정과 보안 규칙이 한다. */
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+/* ── 인증 (Firebase Authentication · 이메일/비밀번호) ──────────── */
 import {
-  getAuth, setPersistence, browserLocalPersistence, browserSessionPersistence,
+  setPersistence, browserLocalPersistence, browserSessionPersistence,
   createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
   updateProfile, onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyCOuVma3nGWfGpvgCP_jfXR4hCdP7pCkm0',
-  authDomain: 'demig0d.firebaseapp.com',
-  projectId: 'demig0d',
-  storageBucket: 'demig0d.firebasestorage.app',
-  messagingSenderId: '968811968630',
-  appId: '1:968811968630:web:86ad7c3d9db58923d80757',
-  measurementId: 'G-8C67HN028T'
-};
+import { auth, emailOf, idOf } from './firebase-init.js';
 
 const UI = window.DGA;
+UI.authReady = true;
+
 const $ = UI.$;
 const loginMsg = $('#loginMsg');
 const signupMsg = $('#signupMsg');
 const LAST_ID_KEY = 'demigod.lastId';
 const ID_RE = /^[A-Za-z0-9_]{4,16}$/;
-const EMAIL_DOMAIN = '@demigod-academy.example';
 
-const configured = !String(firebaseConfig.apiKey).startsWith('PASTE');
-
-if (!configured) {
-  const note = '파이어베이스 설정이 아직 들어가지 않았습니다. index.html 의 firebaseConfig 를 채워 주세요.';
-  UI.say(loginMsg, note);
-  UI.say(signupMsg, note);
-  UI.busy($('#paneLogin'), true);
-  UI.busy($('#paneSignup'), true);
-} else {
-  const auth = getAuth(initializeApp(firebaseConfig));
-  auth.useDeviceLanguage();
-
-  const emailOf = (id) => id.toLowerCase() + EMAIL_DOMAIN;
-  const idOf = (user) =>
-    user.displayName || (user.email || '').replace(EMAIL_DOMAIN, '');
-
-  function reason(err) {
-    switch (err && err.code) {
-      case 'auth/email-already-in-use':
-        return '이미 쓰이고 있는 아이디입니다. 다른 아이디를 골라 주세요.';
-      case 'auth/invalid-credential':
-      case 'auth/wrong-password':
-      case 'auth/user-not-found':
-        return '아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 가입 탭에서 아이디를 먼저 만들어 주세요.';
-      case 'auth/too-many-requests':
-        return '잠시 후 다시 시도해 주세요. 실패가 반복돼 접속이 잠시 막혔습니다.';
-      case 'auth/network-request-failed':
-        return '네트워크에 연결하지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.';
-      case 'auth/operation-not-allowed':
-        return '파이어베이스 콘솔에서 이메일/비밀번호 로그인을 켜 주세요.';
-      case 'auth/weak-password':
-        return '비밀번호가 너무 짧습니다. 8자 이상으로 만들어 주세요.';
-      default:
-        return '입장에 실패했습니다. (' + ((err && err.code) || 'unknown') + ')';
-    }
+function reason(err) {
+  switch (err && err.code) {
+    case 'auth/email-already-in-use':
+      return '이미 쓰이고 있는 아이디입니다. 다른 아이디를 골라 주세요.';
+    case 'auth/invalid-credential':
+    case 'auth/wrong-password':
+    case 'auth/user-not-found':
+      return '아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 가입 탭에서 아이디를 먼저 만들어 주세요.';
+    case 'auth/too-many-requests':
+      return '잠시 후 다시 시도해 주세요. 실패가 반복돼 접속이 잠시 막혔습니다.';
+    case 'auth/network-request-failed':
+      return '네트워크에 연결하지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.';
+    case 'auth/operation-not-allowed':
+      return '파이어베이스 콘솔에서 이메일/비밀번호 로그인을 켜 주세요.';
+    case 'auth/unauthorized-domain':
+      return '이 주소는 아직 파이어베이스 승인된 도메인이 아닙니다. 콘솔에서 추가해 주세요.';
+    case 'auth/weak-password':
+      return '비밀번호가 너무 짧습니다. 8자 이상으로 만들어 주세요.';
+    default:
+      return '입장에 실패했습니다. (' + ((err && err.code) || 'unknown') + ')';
   }
-
-  /* 로그인 상태가 이미 있으면 바로 입장 화면 */
-  onAuthStateChanged(auth, (user) => {
-    if (!user) return;
-    $('#whoId').textContent = idOf(user);
-    UI.showResult(UI.panes.welcome);
-  });
-
-  /* 가입 */
-  UI.panes.signup.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const id = $('#newId').value.trim();
-    const pw = $('#newPw').value;
-    const pw2 = $('#newPw2').value;
-
-    if (!ID_RE.test(id)) {
-      UI.say(signupMsg, '아이디는 영문·숫자·밑줄 4~16자로 만들어 주세요.'); $('#newId').focus(); return;
-    }
-    if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) {
-      UI.say(signupMsg, '비밀번호는 영문과 숫자를 섞어 8자 이상으로 만들어 주세요.'); $('#newPw').focus(); return;
-    }
-    if (pw !== pw2) {
-      UI.say(signupMsg, '두 비밀번호가 다릅니다. 확인란을 다시 입력해 주세요.'); $('#newPw2').focus(); return;
-    }
-
-    UI.busy(UI.panes.signup, true);
-    UI.say(signupMsg, '아이디를 만드는 중…', true);
-    try {
-      const cred = await createUserWithEmailAndPassword(auth, emailOf(id), pw);
-      await updateProfile(cred.user, { displayName: id });
-      $('#newPw').value = '';
-      $('#newPw2').value = '';
-      UI.say(signupMsg, '');
-      $('#whoId').textContent = id;
-      UI.showResult(UI.panes.welcome);
-    } catch (err) {
-      UI.say(signupMsg, reason(err));
-    } finally {
-      UI.busy(UI.panes.signup, false);
-    }
-  });
-
-  /* 로그인 */
-  UI.panes.login.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const id = $('#loginId').value.trim();
-    const pw = $('#loginPw').value;
-
-    if (!id || !pw) { UI.say(loginMsg, '아이디와 비밀번호를 모두 입력해 주세요.'); return; }
-    if (!ID_RE.test(id)) {
-      UI.say(loginMsg, '아이디 또는 비밀번호가 맞지 않습니다.'); $('#loginId').focus(); return;
-    }
-
-    const remember = $('#remember').checked;
-    UI.busy(UI.panes.login, true);
-    UI.say(loginMsg, '입장하는 중…', true);
-    try {
-      await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
-      await signInWithEmailAndPassword(auth, emailOf(id), pw);
-      try {
-        if (remember) localStorage.setItem(LAST_ID_KEY, id);
-        else localStorage.removeItem(LAST_ID_KEY);
-      } catch (_) { /* 저장 불가 환경 */ }
-      $('#loginPw').value = '';
-      UI.say(loginMsg, '');
-      $('#whoId').textContent = id;
-      UI.showResult(UI.panes.welcome);
-    } catch (err) {
-      UI.say(loginMsg, reason(err));
-      $('#loginPw').select();
-    } finally {
-      UI.busy(UI.panes.login, false);
-    }
-  });
-
-  UI.onLogout = () => { signOut(auth).catch(() => {}); };
 }
 
-/* 아이디 기억하기 — 인증과 무관하게 입력란만 미리 채운다 */
+/* 이미 로그인돼 있으면 메인으로 */
+onAuthStateChanged(auth, (user) => {
+  if (!user) return;
+  $('#whoId').textContent = idOf(user);
+  UI.showResult(UI.panes.welcome);
+});
+
+/* 가입 */
+UI.panes.signup.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = $('#newId').value.trim();
+  const pw = $('#newPw').value;
+  const pw2 = $('#newPw2').value;
+
+  if (!ID_RE.test(id)) {
+    UI.say(signupMsg, '아이디는 영문·숫자·밑줄 4~16자로 만들어 주세요.'); $('#newId').focus(); return;
+  }
+  if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) {
+    UI.say(signupMsg, '비밀번호는 영문과 숫자를 섞어 8자 이상으로 만들어 주세요.'); $('#newPw').focus(); return;
+  }
+  if (pw !== pw2) {
+    UI.say(signupMsg, '두 비밀번호가 다릅니다. 확인란을 다시 입력해 주세요.'); $('#newPw2').focus(); return;
+  }
+
+  UI.busy(UI.panes.signup, true);
+  UI.say(signupMsg, '아이디를 만드는 중…', true);
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, emailOf(id), pw);
+    await updateProfile(cred.user, { displayName: id });
+    $('#newPw').value = '';
+    $('#newPw2').value = '';
+    UI.say(signupMsg, '');
+    $('#whoId').textContent = id;
+    UI.showResult(UI.panes.welcome);
+  } catch (err) {
+    UI.say(signupMsg, reason(err));
+  } finally {
+    UI.busy(UI.panes.signup, false);
+  }
+});
+
+/* 로그인 */
+UI.panes.login.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = $('#loginId').value.trim();
+  const pw = $('#loginPw').value;
+
+  if (!id || !pw) { UI.say(loginMsg, '아이디와 비밀번호를 모두 입력해 주세요.'); return; }
+  if (!ID_RE.test(id)) {
+    UI.say(loginMsg, '아이디 또는 비밀번호가 맞지 않습니다.'); $('#loginId').focus(); return;
+  }
+
+  const remember = $('#remember').checked;
+  UI.busy(UI.panes.login, true);
+  UI.say(loginMsg, '입장하는 중…', true);
+  try {
+    await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
+    await signInWithEmailAndPassword(auth, emailOf(id), pw);
+    try {
+      if (remember) localStorage.setItem(LAST_ID_KEY, id);
+      else localStorage.removeItem(LAST_ID_KEY);
+    } catch (_) { /* 저장 불가 환경 */ }
+    $('#loginPw').value = '';
+    UI.say(loginMsg, '');
+    $('#whoId').textContent = id;
+    UI.showResult(UI.panes.welcome);
+  } catch (err) {
+    UI.say(loginMsg, reason(err));
+    $('#loginPw').select();
+  } finally {
+    UI.busy(UI.panes.login, false);
+  }
+});
+
+UI.onLogout = () => { signOut(auth).catch(() => {}); };
+
+/* 아이디 기억하기 — 입력란만 미리 채운다 */
 try {
   const last = localStorage.getItem(LAST_ID_KEY);
   if (last) { $('#loginId').value = last; $('#remember').checked = true; }
