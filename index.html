@@ -187,6 +187,9 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
 .dlg-actions .no{background:transparent; color:var(--t1)}
 .dlg-actions .no:hover{background:var(--dim)}
 
+button[disabled]{opacity:.45; cursor:not-allowed}
+.btn-main[disabled]:hover{transform:none; box-shadow:8px 8px 0 var(--ink)}
+
 @media (max-width:640px){
   .stage{min-height:0}
   .hd{padding:0 16px; gap:10px}
@@ -343,25 +346,18 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
 </dialog>
 
 <script>
+/* ── 화면 조작 ──────────────────────────────────────────────
+   파이어베이스 SDK가 안 뜨더라도 탭·비밀번호 보기·관리자 입장은 동작하도록
+   인증과 분리해 둔다. 인증 쪽은 아래 module 스크립트가 붙인다. */
 (function () {
   'use strict';
 
-  var ACCOUNTS_KEY = 'demigod.accounts';
-  var LAST_ID_KEY = 'demigod.lastId';
-  var ADMIN_CODE = '316316316';
-
-  function readAccounts() {
-    try {
-      var raw = localStorage.getItem(ACCOUNTS_KEY);
-      var parsed = raw ? JSON.parse(raw) : null;
-      return (parsed && typeof parsed === 'object') ? parsed : {};
-    } catch (e) { return {}; }
-  }
-  function writeAccounts(map) {
-    try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(map)); } catch (e) { /* 저장 불가 환경 */ }
-  }
-
   var $ = function (sel) { return document.querySelector(sel); };
+
+  var tabLogin = $('#tabLogin'), tabSignup = $('#tabSignup');
+  var paneLogin = $('#paneLogin'), paneSignup = $('#paneSignup');
+  var paneWelcome = $('#paneWelcome'), paneAdmin = $('#paneAdmin');
+  var seg = document.querySelector('.seg');
 
   function say(box, text, ok) {
     box.className = 'msg' + (ok ? ' ok' : '');
@@ -371,12 +367,6 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
     b.textContent = text;
     box.appendChild(b);
   }
-
-  /* ---- 탭 ---- */
-  var tabLogin = $('#tabLogin'), tabSignup = $('#tabSignup');
-  var paneLogin = $('#paneLogin'), paneSignup = $('#paneSignup');
-  var paneWelcome = $('#paneWelcome'), paneAdmin = $('#paneAdmin');
-  var seg = document.querySelector('.seg');
 
   function showTab(which) {
     var toLogin = which === 'login';
@@ -388,6 +378,7 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
     paneAdmin.hidden = true;
     seg.hidden = false;
   }
+
   function showResult(pane) {
     paneLogin.hidden = true;
     paneSignup.hidden = true;
@@ -395,10 +386,15 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
     paneAdmin.hidden = pane !== paneAdmin;
     seg.hidden = true;
   }
+
+  function busy(form, on) {
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = !!on;
+  }
+
   tabLogin.addEventListener('click', function () { showTab('login'); $('#loginId').focus(); });
   tabSignup.addEventListener('click', function () { showTab('signup'); $('#newId').focus(); });
 
-  /* ---- 비밀번호 표시 ---- */
   Array.prototype.forEach.call(document.querySelectorAll('.peek'), function (btn) {
     btn.addEventListener('click', function () {
       var input = document.getElementById(btn.getAttribute('data-peek'));
@@ -409,73 +405,8 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
     });
   });
 
-  /* ---- 가입 ---- */
-  var ID_RE = /^[A-Za-z0-9_]{4,16}$/;
-  var signupMsg = $('#signupMsg');
-
-  paneSignup.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var id = $('#newId').value.trim();
-    var pw = $('#newPw').value;
-    var pw2 = $('#newPw2').value;
-
-    if (!ID_RE.test(id)) { say(signupMsg, '아이디는 영문·숫자·밑줄 4~16자로 만들어 주세요.'); $('#newId').focus(); return; }
-    if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) {
-      say(signupMsg, '비밀번호는 영문과 숫자를 섞어 8자 이상으로 만들어 주세요.'); $('#newPw').focus(); return;
-    }
-    if (pw !== pw2) { say(signupMsg, '두 비밀번호가 다릅니다. 확인란을 다시 입력해 주세요.'); $('#newPw2').focus(); return; }
-
-    var accounts = readAccounts();
-    if (Object.prototype.hasOwnProperty.call(accounts, id)) {
-      say(signupMsg, '이미 쓰이고 있는 아이디입니다. 다른 아이디를 골라 주세요.'); $('#newId').focus(); return;
-    }
-
-    accounts[id] = { pw: pw, joined: new Date().toISOString() };
-    writeAccounts(accounts);
-
-    say(signupMsg, '');
-    $('#newPw').value = '';
-    $('#newPw2').value = '';
-    $('#loginId').value = id;
-    showTab('login');
-    say($('#loginMsg'), '가입 완료. 비밀번호를 입력하면 입장합니다.', true);
-    $('#loginPw').focus();
-  });
-
-  /* ---- 로그인 ---- */
-  var loginMsg = $('#loginMsg');
-
-  paneLogin.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var id = $('#loginId').value.trim();
-    var pw = $('#loginPw').value;
-    var accounts = readAccounts();
-    var acct = Object.prototype.hasOwnProperty.call(accounts, id) ? accounts[id] : null;
-
-    if (!id || !pw) { say(loginMsg, '아이디와 비밀번호를 모두 입력해 주세요.'); return; }
-    if (!acct || acct.pw !== pw) {
-      say(loginMsg, '아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 가입 탭에서 아이디를 먼저 만들어 주세요.');
-      $('#loginPw').select();
-      return;
-    }
-
-    try {
-      if ($('#remember').checked) localStorage.setItem(LAST_ID_KEY, id);
-      else localStorage.removeItem(LAST_ID_KEY);
-    } catch (err) { /* 저장 불가 환경 */ }
-
-    say(loginMsg, '');
-    $('#loginPw').value = '';
-    $('#whoId').textContent = id;
-    showResult(paneWelcome);
-  });
-
-  try {
-    var last = localStorage.getItem(LAST_ID_KEY);
-    if (last) { $('#loginId').value = last; $('#remember').checked = true; }
-  } catch (err) { /* 저장 불가 환경 */ }
-
-  /* ---- 관리자 ---- */
+  /* 관리자 코드 — 이 판정은 브라우저 안에서만 이뤄진다. 소스를 열면 코드가 보인다. */
+  var ADMIN_CODE = '316316316';
   var dlg = $('#adminDlg');
   var adminMsg = $('#adminMsg');
   var adminCode = $('#adminCode');
@@ -513,13 +444,173 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-logout]'), function (btn) {
     btn.addEventListener('click', function () {
+      if (typeof window.DGA.onLogout === 'function') window.DGA.onLogout();
       showTab('login');
-      say(loginMsg, '');
+      say($('#loginMsg'), '');
       $('#loginPw').value = '';
       $('#loginId').focus();
     });
   });
+
+  window.DGA = {
+    $: $, say: say, showTab: showTab, showResult: showResult, busy: busy,
+    onLogout: null,
+    panes: { login: paneLogin, signup: paneSignup, welcome: paneWelcome, admin: paneAdmin }
+  };
 })();
+</script>
+
+<script type="module">
+/* ── 인증 (Firebase Authentication · 이메일/비밀번호) ────────────
+   이 게임은 이메일이 아니라 아이디로 입장하므로, 아이디를
+   <아이디>@demigod-academy.example 로 바꿔 파이어베이스에 넘긴다.
+   (.example 은 실제로 존재할 수 없는 예약 도메인이다.)
+
+   firebaseConfig 값은 비밀이 아니다 — 파이어베이스 웹 앱 설정은 공개를 전제로
+   설계돼 있고, 실제 보호는 콘솔의 인증 설정과 보안 규칙이 한다. */
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+import {
+  getAuth, setPersistence, browserLocalPersistence, browserSessionPersistence,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
+  updateProfile, onAuthStateChanged
+} from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+
+const firebaseConfig = {
+  apiKey: 'PASTE_API_KEY',
+  authDomain: 'PASTE_PROJECT_ID.firebaseapp.com',
+  projectId: 'PASTE_PROJECT_ID',
+  storageBucket: 'PASTE_PROJECT_ID.firebasestorage.app',
+  messagingSenderId: 'PASTE_SENDER_ID',
+  appId: 'PASTE_APP_ID'
+};
+
+const UI = window.DGA;
+const $ = UI.$;
+const loginMsg = $('#loginMsg');
+const signupMsg = $('#signupMsg');
+const LAST_ID_KEY = 'demigod.lastId';
+const ID_RE = /^[A-Za-z0-9_]{4,16}$/;
+const EMAIL_DOMAIN = '@demigod-academy.example';
+
+const configured = !String(firebaseConfig.apiKey).startsWith('PASTE');
+
+if (!configured) {
+  const note = '파이어베이스 설정이 아직 들어가지 않았습니다. index.html 의 firebaseConfig 를 채워 주세요.';
+  UI.say(loginMsg, note);
+  UI.say(signupMsg, note);
+  UI.busy($('#paneLogin'), true);
+  UI.busy($('#paneSignup'), true);
+} else {
+  const auth = getAuth(initializeApp(firebaseConfig));
+  auth.useDeviceLanguage();
+
+  const emailOf = (id) => id.toLowerCase() + EMAIL_DOMAIN;
+  const idOf = (user) =>
+    user.displayName || (user.email || '').replace(EMAIL_DOMAIN, '');
+
+  function reason(err) {
+    switch (err && err.code) {
+      case 'auth/email-already-in-use':
+        return '이미 쓰이고 있는 아이디입니다. 다른 아이디를 골라 주세요.';
+      case 'auth/invalid-credential':
+      case 'auth/wrong-password':
+      case 'auth/user-not-found':
+        return '아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 가입 탭에서 아이디를 먼저 만들어 주세요.';
+      case 'auth/too-many-requests':
+        return '잠시 후 다시 시도해 주세요. 실패가 반복돼 접속이 잠시 막혔습니다.';
+      case 'auth/network-request-failed':
+        return '네트워크에 연결하지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.';
+      case 'auth/operation-not-allowed':
+        return '파이어베이스 콘솔에서 이메일/비밀번호 로그인을 켜 주세요.';
+      case 'auth/weak-password':
+        return '비밀번호가 너무 짧습니다. 8자 이상으로 만들어 주세요.';
+      default:
+        return '입장에 실패했습니다. (' + ((err && err.code) || 'unknown') + ')';
+    }
+  }
+
+  /* 로그인 상태가 이미 있으면 바로 입장 화면 */
+  onAuthStateChanged(auth, (user) => {
+    if (!user) return;
+    $('#whoId').textContent = idOf(user);
+    UI.showResult(UI.panes.welcome);
+  });
+
+  /* 가입 */
+  UI.panes.signup.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = $('#newId').value.trim();
+    const pw = $('#newPw').value;
+    const pw2 = $('#newPw2').value;
+
+    if (!ID_RE.test(id)) {
+      UI.say(signupMsg, '아이디는 영문·숫자·밑줄 4~16자로 만들어 주세요.'); $('#newId').focus(); return;
+    }
+    if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) {
+      UI.say(signupMsg, '비밀번호는 영문과 숫자를 섞어 8자 이상으로 만들어 주세요.'); $('#newPw').focus(); return;
+    }
+    if (pw !== pw2) {
+      UI.say(signupMsg, '두 비밀번호가 다릅니다. 확인란을 다시 입력해 주세요.'); $('#newPw2').focus(); return;
+    }
+
+    UI.busy(UI.panes.signup, true);
+    UI.say(signupMsg, '아이디를 만드는 중…', true);
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, emailOf(id), pw);
+      await updateProfile(cred.user, { displayName: id });
+      $('#newPw').value = '';
+      $('#newPw2').value = '';
+      UI.say(signupMsg, '');
+      $('#whoId').textContent = id;
+      UI.showResult(UI.panes.welcome);
+    } catch (err) {
+      UI.say(signupMsg, reason(err));
+    } finally {
+      UI.busy(UI.panes.signup, false);
+    }
+  });
+
+  /* 로그인 */
+  UI.panes.login.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = $('#loginId').value.trim();
+    const pw = $('#loginPw').value;
+
+    if (!id || !pw) { UI.say(loginMsg, '아이디와 비밀번호를 모두 입력해 주세요.'); return; }
+    if (!ID_RE.test(id)) {
+      UI.say(loginMsg, '아이디 또는 비밀번호가 맞지 않습니다.'); $('#loginId').focus(); return;
+    }
+
+    const remember = $('#remember').checked;
+    UI.busy(UI.panes.login, true);
+    UI.say(loginMsg, '입장하는 중…', true);
+    try {
+      await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
+      await signInWithEmailAndPassword(auth, emailOf(id), pw);
+      try {
+        if (remember) localStorage.setItem(LAST_ID_KEY, id);
+        else localStorage.removeItem(LAST_ID_KEY);
+      } catch (_) { /* 저장 불가 환경 */ }
+      $('#loginPw').value = '';
+      UI.say(loginMsg, '');
+      $('#whoId').textContent = id;
+      UI.showResult(UI.panes.welcome);
+    } catch (err) {
+      UI.say(loginMsg, reason(err));
+      $('#loginPw').select();
+    } finally {
+      UI.busy(UI.panes.login, false);
+    }
+  });
+
+  UI.onLogout = () => { signOut(auth).catch(() => {}); };
+}
+
+/* 아이디 기억하기 — 인증과 무관하게 입력란만 미리 채운다 */
+try {
+  const last = localStorage.getItem(LAST_ID_KEY);
+  if (last) { $('#loginId').value = last; $('#remember').checked = true; }
+} catch (_) { /* 저장 불가 환경 */ }
 </script>
 
 </body>

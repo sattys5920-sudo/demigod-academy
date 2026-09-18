@@ -35,17 +35,39 @@ blur 없는 하드 섀도우(`10px 10px 0`), 작은 카드는 `rotate(-2deg ~ 2.
 
 ## 계정과 관리자 코드
 
-현재는 프론트엔드 단독 프로토타입입니다.
+로그인·가입은 **Firebase Authentication(이메일/비밀번호)** 를 씁니다. 이 게임은
+이메일이 아니라 아이디로 입장하므로, 아이디를 `<아이디>@demigod-academy.example`
+로 바꿔 파이어베이스에 넘깁니다. 비밀번호는 구글 쪽에 해시로만 남고 이 저장소나
+브라우저에 평문으로 저장되지 않습니다.
 
-- 계정은 브라우저 `localStorage`(`demigod.accounts`)에 **평문으로** 저장됩니다.
-- 관리자 코드는 `index.html` 스크립트에 상수로 들어 있어 **소스를 열면 그대로 보입니다.**
+`index.html` 의 `firebaseConfig` 값은 비밀이 아닙니다 — 파이어베이스 웹 앱 설정은
+공개를 전제로 설계돼 있고, 실제 보호는 콘솔의 인증 설정과 보안 규칙이 합니다.
 
-시연용으로는 문제없지만, 실제 사용자를 받는 단계에서는 로그인과 관리자 판정을
-서버로 옮겨야 합니다.
+다만 **관리자 코드는 아직 클라이언트 상수**라 소스를 열면 그대로 보입니다.
+관리자 콘솔에 실제 데이터 편집 기능을 붙이기 전에 서버(Custom Claims 등)로
+옮겨야 합니다.
 
-## 배포 (GitHub Pages)
+## 배포
 
-저장소 **Settings → Pages**에서 Source를 `Deploy from a branch`,
-Branch를 `main` / `/ (root)`로 지정하면 1~2분 뒤 게시됩니다.
+### GitHub Pages
+
+저장소 **Settings → Pages** 에서 Source `Deploy from a branch`, Branch `main` / `/ (root)`.
 
 게시 주소: `https://sattys5920-sudo.github.io/demigod-academy/`
+
+### Firebase Hosting
+
+```sh
+npm install -g firebase-tools
+firebase login
+firebase deploy --only hosting
+```
+
+`.firebaserc` 의 `PASTE_PROJECT_ID` 를 실제 프로젝트 ID로 바꾼 뒤 실행합니다.
+게시 주소: `https://<프로젝트 ID>.web.app`
+
+파이어베이스 콘솔에서 미리 해둘 것:
+
+1. **Authentication → Sign-in method → 이메일/비밀번호** 사용 설정
+2. **Authentication → Settings → 승인된 도메인** 에 `sattys5920-sudo.github.io` 추가
+   (Pages 쪽에서도 로그인이 되게 하려면 필요합니다)
