@@ -63,8 +63,8 @@ firebase login
 firebase deploy --only hosting
 ```
 
-`.firebaserc` 의 `PASTE_PROJECT_ID` 를 실제 프로젝트 ID로 바꾼 뒤 실행합니다.
-게시 주소: `https://<프로젝트 ID>.web.app`
+프로젝트는 `demig0d` 로 이미 지정돼 있습니다.
+게시 주소: `https://demig0d.web.app`
 
 파이어베이스 콘솔에서 미리 해둘 것:
 
