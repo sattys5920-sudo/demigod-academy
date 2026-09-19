@@ -488,6 +488,7 @@ const signupMsg = $('#signupMsg');
 const LAST_ID_KEY = 'demigod.lastId';
 
 function reason(err) {
+  console.error('[auth]', err);
   switch (err && err.code) {
     case 'auth/email-already-in-use':
       return '이미 쓰이고 있는 아이디입니다. 다른 아이디를 골라 주세요.';
@@ -499,8 +500,12 @@ function reason(err) {
       return '잠시 후 다시 시도해 주세요. 실패가 반복돼 접속이 잠시 막혔습니다.';
     case 'auth/network-request-failed':
       return '네트워크에 연결하지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.';
+    case 'auth/configuration-not-found':
     case 'auth/operation-not-allowed':
-      return '파이어베이스 콘솔에서 이메일/비밀번호 로그인을 켜 주세요.';
+    case 'auth/admin-restricted-operation':
+      return '파이어베이스 콘솔 → Authentication 에서 시작하기를 누르고 이메일/비밀번호 로그인을 켜 주세요. 아직 인증이 준비되지 않았습니다.';
+    case 'auth/api-key-not-valid.-please-pass-a-valid-api-key.':
+      return '파이어베이스 설정값이 올바르지 않습니다. firebase-init.js 의 apiKey 를 확인해 주세요.';
     case 'auth/unauthorized-domain':
       return '이 주소는 아직 파이어베이스 승인된 도메인이 아닙니다. 콘솔에서 추가해 주세요.';
     case 'auth/weak-password':
