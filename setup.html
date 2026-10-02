@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>프로필 만들기 · 데미갓 아카데미</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Gasoek+One&family=Gothic+A1:wght@400;700;900&display=swap">
+<style>
+:root{
+  --bg:#14061F;
+  --panel:#1E0B2C;
+  --line:#FFFFFF;
+  --lime:#C6FF3D;
+  --pink:#FF2E93;
+  --t1:#E4D8EE;
+  --t2:#B7A5C4;
+  --t3:#9B86AD;
+  --dim:#3B2450;
+  --ink:#14061F;
+  --disp:'Gasoek One','Gothic A1',sans-serif;
+  --num:'Archivo Black','Gothic A1',sans-serif;
+  --body:'Gothic A1',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; background:var(--bg); color:var(--t1); font-family:var(--body); -webkit-font-smoothing:antialiased}
+[hidden]{display:none !important}
+button,input{font-family:inherit}
+:focus-visible{outline:4px solid var(--pink); outline-offset:3px}
+.halftone{
+  position:fixed; inset:0; pointer-events:none; z-index:6;
+  background-image:radial-gradient(#FFFFFF 1.4px, transparent 1.5px);
+  background-size:16px 16px; opacity:.07;
+}
+
+#gate{
+  position:fixed; inset:0; z-index:9; background:var(--bg);
+  display:flex; align-items:center; justify-content:center; padding:16px;
+}
+#gate .box{display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; max-width:360px}
+#gate .ring{
+  width:64px; height:64px; border-radius:50%; background:var(--lime); border:4px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+}
+#gate p{margin:0; font-family:var(--disp); font-size:22px; color:var(--line)}
+#gate small{font-size:13px; font-weight:700; color:var(--t2); line-height:1.6}
+#gate a{
+  min-height:48px; display:inline-flex; align-items:center; padding:0 22px; border-radius:999px;
+  border:4px solid var(--line); background:var(--lime); color:var(--ink);
+  font-family:var(--disp); font-size:16px; text-decoration:none;
+}
+
+.stage{position:relative; width:100%; max-width:1080px; margin:0 auto; display:flex; flex-direction:column}
+.blob{
+  position:absolute; width:420px; height:420px; border-radius:50%;
+  background:var(--lime); opacity:.16; top:-140px; right:60px; z-index:0; pointer-events:none;
+}
+.hd{
+  position:relative; z-index:2; height:92px; flex:0 0 92px;
+  display:flex; align-items:center; gap:14px; padding:0 26px;
+  border-bottom:5px solid var(--line); background:var(--bg);
+}
+.logo{
+  width:52px; height:52px; flex:0 0 52px; border-radius:50%;
+  background:var(--lime); border:4px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+}
+.hd h1{margin:0; font-family:var(--disp); font-size:26px; color:var(--line); white-space:nowrap}
+.spacer{flex:1 1 auto}
+.step{
+  display:inline-flex; align-items:center; gap:9px; min-height:40px; padding:0 16px;
+  border-radius:999px; border:4px solid var(--line); background:var(--line); color:var(--ink);
+  font-family:var(--num); font-size:11px; letter-spacing:.14em;
+}
+
+.body{position:relative; z-index:2; padding:26px; display:flex; gap:22px; align-items:flex-start}
+.col-main{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:20px}
+.col-side{flex:0 0 320px; display:flex; flex-direction:column; gap:20px; position:sticky; top:26px}
+
+.panel{background:var(--panel); border:5px solid var(--line); border-radius:28px; padding:22px 26px}
+.panel.flat{border-width:4px; border-radius:18px; padding:16px 18px}
+.eyebrow{font-family:var(--num); font-size:12px; letter-spacing:.2em; color:var(--lime)}
+.sect-h{display:flex; align-items:center; gap:14px; margin-bottom:14px}
+.sect-h h2{margin:0; font-family:var(--disp); font-size:22px; color:var(--line)}
+.hint{margin:0; font-size:13px; font-weight:700; color:var(--t2); line-height:1.7}
+
+/* 아바타 — 문장 고르기 */
+.sigs{display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:14px}
+.sig{
+  display:flex; flex-direction:column; align-items:center; gap:8px; padding:12px 6px;
+  border-radius:18px; cursor:pointer; border:4px solid var(--dim); background:transparent; color:var(--t2);
+}
+.sig:hover{border-color:var(--t3); color:var(--line)}
+.sig[aria-pressed="true"]{border-color:var(--line); color:var(--line); background:var(--ink)}
+.sig .mark{
+  width:58px; height:58px; border-radius:50%; border:4px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+}
+.sig .mark.tone-lime{background:var(--lime)}
+.sig .mark.tone-pink{background:var(--pink)}
+.sig .nm{font-family:var(--disp); font-size:12px; line-height:1.2; text-align:center}
+.sig .ln{font-size:11px; font-weight:700; color:var(--t3); text-align:center}
+
+/* 사진 올리기 */
+.upload{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.filebtn{
+  min-height:56px; padding:0 26px; border-radius:999px; cursor:pointer;
+  border:4px solid var(--line); background:var(--line); color:var(--ink);
+  font-family:var(--disp); font-size:17px;
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+}
+.btn-ghost{
+  min-height:52px; padding:0 22px; border-radius:999px; cursor:pointer;
+  border:4px solid var(--dim); background:transparent; color:var(--line);
+  font-family:var(--disp); font-size:16px;
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+}
+.btn-ghost:hover{border-color:var(--line)}
+.btn-lime{
+  width:100%; min-height:72px; border-radius:999px; cursor:pointer;
+  border:5px solid var(--line); background:var(--lime); color:var(--ink);
+  font-family:var(--disp); font-size:26px; box-shadow:8px 8px 0 var(--line);
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
+}
+.btn-lime:hover{transform:translate(2px,2px); box-shadow:4px 4px 0 var(--line)}
+.btn-lime[disabled]{opacity:.55; cursor:default; transform:none; box-shadow:8px 8px 0 var(--line)}
+
+/* 이름 */
+.field{display:flex; flex-direction:column; gap:9px}
+.field label{font-family:var(--num); font-size:11px; letter-spacing:.16em; color:var(--t3)}
+.field input{
+  width:100%; min-height:60px; padding:0 18px; border-radius:18px;
+  border:4px solid var(--dim); background:var(--ink); color:var(--t1);
+  font-size:17px; font-weight:700;
+}
+.field input:focus{border-color:var(--line); outline:none}
+.field .foot{display:flex; align-items:baseline; gap:10px}
+.field .foot .len{font-family:var(--num); font-size:12px; color:var(--t3); font-variant-numeric:tabular-nums}
+
+.msg{min-height:22px; font-size:13px; font-weight:700; color:var(--pink); line-height:1.6}
+.msg.ok{color:var(--lime)}
+
+/* 미리보기 */
+.card-prev{
+  display:flex; flex-direction:column; gap:12px; padding:14px;
+  border-radius:24px; background:var(--panel); border:5px solid var(--line);
+  box-shadow:8px 8px 0 var(--lime);
+}
+.card-prev .art{
+  position:relative; height:184px; border-radius:16px; overflow:hidden;
+  background:var(--ink); border:4px solid var(--dim);
+  display:flex; align-items:center; justify-content:center;
+}
+.card-prev .art::after{
+  content:""; position:absolute; inset:0;
+  background-image:radial-gradient(#14061F 1.4px, transparent 1.5px);
+  background-size:12px 12px; opacity:.35;
+}
+.ava{
+  position:relative; z-index:1; width:104px; height:104px; border-radius:50%;
+  border:5px solid var(--line); overflow:hidden; background:var(--panel);
+  display:flex; align-items:center; justify-content:center;
+}
+.ava.tone-lime{background:var(--lime)}
+.ava.tone-pink{background:var(--pink)}
+.ava img{width:100%; height:100%; object-fit:cover; display:block}
+.card-prev .nm{
+  margin:0; font-family:var(--disp); font-size:22px; line-height:1.2; color:var(--line);
+  word-break:break-all;
+}
+.card-prev .fam{font-family:var(--num); font-size:11px; letter-spacing:.14em; color:var(--t3)}
+
+@media (max-width:900px){
+  .body{flex-direction:column; padding:16px}
+  .col-side{flex:1 1 auto; width:100%; position:static}
+  .sigs{grid-template-columns:repeat(3, minmax(0,1fr))}
+  .hd{padding:0 16px}
+  .hd h1{font-size:21px}
+  .step{display:none}
+  .panel{padding:18px; border-radius:24px}
+  .btn-lime{font-size:21px; min-height:64px}
+}
+@media (prefers-reduced-motion:reduce){
+  .btn-lime:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="halftone" aria-hidden="true"></div>
+
+<div id="gate" role="status" aria-live="polite">
+  <div class="box">
+    <span class="ring" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
+    </span>
+    <p id="gateTitle">입장 확인 중</p>
+    <small id="gateNote">잠시만 기다려 주세요.</small>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="blob" aria-hidden="true"></div>
+
+  <header class="hd">
+    <span class="logo" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
+    </span>
+    <h1>프로필 만들기</h1>
+    <span class="spacer"></span>
+    <span class="step">STEP 2 / 2</span>
+  </header>
+
+  <div class="body">
+    <div class="col-main">
+
+      <section class="panel">
+        <div class="sect-h">
+          <span class="eyebrow">AVATAR</span>
+          <h2>문장 고르기</h2>
+        </div>
+        <p class="hint" style="margin-bottom:16px">
+          네 피에 흐르는 신의 문장을 하나 골라. 아바타와 계열이 함께 정해진다.
+        </p>
+        <div class="sigs" id="sigs" role="group" aria-label="신성 계열 문장"></div>
+      </section>
+
+      <section class="panel">
+        <div class="sect-h">
+          <span class="eyebrow">PHOTO</span>
+          <h2>사진으로 바꾸기</h2>
+        </div>
+        <p class="hint" style="margin-bottom:16px">
+          원하면 사진을 올려 아바타로 쓸 수 있다. 정사각 160px 로 줄여 이 기기에만 담는다.
+        </p>
+        <div class="upload">
+          <button type="button" class="filebtn" id="pickPhoto">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            사진 고르기
+          </button>
+          <button type="button" class="btn-ghost" id="dropPhoto" hidden>사진 지우고 문장 쓰기</button>
+          <input type="file" id="photoInput" accept="image/*" hidden>
+        </div>
+        <p class="msg" id="photoMsg" role="status" aria-live="polite"></p>
+      </section>
+
+    </div>
+
+    <div class="col-side">
+      <div class="card-prev">
+        <div class="art">
+          <span class="ava" id="prevAva" aria-hidden="true"></span>
+        </div>
+        <h2 class="nm" id="prevName">이름 없음</h2>
+        <span class="fam" id="prevFam">ZEUS · 하늘과 번개</span>
+      </div>
+
+      <section class="panel flat">
+        <div class="field">
+          <label for="nameInput">표시 이름</label>
+          <input type="text" id="nameInput" maxlength="20" autocomplete="nickname"
+                 placeholder="아카데미에서 불릴 이름" enterkeyhint="done">
+          <div class="foot">
+            <span class="hint" style="flex:1 1 auto">무엇이든 쓸 수 있다. 20자까지.</span>
+            <span class="len" id="nameLen">0 / 20</span>
+          </div>
+        </div>
+        <p class="msg" id="saveMsg" role="status" aria-live="polite"></p>
+        <button type="button" class="btn-lime" id="save">아카데미 입학</button>
+      </section>
+
+      <button type="button" class="btn-ghost" id="logout" style="width:100%">다른 아이디로 입장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* 파이어베이스 SDK 가 끝내 안 뜨면 게이트에 갇히지 않게 빠져나갈 길을 준다 */
+setTimeout(function () {
+  if (window.__authResolved) return;
+  var box = document.querySelector('#gate .box');
+  if (!box) return;
+  document.getElementById('gateTitle').textContent = '연결하지 못했습니다';
+  document.getElementById('gateNote').textContent =
+    '인증 모듈을 불러오지 못했습니다. 네트워크 연결을 확인하고 새로고침해 주세요.';
+  var a = document.createElement('a');
+  a.href = 'index.html';
+  a.textContent = '로그인 화면으로';
+  box.appendChild(a);
+}, 8000);
+</script>
+
+<script type="module">
+import { onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+import { auth, idOf } from './firebase-init.js';
+import { GODS, godOf, loadProfile, saveProfile, paintAvatar, shrinkImage } from './profile.js';
+
+const $ = (sel) => document.querySelector(sel);
+const prevAva = $('#prevAva');
+const prevName = $('#prevName');
+const prevFam = $('#prevFam');
+const nameInput = $('#nameInput');
+const nameLen = $('#nameLen');
+const saveMsg = $('#saveMsg');
+const photoMsg = $('#photoMsg');
+const dropPhoto = $('#dropPhoto');
+
+let uid = '';
+let draft = { god: 'zeus', photo: '', name: '' };
+
+function say(box, text, ok) {
+  box.className = 'msg' + (ok ? ' ok' : '');
+  box.textContent = text || '';
+}
+
+/* ── 문장 12개 그리기 ─────────────────────────── */
+const sigs = $('#sigs');
+GODS.forEach((god) => {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'sig';
+  btn.setAttribute('aria-pressed', 'false');
+  btn.dataset.god = god.key;
+
+  const mark = document.createElement('span');
+  mark.className = 'mark';
+  paintAvatar(mark, { god: god.key }, 58);
+
+  const nm = document.createElement('span');
+  nm.className = 'nm';
+  nm.textContent = god.name;
+
+  const ln = document.createElement('span');
+  ln.className = 'ln';
+  ln.textContent = god.line;
+
+  btn.append(mark, nm, ln);
+  btn.addEventListener('click', () => {
+    draft.god = god.key;
+    draft.photo = '';
+    say(photoMsg, '');
+    paint();
+  });
+  sigs.appendChild(btn);
+});
+
+function paint() {
+  const god = godOf(draft.god);
+  Array.prototype.forEach.call(sigs.querySelectorAll('.sig'), (btn) => {
+    btn.setAttribute('aria-pressed', String(!draft.photo && btn.dataset.god === draft.god));
+  });
+  paintAvatar(prevAva, draft, 104);
+  prevName.textContent = draft.name || '이름 없음';
+  prevFam.textContent = god.key.toUpperCase() + ' · ' + god.line;
+  dropPhoto.hidden = !draft.photo;
+  nameLen.textContent = [...draft.name].length + ' / 20';
+}
+
+/* ── 이름 ─────────────────────────────────────── */
+nameInput.addEventListener('input', () => {
+  draft.name = nameInput.value;
+  say(saveMsg, '');
+  paint();
+});
+
+/* ── 사진 ─────────────────────────────────────── */
+$('#pickPhoto').addEventListener('click', () => $('#photoInput').click());
+dropPhoto.addEventListener('click', () => {
+  draft.photo = '';
+  say(photoMsg, '');
+  paint();
+});
+$('#photoInput').addEventListener('change', async (e) => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  say(photoMsg, '사진을 줄이는 중…', true);
+  try {
+    draft.photo = await shrinkImage(file, 160);
+    say(photoMsg, '사진을 아바타로 쓴다. 문장을 다시 누르면 되돌아간다.', true);
+    paint();
+  } catch (err) {
+    say(photoMsg, err.message || '사진을 읽지 못했습니다.');
+  }
+});
+
+/* ── 저장 ─────────────────────────────────────── */
+$('#save').addEventListener('click', async () => {
+  const name = nameInput.value.trim();
+  if (!name) {
+    say(saveMsg, '표시 이름을 입력해 주세요.');
+    nameInput.focus();
+    return;
+  }
+  draft.name = name;
+  const btn = $('#save');
+  btn.disabled = true;
+  say(saveMsg, '프로필을 새기는 중…', true);
+
+  const stored = saveProfile(uid, { god: draft.god, photo: draft.photo, name: name });
+  if (!stored) {
+    btn.disabled = false;
+    say(saveMsg, '이 브라우저가 저장을 막고 있습니다. 시크릿 창이면 일반 창에서 다시 시도해 주세요.');
+    return;
+  }
+  /* 이름은 파이어베이스 계정에도 남겨 다른 기기에서도 따라오게 한다 */
+  try { await updateProfile(auth.currentUser, { displayName: name }); } catch (_) { /* 이름만 못 옮긴 것 */ }
+  location.replace('app.html');
+});
+
+/* ── 입장 확인 ────────────────────────────────── */
+onAuthStateChanged(auth, (user) => {
+  window.__authResolved = true;
+  if (!user) { location.replace('index.html'); return; }
+  uid = user.uid;
+
+  const saved = loadProfile(uid);
+  if (saved) {
+    draft = { god: saved.god || 'zeus', photo: saved.photo || '', name: saved.name || '' };
+    $('#save').textContent = '프로필 저장';
+    document.querySelector('.hd h1').textContent = '프로필 고치기';
+    $('.step').textContent = 'EDIT';
+  } else {
+    draft.name = idOf(user) || '';
+  }
+  nameInput.value = draft.name;
+  paint();
+  const gate = document.getElementById('gate');
+  if (gate) gate.remove();
+  nameInput.focus();
+});
+
+document.getElementById('logout').addEventListener('click', async () => {
+  try { await signOut(auth); } catch (_) { /* 이미 끊긴 세션 */ }
+  location.replace('index.html');
+});
+</script>
+
+</body>
+</html>
