@@ -22,7 +22,10 @@
   --hd:64px;
   --tb:68px;
 
+  /* Gasoek One 은 아주 굵은 전시용이라 18px 이상에서만 쓴다.
+     그보다 작은 라벨·버튼은 --ui(고딕 800), 본문은 --body(고딕 400). */
   --disp:'Gasoek One','Gothic A1',sans-serif;
+  --ui:'Gothic A1',system-ui,sans-serif;
   --num:'Archivo Black','Gothic A1',sans-serif;
   --body:'Gothic A1',system-ui,sans-serif;
 }
@@ -32,7 +35,7 @@ html{-webkit-text-size-adjust:100%}
 html,body{height:100%}
 body{
   margin:0; background:var(--bg2); color:var(--t1);
-  font-family:var(--body); -webkit-font-smoothing:antialiased;
+  font-family:var(--body); font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased;
   overscroll-behavior-y:none;
 }
 [hidden]{display:none !important}
@@ -92,13 +95,13 @@ body::before{
 }
 .slab > *{transform:skewX(9deg)}
 .slab .k{font-family:var(--num); font-size:9px; letter-spacing:.18em}
-.slab h2{margin:0; font-family:var(--disp); font-size:16px; line-height:1.1}
+.slab h2{margin:0; font-family:var(--ui); font-weight:800; font-size:15px; line-height:1.15}
 .slab.hot{background:var(--hot); color:var(--line)}
 
-.eyebrow{font-family:var(--num); font-size:10px; letter-spacing:.22em; color:var(--hot)}
+.eyebrow{font-family:var(--num); font-size:10.5px; letter-spacing:.2em; color:var(--hot)}
 .sect-h{display:flex; align-items:center; gap:10px}
-.sect-h h2{margin:0; font-family:var(--disp); font-size:17px; color:var(--line)}
-.hint{margin:0; font-size:12px; font-weight:700; color:var(--t2); line-height:1.7}
+.sect-h h2{margin:0; font-family:var(--ui); font-weight:800; font-size:16px; color:var(--line)}
+.hint{margin:0; font-size:13px; font-weight:400; color:var(--t2); line-height:1.75}
 .count{font-family:var(--num); font-size:13px; color:var(--hot); font-variant-numeric:tabular-nums}
 
 /* ── 버튼 — 기울인 평행사변형 + 단단한 그림자 ──── */
@@ -106,7 +109,7 @@ body::before{
   position:relative; display:inline-flex; align-items:center; justify-content:center;
   min-height:44px; padding:0 20px; border:3px solid var(--line);
   background:var(--hot); color:var(--line);
-  font-family:var(--disp); font-size:15px; line-height:1;
+  font-family:var(--ui); font-weight:800; font-size:15px; line-height:1;
   transform:skewX(-9deg); box-shadow:5px 5px 0 var(--line);
 }
 .btn > *{transform:skewX(9deg)}
@@ -116,7 +119,7 @@ body::before{
 .btn.white{background:var(--line); color:var(--ink)}
 .btn.gold{background:var(--gold); color:var(--ink)}
 .btn.block{width:100%}
-.btn.lg{min-height:58px; font-size:21px; padding:0 26px; box-shadow:7px 7px 0 var(--line)}
+.btn.lg{min-height:58px; font-family:var(--disp); font-weight:400; font-size:22px; padding:0 26px; box-shadow:7px 7px 0 var(--line)}
 .btn[disabled]{opacity:.45; box-shadow:5px 5px 0 var(--dim)}
 .btn[disabled]:active{transform:skewX(-9deg)}
 
@@ -124,7 +127,7 @@ body::before{
 .chip{
   display:inline-flex; align-items:center; gap:5px; min-height:26px; padding:0 10px;
   border:2px solid var(--dim); color:var(--t2);
-  font-family:var(--num); font-size:9.5px; letter-spacing:.08em;
+  font-family:var(--num); font-size:10px; letter-spacing:.06em;
   clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
 .chip.hot{background:var(--hot); border-color:var(--line); color:var(--line)}
@@ -139,11 +142,11 @@ body::before{
 
 /* ── 입력 ──────────────────────────────────────── */
 .field{display:flex; flex-direction:column; gap:7px}
-.field label{font-family:var(--num); font-size:9.5px; letter-spacing:.18em; color:var(--t3)}
+.field label{font-family:var(--num); font-size:10px; letter-spacing:.16em; color:var(--t3)}
 input[type=text],input[type=password],input[type=email]{
   width:100%; min-height:48px; padding:0 14px;
   border:2px solid var(--dim); background:var(--ink); color:var(--t1);
-  font-size:15px; font-weight:700;
+  font-size:15px; font-weight:500;
 }
 input:focus{border-color:var(--hot); outline:none}
 input::placeholder{color:var(--t3)}
@@ -163,11 +166,11 @@ input::placeholder{color:var(--t3)}
 .ava.l{width:76px; height:76px; border-width:3px}
 
 /* ── 메시지 ────────────────────────────────────── */
-.msg{min-height:20px; font-size:12px; font-weight:700; color:var(--hot); line-height:1.6}
+.msg{min-height:20px; font-size:13px; font-weight:500; color:var(--hot); line-height:1.6}
 .msg.ok{color:var(--gold)}
 .empty{
   padding:22px 16px; border:2px dashed var(--dim);
-  text-align:center; font-size:12px; font-weight:700; color:var(--t3); line-height:1.8;
+  text-align:center; font-size:13px; font-weight:400; color:var(--t3); line-height:1.8;
 }
 
 /* ── 다이얼로그 ────────────────────────────────── */
@@ -180,7 +183,7 @@ dialog.dlg{
 dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
 .dlg-hd{display:flex; align-items:center; gap:12px; margin-bottom:14px}
 .dlg-hd .who{display:flex; flex-direction:column; gap:3px; min-width:0}
-.dlg-hd .who .n{font-family:var(--disp); font-size:18px; color:var(--line); word-break:break-all}
+.dlg-hd .who .n{font-family:var(--ui); font-weight:800; font-size:18px; color:var(--line); word-break:break-all}
 .dlg-hd .who .r{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
 .dlg-acts{display:flex; flex-direction:column; gap:9px}
 .dlg-acts > a{text-decoration:none}
@@ -196,12 +199,12 @@ dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
   display:flex; align-items:center; justify-content:center;
   clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
 }
-#gate p{margin:0; font-family:var(--disp); font-size:19px; color:var(--line)}
-#gate small{font-size:12px; font-weight:700; color:var(--t2); line-height:1.6}
+#gate p{margin:0; font-family:var(--disp); font-size:20px; color:var(--line)}
+#gate small{font-size:13px; font-weight:400; color:var(--t2); line-height:1.7}
 #gate a{
   min-height:44px; display:inline-flex; align-items:center; padding:0 18px;
   border:3px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--disp); font-size:15px; text-decoration:none; transform:skewX(-9deg);
+  font-family:var(--ui); font-weight:800; font-size:15px; text-decoration:none; transform:skewX(-9deg);
 }
 #gate a > *{transform:skewX(9deg)}
 
