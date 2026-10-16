@@ -233,6 +233,8 @@
     on.appendChild(el('span', 'n', '지금 들어와 있는 사람 1명 · 나만'));
 
     var ch = curChapter();
+    /* 장 번호는 배경에 거대하게 깔린다 — 그리는 쪽은 CSS(attr(data-n)) */
+    $('#nowch').setAttribute('data-n', String(ch.n).padStart(2, '0'));
     $('#chEyebrow').textContent = 'CHAPTER ' + String(ch.n).padStart(2, '0') + ' · ' + ch.god;
     $('#chTitle').textContent = ch.title;
     $('#chBoss').textContent = ch.boss.name + ' — ' + ch.boss.weaknessNote;

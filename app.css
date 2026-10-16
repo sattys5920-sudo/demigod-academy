@@ -131,12 +131,81 @@ body.fullscreen-on .tabbar{display:none}
 .grid-sm .card.sel{outline:3px solid var(--gold); outline-offset:-3px}
 
 /* ── 홈 ────────────────────────────────────────── */
+/* 접속 표시 — 다른 상자와 폭이 같으면 격자가 안 깨진다. 내용만큼만 차지한다. */
+.strip{
+  align-self:flex-start; max-width:100%; padding:6px 18px 7px 9px;
+  background:var(--ink); border:0; border-left:5px solid var(--hot);
+  clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 100%, 0 100%);
+}
 .online{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
 .online .n{font-size:12px; font-weight:400; color:var(--t2)}
 
-.nowch{display:flex; flex-direction:column; gap:12px; box-shadow:6px 6px 0 var(--hot)}
-.nowch h2{margin:0; font-family:var(--disp); font-weight:400; font-size:27px; line-height:1.1; color:var(--line); text-wrap:balance}
-.nowch .side{display:none}
+/* ══ 홈의 주인공 — 지금 장 ═══════════════════════════════
+   화면에 압도적으로 큰 것이 하나는 있어야 한다. 그 하나가 여기다.
+
+   · 폭을 .body 의 좌우 여백 밖으로 흘려 보내 격자를 깬다
+   · 빨강을 테두리가 아니라 바닥으로 쓴다 (화면의 1/4 가 빨강이 된다)
+   · 장 번호를 150px 로 뒤에 깔고, 아래를 비스듬히 잘라 낸다
+   · 망점과 사선 줄을 면 위에 얹어 평면을 깬다                        */
+.nowch{
+  display:flex; flex-direction:column; gap:13px;
+  margin:0 -12px;                /* .body 의 padding:0 12px 를 되돌려 끝까지 */
+  padding:20px 22px 46px 18px;   /* 아래 46px 은 비스듬히 잘려 나갈 몫 */
+  background:var(--hot); color:var(--ink);
+  border:0; border-top:3px solid var(--line); border-bottom:3px solid var(--line);
+  box-shadow:none; overflow:hidden;
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 30px), 0 100%);
+}
+.nowch::before{                   /* 장 번호 — 반쯤 잘려 나간다 */
+  content:attr(data-n); position:absolute; right:-12px; bottom:-46px;
+  font-family:var(--num); font-size:154px; line-height:1; letter-spacing:-.05em;
+  color:rgba(11,9,16,.19); pointer-events:none;
+}
+.nowch::after{                    /* 질감 — 사선 줄 + 망점 */
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    repeating-linear-gradient(-45deg, rgba(11,9,16,.085) 0 2px, transparent 2px 10px),
+    radial-gradient(rgba(11,9,16,.17) 1.2px, transparent 1.3px);
+  background-size:auto, 7px 7px;
+}
+.nowch > *{position:relative; z-index:1}
+
+.nowch .txt{display:flex; flex-direction:column; gap:11px; align-items:flex-start}
+/* 띠지로 박아 넣는다 — 빨간 면 위에서 가장 또렷한 대비 */
+.nowch .eyebrow{
+  display:inline-block; margin-left:-2px; padding:4px 10px 5px;
+  background:var(--ink); color:var(--hot); transform:skewX(-9deg);
+}
+.nowch h2{
+  margin:0; font-family:var(--disp); font-weight:400;
+  font-size:clamp(31px, 10.2vw, 41px); line-height:.95; letter-spacing:-.02em;
+  color:var(--ink); text-wrap:balance;
+}
+.nowch .hint{color:rgba(11,9,16,.74)}
+
+/* DAY 도장 — 격자 밖으로 비뚤게 박힌다 */
+.nowch .side{
+  display:block; position:absolute; top:15px; right:13px; z-index:2;
+  padding:4px 9px 5px; border:3px solid var(--ink); background:var(--hot);
+  transform:rotate(6deg); text-align:center;
+}
+.nowch .side .big{display:block; font-family:var(--num); font-size:15px; line-height:1; color:var(--ink)}
+.nowch .side .cap{display:block; font-family:var(--num); font-size:6.5px; letter-spacing:.14em; color:rgba(11,9,16,.62)}
+
+/* 빨간 바닥 위에서는 전부 뒤집는다 */
+.nowch .phase{border-color:var(--ink); background:rgba(11,9,16,.13)}
+.nowch .phase .d{color:rgba(11,9,16,.6)}
+.nowch .phase .t{color:var(--ink)}
+.nowch .phase .s{color:rgba(11,9,16,.72)}
+.nowch .phase.on{background:var(--ink); border-color:var(--ink)}
+.nowch .phase.on .d{color:var(--hot)}
+.nowch .phase.on .t{color:var(--line)}
+.nowch .phase.on .s{color:var(--t2)}
+.nowch .phase.done{background:var(--line); border-color:var(--ink)}
+.nowch .btn{background:var(--ink); color:var(--line); border-color:var(--ink); box-shadow:5px 5px 0 var(--line)}
+.nowch .btn:active{box-shadow:2px 2px 0 var(--line)}
+.nowch .btn.ghost{background:transparent; color:var(--ink); border-color:var(--ink); box-shadow:none}
+
 .phases{display:flex; gap:6px}
 .phase{
   flex:1 1 0; min-width:0; padding:8px 8px 9px; border:2px solid var(--dim); background:var(--ink);
@@ -145,6 +214,7 @@ body.fullscreen-on .tabbar{display:none}
 .phase .d{font-family:var(--num); font-size:9px; letter-spacing:.1em; color:var(--t3)}
 .phase .t{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line)}
 .phase .s{font-size:11px; font-weight:400; color:var(--t2); line-height:1.5}
+.phase .t,.phase .s{word-break:keep-all; overflow-wrap:break-word}
 .phase.on{border-color:var(--hot)}
 .phase.on .d{color:var(--hot)}
 .phase.done{background:var(--line)}
@@ -169,11 +239,27 @@ body.fullscreen-on .tabbar{display:none}
 .banner-s .kicker{font-family:var(--num); font-size:10px; letter-spacing:.16em}
 .banner-s .line{font-family:var(--disp); font-weight:400; font-size:19px; line-height:1.2}
 
+/* ══ 탭의 머리 ═══════════════════════════════════════════
+   빨간 면은 홈, 금색 면은 상점의 몫이다 — 세 번째 색 면을 만들면
+   어느 것도 주인공이 아니게 된다. 나머지 탭은 색이 아니라 크기로만
+   주인공을 세운다: 제목 하나를 30px 로 올리고 옆 숫자는 작게 둔다. */
+.tophead{padding:17px 16px 19px; border-left:5px solid var(--hot)}
+.tophead .sect-h{align-items:flex-end; gap:12px}
+.tophead .sect-h h2{
+  font-family:var(--disp); font-weight:400; font-size:30px; line-height:.95;
+  letter-spacing:-.01em; color:var(--line);
+}
+.tophead .count{font-size:15px}
+.tophead .bar{height:16px}
+
 .composer{display:flex; gap:10px; align-items:flex-start}
 .composer .grow{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:8px}
 .composer .row{display:flex; gap:8px; align-items:center}
 
+/* 피드 — 한 줄씩 좌우로 어긋나게. 똑바로 쌓으면 목록처럼 읽힌다. */
 .feed{display:flex; flex-direction:column; gap:11px; list-style:none; margin:0; padding:0}
+.feed .post:nth-child(odd){margin-right:17px}
+.feed .post:nth-child(even){margin-left:17px}
 .post{
   display:flex; flex-direction:column; gap:9px; padding:13px;
   background:var(--panel); border:2px solid var(--line);
@@ -299,13 +385,48 @@ body.fullscreen-on .tabbar{display:none}
 }
 
 /* ── 뽑기 ──────────────────────────────────────── */
-.banner{display:flex; flex-direction:column; gap:12px; box-shadow:6px 6px 0 var(--gold)}
-.banner h2{margin:0; font-family:var(--disp); font-weight:400; font-size:27px; line-height:1.1; color:var(--line)}
-.packfan{position:relative; height:150px; align-self:center; width:220px}
-.packfan .card{position:absolute; width:92px; height:132px}
-.packfan .card:nth-child(1){left:0; top:14px; transform:rotate(-11deg)}
-.packfan .card:nth-child(2){left:112px; top:14px; transform:rotate(11deg)}
-.packfan .card:nth-child(3){left:56px; top:0; z-index:1}
+/* ══ 상점의 주인공 — 뽑기 배너 ═══════════════════════════
+   홈의 '지금 장' 과 같은 규칙으로 짠다. 다만 색이 다르다:
+   빨강은 '지금 해야 할 일', 금색은 '뽑기와 보상' 을 뜻한다.      */
+.banner{
+  display:flex; flex-direction:column; gap:12px;
+  margin:0 -12px; padding:20px 22px 44px 18px;
+  background:var(--gold); color:var(--ink);
+  border:0; border-top:3px solid var(--line); border-bottom:3px solid var(--line);
+  box-shadow:none; overflow:hidden;
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 28px), 0 100%);
+}
+.banner::before{                  /* ★3 — 배너의 숫자 자리 */
+  content:"★3"; position:absolute; left:-10px; bottom:-38px;
+  font-family:var(--num); font-size:112px; line-height:1; letter-spacing:-.04em;
+  color:rgba(11,9,16,.15); pointer-events:none;
+}
+.banner::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    repeating-linear-gradient(-45deg, rgba(11,9,16,.075) 0 2px, transparent 2px 10px),
+    radial-gradient(rgba(11,9,16,.15) 1.2px, transparent 1.3px);
+  background-size:auto, 7px 7px;
+}
+.banner > *{position:relative; z-index:1}
+.banner .txt{display:flex; flex-direction:column; gap:9px; align-items:flex-start}
+.banner .eyebrow{
+  display:inline-block; margin-left:-2px; padding:4px 10px 5px;
+  background:var(--ink); color:var(--gold); transform:skewX(-9deg);
+}
+.banner h2{
+  margin:0; font-family:var(--disp); font-weight:400;
+  font-size:clamp(31px, 10.2vw, 41px); line-height:.95; letter-spacing:-.02em; color:var(--ink);
+}
+.banner .hint{color:rgba(11,9,16,.76)}
+
+/* 카드 세 장은 겹쳐 쥔 모양으로. 가운데 장이 양옆 이름을 가리지 않게 벌린다. */
+/* 세 장을 벌려 쥔 모양. 폭을 비율로 잡아야 좁은 화면에서도 서로 안 가린다. */
+.packfan{position:relative; height:168px; align-self:center; width:100%; max-width:300px; margin-top:2px}
+.packfan .card{position:absolute; width:30%; min-width:76px; height:132px; box-shadow:4px 4px 0 rgba(11,9,16,.32)}
+.packfan .card:nth-child(1){left:0;  top:28px; transform:rotate(-14deg)}
+.packfan .card:nth-child(2){right:0; top:28px; transform:rotate(14deg)}
+.packfan .card:nth-child(3){left:35%; top:0; z-index:1}
 .pulls{display:flex; gap:10px}
 .pull{
   flex:1 1 0; min-height:64px; padding:0 10px; border:3px solid var(--line);

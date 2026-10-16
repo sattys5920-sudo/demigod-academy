@@ -75,7 +75,7 @@ body::before{
 .halftone{
   position:fixed; inset:0; pointer-events:none; z-index:40;
   background-image:radial-gradient(#FFFFFF 1.1px, transparent 1.2px);
-  background-size:14px 14px; opacity:.05;
+  background-size:12px 12px; opacity:.085;
 }
 
 /* ── 모양 조각 ─────────────────────────────────── */
@@ -114,7 +114,10 @@ body::before{
 .eyebrow{font-family:var(--num); font-size:10.5px; letter-spacing:.2em; color:var(--hot)}
 .sect-h{display:flex; align-items:center; gap:10px}
 .sect-h h2{margin:0; font-family:var(--ui); font-weight:400; font-size:16px; color:var(--line)}
-.hint{margin:0; font-size:13px; font-weight:400; color:var(--t2); line-height:1.75}
+/* 한글은 음절 단위로 끊으면 '쪽지시험 · 장 / 비' 처럼 낱말이 쪼개진다.
+   낱말 단위로 끊되, 끊을 데가 없는 긴 문자열은 그때만 쪼갠다. */
+.hint{margin:0; font-size:13px; font-weight:400; color:var(--t2); line-height:1.75;
+      word-break:keep-all; overflow-wrap:break-word}
 .count{font-family:var(--num); font-size:13px; color:var(--hot); font-variant-numeric:tabular-nums}
 
 /* ── 버튼 — 기울인 평행사변형 + 단단한 그림자 ──── */

@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;600&display=swap">
-<link rel="stylesheet" href="theme.css?v=13e7d66b">
-<link rel="stylesheet" href="app.css?v=28827e48">
+<link rel="stylesheet" href="theme.css?v=bc1a0fc9">
+<link rel="stylesheet" href="app.css?v=70804e3e">
 </head>
 <body>
 
@@ -67,11 +67,11 @@
     <!-- ══ 1) 홈 · 신탁 ══════════════════════════ -->
     <section class="tabpanel" id="tab-home" role="tabpanel" aria-label="신탁">
 
-      <section class="panel flat">
+      <section class="panel flat strip">
         <div class="online" id="online" aria-live="polite"></div>
       </section>
 
-      <article class="panel nowch">
+      <article class="panel nowch" id="nowch" data-n="01">
         <div class="txt">
           <span class="eyebrow" id="chEyebrow">CHAPTER 01 · HERMES</span>
           <h2 id="chTitle">—</h2>
@@ -113,7 +113,7 @@
       </div>
 
       <div class="segpanel" id="seg-dex">
-        <section class="panel flat">
+        <section class="panel flat tophead">
           <div class="sect-h" style="margin-bottom:14px">
             <h2>수집 현황</h2><span class="spacer"></span>
             <span class="count" id="dexCount">0 <span style="color:var(--t3)">/ 0</span></span>
@@ -207,7 +207,7 @@
       </div>
 
       <div class="segpanel" id="seg-time">
-        <section class="panel flat">
+        <section class="panel flat tophead">
           <div class="sect-h">
             <h2>오늘의 시간표</h2><span class="spacer"></span>
             <span class="chip gold" id="capLeft">오늘 에테르 —</span>
@@ -280,7 +280,7 @@
 
     <!-- ══ 5) 인연 · 모모톡 ═══════════════════════ -->
     <section class="tabpanel" id="tab-bonds" role="tabpanel" aria-label="인연" hidden>
-      <section class="panel flat">
+      <section class="panel flat tophead">
         <div class="sect-h"><h2>모모톡</h2><span class="spacer"></span>
           <span class="chip hot" id="unreadCount">안 읽음 0</span></div>
         <p class="hint" style="margin-top:12px">
@@ -493,7 +493,7 @@
 </dialog>
 
 <script src="battle.js?v=c3574053"></script>
-<script src="app.js?v=e71ca3d4"></script>
+<script src="app.js?v=9388bbfc"></script>
 <script type="module" src="app-auth.js?v=3e0d0c7a"></script>
 
 </body>
