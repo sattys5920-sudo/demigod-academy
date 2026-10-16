@@ -1,48 +1,144 @@
 {
   "_": "모모톡 — NPC가 먼저 말을 걸고, 답장을 고르면 이어진다. 글은 전부 빈칸이고 구조만 잡아 둔다.",
-  "bondLevels": [0, 1, 2, 3, 4, 5],
+  "bondLevels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
   "levelUnlocks": {
-    "1": ["stat"],
-    "2": ["stat", "bond-reveal"],
-    "3": ["stat", "scene"],
-    "4": ["stat", "bond-reveal"],
-    "5": ["stat", "scene", "skill"]
+    "1": [
+      "stat"
+    ],
+    "2": [
+      "stat",
+      "bond-reveal"
+    ],
+    "3": [
+      "stat",
+      "scene"
+    ],
+    "4": [
+      "stat",
+      "bond-reveal"
+    ],
+    "5": [
+      "stat",
+      "scene",
+      "skill"
+    ]
   },
   "trigger": {
     "_": "스레드가 도착하는 조건. 하나라도 맞으면 안 읽은 배지가 뜬다.",
-    "kinds": ["bond", "chapter", "deck", "zone", "idle"]
+    "kinds": [
+      "bond",
+      "chapter",
+      "deck",
+      "zone",
+      "idle"
+    ]
   },
   "threads": [
     {
       "id": "nereo-01",
       "card": "nereo",
-      "requires": { "kind": "bond", "value": 0 },
+      "requires": {
+        "kind": "bond",
+        "value": 0
+      },
       "bondGain": 1,
       "lines": [
-        { "id": "l1", "who": "npc", "text": "" },
-        { "id": "l2", "who": "npc", "text": "" },
+        {
+          "id": "l1",
+          "who": "npc",
+          "text": ""
+        },
+        {
+          "id": "l2",
+          "who": "npc",
+          "text": ""
+        },
         {
           "id": "l3",
           "who": "me",
           "choices": [
-            { "text": "", "bond": 1, "next": "l4" },
-            { "text": "", "bond": 0, "next": "l5" }
+            {
+              "text": "",
+              "bond": 1,
+              "next": "l4"
+            },
+            {
+              "text": "",
+              "bond": 0,
+              "next": "l5"
+            }
           ]
         },
-        { "id": "l4", "who": "npc", "text": "", "next": null },
-        { "id": "l5", "who": "npc", "text": "", "next": null }
+        {
+          "id": "l4",
+          "who": "npc",
+          "text": "",
+          "next": null
+        },
+        {
+          "id": "l5",
+          "who": "npc",
+          "text": "",
+          "next": null
+        }
       ]
     },
     {
       "id": "nereo-02",
       "card": "nereo",
-      "requires": { "kind": "chapter", "value": 4, "note": "자기 계보의 장이 끝난 뒤" },
+      "requires": {
+        "kind": "chapter",
+        "value": 4,
+        "note": "자기 계보의 장이 끝난 뒤"
+      },
       "bondGain": 2,
       "unlocksScene": "nereo-s1",
       "lines": []
     }
   ],
   "scenes": [
-    { "id": "nereo-s1", "card": "nereo", "title": "", "body": "", "note": "호감도 3에서 열리는 짧은 장면" }
-  ]
+    {
+      "id": "nereo-s1",
+      "card": "nereo",
+      "title": "",
+      "body": "",
+      "note": "호감도 3에서 열리는 짧은 장면"
+    }
+  ],
+  "defaultThread": {
+    "_": "전용 스레드가 없는 카드에 쓰이는 첫 인사. id 는 first-<cardId> 로 만들어진다.",
+    "requires": {
+      "kind": "bond",
+      "value": 0
+    },
+    "bondGain": 1,
+    "lines": [
+      {
+        "id": "l1",
+        "who": "npc",
+        "text": ""
+      },
+      {
+        "id": "l2",
+        "who": "me",
+        "choices": [
+          {
+            "text": "",
+            "bond": 1
+          },
+          {
+            "text": "",
+            "bond": 1
+          }
+        ]
+      }
+    ]
+  }
 }

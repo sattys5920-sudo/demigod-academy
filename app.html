@@ -5,722 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>데미갓 아카데미</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Gasoek+One&family=Gothic+A1:wght@400;700;900&display=swap">
-<style>
-:root{
-  --bg:#14061F;
-  --panel:#1E0B2C;
-  --line:#FFFFFF;
-  --lime:#C6FF3D;
-  --pink:#FF2E93;
-  --t1:#E4D8EE;
-  --t2:#B7A5C4;
-  --t3:#9B86AD;
-  --dim:#3B2450;
-  --ink:#14061F;
-  --disp:'Gasoek One','Gothic A1',sans-serif;
-  --num:'Archivo Black','Gothic A1',sans-serif;
-  --body:'Gothic A1',system-ui,sans-serif;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0; background:var(--bg); color:var(--t1); font-family:var(--body); -webkit-font-smoothing:antialiased}
-[hidden]{display:none !important}
-button,input{font-family:inherit}
-:focus-visible{outline:4px solid var(--pink); outline-offset:3px}
-.halftone{
-  position:fixed; inset:0; pointer-events:none; z-index:6;
-  background-image:radial-gradient(#FFFFFF 1.4px, transparent 1.5px);
-  background-size:16px 16px; opacity:.07;
-}
-
-/* ── 입장 확인 게이트 ─────────────────────────── */
-#gate{
-  position:fixed; inset:0; z-index:9; background:var(--bg);
-  display:flex; align-items:center; justify-content:center; padding:16px;
-}
-#gate .box{display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; max-width:360px}
-#gate .ring{
-  width:64px; height:64px; border-radius:50%; background:var(--lime); border:4px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-}
-#gate p{margin:0; font-family:var(--disp); font-size:22px; color:var(--line)}
-#gate small{font-size:13px; font-weight:700; color:var(--t2); line-height:1.6}
-#gate a{
-  min-height:48px; display:inline-flex; align-items:center; padding:0 22px; border-radius:999px;
-  border:4px solid var(--line); background:var(--lime); color:var(--ink);
-  font-family:var(--disp); font-size:16px; text-decoration:none;
-}
-
-/* ── 셸 ───────────────────────────────────────── */
-.stage{position:relative; width:100%; max-width:1280px; margin:0 auto; display:flex; flex-direction:column}
-.blob{
-  position:absolute; width:460px; height:460px; border-radius:50%;
-  background:var(--lime); opacity:.18; top:-150px; right:120px; z-index:0; pointer-events:none;
-}
-.hd{
-  position:relative; z-index:2; height:92px; flex:0 0 92px;
-  display:flex; align-items:center; gap:14px; padding:0 26px;
-  border-bottom:5px solid var(--line); background:var(--bg);
-}
-.logo{
-  width:52px; height:52px; flex:0 0 52px; border-radius:50%;
-  background:var(--lime); border:4px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-}
-.hd h1{margin:0; font-family:var(--disp); font-size:28px; color:var(--line); white-space:nowrap}
-.spacer{flex:1 1 auto}
-
-.tabs{display:flex; gap:10px}
-.tab{
-  min-height:44px; display:inline-flex; align-items:center; gap:8px; padding:0 18px;
-  border-radius:999px; cursor:pointer; border:4px solid var(--dim); background:transparent;
-  color:var(--line); font-family:var(--disp); font-size:15px;
-}
-.tab:hover{border-color:var(--t3)}
-.tab[aria-selected="true"]{background:var(--lime); border-color:var(--line); color:var(--ink)}
-
-.icons{display:flex; gap:8px}
-.iconbtn{
-  width:46px; height:46px; border-radius:50%; cursor:pointer; position:relative;
-  border:4px solid var(--dim); background:transparent; color:var(--line);
-  display:inline-flex; align-items:center; justify-content:center; padding:0; overflow:hidden;
-}
-.iconbtn:hover{border-color:var(--line)}
-.iconbtn .dot{
-  position:absolute; top:-3px; right:-3px; width:14px; height:14px;
-  border-radius:50%; background:var(--pink); border:3px solid var(--bg);
-}
-.wallet{
-  min-height:44px; display:inline-flex; align-items:center; gap:9px; padding:0 18px;
-  border-radius:999px; background:var(--line); border:4px solid var(--line); color:var(--ink);
-}
-.wallet .lbl{font-family:var(--num); font-size:10px; letter-spacing:.14em}
-.wallet .val{font-family:var(--num); font-size:17px; font-variant-numeric:tabular-nums}
-
-.body{position:relative; z-index:2; flex:1 1 auto; padding:26px; display:flex}
-.tabpanel{flex:1 1 auto; display:flex; flex-direction:column; gap:20px; min-width:0}
-
-/* ── 공통 조각 ────────────────────────────────── */
-.panel{background:var(--panel); border:5px solid var(--line); border-radius:28px; padding:22px 26px}
-.panel.flat{border-width:4px; border-radius:18px; padding:16px 18px}
-.eyebrow{font-family:var(--num); font-size:12px; letter-spacing:.2em; color:var(--lime)}
-.sect-h{display:flex; align-items:center; gap:14px}
-.sect-h h2{margin:0; font-family:var(--disp); font-size:22px; color:var(--line)}
-.bar{height:20px; border:4px solid var(--line); border-radius:999px; background:var(--ink); overflow:hidden}
-.bar > i{display:block; height:100%; background:var(--lime)}
-.bar.pinkbar > i{background:var(--pink)}
-.bar.thin{height:14px; border-width:3px}
-.count{font-family:var(--num); font-size:15px; color:var(--lime); font-variant-numeric:tabular-nums}
-.hint{margin:0; font-size:13px; font-weight:700; color:var(--t2); line-height:1.7}
-.chip{
-  display:inline-flex; align-items:center; gap:7px; height:32px; padding:0 14px;
-  border-radius:999px; border:4px solid var(--dim); color:var(--t1);
-  font-family:var(--num); font-size:11px; letter-spacing:.06em;
-}
-.chip.lime{background:var(--lime); border-color:var(--line); color:var(--ink)}
-.chip.pink{background:var(--pink); border-color:var(--line); color:var(--ink)}
-.btn-lime{
-  min-height:92px; padding:0 34px; border-radius:999px; cursor:pointer;
-  border:5px solid var(--line); background:var(--lime); color:var(--ink);
-  font-family:var(--disp); font-size:34px; box-shadow:10px 10px 0 var(--line);
-  display:inline-flex; align-items:center; justify-content:center; gap:14px;
-}
-.btn-lime:hover{transform:translate(2px,2px); box-shadow:6px 6px 0 var(--line)}
-.btn-md{
-  min-height:56px; padding:0 26px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--line); background:var(--lime); color:var(--ink);
-  font-family:var(--disp); font-size:18px;
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-}
-.btn-md:hover{background:#D8FF74}
-.btn-ghost{
-  min-height:52px; padding:0 22px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--dim); background:transparent; color:var(--line);
-  font-family:var(--disp); font-size:16px;
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-}
-.btn-ghost:hover{border-color:var(--line)}
-.btn-white{
-  min-height:56px; padding:0 26px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--line); background:var(--line); color:var(--ink);
-  font-family:var(--disp); font-size:18px;
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-}
-.btn-md[disabled], .btn-white[disabled], .btn-lime[disabled]{
-  opacity:.5; cursor:default; transform:none;
-}
-
-/* 아바타 */
-.ava{
-  border-radius:50%; border:4px solid var(--line); overflow:hidden; background:var(--panel);
-  display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
-}
-.ava.tone-lime{background:var(--lime)}
-.ava.tone-pink{background:var(--pink)}
-.ava img{width:100%; height:100%; object-fit:cover; display:block}
-.ava.s{width:44px; height:44px}
-.ava.m{width:56px; height:56px}
-.ava.l{width:88px; height:88px; border-width:5px}
-.ava.xs{width:34px; height:34px; border-width:3px}
-
-/* 카드 스티커 */
-.card{
-  display:flex; flex-direction:column; gap:8px; padding:10px;
-  border-radius:18px; background:var(--panel); border:4px solid var(--line);
-}
-.card-top{display:flex; align-items:center; justify-content:space-between; gap:6px}
-.cost{
-  width:34px; height:34px; flex:0 0 34px; border-radius:50%;
-  background:var(--lime); border:4px solid var(--line); color:var(--ink);
-  display:flex; align-items:center; justify-content:center; font-family:var(--num); font-size:15px;
-}
-.card.pinkish .cost{background:var(--pink)}
-.fam{font-family:var(--num); font-size:9px; letter-spacing:.08em; color:var(--t3); text-align:right}
-.art{
-  position:relative; flex:1 1 auto; min-height:80px; border-radius:12px; overflow:hidden;
-  background:var(--ink); border:4px solid var(--dim);
-  display:flex; align-items:center; justify-content:center;
-}
-.art::after{
-  content:""; position:absolute; inset:0;
-  background-image:radial-gradient(#14061F 1.4px, transparent 1.5px);
-  background-size:12px 12px; opacity:.35;
-}
-.glyph{position:relative; z-index:1; font-family:var(--disp); font-size:30px; color:var(--lime)}
-.card.pinkish .glyph{color:var(--pink)}
-.cname{margin:0; font-family:var(--disp); font-size:14px; line-height:1.2; color:var(--line)}
-.stats{display:flex; gap:6px}
-.stat{
-  flex:1 1 0; min-width:0; height:28px; border-radius:999px;
-  display:flex; align-items:center; justify-content:center;
-  border:3px solid var(--line); font-family:var(--num); font-size:12px; color:var(--t1);
-}
-.stat.atk{background:var(--line); color:var(--ink)}
-
-/* ── 1) 홈 · 신탁 피드 ────────────────────────── */
-.daily{display:flex; gap:26px; align-items:stretch; box-shadow:10px 10px 0 var(--lime)}
-.daily .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:16px}
-.daily h2{margin:0; font-family:var(--disp); font-size:40px; line-height:1.14; color:var(--line); text-wrap:balance}
-.daily .prog{display:flex; flex-direction:column; gap:9px}
-.daily .prog .row{display:flex; justify-content:space-between; align-items:baseline}
-.daily .prog .row span{font-size:13px; font-weight:700; color:var(--t2)}
-.daily .side{
-  position:relative; flex:0 0 212px; border-radius:18px; overflow:hidden;
-  background:var(--ink); border:4px solid var(--dim);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-}
-.daily .side::after{
-  content:""; position:absolute; inset:0;
-  background-image:radial-gradient(#14061F 1.4px, transparent 1.5px);
-  background-size:12px 12px; opacity:.35;
-}
-.daily .side .big{position:relative; z-index:1; font-family:var(--num); font-size:54px; color:var(--lime); line-height:1}
-.daily .side .cap{position:relative; z-index:1; font-family:var(--num); font-size:11px; letter-spacing:.16em; color:var(--t3)}
-
-.quests{display:flex; flex-direction:column; gap:10px; list-style:none; margin:0; padding:0}
-.quest{
-  display:flex; align-items:center; gap:14px; padding:14px 18px;
-  border-radius:18px; border:4px solid var(--dim); background:var(--panel);
-}
-.quest.done{background:var(--lime); border-color:var(--line); color:var(--ink)}
-.tick{
-  width:28px; height:28px; flex:0 0 28px; border-radius:50%;
-  border:4px solid var(--dim); display:flex; align-items:center; justify-content:center;
-}
-.quest.done .tick{border-color:var(--ink); background:var(--ink)}
-.quest .qt{flex:1 1 auto; min-width:0; font-size:14px; font-weight:700}
-.quest .qn{font-family:var(--num); font-size:13px; font-variant-numeric:tabular-nums}
-
-.composer{display:flex; gap:14px; align-items:flex-start}
-.composer .grow{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:10px}
-.composer input{
-  width:100%; min-height:56px; padding:0 18px; border-radius:18px;
-  border:4px solid var(--dim); background:var(--ink); color:var(--t1); font-size:15px; font-weight:700;
-}
-.composer input:focus{border-color:var(--line); outline:none}
-.composer .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-
-.feed{display:flex; flex-direction:column; gap:16px; list-style:none; margin:0; padding:0}
-.post{
-  display:flex; flex-direction:column; gap:14px; padding:20px 22px;
-  border-radius:24px; border:5px solid var(--line); background:var(--panel);
-}
-.post.oracle{background:var(--pink); color:var(--ink); position:relative; overflow:hidden}
-.post.oracle::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:radial-gradient(#14061F 1.4px, transparent 1.5px);
-  background-size:12px 12px; opacity:.35;
-}
-.post.oracle > *{position:relative; z-index:1}
-.post-hd{display:flex; align-items:center; gap:12px}
-.post-hd .who{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:3px}
-.post-hd .nm{font-family:var(--disp); font-size:17px; color:var(--line); word-break:break-all}
-.post.oracle .post-hd .nm{color:var(--ink)}
-.post-hd .mt{font-family:var(--num); font-size:10px; letter-spacing:.12em; color:var(--t3)}
-.post.oracle .post-hd .mt{color:var(--ink)}
-.post-hd .tm{font-family:var(--num); font-size:11px; color:var(--t3); white-space:nowrap}
-.post.oracle .post-hd .tm{color:var(--ink)}
-.post .say{margin:0; font-size:15px; font-weight:700; line-height:1.75; color:var(--t1); word-break:break-word}
-.post.oracle .say{font-family:var(--disp); font-size:21px; line-height:1.35; color:var(--ink)}
-.post-att{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
-.post-att .card{width:132px; min-height:188px; flex:0 0 132px}
-.post-att .note{display:flex; flex-direction:column; gap:7px; min-width:0}
-.post-att .note .k{font-family:var(--num); font-size:10px; letter-spacing:.14em; color:var(--lime)}
-.post-att .note .v{font-size:13px; font-weight:700; color:var(--t2); line-height:1.7}
-.stack-ava{display:flex; align-items:center}
-.stack-ava .ava{margin-right:-12px}
-.post-acts{display:flex; gap:10px; flex-wrap:wrap}
-.react{
-  min-height:44px; padding:0 16px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--dim); background:transparent; color:var(--t2);
-  font-family:var(--num); font-size:12px; letter-spacing:.06em;
-  display:inline-flex; align-items:center; gap:8px;
-}
-.react:hover{border-color:var(--line); color:var(--line)}
-.react[aria-pressed="true"]{background:var(--lime); border-color:var(--line); color:var(--ink)}
-.post.oracle .react{border-color:var(--ink); color:var(--ink)}
-.post.oracle .react[aria-pressed="true"]{background:var(--ink); color:var(--line)}
-
-/* ── 2) 카드 · 계보 ───────────────────────────── */
-.seg{display:flex; gap:12px}
-.seg-btn{
-  flex:1 1 0; min-height:54px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--dim); background:transparent; color:var(--line);
-  font-family:var(--disp); font-size:17px;
-}
-.seg-btn:hover{border-color:var(--t3)}
-.seg-btn[aria-selected="true"]{background:var(--lime); border-color:var(--line); color:var(--ink)}
-.segpanel{display:flex; flex-direction:column; gap:20px}
-
-.filters{display:flex; gap:10px; flex-wrap:wrap}
-.filter{
-  min-height:44px; padding:0 18px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--dim); background:transparent; color:var(--line);
-  font-family:var(--disp); font-size:14px;
-}
-.filter:hover{border-color:var(--t3)}
-.filter[aria-pressed="true"]{background:var(--lime); border-color:var(--line); color:var(--ink)}
-
-.grid6{display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:14px}
-.grid6 .card{min-height:214px}
-.grid6 .card:nth-child(6n+1){transform:rotate(-2deg)}
-.grid6 .card:nth-child(6n+2){transform:rotate(1.4deg)}
-.grid6 .card:nth-child(6n+3){transform:rotate(-1deg)}
-.grid6 .card:nth-child(6n+4){transform:rotate(2.2deg)}
-.grid6 .card:nth-child(6n+5){transform:rotate(-1.6deg)}
-.grid6 .card:nth-child(6n){transform:rotate(.8deg)}
-
-.decklist{display:flex; flex-direction:column; gap:10px; list-style:none; margin:0; padding:0}
-.deckrow{
-  display:flex; align-items:center; gap:14px; padding:12px 16px;
-  border-radius:18px; border:4px solid var(--dim); background:var(--panel);
-}
-.deckrow .nm{flex:1 1 auto; min-width:0; font-size:14px; font-weight:700; color:var(--line)}
-.deckrow .fm{font-family:var(--num); font-size:10px; letter-spacing:.08em; color:var(--t3)}
-.deckrow .qty{
-  height:32px; min-width:46px; padding:0 12px; border-radius:999px;
-  border:3px solid var(--line); background:var(--line); color:var(--ink);
-  display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:13px;
-}
-.deckrow .rm{
-  width:40px; height:40px; border-radius:50%; cursor:pointer;
-  border:3px solid var(--dim); background:transparent; color:var(--t2);
-  display:inline-flex; align-items:center; justify-content:center;
-}
-.deckrow .rm:hover{border-color:var(--pink); color:var(--pink)}
-
-.curve{display:flex; align-items:flex-end; gap:10px; height:132px}
-.curve .col{flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:7px; height:100%}
-.curve .track{flex:1 1 auto; width:100%; display:flex; align-items:flex-end}
-.curve .fill{width:100%; border-radius:8px 8px 0 0; border:3px solid var(--line); border-bottom:0; background:var(--lime)}
-.curve .col.hot .fill{background:var(--pink)}
-.curve .n{font-family:var(--num); font-size:11px; color:var(--t2)}
-.curve .k{font-family:var(--num); font-size:12px; color:var(--line)}
-
-.fuse{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
-.slot{
-  width:150px; height:196px; border-radius:18px; cursor:pointer;
-  border:4px dashed var(--dim); background:var(--panel); color:var(--t2);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-  font-family:var(--disp); font-size:14px;
-}
-.slot:hover{border-color:var(--line); color:var(--line)}
-.slot.filled{border-style:solid; border-color:var(--line); padding:10px; justify-content:flex-start}
-.fuse .op{font-family:var(--disp); font-size:32px; color:var(--lime)}
-.fuse .out{
-  width:172px; padding:10px; border-radius:18px; border:4px solid var(--lime); background:var(--panel);
-  display:flex; flex-direction:column; gap:8px;
-}
-.fuse .out .tagline{font-family:var(--num); font-size:10px; letter-spacing:.14em; color:var(--lime); text-align:center}
-.fusefoot{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-.price{
-  display:inline-flex; align-items:center; gap:9px; min-height:48px; padding:0 18px;
-  border-radius:999px; border:4px solid var(--line); background:var(--ink); color:var(--line);
-}
-.price .k{font-family:var(--num); font-size:10px; letter-spacing:.14em; color:var(--t3)}
-.price .v{font-family:var(--num); font-size:17px; color:var(--lime); font-variant-numeric:tabular-nums}
-
-/* 강화 */
-.grow-wrap{display:flex; gap:24px; align-items:stretch; flex-wrap:wrap}
-.grow-wrap .card{width:188px; flex:0 0 188px; min-height:262px; box-shadow:8px 8px 0 var(--lime)}
-.grow-wrap .meter{flex:1 1 320px; min-width:0; display:flex; flex-direction:column; gap:18px}
-.stars{display:flex; gap:6px; align-items:center}
-.stars .st{color:var(--dim)}
-.stars .st.on{color:var(--lime)}
-.lvrow{display:flex; align-items:center; gap:14px}
-.lvrow .lv{
-  min-width:92px; min-height:52px; padding:0 16px; border-radius:18px;
-  border:4px solid var(--line); background:var(--ink);
-  display:inline-flex; align-items:center; justify-content:center; gap:7px;
-}
-.lvrow .lv .k{font-family:var(--num); font-size:10px; letter-spacing:.14em; color:var(--t3)}
-.lvrow .lv .v{font-family:var(--num); font-size:22px; color:var(--lime); font-variant-numeric:tabular-nums}
-.lvrow .arrow{color:var(--lime); flex:0 0 auto}
-.lvrow .lv.next .v{color:var(--line)}
-.deltas{display:flex; flex-direction:column; gap:10px}
-.delta{
-  display:flex; align-items:center; gap:12px; min-height:52px; padding:0 18px;
-  border-radius:18px; border:4px solid var(--dim); background:var(--panel);
-}
-.delta .k{flex:1 1 auto; font-family:var(--num); font-size:11px; letter-spacing:.14em; color:var(--t3)}
-.delta .a{font-family:var(--num); font-size:16px; color:var(--t2)}
-.delta .b{font-family:var(--num); font-size:18px; color:var(--lime)}
-.mats{display:flex; gap:12px; flex-wrap:wrap}
-.mat{
-  display:flex; align-items:center; gap:10px; min-height:52px; padding:0 16px;
-  border-radius:999px; border:4px solid var(--dim); background:var(--panel);
-}
-.mat .n{font-family:var(--num); font-size:13px; color:var(--line)}
-.mat .t{font-size:12px; font-weight:700; color:var(--t3)}
-.mat.ok{border-color:var(--lime)}
-
-/* ── 3) 소환 ──────────────────────────────────── */
-.banner{display:flex; gap:26px; align-items:center; box-shadow:10px 10px 0 var(--pink)}
-.banner .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:16px}
-.banner h2{margin:0; font-family:var(--disp); font-size:42px; line-height:1.14; color:var(--line)}
-.packfan{position:relative; flex:0 0 300px; height:232px}
-.packfan .card{position:absolute; width:140px; height:200px}
-.packfan .card:nth-child(1){left:0; top:22px; transform:rotate(-10deg)}
-.packfan .card:nth-child(2){left:150px; top:22px; transform:rotate(10deg)}
-.packfan .card:nth-child(3){left:75px; top:0; z-index:1}
-.pulls{display:flex; gap:16px; flex-wrap:wrap}
-.pull{
-  flex:1 1 220px; min-height:96px; padding:0 26px; border-radius:24px; cursor:pointer;
-  border:5px solid var(--line); background:var(--lime); color:var(--ink);
-  display:flex; align-items:center; justify-content:center; gap:14px;
-  box-shadow:8px 8px 0 var(--line);
-}
-.pull.ten{background:var(--pink)}
-.pull:hover{transform:translate(2px,2px); box-shadow:4px 4px 0 var(--line)}
-.pull[disabled]{opacity:.5; cursor:default; transform:none; box-shadow:8px 8px 0 var(--line)}
-.pull .big{font-family:var(--disp); font-size:28px}
-.pull .cost-tag{
-  display:inline-flex; align-items:center; gap:7px; height:36px; padding:0 14px;
-  border-radius:999px; border:3px solid var(--ink); font-family:var(--num); font-size:13px;
-}
-.rates{display:flex; flex-direction:column; gap:12px; list-style:none; margin:0; padding:0}
-.rate{display:flex; align-items:center; gap:14px}
-.rate .g{flex:0 0 96px; font-family:var(--disp); font-size:15px; color:var(--line)}
-.rate .track{flex:1 1 auto; min-width:0}
-.rate .p{flex:0 0 64px; text-align:right; font-family:var(--num); font-size:14px; color:var(--lime); font-variant-numeric:tabular-nums}
-.shoprow{display:flex; gap:20px}
-.shoprow > *{flex:1 1 0; min-width:0}
-.goods{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px}
-.good{
-  display:flex; flex-direction:column; gap:10px; align-items:flex-start;
-  padding:16px 18px; border-radius:18px; border:4px solid var(--dim); background:var(--panel);
-}
-.good .amt{font-family:var(--num); font-size:26px; color:var(--lime)}
-.good .nm{font-size:13px; font-weight:700; color:var(--t2)}
-.good button{
-  width:100%; min-height:48px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--line); background:var(--line); color:var(--ink);
-  font-family:var(--disp); font-size:15px;
-}
-
-/* ── 4) 원정 ──────────────────────────────────── */
-.party{display:flex; gap:16px; align-items:center; flex-wrap:wrap}
-.member{
-  display:flex; align-items:center; gap:12px; min-height:68px; padding:0 18px 0 10px;
-  border-radius:999px; border:4px solid var(--dim); background:var(--panel);
-}
-.member .who{display:flex; flex-direction:column; gap:3px; min-width:0}
-.member .who .n{font-family:var(--disp); font-size:15px; color:var(--line); word-break:break-all}
-.member .who .f{font-family:var(--num); font-size:10px; letter-spacing:.1em; color:var(--t3)}
-.member.me{border-color:var(--line)}
-.member.open{border-style:dashed; color:var(--t3)}
-.member.open .mk{
-  width:44px; height:44px; flex:0 0 44px; border-radius:50%; border:4px dashed var(--dim);
-  display:inline-flex; align-items:center; justify-content:center;
-}
-.modes{display:flex; flex-direction:column; gap:18px}
-.mode{display:flex; align-items:center; gap:22px}
-.mode .badge{
-  width:96px; height:96px; flex:0 0 96px; border-radius:24px;
-  border:4px solid var(--line); background:var(--ink); color:var(--lime);
-  display:flex; align-items:center; justify-content:center;
-}
-.mode.pinky .badge{color:var(--pink)}
-.mode .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:8px}
-.mode h3{margin:0; font-family:var(--disp); font-size:24px; color:var(--line)}
-.mode .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-.mode .desc{font-size:13px; font-weight:700; color:var(--t2); line-height:1.6}
-
-/* ── 하단 탭 바 (모바일) ──────────────────────── */
-.tabbar{display:none}
-
-/* ── 풀스크린 모드 ────────────────────────────── */
-.full{
-  position:fixed; inset:0; z-index:5; background:var(--bg);
-  display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden;
-}
-.exit{
-  width:56px; height:56px; flex:0 0 56px; border-radius:50%; cursor:pointer;
-  border:4px solid var(--line); background:var(--panel); color:var(--line);
-  display:inline-flex; align-items:center; justify-content:center;
-}
-.exit:hover{background:var(--dim)}
-.full > .topbar{
-  flex:0 0 auto; display:flex; align-items:center; gap:14px; padding:18px 22px;
-  border-bottom:4px solid var(--line); background:var(--bg); position:sticky; top:0; z-index:3;
-}
-.full > .topbar .ttl{display:flex; flex-direction:column; gap:3px; min-width:0}
-.full > .topbar .ttl .n{font-family:var(--disp); font-size:20px; color:var(--line)}
-.full > .topbar .ttl .s{font-family:var(--num); font-size:10px; letter-spacing:.16em; color:var(--t3)}
-
-/* 전투 */
-.fieldwrap{flex:1 1 auto; display:flex; flex-direction:column; gap:14px; padding:20px 26px 0; align-items:center}
-.hpbar{display:flex; align-items:center; gap:14px; width:100%; max-width:760px}
-.hpbar .face{
-  width:56px; height:56px; flex:0 0 56px; border-radius:50%;
-  border:4px solid var(--line); background:var(--panel); color:var(--lime);
-  display:flex; align-items:center; justify-content:center;
-}
-.hpbar.foe .face{color:var(--pink)}
-.hpbar .who{display:flex; flex-direction:column; gap:5px; flex:1 1 auto; min-width:0}
-.hpbar .who .n{font-family:var(--disp); font-size:17px; color:var(--line); word-break:break-all}
-.hpbar .hp{height:16px; border:3px solid var(--line); border-radius:999px; background:var(--ink); overflow:hidden}
-.hpbar .hp > i{display:block; height:100%; background:var(--lime)}
-.hpbar.foe .hp > i{background:var(--pink)}
-.hpbar .num{font-family:var(--num); font-size:18px; color:var(--line); font-variant-numeric:tabular-nums}
-.field{width:100%; max-width:760px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px}
-.slotmini{
-  height:126px; border-radius:18px; border:4px dashed var(--dim); background:var(--panel);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--num); font-size:11px; letter-spacing:.14em; color:var(--t3);
-}
-.slotmini.on{border-style:solid; border-color:var(--line); flex-direction:column; gap:6px; color:var(--line)}
-.slotmini .g{font-family:var(--disp); font-size:24px; color:var(--lime)}
-.slotmini.foe .g{color:var(--pink)}
-.slotmini .s{font-family:var(--num); font-size:12px; color:var(--t2)}
-.turnbar{
-  display:flex; align-items:center; gap:14px; width:100%; max-width:760px;
-  padding:12px 18px; border-radius:999px; border:4px solid var(--line); background:var(--panel);
-}
-.turnbar .t{font-family:var(--disp); font-size:18px; color:var(--lime)}
-.turnbar .m{font-family:var(--num); font-size:13px; color:var(--t2); letter-spacing:.06em}
-.hand{position:relative; height:210px; flex:0 0 210px; display:flex; align-items:flex-end; justify-content:center}
-.hand .card{position:absolute; bottom:-26px; width:132px; height:186px; transform-origin:50% 100%}
-.hand .card:nth-child(1){transform:rotate(-14deg) translate(-250px,26px)}
-.hand .card:nth-child(2){transform:rotate(-7deg) translate(-126px,6px)}
-.hand .card:nth-child(3){transform:rotate(0deg) translate(0,-2px)}
-.hand .card:nth-child(4){transform:rotate(7deg) translate(126px,6px)}
-.hand .card:nth-child(5){transform:rotate(14deg) translate(250px,26px)}
-.endturn{
-  position:absolute; right:26px; bottom:34px; z-index:2;
-  min-height:60px; padding:0 28px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--line); background:var(--lime); color:var(--ink);
-  font-family:var(--disp); font-size:20px; box-shadow:6px 6px 0 var(--line);
-}
-.endturn:hover{transform:translate(2px,2px); box-shadow:4px 4px 0 var(--line)}
-
-/* 결과 */
-.result{align-items:center; justify-content:center; padding:26px}
-.result .inner{width:100%; max-width:620px; display:flex; flex-direction:column; gap:22px; align-items:center}
-.result .win{font-family:var(--disp); font-size:72px; line-height:1; color:var(--lime); text-align:center}
-.result .sub{font-family:var(--num); font-size:12px; letter-spacing:.24em; color:var(--t2)}
-.rewards{display:flex; gap:18px; align-items:center; flex-wrap:wrap; justify-content:center}
-.rewards .card{width:172px; height:238px; box-shadow:8px 8px 0 var(--lime)}
-.gains{display:flex; flex-direction:column; gap:12px}
-.gain{
-  display:flex; align-items:center; gap:12px; min-height:56px; padding:0 20px;
-  border-radius:999px; border:4px solid var(--line); background:var(--panel);
-}
-.gain .k{font-family:var(--num); font-size:10px; letter-spacing:.14em; color:var(--t3)}
-.gain .v{font-family:var(--num); font-size:19px; color:var(--lime); font-variant-numeric:tabular-nums}
-.result .acts{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; width:100%}
-.result .acts > *{flex:1 1 220px}
-
-/* 소환 연출 */
-.reveal{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px; padding:26px}
-.reveal .hdline{font-family:var(--disp); font-size:56px; line-height:1; color:var(--lime); text-align:center}
-.reveal .pulled{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; max-width:880px}
-.reveal .pulled .card{width:136px; min-height:196px; box-shadow:6px 6px 0 var(--lime)}
-.reveal .pulled .card.pinkish{box-shadow:6px 6px 0 var(--pink)}
-.reveal .acts{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
-.rank{
-  align-self:flex-start; display:inline-flex; align-items:center; gap:5px;
-  font-family:var(--num); font-size:10px; letter-spacing:.1em; color:var(--lime);
-}
-
-/* 원정 세션 — 단체 대화 */
-.session{display:flex; flex-direction:column}
-.session .log{
-  flex:1 1 auto; display:flex; flex-direction:column; gap:14px;
-  padding:22px; max-width:860px; width:100%; margin:0 auto;
-}
-.bub{display:flex; gap:12px; align-items:flex-start}
-.bub .txt{
-  flex:0 1 auto; min-width:0; padding:14px 18px; border-radius:20px;
-  border:4px solid var(--dim); background:var(--panel);
-}
-.bub .nm{display:block; font-family:var(--disp); font-size:13px; color:var(--t2); margin-bottom:6px}
-.bub .ln{margin:0; font-size:15px; font-weight:700; line-height:1.75; color:var(--t1); word-break:break-word}
-.bub.gm .txt{border-color:var(--lime); background:var(--ink)}
-.bub.gm .nm{color:var(--lime)}
-.bub.gm .ln{font-size:16px; line-height:1.8}
-.bub.me{flex-direction:row-reverse}
-.bub.me .txt{border-color:var(--line); background:var(--line)}
-.bub.me .nm{color:var(--ink); text-align:right}
-.bub.me .ln{color:var(--ink)}
-.roll{
-  align-self:center; display:inline-flex; align-items:center; gap:12px;
-  min-height:52px; padding:0 22px; border-radius:999px;
-  border:4px solid var(--line); background:var(--ink);
-}
-.roll .d{font-family:var(--num); font-size:11px; letter-spacing:.16em; color:var(--t3)}
-.roll .v{font-family:var(--num); font-size:22px; color:var(--lime); font-variant-numeric:tabular-nums}
-.roll .j{font-family:var(--disp); font-size:16px; color:var(--line)}
-.roll.fail .v{color:var(--pink)}
-.sysline{
-  align-self:center; font-family:var(--num); font-size:11px; letter-spacing:.16em;
-  color:var(--t3); text-align:center;
-}
-.session .deck-bar{
-  position:sticky; bottom:0; z-index:2; flex:0 0 auto;
-  display:flex; flex-direction:column; gap:12px; padding:18px 22px;
-  padding-bottom:calc(18px + env(safe-area-inset-bottom, 0px));
-  border-top:4px solid var(--line); background:var(--bg);
-}
-.choices{display:flex; gap:12px; flex-wrap:wrap; max-width:860px; width:100%; margin:0 auto}
-.choice{
-  flex:1 1 240px; min-height:62px; padding:12px 20px; border-radius:20px; cursor:pointer;
-  border:4px solid var(--dim); background:var(--panel); color:var(--line);
-  font-family:var(--disp); font-size:16px; text-align:left; line-height:1.35;
-  display:flex; align-items:center; gap:12px;
-}
-.choice:hover{border-color:var(--line); background:var(--ink)}
-.choice .no{
-  width:30px; height:30px; flex:0 0 30px; border-radius:50%;
-  border:3px solid var(--lime); color:var(--lime);
-  display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:12px;
-}
-.choice.fight{border-color:var(--pink)}
-.choice.fight .no{border-color:var(--pink); color:var(--pink)}
-.talk{display:flex; gap:12px; max-width:860px; width:100%; margin:0 auto}
-.talk input{
-  flex:1 1 auto; min-width:0; min-height:56px; padding:0 18px; border-radius:18px;
-  border:4px solid var(--dim); background:var(--ink); color:var(--t1); font-size:15px; font-weight:700;
-}
-.talk input:focus{border-color:var(--line); outline:none}
-.talk .send{
-  min-height:56px; padding:0 22px; border-radius:18px; cursor:pointer;
-  border:4px solid var(--line); background:var(--lime); color:var(--ink);
-  font-family:var(--disp); font-size:16px;
-}
-
-/* ── 프로필 다이얼로그 ────────────────────────── */
-dialog.dlg{
-  width:min(400px, calc(100vw - 32px)); padding:26px; border:5px solid var(--line);
-  border-radius:28px; background:var(--panel); color:var(--t1); box-shadow:10px 10px 0 var(--lime);
-}
-dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
-.dlg-hd{display:flex; align-items:center; gap:14px; margin-bottom:18px}
-.dlg-hd .who{display:flex; flex-direction:column; gap:4px; min-width:0}
-.dlg-hd .who .n{font-family:var(--disp); font-size:22px; color:var(--line); word-break:break-all}
-.dlg-hd .who .r{font-family:var(--num); font-size:11px; letter-spacing:.12em; color:var(--t3)}
-.dlg-acts{display:flex; flex-direction:column; gap:12px}
-.dlg-acts > a{text-decoration:none}
-
-/* ── 반응형 ───────────────────────────────────── */
-@media (max-width:1024px){
-  .tabs{display:none}
-  .body{padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px))}
-  .tabbar{
-    position:fixed; left:0; right:0; bottom:0; z-index:4;
-    display:flex; gap:8px; height:72px; padding:0 12px;
-    padding-bottom:env(safe-area-inset-bottom, 0px);
-    background:var(--panel); border-top:4px solid var(--line); align-items:center;
-  }
-  .tabbar .tab{flex:1 1 0; height:56px; min-height:56px; flex-direction:column; gap:2px; padding:0 4px; font-size:12px}
-  body.fullscreen-on .tabbar{display:none}
-
-  .daily{flex-direction:column}
-  .daily .side{flex:0 0 160px}
-  .grid6{grid-template-columns:repeat(3, minmax(0,1fr))}
-  .banner{flex-direction:column; align-items:stretch}
-  .packfan{flex:0 0 232px; align-self:center; width:300px}
-  .shoprow{flex-direction:column}
-}
-@media (max-width:760px){
-  .hd{padding:0 16px; gap:10px}
-  .hd h1{font-size:22px}
-  .wallet{padding:0 14px}
-  .wallet .lbl{display:none}
-  .body{padding:16px; padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px))}
-  .daily h2{font-size:30px}
-  .btn-lime{font-size:24px; min-height:72px; box-shadow:6px 6px 0 var(--line)}
-  .grid6{grid-template-columns:repeat(2, minmax(0,1fr))}
-  .goods{grid-template-columns:repeat(1, minmax(0,1fr))}
-  .mode{flex-wrap:wrap}
-  .mode .badge{width:72px; height:72px; flex:0 0 72px}
-  .fuse{justify-content:center}
-  .panel{padding:18px; border-radius:24px}
-  .post{padding:16px 18px}
-  .post.oracle .say{font-size:18px}
-  .seg-btn{font-size:15px; min-height:48px}
-  .result .win{font-size:48px}
-  .reveal .hdline{font-size:36px}
-  .reveal .pulled .card{width:104px; min-height:152px}
-  .fieldwrap{padding:16px 16px 0}
-  .hand{height:180px; flex:0 0 180px}
-  .hand .card{width:104px; height:150px}
-  .hand .card:nth-child(1){transform:rotate(-14deg) translate(-120px,26px)}
-  .hand .card:nth-child(2){transform:rotate(-7deg) translate(-62px,6px)}
-  .hand .card:nth-child(4){transform:rotate(7deg) translate(62px,6px)}
-  .hand .card:nth-child(5){transform:rotate(14deg) translate(120px,26px)}
-  .endturn{right:16px; bottom:16px; font-size:16px; min-height:52px; padding:0 20px}
-  .session .log{padding:16px}
-  .bub .txt{padding:12px 14px}
-  .choice{font-size:15px; flex:1 1 100%}
-}
-@media (max-width:430px){
-  .hd{padding:0 12px; gap:8px}
-  .logo{width:42px; height:42px; flex:0 0 42px; border-width:3px}
-  .hd h1{font-size:18px}
-  .icons{gap:6px}
-  .iconbtn{width:40px; height:40px; border-width:3px}
-  .wallet{padding:0 10px; gap:6px; border-width:3px}
-  .wallet .val{font-size:14px}
-  .full > .topbar{padding:14px 14px}
-  .daily .side{flex:0 0 132px}
-}
-@media (max-width:360px){
-  .hd{padding:0 10px; gap:6px}
-  .logo{width:36px; height:36px; flex:0 0 36px}
-  .hd h1{font-size:16px}
-  .iconbtn{width:36px; height:36px}
-  .wallet{padding:0 9px; gap:5px}
-  .wallet .val{font-size:13px}
-  .body{padding:12px; padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
-  .panel{padding:14px; border-radius:20px}
-  .grid6{grid-template-columns:repeat(1, minmax(0,1fr))}
-}
-@media (prefers-reduced-motion:reduce){
-  *{transition:none !important}
-  .btn-lime:hover, .endturn:hover, .pull:hover{transform:none}
-}
-</style>
+<link rel="stylesheet" href="app.css">
 </head>
 <body>
 
@@ -747,7 +32,7 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
     <span class="spacer"></span>
 
     <nav class="tabs" role="tablist" aria-label="주요 메뉴">
-      <button type="button" class="tab" role="tab" data-tab="feed" aria-selected="true">
+      <button type="button" class="tab" role="tab" data-tab="home" aria-selected="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7"/><path d="M6.5 10v9h11v-9"/><path d="M10 19v-5h4v5"/></svg>
         홈
       </button>
@@ -755,13 +40,13 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="16" rx="2.5"/><path d="M4.5 7v11a3 3 0 0 0 3 3H15"/></svg>
         카드
       </button>
-      <button type="button" class="tab" role="tab" data-tab="summon" aria-selected="false">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
-        소환
+      <button type="button" class="tab" role="tab" data-tab="daily" aria-selected="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
+        일상
       </button>
-      <button type="button" class="tab" role="tab" data-tab="quest" aria-selected="false">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V5l6 2 6-2 4 1.5V17l-4 2-6-2-6 3Z"/><path d="M10 7v10"/><path d="M16 5v10"/></svg>
-        원정
+      <button type="button" class="tab" role="tab" data-tab="bonds" aria-selected="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M9 10h6"/></svg>
+        인연
       </button>
     </nav>
 
@@ -778,160 +63,68 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
       </button>
     </div>
 
-    <span class="wallet">
+    <div class="wallets">
+    <span class="wallet" title="이코르 — 뽑기에 쓴다">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.8 3.4 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2.2-5.6 5-9Z"/></svg>
       <span class="lbl">ICHOR</span>
-      <span class="val" id="walletVal">1,240</span>
+      <span class="val" id="walletIchor">0</span>
     </span>
+    <span class="wallet" id="walletEtherBox" title="에테르 — 강화에 쓴다" style="background:var(--lime); border-color:var(--line)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
+      <span class="lbl">AITHER</span>
+      <span class="val" id="walletEther">0</span>
+    </span>
+    </div>
   </header>
 
   <div class="body">
 
-    <!-- ══ 1) 홈 · 신탁 피드 ══════════════════════ -->
-    <section class="tabpanel" id="tab-feed" role="tabpanel" aria-label="신탁">
+    <!-- ══ 1) 홈 · 신탁 ══════════════════════════ -->
+    <section class="tabpanel" id="tab-home" role="tabpanel" aria-label="신탁">
 
-      <article class="panel daily">
+      <section class="panel flat">
+        <div class="online" id="online" aria-live="polite"></div>
+      </section>
+
+      <article class="panel nowch">
         <div class="txt">
-          <span class="eyebrow">TODAY · 오늘의 신탁</span>
-          <h2>폭풍이 온다.<br>준비된 자만 바다로 나간다.</h2>
-          <div class="prog">
-            <div class="row"><span>일일 임무</span><span class="count">2 <span style="color:var(--t3)">/ 3</span></span></div>
-            <div class="bar" role="img" aria-label="일일 임무 3개 중 2개 완료"><i style="width:66%"></i></div>
+          <span class="eyebrow" id="chEyebrow">CHAPTER 01 · HERMES</span>
+          <h2 id="chTitle">—</h2>
+          <p class="hint" id="chBoss">—</p>
+          <div class="phases" id="phases"></div>
+          <div class="post-acts" style="margin-top:4px">
+            <button type="button" class="btn-md" id="goPhase">지금 할 일</button>
+            <button type="button" class="btn-ghost" id="openChron">연대기</button>
           </div>
-          <ul class="quests">
-            <li class="quest done">
-              <span class="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg></span>
-              <span class="qt">출석하고 신탁 받기</span><span class="qn">+40</span>
-            </li>
-            <li class="quest done">
-              <span class="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4 10-10"/></svg></span>
-              <span class="qt">카드 1회 소환하기</span><span class="qn">+60</span>
-            </li>
-            <li class="quest">
-              <span class="tick" aria-hidden="true"></span>
-              <span class="qt">원정 1막 완료하기</span><span class="qn">+120</span>
-            </li>
-          </ul>
         </div>
         <div class="side" aria-hidden="true">
-          <span class="big">D-3</span>
-          <span class="cap">STORM WATCH</span>
+          <span class="big" id="chLeft">—</span>
+          <span class="cap">UNTIL CLOSE</span>
         </div>
       </article>
+
+      <button type="button" class="banner-s" id="homeSummon">
+        <span class="mark" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
+        </span>
+        <span class="txt">
+          <span class="kicker">SUMMON</span>
+          <span class="line">새 학생을 부른다</span>
+        </span>
+      </button>
 
       <section class="panel flat composer">
         <span class="ava m" id="composerAva" aria-hidden="true"></span>
         <div class="grow">
           <input type="text" id="sayInput" maxlength="140" placeholder="아카데미에 한 줄 남기기" aria-label="피드에 남길 말" enterkeyhint="send">
           <div class="row">
-            <span class="hint" style="flex:1 1 auto">140자까지. 올린 글은 이 기기에서만 보인다.</span>
+            <span class="hint" style="flex:1 1 auto">140자까지</span>
             <button type="button" class="btn-md" id="sayPost">올리기</button>
           </div>
         </div>
       </section>
 
-      <ul class="feed" id="feed">
-
-        <li class="post oracle">
-          <div class="post-hd">
-            <span class="ava m tone-lime" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></span>
-            <span class="who"><span class="nm">신탁</span><span class="mt">ORACLE · 공지</span></span>
-            <span class="tm">방금</span>
-          </div>
-          <p class="say">사흘간 폭풍 경보. 포세이돈 계열 소환 확률이 두 배가 된다.</p>
-          <div class="post-acts">
-            <button type="button" class="react" aria-pressed="false" data-react>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-              <span data-react-n>412</span>
-            </button>
-            <button type="button" class="react" data-goto="summon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
-              소환으로
-            </button>
-          </div>
-        </li>
-
-        <li class="post">
-          <div class="post-hd">
-            <span class="ava m tone-lime" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10a7 7 0 0 1 14 0v2a7 7 0 0 1-14 0v-2Z"/><circle cx="9.3" cy="11" r="1.8"/><circle cx="14.7" cy="11" r="1.8"/><path d="M12 14v2"/></svg></span>
-            <span class="who"><span class="nm">세리</span><span class="mt">ATHENA · 2학년</span></span>
-            <span class="tm">12분</span>
-          </div>
-          <p class="say">10연 돌렸는데 마지막 한 장에서 터졌다. 명계 쪽은 진짜 안 나오더니.</p>
-          <div class="post-att">
-            <article class="card pinkish">
-              <div class="card-top"><span class="cost">6</span><span class="fam">HADES</span></div>
-              <div class="art"><span class="glyph">하윤</span></div>
-              <h3 class="cname">하윤 · 명계의 문지기</h3>
-              <div class="stats"><span class="stat atk">ATK 4</span><span class="stat">HP 9</span></div>
-            </article>
-            <span class="note">
-              <span class="k">3성 카드 획득</span>
-              <span class="v">천장 73회에서 뽑음<br>이번 시즌 두 번째 3성</span>
-            </span>
-          </div>
-          <div class="post-acts">
-            <button type="button" class="react" aria-pressed="false" data-react>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-              <span data-react-n>86</span>
-            </button>
-            <button type="button" class="react">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4V5Z"/></svg>
-              댓글 14
-            </button>
-          </div>
-        </li>
-
-        <li class="post">
-          <div class="post-hd">
-            <span class="ava m tone-pink" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V5l6 2 6-2 4 1.5V17l-4 2-6-2-6 3Z"/><path d="M10 7v10"/><path d="M16 5v10"/></svg></span>
-            <span class="who"><span class="nm">밤의 파티</span><span class="mt">PARTY · 원정 기록</span></span>
-            <span class="tm">1시간</span>
-          </div>
-          <p class="say">달빛 수도원 2막 돌파. 종소리 세 번 울리기 전에 문을 닫았다. 3막은 오늘 밤에.</p>
-          <div class="post-att">
-            <span class="stack-ava" aria-hidden="true">
-              <span class="ava s tone-lime"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v13"/><path d="M5 3v6a7 7 0 0 0 14 0V3"/><path d="M12 3v6"/></svg></span>
-              <span class="ava s tone-pink"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 11 13"/><path d="M9.5 10.5 14 6l4.5 4.5L14 15l-4.5-4.5Z"/></svg></span>
-              <span class="ava s tone-lime"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v17"/><path d="M12 9C9 6 6 6.6 4 8.6 6 10.6 9 11.6 12 9Z"/><path d="M12 9c3-3 6-2.4 8-.4-2 2-5 3-8 .4Z"/></svg></span>
-            </span>
-            <span class="note">
-              <span class="k">3 / 4 참가</span>
-              <span class="v">한 자리 비었다. 권장 레벨 8 이상.</span>
-            </span>
-          </div>
-          <div class="post-acts">
-            <button type="button" class="react" aria-pressed="false" data-react>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-              <span data-react-n>57</span>
-            </button>
-            <button type="button" class="react" data-goto="quest">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg>
-              원정으로
-            </button>
-          </div>
-        </li>
-
-        <li class="post">
-          <div class="post-hd">
-            <span class="ava m tone-pink" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 11 13"/><path d="M9.5 10.5 14 6l4.5 4.5L14 15l-4.5-4.5Z"/></svg></span>
-            <span class="who"><span class="nm">루카</span><span class="mt">HEPHAISTOS · 1학년</span></span>
-            <span class="tm">3시간</span>
-          </div>
-          <p class="say">카일 세 장 갈아서 별 셋까지 올렸다. 불씨 도둑이 이제 불을 던진다.</p>
-          <div class="post-acts">
-            <button type="button" class="react" aria-pressed="false" data-react>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-              <span data-react-n>31</span>
-            </button>
-            <button type="button" class="react" data-goto="cards" data-seg-goto="fuse">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-              합성으로
-            </button>
-          </div>
-        </li>
-
-      </ul>
+      <ul class="feed" id="feed"></ul>
     </section>
 
     <!-- ══ 2) 카드 · 계보 ═════════════════════════ -->
@@ -939,402 +132,177 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
       <div class="seg" role="tablist" aria-label="카드 보기">
         <button type="button" class="seg-btn" role="tab" data-seg="dex" aria-selected="true">도감</button>
         <button type="button" class="seg-btn" role="tab" data-seg="deck" aria-selected="false">덱</button>
-        <button type="button" class="seg-btn" role="tab" data-seg="fuse" aria-selected="false">합성</button>
-        <button type="button" class="seg-btn" role="tab" data-seg="grow" aria-selected="false">강화</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="grow" aria-selected="false">승급</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="melt" aria-selected="false">봉납</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="bondmap" aria-selected="false">관계도</button>
       </div>
 
-      <!-- 도감 -->
       <div class="segpanel" id="seg-dex">
         <section class="panel flat">
           <div class="sect-h" style="margin-bottom:14px">
-            <h2>수집 현황</h2>
-            <span class="spacer"></span>
-            <span class="count">128 <span style="color:var(--t3)">/ 240</span></span>
+            <h2>수집 현황</h2><span class="spacer"></span>
+            <span class="count" id="dexCount">0 <span style="color:var(--t3)">/ 0</span></span>
           </div>
-          <div class="bar" role="img" aria-label="수집률 53퍼센트"><i style="width:53%"></i></div>
+          <div class="bar" role="img" aria-label="수집률"><i id="dexBar" style="width:0%"></i></div>
         </section>
-
-        <div class="filters" role="group" aria-label="계열 필터">
-          <button type="button" class="filter" data-fam="전체" aria-pressed="true">전체</button>
-          <button type="button" class="filter" data-fam="올림포스" aria-pressed="false">올림포스</button>
-          <button type="button" class="filter" data-fam="명계" aria-pressed="false">명계</button>
-          <button type="button" class="filter" data-fam="원시신" aria-pressed="false">원시신</button>
-          <button type="button" class="filter" data-fam="인간계" aria-pressed="false">인간계</button>
-        </div>
-
-        <div class="grid6" id="dexGrid">
-          <article class="card">
-            <div class="card-top"><span class="cost">4</span><span class="fam">POSEIDON</span></div>
-            <div class="art"><span class="glyph">네레오</span></div>
-            <h3 class="cname">네레오 · 파도의 아들</h3>
-            <div class="stats"><span class="stat atk">ATK 5</span><span class="stat">HP 4</span></div>
-          </article>
-          <article class="card pinkish">
-            <div class="card-top"><span class="cost">2</span><span class="fam">HERMES</span></div>
-            <div class="art"><span class="glyph">이즈미</span></div>
-            <h3 class="cname">이즈미 · 전령의 딸</h3>
-            <div class="stats"><span class="stat atk">ATK 2</span><span class="stat">HP 3</span></div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cost">6</span><span class="fam">HADES</span></div>
-            <div class="art"><span class="glyph">하윤</span></div>
-            <h3 class="cname">하윤 · 명계의 문지기</h3>
-            <div class="stats"><span class="stat atk">ATK 4</span><span class="stat">HP 9</span></div>
-          </article>
-          <article class="card pinkish">
-            <div class="card-top"><span class="cost">3</span><span class="fam">ARES</span></div>
-            <div class="art"><span class="glyph">알렉토</span></div>
-            <h3 class="cname">알렉토 · 붉은 손</h3>
-            <div class="stats"><span class="stat atk">ATK 4</span><span class="stat">HP 2</span></div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cost">5</span><span class="fam">ATHENA</span></div>
-            <div class="art"><span class="glyph">세리</span></div>
-            <h3 class="cname">세리 · 올빼미의 눈</h3>
-            <div class="stats"><span class="stat atk">ATK 3</span><span class="stat">HP 7</span></div>
-          </article>
-          <article class="card pinkish">
-            <div class="card-top"><span class="cost">1</span><span class="fam">HEPHAISTOS</span></div>
-            <div class="art"><span class="glyph">카일</span></div>
-            <h3 class="cname">카일 · 불씨 도둑</h3>
-            <div class="stats"><span class="stat atk">ATK 1</span><span class="stat">HP 2</span></div>
-          </article>
-        </div>
+        <div class="filters" role="group" aria-label="계보 필터" id="dexFilters"></div>
+        <div class="grid6" id="dexGrid"></div>
       </div>
 
-      <!-- 덱 -->
       <div class="segpanel" id="seg-deck" hidden>
         <section class="panel flat">
           <div class="sect-h">
-            <h2>심야의 포세이돈</h2>
-            <span class="count">28 <span style="color:var(--t3)">/ 30</span></span>
+            <h2 id="deckName">심야의 포세이돈</h2>
+            <span class="count" id="deckCount">0 <span style="color:var(--t3)">/ 30</span></span>
             <span class="spacer"></span>
-            <span class="chip">평균 코스트 3.4</span>
+            <span class="chip" id="deckAvg">평균 코스트 —</span>
           </div>
         </section>
-
-        <ul class="decklist">
-          <li class="deckrow">
-            <span class="cost">4</span>
-            <span class="nm">네레오 · 파도의 아들</span>
-            <span class="fm">POSEIDON</span>
-            <span class="qty">× 2</span>
-            <button type="button" class="rm" aria-label="네레오 덱에서 빼기">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h12"/></svg>
-            </button>
-          </li>
-          <li class="deckrow">
-            <span class="cost">2</span>
-            <span class="nm">이즈미 · 전령의 딸</span>
-            <span class="fm">HERMES</span>
-            <span class="qty">× 3</span>
-            <button type="button" class="rm" aria-label="이즈미 덱에서 빼기">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h12"/></svg>
-            </button>
-          </li>
-          <li class="deckrow">
-            <span class="cost">6</span>
-            <span class="nm">하윤 · 명계의 문지기</span>
-            <span class="fm">HADES</span>
-            <span class="qty">× 1</span>
-            <button type="button" class="rm" aria-label="하윤 덱에서 빼기">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h12"/></svg>
-            </button>
-          </li>
-          <li class="deckrow">
-            <span class="cost">3</span>
-            <span class="nm">알렉토 · 붉은 손</span>
-            <span class="fm">ARES</span>
-            <span class="qty">× 2</span>
-            <button type="button" class="rm" aria-label="알렉토 덱에서 빼기">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h12"/></svg>
-            </button>
-          </li>
-        </ul>
-
         <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:16px"><h2>코스트 곡선</h2></div>
-          <div class="curve" role="img" aria-label="코스트별 카드 수 곡선">
-            <span class="col"><span class="n">2</span><span class="track"><span class="fill" style="height:28%"></span></span><span class="k">1</span></span>
-            <span class="col"><span class="n">5</span><span class="track"><span class="fill" style="height:62%"></span></span><span class="k">2</span></span>
-            <span class="col hot"><span class="n">7</span><span class="track"><span class="fill" style="height:100%"></span></span><span class="k">3</span></span>
-            <span class="col"><span class="n">6</span><span class="track"><span class="fill" style="height:84%"></span></span><span class="k">4</span></span>
-            <span class="col"><span class="n">4</span><span class="track"><span class="fill" style="height:52%"></span></span><span class="k">5</span></span>
-            <span class="col"><span class="n">3</span><span class="track"><span class="fill" style="height:40%"></span></span><span class="k">6+</span></span>
-          </div>
+          <div class="sect-h" style="margin-bottom:12px"><h2>이 덱의 관계</h2></div>
+          <ul class="rows" id="deckBonds"></ul>
         </section>
+        <ul class="decklist" id="deckList"></ul>
       </div>
 
-      <!-- 합성 -->
-      <div class="segpanel" id="seg-fuse" hidden>
-        <section class="panel">
-          <div class="sect-h" style="margin-bottom:18px">
-            <span class="eyebrow">FUSION</span>
-            <h2>같은 계열 두 장을 겹친다</h2>
-          </div>
-          <div class="fuse">
-            <button type="button" class="slot filled" aria-label="첫 번째 재료 — 네레오, 바꾸려면 누르세요">
-              <span class="card-top" style="width:100%"><span class="cost">4</span><span class="fam">POSEIDON</span></span>
-              <span class="art" style="width:100%; height:106px; margin-top:8px"><span class="glyph" style="font-size:22px">네레오</span></span>
-              <span style="margin-top:8px">네레오</span>
-            </button>
-            <span class="op" aria-hidden="true">+</span>
-            <button type="button" class="slot" aria-label="두 번째 재료 고르기">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-              재료 고르기
-            </button>
-            <span class="op" aria-hidden="true">=</span>
-            <span class="out">
-              <span class="tagline">결과 미리보기</span>
-              <span class="card" style="border-color:var(--lime)">
-                <span class="card-top"><span class="cost">5</span><span class="fam">POSEIDON</span></span>
-                <span class="art" style="height:112px"><span class="glyph" style="font-size:20px">???</span></span>
-                <span class="cname">파도의 계승자</span>
-                <span class="stats"><span class="stat atk">ATK 7</span><span class="stat">HP 6</span></span>
-              </span>
-            </span>
-          </div>
-          <div class="fusefoot" style="margin-top:22px">
-            <span class="price"><span class="k">COST</span><span class="v">320</span></span>
-            <span class="hint" style="flex:1 1 200px">재료 두 장은 사라진다. 계열이 같아야 겹칠 수 있다.</span>
-            <button type="button" class="btn-md" id="doFuse">합성하기</button>
-          </div>
-          <p class="msg" id="fuseMsg" role="status" aria-live="polite" style="min-height:22px; font-size:13px; font-weight:700; color:var(--lime); margin:12px 0 0"></p>
-        </section>
-      </div>
-
-      <!-- 강화 -->
       <div class="segpanel" id="seg-grow" hidden>
         <section class="panel">
           <div class="sect-h" style="margin-bottom:18px">
-            <span class="eyebrow">AWAKEN</span>
-            <h2>카드를 키운다</h2>
+            <span class="eyebrow">AWAKEN</span><h2>카드를 키운다</h2>
           </div>
-          <div class="grow-wrap">
-            <article class="card">
-              <div class="card-top"><span class="cost">4</span><span class="fam">POSEIDON</span></div>
-              <div class="art"><span class="glyph">네레오</span></div>
-              <h3 class="cname">네레오 · 파도의 아들</h3>
-              <div class="stats"><span class="stat atk" id="growAtk">ATK 5</span><span class="stat" id="growHp">HP 4</span></div>
-            </article>
+          <div class="grow-wrap" id="growWrap"></div>
+        </section>
+      </div>
 
-            <div class="meter">
-              <div class="stars" id="growStars" role="img" aria-label="별 2개 중 5개">
-                <span class="st on" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg></span>
-                <span class="st on" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg></span>
-                <span class="st" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg></span>
-                <span class="st" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg></span>
-                <span class="st" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg></span>
-              </div>
-
-              <div class="lvrow">
-                <span class="lv"><span class="k">LV</span><span class="v" id="growLv">7</span></span>
-                <span class="arrow" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>
-                <span class="lv next"><span class="k">NEXT</span><span class="v" id="growNext">8</span></span>
-                <span class="spacer"></span>
-                <span class="chip lime" id="growExp">경험 460 / 600</span>
-              </div>
-              <div class="bar thin" role="img" aria-label="다음 레벨까지 77퍼센트"><i id="growBar" style="width:77%"></i></div>
-
-              <div class="deltas">
-                <span class="delta"><span class="k">ATK</span><span class="a" id="dAtkA">5</span>
-                  <span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>
-                  <span class="b" id="dAtkB">6</span></span>
-                <span class="delta"><span class="k">HP</span><span class="a" id="dHpA">4</span>
-                  <span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>
-                  <span class="b" id="dHpB">5</span></span>
-              </div>
-
-              <div class="mats">
-                <span class="mat ok"><span class="n">× 2</span><span class="t">같은 계열 카드</span></span>
-                <span class="mat ok"><span class="n">180</span><span class="t">이코르</span></span>
-              </div>
-
-              <div class="fusefoot">
-                <span class="hint" style="flex:1 1 200px">별을 올리면 코스트는 그대로, 수치만 오른다.</span>
-                <button type="button" class="btn-md" id="doGrow">강화하기</button>
-              </div>
-              <p class="msg" id="growMsg" role="status" aria-live="polite" style="min-height:22px; font-size:13px; font-weight:700; color:var(--lime); margin:0"></p>
+      <div class="segpanel" id="seg-melt" hidden>
+        <section class="panel">
+          <div class="sect-h" style="margin-bottom:14px">
+            <span class="eyebrow">OFFERING</span><h2>봉납</h2>
+          </div>
+          <p class="hint" style="margin-bottom:18px">
+            중복 카드를 녹여 에테르로 바꾼다. 같은 카드 셋이면 별 하나가 오른다.
+          </p>
+          <div class="melt">
+            <div class="pick">
+              <div class="grid-sm" id="meltGrid"></div>
             </div>
+            <div class="out">
+              <span class="k">받을 에테르</span>
+              <span class="v" id="meltSum">0</span>
+              <span class="hint" id="meltNote">녹일 카드를 고르세요.</span>
+              <button type="button" class="btn-md" id="doMelt" style="width:100%">봉납하기</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="segpanel" id="seg-bondmap" hidden>
+        <section class="panel">
+          <div class="sect-h" style="margin-bottom:14px">
+            <span class="eyebrow">BONDS</span><h2>관계도</h2>
+          </div>
+          <p class="hint" style="margin-bottom:16px">
+            같은 덱에 넣으면 효과가 붙는다. <b style="color:var(--lime)">관계는 호감도를 올려야 드러난다.</b>
+          </p>
+          <div class="bondmap" id="bondMap"></div>
+          <div class="legend" style="margin-top:16px">
+            <span class="it"><span class="sw"></span>연계</span>
+            <span class="it"><span class="sw deep"></span>깊은 연계</span>
+            <span class="it"><span class="sw clash"></span>불화</span>
+            <span class="it" style="color:var(--t3)">점선 없는 회색 — 아직 밝혀지지 않음</span>
           </div>
         </section>
       </div>
     </section>
 
-    <!-- ══ 3) 소환 ════════════════════════════════ -->
-    <section class="tabpanel" id="tab-summon" role="tabpanel" aria-label="소환" hidden>
-
-      <article class="panel banner">
-        <div class="txt">
-          <span class="eyebrow">BANNER 01 · 기간 한정</span>
-          <h2>심야의 폭풍</h2>
-          <p class="hint">
-            포세이돈·하데스 계열이 두 배로 나온다. 100회 안에 3성 하나는 반드시 나온다.
-          </p>
-          <div class="post-acts">
-            <span class="chip pink">확률 2배</span>
-            <span class="chip">남은 기간 3일</span>
-          </div>
-        </div>
-        <div class="packfan" aria-hidden="true">
-          <span class="card"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
-          <span class="card pinkish"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
-          <span class="card"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
-        </div>
-      </article>
-
-      <div class="pulls">
-        <button type="button" class="pull" data-pull="1">
-          <span class="big">1회 소환</span>
-          <span class="cost-tag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.8 3.4 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2.2-5.6 5-9Z"/></svg>
-            120
-          </span>
-        </button>
-        <button type="button" class="pull ten" data-pull="10">
-          <span class="big">10회 소환</span>
-          <span class="cost-tag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.8 3.4 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2.2-5.6 5-9Z"/></svg>
-            1,080
-          </span>
-        </button>
+    <!-- ══ 3) 일상 ════════════════════════════════ -->
+    <section class="tabpanel" id="tab-daily" role="tabpanel" aria-label="일상" hidden>
+      <div class="seg" role="tablist" aria-label="일상">
+        <button type="button" class="seg-btn" role="tab" data-seg="time" aria-selected="true">시간표</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="hunt" aria-selected="false">사냥터</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="summon" aria-selected="false">뽑기</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="shop" aria-selected="false">상점</button>
       </div>
-      <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px; font-size:13px; font-weight:700; color:var(--pink); margin:0"></p>
 
-      <section class="panel flat">
-        <div class="sect-h" style="margin-bottom:14px">
-          <h2>천장</h2>
-          <span class="spacer"></span>
-          <span class="count"><span id="pityVal">73</span> <span style="color:var(--t3)">/ 100</span></span>
-        </div>
-        <div class="bar pinkbar" role="img" aria-label="천장까지 73퍼센트"><i id="pityBar" style="width:73%"></i></div>
-        <p class="hint" style="margin-top:12px">100회에 3성이 확정된다. 3성이 나오면 0으로 돌아간다.</p>
-      </section>
-
-      <div class="shoprow">
+      <div class="segpanel" id="seg-time">
         <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:16px"><h2>등급 확률</h2></div>
-          <ul class="rates">
-            <li class="rate">
-              <span class="g"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg> 3성</span>
-              <span class="track"><span class="bar thin pinkbar"><i style="width:6%"></i></span></span>
-              <span class="p">3 %</span>
-            </li>
-            <li class="rate">
-              <span class="g"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg> 2성</span>
-              <span class="track"><span class="bar thin"><i style="width:44%"></i></span></span>
-              <span class="p">22 %</span>
-            </li>
-            <li class="rate">
-              <span class="g"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/></svg> 1성</span>
-              <span class="track"><span class="bar thin"><i style="width:100%"></i></span></span>
-              <span class="p">75 %</span>
-            </li>
-          </ul>
+          <div class="sect-h">
+            <h2>오늘의 시간표</h2><span class="spacer"></span>
+            <span class="chip lime" id="capLeft">오늘 에테르 —</span>
+          </div>
+          <p class="hint" style="margin-top:12px">
+            걸어 두고 한 번 들른다. <b style="color:var(--lime)">안 들르면 보상이 절반</b>이다.
+            수업에 보낸 카드는 그동안 덱에 못 쓴다.
+          </p>
         </section>
+        <div class="slots" id="slots"></div>
+      </div>
 
+      <div class="segpanel" id="seg-hunt" hidden>
+        <section class="panel flat">
+          <div class="sect-h"><h2>사냥터</h2><span class="spacer"></span>
+            <span class="chip" id="huntOpen">0곳 열림</span></div>
+          <p class="hint" style="margin-top:12px">
+            막아낸 장의 배경이 열린다. 덱 10장, 3~5턴. <b style="color:var(--lime)">파티는 지금 접속한 사람하고만.</b>
+          </p>
+        </section>
+        <ul class="rows" id="huntList"></ul>
+      </div>
+
+      <div class="segpanel" id="seg-summon" hidden>
+        <article class="panel banner">
+          <div class="txt">
+            <span class="eyebrow">BANNER 01</span>
+            <h2>심야의 폭풍</h2>
+            <p class="hint">★3 확률 3%. 50회 안에 ★3 하나는 반드시 나온다.</p>
+          </div>
+          <div class="packfan" aria-hidden="true">
+            <span class="card"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
+            <span class="card pinkish"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
+            <span class="card"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
+          </div>
+        </article>
+        <div class="pulls">
+          <button type="button" class="pull" data-pull="1"><span class="big">1회</span><span class="cost-tag" id="cost1">—</span></button>
+          <button type="button" class="pull ten" data-pull="10"><span class="big">10회</span><span class="cost-tag" id="cost10">—</span></button>
+        </div>
+        <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--pink);margin:0"></p>
+        <section class="panel flat">
+          <div class="sect-h" style="margin-bottom:14px"><h2>천장</h2><span class="spacer"></span>
+            <span class="count"><span id="pityVal">0</span> <span style="color:var(--t3)">/ <span id="pityMax">50</span></span></span></div>
+          <div class="bar pinkbar" role="img" aria-label="천장"><i id="pityBar" style="width:0%"></i></div>
+        </section>
+      </div>
+
+      <div class="segpanel" id="seg-shop" hidden>
         <section class="panel flat">
           <div class="sect-h" style="margin-bottom:16px"><h2>이코르 보충</h2></div>
-          <div class="goods">
-            <span class="good"><span class="amt">600</span><span class="nm">작은 성배</span><button type="button" data-buy="600">받기</button></span>
-            <span class="good"><span class="amt">1,800</span><span class="nm">은빛 성배</span><button type="button" data-buy="1800">받기</button></span>
-            <span class="good"><span class="amt">5,000</span><span class="nm">황금 성배</span><button type="button" data-buy="5000">받기</button></span>
-          </div>
-          <p class="hint" style="margin-top:14px">아직 결제는 붙지 않았다. 누르면 그대로 들어온다.</p>
+          <div class="goods" id="goods"></div>
+        </section>
+        <section class="panel flat">
+          <div class="sect-h" style="margin-bottom:16px"><h2>선물</h2></div>
+          <p class="hint" style="margin-bottom:14px">카드마다 좋아하는 것이 다르다. 주면 호감도가 오른다.</p>
+          <div class="goods" id="gifts"></div>
         </section>
       </div>
     </section>
 
-    <!-- ══ 4) 원정 ════════════════════════════════ -->
-    <section class="tabpanel" id="tab-quest" role="tabpanel" aria-label="원정" hidden>
-
-      <section class="panel">
-        <div class="sect-h" style="margin-bottom:18px">
-          <span class="eyebrow">PARTY</span>
-          <h2>밤의 파티</h2>
-          <span class="spacer"></span>
-          <span class="chip pink">3 / 4 모집중</span>
-        </div>
-        <div class="party">
-          <span class="member me">
-            <span class="ava s" id="partyAva" aria-hidden="true"></span>
-            <span class="who"><span class="n" id="partyName">나</span><span class="f" id="partyFam">ZEUS</span></span>
-          </span>
-          <span class="member">
-            <span class="ava s tone-lime" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v13"/><path d="M5 3v6a7 7 0 0 0 14 0V3"/><path d="M12 3v6"/></svg></span>
-            <span class="who"><span class="n">네레오</span><span class="f">POSEIDON · LV 9</span></span>
-          </span>
-          <span class="member">
-            <span class="ava s tone-pink" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 11 13"/><path d="M9.5 10.5 14 6l4.5 4.5L14 15l-4.5-4.5Z"/></svg></span>
-            <span class="who"><span class="n">루카</span><span class="f">HEPHAISTOS · LV 7</span></span>
-          </span>
-          <span class="member open">
-            <span class="mk" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
-            <span class="who"><span class="n">빈 자리</span><span class="f">RECRUITING</span></span>
-          </span>
-        </div>
+    <!-- ══ 4) 인연 · 모모톡 ═══════════════════════ -->
+    <section class="tabpanel" id="tab-bonds" role="tabpanel" aria-label="인연" hidden>
+      <section class="panel flat">
+        <div class="sect-h"><h2>모모톡</h2><span class="spacer"></span>
+          <span class="chip pink" id="unreadCount">안 읽음 0</span></div>
+        <p class="hint" style="margin-top:12px">
+          먼저 말을 걸어 온다. 답장을 고르면 이어지고, 호감도가 오르면 장면이 열린다.
+        </p>
       </section>
-
-      <section class="panel">
-        <div class="sect-h" style="margin-bottom:20px">
-          <span class="eyebrow">QUESTS</span>
-          <h2>갈 수 있는 원정</h2>
-        </div>
-        <div class="modes">
-          <article class="mode">
-            <span class="badge" aria-hidden="true">
-              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3a9 9 0 1 0 0 18 7.2 7.2 0 0 1 0-18Z"/><path d="M19 5v5h-5"/></svg>
-            </span>
-            <div class="txt">
-              <h3>달빛 수도원 · 3막</h3>
-              <div class="meta">
-                <span class="chip lime">진행 중 2 / 3막</span>
-                <span class="chip">권장 LV 8</span>
-                <span class="chip">4인 단체</span>
-              </div>
-              <p class="desc">종이 세 번 울리기 전에 수도원 문을 닫아야 한다. 판정 실패가 두 번 쌓이면 전투로 넘어간다.</p>
-            </div>
-            <button type="button" class="btn-md" data-session="수도원">이어서 가기</button>
-          </article>
-
-          <article class="mode pinky">
-            <span class="badge" aria-hidden="true">
-              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M6 7v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7"/><path d="M9 19v2"/><path d="M15 19v2"/><path d="M9 11h6"/></svg>
-            </span>
-            <div class="txt">
-              <h3>9호선 끝 · 2막</h3>
-              <div class="meta">
-                <span class="chip pink">신규</span>
-                <span class="chip">권장 LV 6</span>
-                <span class="chip">4인 단체</span>
-              </div>
-              <p class="desc">막차 뒤에 한 대가 더 온다. 타면 돌아오지 못한다는 소문이 있다.</p>
-            </div>
-            <button type="button" class="btn-md" data-session="9호선">시작하기</button>
-          </article>
-
-          <article class="mode">
-            <span class="badge" aria-hidden="true">
-              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h3l10 10"/><path d="M20 3h-3L7 13"/><path d="m5 16 3 3"/><path d="m19 16-3 3"/><path d="m3 21 4-4"/><path d="m21 21-4-4"/></svg>
-            </span>
-            <div class="txt">
-              <h3>올림포스 모의전</h3>
-              <div class="meta">
-                <span class="chip">1 대 1</span>
-                <span class="chip">덱 30장 필요</span>
-              </div>
-              <p class="desc">대화 없이 바로 카드만 맞붙는다. 덱을 시험해 보기 좋다.</p>
-            </div>
-            <button type="button" class="btn-md" data-battle="quest">전투 시작</button>
-          </article>
-        </div>
-      </section>
+      <ul class="rows talk-list" id="talkList"></ul>
     </section>
 
   </div>
 
   <nav class="tabbar" role="tablist" aria-label="주요 메뉴">
-    <button type="button" class="tab" role="tab" data-tab="feed" aria-selected="true">
+    <button type="button" class="tab" role="tab" data-tab="home" aria-selected="true">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7"/><path d="M6.5 10v9h11v-9"/><path d="M10 19v-5h4v5"/></svg>
       홈
     </button>
@@ -1342,155 +310,142 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="16" rx="2.5"/><path d="M4.5 7v11a3 3 0 0 0 3 3H15"/></svg>
       카드
     </button>
-    <button type="button" class="tab" role="tab" data-tab="summon" aria-selected="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
-      소환
+    <button type="button" class="tab" role="tab" data-tab="daily" aria-selected="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
+      일상
     </button>
-    <button type="button" class="tab" role="tab" data-tab="quest" aria-selected="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V5l6 2 6-2 4 1.5V17l-4 2-6-2-6 3Z"/><path d="M10 7v10"/><path d="M16 5v10"/></svg>
-      원정
+    <button type="button" class="tab" role="tab" data-tab="bonds" aria-selected="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M9 10h6"/></svg>
+      인연
+      <span class="dot" id="tabDot" hidden aria-hidden="true"></span>
     </button>
   </nav>
 </div>
 
-<!-- ══ 풀스크린 · 소환 연출 ═══════════════════════ -->
-<div class="full" id="reveal" hidden>
+<!-- ══ 풀스크린 · 연대기 ═══════════════════════════ -->
+<div class="full" id="chron" hidden>
   <div class="topbar">
-    <button type="button" class="exit" id="revealExit" aria-label="소환 닫기">
+    <button type="button" class="exit" data-close="chron" aria-label="연대기 닫기">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
     </button>
-    <span class="ttl"><span class="n">심야의 폭풍</span><span class="s" id="revealSub">1회 소환</span></span>
+    <span class="ttl"><span class="n">연대기</span><span class="s">THE CHRONICLE</span></span>
+  </div>
+  <div class="log" id="chronList" style="gap:18px"></div>
+</div>
+
+<!-- ══ 풀스크린 · 1일차 조사 ═══════════════════════ -->
+<div class="full" id="scout" hidden>
+  <div class="topbar">
+    <button type="button" class="exit" data-close="scout" aria-label="조사 나가기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
+    </button>
+    <span class="ttl"><span class="n">조사</span><span class="s" id="scoutSub">DAY 1</span></span>
+    <span class="spacer"></span>
+    <span class="chip lime" id="scoutLeft">남은 횟수 3</span>
+  </div>
+  <div class="log" id="scoutBody" style="gap:16px"></div>
+</div>
+
+<!-- ══ 풀스크린 · 쪽지시험 ═════════════════════════ -->
+<div class="full" id="quiz" hidden>
+  <div class="topbar">
+    <button type="button" class="exit" data-close="quiz" aria-label="시험 나가기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+    </button>
+    <span class="ttl"><span class="n" id="quizTitle">쪽지시험</span><span class="s" id="quizCat">—</span></span>
+  </div>
+  <div class="log" id="quizBody" style="gap:18px"></div>
+  <div class="deck-bar">
+    <div class="talk">
+      <input type="text" id="quizInput" placeholder="답" aria-label="답" enterkeyhint="done" autocomplete="off">
+      <button type="button" class="send" id="quizSend">제출</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 풀스크린 · 모모톡 대화방 ════════════════════ -->
+<div class="full session" id="talk" hidden>
+  <div class="topbar">
+    <button type="button" class="exit" data-close="talk" aria-label="대화방 나가기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
+    </button>
+    <span class="ava s" id="talkAva" aria-hidden="true"></span>
+    <span class="ttl"><span class="n" id="talkName">—</span><span class="s" id="talkFam">—</span></span>
+    <span class="spacer"></span>
+    <span class="bondbar" id="talkBond" aria-label="호감도"></span>
+  </div>
+  <div class="log" id="talkLog"></div>
+  <div class="deck-bar">
+    <div class="choices" id="talkChoices"></div>
+  </div>
+</div>
+
+<!-- ══ 풀스크린 · 뽑기 연출 ════════════════════════ -->
+<div class="full" id="reveal" hidden>
+  <div class="topbar">
+    <button type="button" class="exit" data-close="reveal" aria-label="소환 닫기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+    </button>
+    <span class="ttl"><span class="n">심야의 폭풍</span><span class="s" id="revealSub">—</span></span>
   </div>
   <div class="reveal">
     <p class="hdline" id="revealTitle">소환 완료</p>
     <div class="pulled" id="revealCards"></div>
     <div class="acts">
       <button type="button" class="btn-white" id="revealAgain">한 번 더</button>
-      <button type="button" class="btn-md" id="revealToDex">계보에서 확인</button>
+      <button type="button" class="btn-md" id="revealToDex">도감에서 확인</button>
     </div>
   </div>
 </div>
 
-<!-- ══ 풀스크린 · 원정 단체 대화 ══════════════════ -->
-<div class="full session" id="session" hidden>
-  <div class="topbar">
-    <button type="button" class="exit" id="sessionExit" aria-label="원정에서 나가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
-    </button>
-    <span class="ttl"><span class="n" id="sessionName">달빛 수도원</span><span class="s" id="sessionAct">ACT 2 / 3</span></span>
-    <span class="spacer"></span>
-    <span class="stack-ava" aria-hidden="true">
-      <span class="ava xs" id="sessionAva"></span>
-      <span class="ava xs tone-lime"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v13"/><path d="M5 3v6a7 7 0 0 0 14 0V3"/><path d="M12 3v6"/></svg></span>
-      <span class="ava xs tone-pink"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 11 13"/><path d="M9.5 10.5 14 6l4.5 4.5L14 15l-4.5-4.5Z"/></svg></span>
-    </span>
-  </div>
-
-  <div class="log" id="log"></div>
-
-  <div class="deck-bar">
-    <div class="choices" id="choices"></div>
-    <div class="talk">
-      <input type="text" id="talkInput" maxlength="140" placeholder="파티에 말하기" aria-label="파티에 보낼 말" enterkeyhint="send">
-      <button type="button" class="send" id="talkSend">보내기</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ 풀스크린 · 전투 ════════════════════════════ -->
+<!-- ══ 풀스크린 · 전투 ═════════════════════════════ -->
 <div class="full" id="battle" hidden>
   <div class="topbar">
-    <button type="button" class="exit" id="battleExit" aria-label="전투에서 나가기">
+    <button type="button" class="exit" data-close="battle" aria-label="전투 나가기">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
     </button>
-    <span class="ttl"><span class="n">카드 전투</span><span class="s">BEST OF ONE</span></span>
+    <span class="ttl"><span class="n" id="battleTitle">전투</span><span class="s" id="battleSub">—</span></span>
   </div>
-
   <div class="fieldwrap">
     <div class="hpbar foe">
-      <span class="face" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 3 7.4 7 9 4-1.6 7-4.8 7-9V6l-7-3Z"/></svg>
-      </span>
-      <span class="who">
-        <span class="n">수도원의 그림자</span>
-        <span class="hp"><i style="width:62%"></i></span>
-      </span>
-      <span class="num">18 / 30</span>
+      <span class="face" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 3 7.4 7 9 4-1.6 7-4.8 7-9V6l-7-3Z"/></svg></span>
+      <span class="who"><span class="n" id="foeName">—</span><span class="hp"><i id="foeHp" style="width:100%"></i></span></span>
+      <span class="num" id="foeNum">—</span>
     </div>
-
-    <div class="field">
-      <span class="slotmini foe on"><span class="g">그림자</span><span class="s">3 / 4</span></span>
-      <span class="slotmini foe on"><span class="g">종지기</span><span class="s">2 / 2</span></span>
-      <span class="slotmini foe">EMPTY</span>
-    </div>
-
+    <div class="field" id="foeField"></div>
     <div class="turnbar">
-      <span class="t">TURN 4 · 내 턴</span>
-      <span class="spacer"></span>
-      <span class="m">이코르 5 / 5</span>
+      <span class="t" id="turnLabel">TURN 1 · 내 턴</span><span class="spacer"></span>
+      <span class="m" id="turnMana">이코르 1 / 1</span>
     </div>
-
-    <div class="field">
-      <span class="slotmini on"><span class="g">네레오</span><span class="s">5 / 4</span></span>
-      <span class="slotmini on"><span class="g">이즈미</span><span class="s">2 / 3</span></span>
-      <span class="slotmini">EMPTY</span>
-    </div>
-
+    <div class="field" id="myField"></div>
     <div class="hpbar">
-      <span class="face" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-      </span>
-      <span class="who">
-        <span class="n" id="battleMe">나</span>
-        <span class="hp"><i style="width:84%"></i></span>
-      </span>
-      <span class="num">25 / 30</span>
+      <span class="face" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></span>
+      <span class="who"><span class="n" id="battleMe">나</span><span class="hp"><i id="myHp" style="width:100%"></i></span></span>
+      <span class="num" id="myNum">—</span>
     </div>
   </div>
-
-  <div class="hand">
-    <span class="card"><span class="card-top"><span class="cost">4</span><span class="fam">POSEIDON</span></span><span class="art"><span class="glyph">네레오</span></span><span class="cname">네레오</span></span>
-    <span class="card"><span class="card-top"><span class="cost">2</span><span class="fam">HERMES</span></span><span class="art"><span class="glyph">이즈미</span></span><span class="cname">이즈미</span></span>
-    <span class="card pinkish"><span class="card-top"><span class="cost">3</span><span class="fam">ARES</span></span><span class="art"><span class="glyph">알렉토</span></span><span class="cname">알렉토</span></span>
-    <span class="card"><span class="card-top"><span class="cost">5</span><span class="fam">ATHENA</span></span><span class="art"><span class="glyph">세리</span></span><span class="cname">세리</span></span>
-    <span class="card pinkish"><span class="card-top"><span class="cost">6</span><span class="fam">HADES</span></span><span class="art"><span class="glyph">하윤</span></span><span class="cname">하윤</span></span>
-  </div>
+  <div class="hand" id="hand"></div>
   <button type="button" class="endturn" id="endTurn">턴 종료</button>
 </div>
 
-<!-- ══ 풀스크린 · 결과 ════════════════════════════ -->
+<!-- ══ 풀스크린 · 결과 ═════════════════════════════ -->
 <div class="full result" id="result" hidden>
   <div class="inner">
-    <p class="win">승리</p>
-    <span class="sub">MOONLIT ABBEY · ACT 2 CLEARED</span>
-    <div class="rewards">
-      <article class="card pinkish">
-        <div class="card-top"><span class="cost">6</span><span class="fam">HADES</span></div>
-        <div class="art"><span class="glyph">하윤</span></div>
-        <h3 class="cname">하윤 · 명계의 문지기</h3>
-        <div class="stats"><span class="stat atk">ATK 4</span><span class="stat">HP 9</span></div>
-      </article>
-      <div class="gains">
-        <span class="gain"><span class="k">ICHOR</span><span class="v">+320</span></span>
-        <span class="gain"><span class="k">EXP</span><span class="v">+140</span></span>
-        <span class="gain"><span class="k">CARD</span><span class="v">+1</span></span>
-      </div>
-    </div>
+    <p class="win" id="resultWord">승리</p>
+    <span class="sub" id="resultSub">—</span>
+    <div class="rewards"><div class="gains" id="resultGains"></div></div>
     <div class="acts">
-      <button type="button" class="btn-white" id="toDex">계보에서 확인</button>
+      <button type="button" class="btn-white" id="resultToDex">도감에서 확인</button>
       <button type="button" class="btn-md" id="resultBack">돌아가기</button>
     </div>
   </div>
 </div>
 
-<!-- ══ 프로필 ═════════════════════════════════════ -->
+<!-- ══ 프로필 ══════════════════════════════════════ -->
 <dialog class="dlg" id="profileDlg" aria-labelledby="profileName">
   <div class="dlg-hd">
     <span class="ava l" id="dlgAva" aria-hidden="true"></span>
-    <span class="who">
-      <span class="n" id="profileName">—</span>
-      <span class="r" id="profileFam">ZEUS · 하늘과 번개</span>
-    </span>
+    <span class="who"><span class="n" id="profileName">—</span><span class="r" id="profileFam">—</span></span>
   </div>
   <div class="dlg-acts">
     <a class="btn-white" href="setup.html" style="width:100%">프로필 고치기</a>
@@ -1499,701 +454,19 @@ dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
   </div>
 </dialog>
 
-<script>
-/* ── 화면 조작 ──────────────────────────────────────────────
-   탭은 4개로 고정한다. 소환 연출 · 원정 대화 · 전투 · 결과는 탭이 아니라
-   그 위를 덮는 풀스크린 모드다. 인증과 떨어뜨려 두어, 파이어베이스 SDK 가
-   뜨지 않아도 화면 조작은 살아 있게 한다. */
-(function () {
-  'use strict';
-
-  var $ = function (sel) { return document.querySelector(sel); };
-  var all = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
-
-  var TITLES = { feed: '신탁', cards: '계보', summon: '소환', quest: '원정' };
-  var SEGS = ['dex', 'deck', 'fuse', 'grow'];
-
-  var title = $('#screenTitle');
-  var stage = $('#stage');
-  var views = {
-    reveal: $('#reveal'),
-    session: $('#session'),
-    battle: $('#battle'),
-    result: $('#result')
-  };
-  var origin = 'feed';
-
-  /* 아바타는 프로필 모듈이 그린다. 모듈이 못 뜨면 빈 원으로 남는다. */
-  function avatar(el, profile, px) {
-    if (!el) return;
-    if (typeof UI.paintAvatar === 'function') UI.paintAvatar(el, profile, px);
-  }
-
-  var UI = window.DGA = {
-    player: { name: '나', profile: null, fam: 'ZEUS' },
-    paintAvatar: null,
-    onLogout: null
-  };
-
-  /* ── 탭 · 세그먼트 · 풀스크린 ─────────────────── */
-  function setTab(name) {
-    if (!TITLES[name]) return;
-    title.textContent = TITLES[name];
-    Object.keys(TITLES).forEach(function (key) {
-      $('#tab-' + key).hidden = key !== name;
-    });
-    all('[data-tab]').forEach(function (btn) {
-      btn.setAttribute('aria-selected', String(btn.getAttribute('data-tab') === name));
-    });
-    window.scrollTo(0, 0);
-  }
-
-  function setSeg(name) {
-    SEGS.forEach(function (key) { $('#seg-' + key).hidden = key !== name; });
-    all('[data-seg]').forEach(function (btn) {
-      btn.setAttribute('aria-selected', String(btn.getAttribute('data-seg') === name));
-    });
-  }
-
-  function setView(which) {
-    stage.hidden = which !== 'app';
-    Object.keys(views).forEach(function (key) { views[key].hidden = key !== which; });
-    document.body.classList.toggle('fullscreen-on', which !== 'app');
-    window.scrollTo(0, 0);
-  }
-  UI.setTab = setTab;
-  UI.setSeg = setSeg;
-
-  all('[data-tab]').forEach(function (btn) {
-    btn.addEventListener('click', function () { setTab(btn.getAttribute('data-tab')); });
-  });
-  all('[data-seg]').forEach(function (btn) {
-    btn.addEventListener('click', function () { setSeg(btn.getAttribute('data-seg')); });
-  });
-  all('[data-goto]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      setTab(btn.getAttribute('data-goto'));
-      var seg = btn.getAttribute('data-seg-goto');
-      if (seg) setSeg(seg);
-    });
-  });
-  all('[data-fam]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      all('[data-fam]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === btn)); });
-    });
-  });
-
-  /* ── 지갑 ─────────────────────────────────────── */
-  var ichor = 1240;
-  var walletVal = $('#walletVal');
-  function paintWallet() { walletVal.textContent = ichor.toLocaleString('ko-KR'); }
-  function spend(n) {
-    if (ichor < n) return false;
-    ichor -= n;
-    paintWallet();
-    return true;
-  }
-  all('[data-buy]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      ichor += parseInt(btn.getAttribute('data-buy'), 10);
-      paintWallet();
-    });
-  });
-
-  /* ── 홈 피드 ──────────────────────────────────── */
-  function reactionBtn(count) {
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'react';
-    btn.setAttribute('aria-pressed', 'false');
-    btn.dataset.react = '';
-    btn.innerHTML =
-      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-      'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg><span data-react-n></span>';
-    btn.querySelector('[data-react-n]').textContent = String(count);
-    bindReact(btn);
-    return btn;
-  }
-
-  function bindReact(btn) {
-    btn.addEventListener('click', function () {
-      var on = btn.getAttribute('aria-pressed') === 'true';
-      var box = btn.querySelector('[data-react-n]');
-      var n = parseInt(box.textContent.replace(/[^0-9]/g, ''), 10) || 0;
-      btn.setAttribute('aria-pressed', String(!on));
-      box.textContent = String(on ? n - 1 : n + 1);
-    });
-  }
-  all('[data-react]').forEach(bindReact);
-
-  var feed = $('#feed');
-  var sayInput = $('#sayInput');
-
-  function postSay() {
-    var text = sayInput.value.trim();
-    if (!text) { sayInput.focus(); return; }
-
-    var li = document.createElement('li');
-    li.className = 'post';
-
-    var hd = document.createElement('div');
-    hd.className = 'post-hd';
-    var ava = document.createElement('span');
-    ava.className = 'ava m';
-    ava.setAttribute('aria-hidden', 'true');
-    avatar(ava, UI.player.profile, 56);
-    var who = document.createElement('span');
-    who.className = 'who';
-    var nm = document.createElement('span');
-    nm.className = 'nm';
-    nm.textContent = UI.player.name;
-    var mt = document.createElement('span');
-    mt.className = 'mt';
-    mt.textContent = UI.player.fam + ' · 나';
-    who.append(nm, mt);
-    var tm = document.createElement('span');
-    tm.className = 'tm';
-    tm.textContent = '방금';
-    hd.append(ava, who, tm);
-
-    var say = document.createElement('p');
-    say.className = 'say';
-    say.textContent = text;
-
-    var acts = document.createElement('div');
-    acts.className = 'post-acts';
-    acts.appendChild(reactionBtn(0));
-
-    li.append(hd, say, acts);
-    feed.insertBefore(li, feed.firstChild);
-    sayInput.value = '';
-    sayInput.focus();
-  }
-  $('#sayPost').addEventListener('click', postSay);
-  sayInput.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') { e.preventDefault(); postSay(); }
-  });
-
-  /* ── 합성 · 강화 ──────────────────────────────── */
-  $('#doFuse').addEventListener('click', function () {
-    var msg = $('#fuseMsg');
-    if (!spend(320)) {
-      msg.style.color = 'var(--pink)';
-      msg.textContent = '이코르가 모자란다. 320이 필요하다.';
-      return;
-    }
-    msg.style.color = 'var(--lime)';
-    msg.textContent = '재료 두 장이 사라지고 파도의 계승자가 남았다.';
-  });
-
-  var grow = { lv: 7, stars: 2, atk: 5, hp: 4 };
-  function paintGrow() {
-    $('#growLv').textContent = String(grow.lv);
-    $('#growNext').textContent = String(grow.lv + 1);
-    $('#growAtk').textContent = 'ATK ' + grow.atk;
-    $('#growHp').textContent = 'HP ' + grow.hp;
-    $('#dAtkA').textContent = String(grow.atk);
-    $('#dAtkB').textContent = String(grow.atk + 1);
-    $('#dHpA').textContent = String(grow.hp);
-    $('#dHpB').textContent = String(grow.hp + 1);
-    var stars = $('#growStars');
-    Array.prototype.forEach.call(stars.children, function (st, i) {
-      st.classList.toggle('on', i < grow.stars);
-    });
-    stars.setAttribute('aria-label', '별 ' + grow.stars + '개 중 5개');
-  }
-  $('#doGrow').addEventListener('click', function () {
-    var msg = $('#growMsg');
-    if (!spend(180)) {
-      msg.style.color = 'var(--pink)';
-      msg.textContent = '이코르가 모자란다. 180이 필요하다.';
-      return;
-    }
-    grow.lv += 1;
-    grow.atk += 1;
-    grow.hp += 1;
-    if (grow.lv % 3 === 1 && grow.stars < 5) grow.stars += 1;
-    paintGrow();
-    msg.style.color = 'var(--lime)';
-    msg.textContent = '네레오가 LV ' + grow.lv + ' 이 되었다.';
-  });
-  paintGrow();
-
-  /* ── 소환 (가챠) ──────────────────────────────── */
-  var POOL = [
-    { n: '하윤 · 명계의 문지기', f: 'HADES', c: 6, a: 4, h: 9, g: '하윤', r: 3, pink: true },
-    { n: '파도의 계승자', f: 'POSEIDON', c: 5, a: 7, h: 6, g: '계승자', r: 3, pink: false },
-    { n: '네레오 · 파도의 아들', f: 'POSEIDON', c: 4, a: 5, h: 4, g: '네레오', r: 2, pink: false },
-    { n: '세리 · 올빼미의 눈', f: 'ATHENA', c: 5, a: 3, h: 7, g: '세리', r: 2, pink: false },
-    { n: '알렉토 · 붉은 손', f: 'ARES', c: 3, a: 4, h: 2, g: '알렉토', r: 2, pink: true },
-    { n: '이즈미 · 전령의 딸', f: 'HERMES', c: 2, a: 2, h: 3, g: '이즈미', r: 1, pink: false },
-    { n: '카일 · 불씨 도둑', f: 'HEPHAISTOS', c: 1, a: 1, h: 2, g: '카일', r: 1, pink: true },
-    { n: '미르 · 안개의 아이', f: 'NYX', c: 2, a: 3, h: 1, g: '미르', r: 1, pink: false }
-  ];
-  var PULL_COST = 120;
-  var pity = 73;
-
-  function byRank(r) { return POOL.filter(function (c) { return c.r === r; }); }
-
-  function drawOne() {
-    pity += 1;
-    var rank;
-    if (pity >= 100) rank = 3;
-    else {
-      var roll = Math.random() * 100;
-      rank = roll < 3 ? 3 : (roll < 25 ? 2 : 1);
-    }
-    if (rank === 3) pity = 0;
-    var box = byRank(rank);
-    return box[Math.floor(Math.random() * box.length)];
-  }
-
-  function paintPity() {
-    $('#pityVal').textContent = String(pity);
-    $('#pityBar').style.width = pity + '%';
-  }
-  paintPity();
-
-  function cardEl(card) {
-    var art = document.createElement('span');
-    art.className = 'card' + (card.pink ? ' pinkish' : '');
-
-    var top = document.createElement('span');
-    top.className = 'card-top';
-    var cost = document.createElement('span');
-    cost.className = 'cost';
-    cost.textContent = String(card.c);
-    var fam = document.createElement('span');
-    fam.className = 'fam';
-    fam.textContent = card.f;
-    top.append(cost, fam);
-
-    var pic = document.createElement('span');
-    pic.className = 'art';
-    var glyph = document.createElement('span');
-    glyph.className = 'glyph';
-    glyph.style.fontSize = '22px';
-    glyph.textContent = card.g;
-    pic.appendChild(glyph);
-
-    var rank = document.createElement('span');
-    rank.className = 'rank';
-    for (var si = 0; si < card.r; si += 1) {
-      var star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      star.setAttribute('width', '12');
-      star.setAttribute('height', '12');
-      star.setAttribute('viewBox', '0 0 24 24');
-      star.setAttribute('fill', 'none');
-      star.setAttribute('stroke', 'currentColor');
-      star.setAttribute('stroke-width', '3');
-      star.setAttribute('stroke-linecap', 'round');
-      star.setAttribute('stroke-linejoin', 'round');
-      star.setAttribute('aria-hidden', 'true');
-      star.innerHTML = '<path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/>';
-      rank.appendChild(star);
-    }
-    rank.appendChild(document.createTextNode(' ' + card.r + '성'));
-
-    var name = document.createElement('span');
-    name.className = 'cname';
-    name.textContent = card.n;
-
-    var stats = document.createElement('span');
-    stats.className = 'stats';
-    var atk = document.createElement('span');
-    atk.className = 'stat atk';
-    atk.textContent = 'ATK ' + card.a;
-    var hp = document.createElement('span');
-    hp.className = 'stat';
-    hp.textContent = 'HP ' + card.h;
-    stats.append(atk, hp);
-
-    art.append(top, pic, rank, name, stats);
-    return art;
-  }
-
-  var lastPull = 1;
-  function doPull(n) {
-    var msg = $('#pullMsg');
-    var cost = n === 10 ? PULL_COST * 9 : PULL_COST;
-    if (!spend(cost)) {
-      msg.textContent = '이코르가 모자란다. ' + cost.toLocaleString('ko-KR') + ' 이 필요하다.';
-      return;
-    }
-    msg.textContent = '';
-    lastPull = n;
-
-    var got = [];
-    for (var i = 0; i < n; i += 1) got.push(drawOne());
-    paintPity();
-
-    var box = $('#revealCards');
-    box.textContent = '';
-    got.forEach(function (card) { box.appendChild(cardEl(card)); });
-
-    var best = got.reduce(function (m, c) { return Math.max(m, c.r); }, 1);
-    $('#revealTitle').textContent = best === 3 ? '3성 강림' : (best === 2 ? '괜찮은 손' : '소환 완료');
-    $('#revealSub').textContent = n + '회 소환 · 천장 ' + pity + ' / 100';
-    setView('reveal');
-  }
-
-  all('[data-pull]').forEach(function (btn) {
-    btn.addEventListener('click', function () { doPull(parseInt(btn.getAttribute('data-pull'), 10)); });
-  });
-  $('#revealAgain').addEventListener('click', function () { doPull(lastPull); });
-  $('#revealExit').addEventListener('click', function () { setView('app'); setTab('summon'); });
-  $('#revealToDex').addEventListener('click', function () {
-    setView('app');
-    setTab('cards');
-    setSeg('dex');
-  });
-
-  /* ── 원정 · 단체 대화 ──────────────────────────
-     신탁(진행자)이 상황을 던지고, 선택지를 고르면 d20 판정이 돌아간다.
-     판정에 두 번 실패하면 전투로 넘어간다. */
-  var MATES = [
-    { n: '네레오', god: 'poseidon' },
-    { n: '루카', god: 'hephaistos' }
-  ];
-
-  var SCENES = {
-    '수도원': {
-      name: '달빛 수도원',
-      act: 2, acts: 3,
-      open: [
-        { who: 'gm', t: '수도원 문이 반쯤 열려 있다. 안에서 종소리가 한 번 울렸다. 두 번 더 울리면 문은 영원히 닫힌다.' },
-        { who: 0, t: '내가 종탑으로 올라갈게. 누가 문 잡아 줘.' },
-        { who: 1, t: '쇠사슬은 내가 끊는다. 불만 붙여 줘.' }
-      ],
-      beats: [
-        {
-          gm: '종탑 계단은 이끼로 덮여 미끄럽다. 위에서 누군가 숨을 참고 있다.',
-          choices: [
-            { t: '소리 없이 계단을 오른다', dc: 11, win: '발소리를 삼키고 올라섰다. 종지기는 아직 네 존재를 모른다.', lose: '이끼를 밟고 미끄러졌다. 종지기가 고개를 돌린다.' },
-            { t: '종지기에게 말을 건다', dc: 9, win: '종지기가 멈칫한다. "너도 갇힌 아이인가." 대화가 열렸다.', lose: '종지기가 줄을 당긴다. 두 번째 종이 울렸다.' }
-          ]
-        },
-        {
-          gm: '두 번째 종이 울리기 전, 쇠사슬이 문을 조이고 있다.',
-          choices: [
-            { t: '카일의 불씨로 사슬을 녹인다', dc: 12, win: '쇠가 붉게 늘어지며 끊어졌다. 문이 다시 숨을 쉰다.', lose: '불씨가 꺼졌다. 사슬은 더 단단해졌다.' },
-            { t: '파도를 끌어와 문을 밀어낸다', dc: 13, win: '복도가 물로 가득 차고 문이 안쪽으로 열렸다.', lose: '물이 역류해 계단을 덮었다. 발이 묶였다.' }
-          ]
-        },
-        {
-          gm: '종탑 꼭대기. 그림자가 종 줄을 쥐고 너를 본다. 더는 말이 통하지 않는다.',
-          choices: [
-            { t: '카드를 뽑아 맞붙는다', fight: true }
-          ]
-        }
-      ]
-    },
-    '9호선': {
-      name: '9호선 끝',
-      act: 1, acts: 2,
-      open: [
-        { who: 'gm', t: '막차가 떠난 승강장. 전광판에 없는 열차 한 대가 들어온다. 문이 열리지만 안은 보이지 않는다.' },
-        { who: 1, t: '저거 타면 못 돌아온다던데.' },
-        { who: 0, t: '안 타면 여기서 밤을 새야 하고.' }
-      ],
-      beats: [
-        {
-          gm: '열차 안에서 찬 바람이 밀려 나온다. 문이 닫히기까지 몇 초.',
-          choices: [
-            { t: '먼저 올라탄다', dc: 10, win: '올라선 순간 승강장이 사라졌다. 적어도 셋 다 같은 칸이다.', lose: '문틈에 가방이 끼었다. 한 명이 뒤처졌다.' },
-            { t: '손잡이에 끈을 묶고 들어간다', dc: 12, win: '끈이 승강장 기둥까지 이어졌다. 돌아갈 길을 남겼다.', lose: '끈이 끊어지며 열차가 출발했다.' }
-          ]
-        },
-        {
-          gm: '차창 밖은 터널이 아니라 바다다. 맞은편 좌석에 네 모습이 앉아 있다.',
-          choices: [
-            { t: '내 쪽을 똑바로 본다', dc: 13, win: '맞은편이 먼저 눈을 피했다. 유리에 금이 간다.', lose: '맞은편이 먼저 일어섰다. 네 이름을 부른다.' },
-            { t: '카드를 뽑아 맞붙는다', fight: true }
-          ]
-        }
-      ]
-    }
-  };
-
-  var scene = null;
-  var beat = 0;
-  var fails = 0;
-  var startAct = 1;
-  var log = $('#log');
-  var choices = $('#choices');
-
-  function bubble(whoName, text, kind, profile) {
-    var row = document.createElement('div');
-    row.className = 'bub' + (kind ? ' ' + kind : '');
-
-    var ava = document.createElement('span');
-    ava.className = 'ava s';
-    ava.setAttribute('aria-hidden', 'true');
-    if (kind === 'gm') {
-      ava.classList.add('tone-lime');
-      ava.innerHTML =
-        '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" ' +
-        'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
-        '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>';
-    } else {
-      avatar(ava, profile || null, 44);
-    }
-
-    var box = document.createElement('span');
-    box.className = 'txt';
-    var nm = document.createElement('span');
-    nm.className = 'nm';
-    nm.textContent = whoName;
-    var ln = document.createElement('p');
-    ln.className = 'ln';
-    ln.textContent = text;
-    box.append(nm, ln);
-
-    row.append(ava, box);
-    log.appendChild(row);
-    return row;
-  }
-
-  function rollLine(value, dc, ok) {
-    var row = document.createElement('div');
-    row.className = 'roll' + (ok ? '' : ' fail');
-    var d = document.createElement('span');
-    d.className = 'd';
-    d.textContent = 'D20 · 목표 ' + dc;
-    var v = document.createElement('span');
-    v.className = 'v';
-    v.textContent = String(value);
-    var j = document.createElement('span');
-    j.className = 'j';
-    j.textContent = ok ? '성공' : '실패';
-    row.append(d, v, j);
-    log.appendChild(row);
-  }
-
-  function sysLine(text) {
-    var row = document.createElement('div');
-    row.className = 'sysline';
-    row.textContent = text;
-    log.appendChild(row);
-  }
-
-  function toBottom() { log.parentNode.scrollTop = log.parentNode.scrollHeight; }
-
-  function clearChoices() { choices.textContent = ''; }
-
-  function showBeat() {
-    clearChoices();
-    var data = scene.beats[beat];
-    if (!data) {
-      sysLine('막을 넘었다 · 결과를 정리한다');
-      var done = document.createElement('button');
-      done.type = 'button';
-      done.className = 'choice fight';
-      done.innerHTML = '<span class="no" aria-hidden="true">!</span>';
-      done.appendChild(document.createTextNode('원정 결과 보기'));
-      done.addEventListener('click', function () { setView('result'); });
-      choices.appendChild(done);
-      toBottom();
-      return;
-    }
-
-    bubble('신탁', data.gm, 'gm');
-    data.choices.forEach(function (ch, i) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'choice' + (ch.fight ? ' fight' : '');
-      var no = document.createElement('span');
-      no.className = 'no';
-      no.setAttribute('aria-hidden', 'true');
-      no.textContent = ch.fight ? '!' : String(i + 1);
-      btn.appendChild(no);
-      btn.appendChild(document.createTextNode(ch.t));
-      btn.addEventListener('click', function () { pick(ch); });
-      choices.appendChild(btn);
-    });
-    toBottom();
-  }
-
-  function pick(ch) {
-    clearChoices();
-    bubble(UI.player.name, ch.t, 'me', UI.player.profile);
-
-    if (ch.fight) {
-      sysLine('전투 시작');
-      toBottom();
-      setView('battle');
-      return;
-    }
-
-    var value = Math.floor(Math.random() * 20) + 1 + 3;   /* d20 + 숙련 3 */
-    var ok = value >= ch.dc;
-    rollLine(value, ch.dc, ok);
-    bubble('신탁', ok ? ch.win : ch.lose, 'gm');
-
-    if (!ok) {
-      fails += 1;
-      if (fails >= 2) {
-        sysLine('실패가 두 번 쌓였다 · 그림자가 앞을 막는다');
-        var go = document.createElement('button');
-        go.type = 'button';
-        go.className = 'choice fight';
-        var no = document.createElement('span');
-        no.className = 'no';
-        no.setAttribute('aria-hidden', 'true');
-        no.textContent = '!';
-        go.appendChild(no);
-        go.appendChild(document.createTextNode('카드를 뽑아 맞붙는다'));
-        go.addEventListener('click', function () {
-          sysLine('전투 시작');
-          setView('battle');
-        });
-        choices.appendChild(go);
-        toBottom();
-        return;
-      }
-    }
-
-    var mate = MATES[beat % MATES.length];
-    bubble(mate.n, ok ? '좋아, 이대로 간다.' : '괜찮아. 한 번 더 간다.', '', { god: mate.god });
-
-    beat += 1;
-    $('#sessionAct').textContent =
-      'ACT ' + Math.min(startAct + beat, scene.acts) + ' / ' + scene.acts;
-    showBeat();
-  }
-
-  function openSession(key) {
-    scene = SCENES[key];
-    if (!scene) return;
-    beat = 0;
-    fails = 0;
-    startAct = scene.act;
-    log.textContent = '';
-    $('#sessionName').textContent = scene.name;
-    $('#sessionAct').textContent = 'ACT ' + startAct + ' / ' + scene.acts;
-    avatar($('#sessionAva'), UI.player.profile, 34);
-
-    sysLine(scene.name + ' · 파티 3인 입장');
-    scene.open.forEach(function (line) {
-      if (line.who === 'gm') bubble('신탁', line.t, 'gm');
-      else {
-        var mate = MATES[line.who];
-        bubble(mate.n, line.t, '', { god: mate.god });
-      }
-    });
-    showBeat();
-    setView('session');
-  }
-
-  all('[data-session]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      origin = 'quest';
-      openSession(btn.getAttribute('data-session'));
-    });
-  });
-
-  function sendTalk() {
-    var text = $('#talkInput').value.trim();
-    if (!text) return;
-    bubble(UI.player.name, text, 'me', UI.player.profile);
-    $('#talkInput').value = '';
-    toBottom();
-  }
-  $('#talkSend').addEventListener('click', sendTalk);
-  $('#talkInput').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') { e.preventDefault(); sendTalk(); }
-  });
-
-  $('#sessionExit').addEventListener('click', function () { setView('app'); setTab(origin); });
-
-  /* ── 전투 · 결과 ──────────────────────────────── */
-  all('[data-battle]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      origin = btn.getAttribute('data-battle');
-      setView('battle');
-    });
-  });
-  $('#battleExit').addEventListener('click', function () { setView('app'); setTab(origin); });
-  $('#endTurn').addEventListener('click', function () { setView('result'); });
-  $('#resultBack').addEventListener('click', function () {
-    ichor += 320;
-    paintWallet();
-    setView('app');
-    setTab(origin);
-  });
-  $('#toDex').addEventListener('click', function () {
-    ichor += 320;
-    paintWallet();
-    setView('app');
-    setTab('cards');
-    setSeg('dex');
-  });
-
-  /* ── 프로필 ───────────────────────────────────── */
-  var dlg = $('#profileDlg');
-  $('#profileOpen').addEventListener('click', function () {
-    if (typeof dlg.showModal === 'function') dlg.showModal();
-    else dlg.setAttribute('open', '');
-  });
-  $('#profileClose').addEventListener('click', function () { dlg.close(); });
-
-  /* 파이어베이스 SDK 가 끝내 안 뜨면 게이트에 갇히지 않게 빠져나갈 길을 준다 */
-  setTimeout(function () {
-    if (window.__authResolved) return;
-    var box = document.querySelector('#gate .box');
-    if (!box) return;
-    $('#gateTitle').textContent = '연결하지 못했습니다';
-    $('#gateNote').textContent =
-      '인증 모듈을 불러오지 못했습니다. 네트워크 연결을 확인하고 새로고침해 주세요.';
-    var a = document.createElement('a');
-    a.href = 'index.html';
-    a.textContent = '로그인 화면으로';
-    box.appendChild(a);
-  }, 8000);
-})();
-</script>
-
-<script type="module">
-/* ── 인증 · 프로필 ──────────────────────────────── */
-import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
-import { auth, idOf } from './firebase-init.js';
-import { godOf, loadProfile, paintAvatar } from './profile.js';
-
-const UI = window.DGA;
-UI.paintAvatar = paintAvatar;
-
-const gate = document.getElementById('gate');
-
-onAuthStateChanged(auth, (user) => {
-  window.__authResolved = true;
-  if (!user) { location.replace('index.html'); return; }
-
-  const profile = loadProfile(user.uid);
-  if (!profile) { location.replace('setup.html'); return; }   /* 프로필부터 만든다 */
-
-  const god = godOf(profile.god);
-  UI.player = { name: profile.name, profile: profile, fam: god.key.toUpperCase() };
-
-  document.getElementById('profileName').textContent = profile.name;
-  document.getElementById('profileFam').textContent = god.key.toUpperCase() + ' · ' + god.line;
-  document.getElementById('battleMe').textContent = profile.name;
-  document.getElementById('partyName').textContent = profile.name;
-  document.getElementById('partyFam').textContent = god.key.toUpperCase() + ' · LV 7';
-
-  paintAvatar(document.getElementById('hdAva'), profile, 46);
-  paintAvatar(document.getElementById('dlgAva'), profile, 88);
-  paintAvatar(document.getElementById('composerAva'), profile, 56);
-  paintAvatar(document.getElementById('partyAva'), profile, 44);
-
-  if (gate) gate.remove();
-});
-
-document.getElementById('logout').addEventListener('click', async () => {
-  try { await signOut(auth); } catch (_) { /* 이미 끊긴 세션 */ }
-  location.replace('index.html');
-});
-</script>
+<!-- ══ 시간표 걸기 ═════════════════════════════════ -->
+<dialog class="dlg" id="slotDlg" aria-labelledby="slotDlgTitle">
+  <div class="dlg-hd">
+    <span class="ic" aria-hidden="true" style="width:56px;height:56px;flex:0 0 56px;border-radius:50%;background:var(--lime);border:4px solid var(--line);display:flex;align-items:center;justify-content:center">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
+    </span>
+    <span class="who"><span class="n" id="slotDlgTitle">무엇을 할까</span><span class="r">SET A SLOT</span></span>
+  </div>
+  <div class="dlg-acts" id="slotPick"></div>
+</dialog>
+
+<script src="app.js"></script>
+<script type="module" src="app-auth.js"></script>
 
 </body>
 </html>
