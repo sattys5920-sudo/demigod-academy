@@ -97,10 +97,11 @@
   }
 
   /* ── 화면 이동 ───────────────────────────────── */
-  var TITLES = { home: '신탁', cards: '계보', daily: '일상', bonds: '인연' };
+  var TITLES = { home: '신탁', cards: '계보', daily: '일상', shop: '상점', bonds: '인연' };
   var SEGS = {
     cards: ['dex', 'deck', 'grow', 'melt', 'bondmap'],
-    daily: ['time', 'hunt', 'summon', 'shop']
+    daily: ['time', 'hunt'],
+    shop: ['summon', 'goods']
   };
   var VIEWS = ['chron', 'scout', 'quiz', 'talk', 'reveal', 'battle', 'result'];
   var curTab = 'home';
@@ -654,14 +655,14 @@
   }
   function paintSummon() {
     $('#cost1').textContent = fmt(D.economy.summon.cost1);
-    $('#cost10').textContent = fmt(D.economy.summon.cost10);
+    $('#cost12').textContent = fmt(D.economy.summon.cost12);
     $('#pityVal').textContent = S.pity;
     $('#pityMax').textContent = D.economy.summon.pity;
     $('#pityBar').style.width = Math.min(100, S.pity / D.economy.summon.pity * 100) + '%';
   }
   var lastPull = 1;
   function doPull(n) {
-    var cost = n === 10 ? D.economy.summon.cost10 : D.economy.summon.cost1;
+    var cost = n > 1 ? D.economy.summon.cost12 : D.economy.summon.cost1;
     if (!spend('ichor', cost)) {
       $('#pullMsg').textContent = '이코르가 모자란다. ' + fmt(cost) + ' 필요.';
       return;
@@ -675,7 +676,8 @@
     got.forEach(function (c) { box.appendChild(cardEl(c, { always: true })); });
     var best = got.reduce(function (m, c) { return Math.max(m, c.grade); }, 1);
     $('#revealTitle').textContent = best === 3 ? '★3 강림' : (best === 2 ? '괜찮은 손' : '소환 완료');
-    $('#revealSub').textContent = n + '회 · 천장 ' + S.pity + ' / ' + D.economy.summon.pity;
+    $('#revealSub').textContent = (n > 1 ? n + '장 팩' : '1장')
+      + ' · 천장 ' + S.pity + ' / ' + D.economy.summon.pity;
     setView('reveal');
   }
 
@@ -856,10 +858,9 @@
       b.addEventListener('click', function () { setView(null); paintAll(); });
     });
     $('#openChron').addEventListener('click', function () { paintChron(); setView('chron'); });
-    $('#homeSummon').addEventListener('click', function () { setTab('daily'); setSeg('daily', 'summon'); paintAll(); });
     $('#goPhase').addEventListener('click', function () {
-      if (S.day === 3) { setTab('daily'); setSeg('daily', 'hunt'); }
-      else { setTab('daily'); setSeg('daily', 'time'); }
+      setTab('daily');
+      setSeg('daily', S.day === 3 ? 'hunt' : 'time');
       paintAll();
     });
     all('[data-pull]').forEach(function (b) {
@@ -920,7 +921,7 @@
 
   loadData().then(function () {
     wire();
-    setTab('home'); setSeg('cards', 'dex'); setSeg('daily', 'time');
+    setTab('home'); setSeg('cards', 'dex'); setSeg('daily', 'time'); setSeg('shop', 'summon');
     if (typeof UI.onReady === 'function') UI.onReady();
     else UI.boot('local');
   }).catch(function (e) {

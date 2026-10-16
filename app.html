@@ -85,16 +85,6 @@
         </div>
       </article>
 
-      <button type="button" class="banner-s" id="homeSummon">
-        <span class="mark" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
-        </span>
-        <span class="txt">
-          <span class="kicker">SUMMON</span>
-          <span class="line">새 학생을 부른다</span>
-        </span>
-      </button>
-
       <section class="panel flat composer">
         <span class="ava m" id="composerAva" aria-hidden="true"></span>
         <div class="grow">
@@ -202,8 +192,6 @@
       <div class="seg" role="tablist" aria-label="일상">
         <button type="button" class="seg-btn" role="tab" data-seg="time" aria-selected="true">시간표</button>
         <button type="button" class="seg-btn" role="tab" data-seg="hunt" aria-selected="false">사냥터</button>
-        <button type="button" class="seg-btn" role="tab" data-seg="summon" aria-selected="false">뽑기</button>
-        <button type="button" class="seg-btn" role="tab" data-seg="shop" aria-selected="false">상점</button>
       </div>
 
       <div class="segpanel" id="seg-time">
@@ -231,7 +219,16 @@
         <ul class="rows" id="huntList"></ul>
       </div>
 
-      <div class="segpanel" id="seg-summon" hidden>
+    </section>
+
+    <!-- ══ 4) 상점 ══════════════════════════════ -->
+    <section class="tabpanel" id="tab-shop" role="tabpanel" aria-label="상점" hidden>
+      <div class="seg" role="tablist" aria-label="상점">
+        <button type="button" class="seg-btn" role="tab" data-seg="summon" aria-selected="true">뽑기</button>
+        <button type="button" class="seg-btn" role="tab" data-seg="goods" aria-selected="false">상점</button>
+      </div>
+
+      <div class="segpanel" id="seg-summon">
         <article class="panel banner">
           <div class="txt">
             <span class="eyebrow">BANNER 01</span>
@@ -245,8 +242,8 @@
           </div>
         </article>
         <div class="pulls">
-          <button type="button" class="pull" data-pull="1"><span class="big">1회</span><span class="cost-tag" id="cost1">—</span></button>
-          <button type="button" class="pull ten" data-pull="10"><span class="big">10회</span><span class="cost-tag" id="cost10">—</span></button>
+          <button type="button" class="pull" data-pull="1"><span class="big">1장</span><span class="cost-tag" id="cost1">—</span></button>
+          <button type="button" class="pull ten" data-pull="12"><span class="big">12장 팩</span><span class="cost-tag" id="cost12">—</span></button>
         </div>
         <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--pink);margin:0"></p>
         <section class="panel flat">
@@ -256,7 +253,7 @@
         </section>
       </div>
 
-      <div class="segpanel" id="seg-shop" hidden>
+      <div class="segpanel" id="seg-goods" hidden>
         <section class="panel flat">
           <div class="sect-h" style="margin-bottom:16px"><h2>이코르 보충</h2></div>
           <div class="goods" id="goods"></div>
@@ -269,7 +266,7 @@
       </div>
     </section>
 
-    <!-- ══ 4) 인연 · 모모톡 ═══════════════════════ -->
+    <!-- ══ 5) 인연 · 모모톡 ═══════════════════════ -->
     <section class="tabpanel" id="tab-bonds" role="tabpanel" aria-label="인연" hidden>
       <section class="panel flat">
         <div class="sect-h"><h2>모모톡</h2><span class="spacer"></span>
@@ -295,6 +292,10 @@
     <button type="button" class="tab" role="tab" data-tab="daily" aria-selected="false">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
       일상
+    </button>
+    <button type="button" class="tab" role="tab" data-tab="shop" aria-selected="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      상점
     </button>
     <button type="button" class="tab" role="tab" data-tab="bonds" aria-selected="false">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M9 10h6"/></svg>
