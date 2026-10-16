@@ -48,8 +48,8 @@
 .wallet svg{display:none}
 .wallet .lbl{font-family:var(--num); font-weight:700; font-size:8px; letter-spacing:2px; color:var(--t3)}
 .wallet .val{font-family:var(--num); font-weight:700; font-size:12px; font-variant-numeric:tabular-nums}
-#walletEtherBox{border-color:rgba(255,210,63,.6)}
-#walletEtherBox .val{color:var(--gold)}
+#walletEtherBox{border-color:rgba(63,224,255,.5)}
+#walletEtherBox .val{color:var(--t1)}
 
 /* 헤더는 390px 를 기준으로 짰다. 그보다 좁으면 영문 라벨부터 접고,
    더 좁으면 제목과 재화를 줄인다 — 잘리는 것보다 작아지는 쪽이 낫다. */
@@ -214,8 +214,9 @@ body.fullscreen-on .tabbar{display:none}
 .tcg.big .tcg-noab{font-size:11px}
 .tcg-flavor{
   margin-top:auto; padding-top:7px; border-top:1px solid rgba(16,16,16,.25);
-  font-family:var(--ui); font-weight:500; font-style:italic; font-size:10px; line-height:1.5;
-  color:#4a4a4a; word-break:keep-all;
+  /* 기울임은 italic 이 아니라 skewX 로만 준다 */
+  font-family:var(--ui); font-weight:500; font-size:10px; line-height:1.5;
+  color:#4a4a4a; word-break:keep-all; transform:skewX(var(--skew));
 }
 .tcg-lock{
   /* 작은 카드의 능력 칸은 24px 뿐이다 — 세로로 쌓으면 글자가 잘린다 */
@@ -272,66 +273,94 @@ body.fullscreen-on .tabbar{display:none}
 .online .n{font-size:12px; font-weight:500; color:var(--t2)}
 
 /* ══ 홈의 주인공 — 지금 장 ═══════════════════════════════
-   전에는 이 면을 통째로 강조색으로 칠했다. 그 색이 네온으로 바뀌자
-   화면 절반이 시안이 됐다 — '네이비와 시안으로 절제하고 색은 그림이
-   담당한다' 는 규칙과 정면으로 어긋난다. 바닥은 패널 네이비로 돌리고,
-   시안은 획·띠지·도장·버튼에만 쓴다. */
+   넓은 면은 패널 네이비(#081a52)다. 오른쪽 45% 를 사선으로 잘라 그 장을
+   맡은 신의 그림을 넣고, 경계에만 시안 네온 라인을 긋는다. */
 .nowch{
+  position:relative; overflow:hidden;
   display:flex; flex-direction:column; gap:13px;
-  margin:0 -12px;                /* .body 의 좌우 여백을 되돌려 끝까지 */
-  padding:20px 22px 44px 18px;
+  margin:0 -12px; padding:20px 18px 40px;
   background:var(--panel); color:var(--t1);
-  border:0; border-top:1.5px solid var(--neon); border-bottom:1.5px solid var(--neon);
-  overflow:hidden;
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 30px), 0 100%);
+  border:0; border-top:1px solid rgba(63,224,255,.4); border-bottom:1px solid rgba(63,224,255,.4);
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 26px), 0 100%);
 }
-.nowch::before{                   /* 장 번호 — 네온 외곽선만 남기고 반쯤 자른다 */
-  content:attr(data-n); position:absolute; right:-10px; bottom:-44px;
-  font-family:var(--num); font-weight:700; font-size:150px; line-height:1; letter-spacing:-.05em;
-  color:transparent; -webkit-text-stroke:2px rgba(63,224,255,.22); pointer-events:none;
+.ch-art{
+  position:absolute; top:0; right:0; bottom:0; width:58%; z-index:0;
+  clip-path:polygon(30% 0, 100% 0, 100% 100%, 0 100%);
 }
-.nowch::after{                    /* -18° 사선 띠 */
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.07) 0 2px, transparent 2px 13px);
+.ch-art img{width:100%; height:100%; object-fit:cover; display:block; opacity:.5}
+.ch-art::after{                    /* 글자 쪽으로 어둠을 깔아 읽히게 */
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(100deg, var(--panel) 16%, rgba(8,26,82,.72) 46%, rgba(8,26,82,.1) 100%);
 }
-.nowch > *{position:relative; z-index:1}
+/* 경계에 긋는 네온 라인 하나 */
+.ch-art::before{
+  content:""; position:absolute; top:-6%; left:28%; width:2px; height:120%; z-index:2;
+  background:var(--neon); box-shadow:var(--glow); transform:rotate(14deg); transform-origin:top;
+}
+.nowch::before{                   /* 장 번호 — 네온 외곽선만 */
+  content:attr(data-n); position:absolute; left:8px; top:4px; z-index:1;
+  font-family:var(--num); font-weight:700; font-size:92px; line-height:1; letter-spacing:-.05em;
+  color:transparent; -webkit-text-stroke:1.5px rgba(63,224,255,.16); pointer-events:none;
+}
+.nowch > *:not(.ch-art):not(.side){position:relative; z-index:2}
 
-.nowch .txt{display:flex; flex-direction:column; gap:11px; align-items:flex-start}
+.nowch .txt{display:flex; flex-direction:column; gap:10px; align-items:flex-start; max-width:72%}
 .nowch .eyebrow{
-  display:inline-block; margin-left:-2px; padding:4px 11px 5px;
+  display:inline-block; padding:4px 11px 5px;
   background:var(--neon); color:#02122b; transform:skewX(var(--skew));
 }
+/* 제목 — Gasoek One 40px, 검은 외곽선에 파란 오프셋 그림자 */
 .nowch h2{
-  margin:0; font-family:var(--disp); font-weight:400;
-  font-size:clamp(30px, 9.8vw, 40px); line-height:.98; letter-spacing:-.01em;
-  color:var(--line); text-wrap:balance; text-shadow:3px 3px 0 var(--accent-blue);
+  margin:0; display:flex; flex-direction:column; align-items:flex-start;
+  font-family:var(--disp); font-weight:400; font-size:40px; line-height:1.06;
+  letter-spacing:-.01em; color:#fff;
+  -webkit-text-stroke:2px #000; paint-order:stroke fill;
+  text-shadow:3px 4px 0 var(--accent-blue);
 }
-.nowch .hint{color:var(--t2)}
+.nowch h2 .ln{display:block; white-space:nowrap}
+.nowch .hint{color:var(--t2); max-width:100%}
 
-/* DAY 도장 — 격자 밖으로 비뚤게 박힌다 */
+/* DAY 도장 */
 .nowch .side{
-  display:block; position:absolute; top:15px; right:13px; z-index:2;
-  padding:5px 10px 6px; border:1.5px solid var(--neon); background:var(--ink);
-  transform:rotate(6deg); text-align:center; box-shadow:var(--glow);
+  position:absolute; top:14px; right:12px; z-index:3; display:block;
+  padding:5px 10px 6px; border:1.5px solid var(--neon); background:var(--bg);
+  transform:skewX(var(--skew)); text-align:center;
 }
-.nowch .side .big{display:block; font-family:var(--num); font-weight:700; font-size:15px; line-height:1; color:var(--neon)}
-.nowch .side .cap{display:block; font-family:var(--num); font-weight:700; font-size:6.5px; letter-spacing:2px; color:var(--t3)}
+.nowch .side > *{transform:skewX(14deg)}
+.nowch .side .big{display:block; font-family:var(--num); font-weight:700; font-size:15px; line-height:1; color:var(--neon); white-space:nowrap}
+.nowch .side .cap{display:block; font-family:var(--num); font-weight:700; font-size:6.5px; letter-spacing:2px; color:var(--t3); white-space:nowrap}
 
-.phases{display:flex; gap:6px}
+/* DAY 1~3 — 기울인 칸 셋. 진행 중인 날만 시안으로 채운다. */
+/* skew 가 칸의 바깥 폭을 넓힌다 — 양끝을 들여 셋이 다 보이게 한다 */
+.phases{display:flex; gap:7px; margin:0 9px}
 .phase{
-  flex:1 1 0; min-width:0; padding:9px 9px 10px; background:var(--ink);
-  border:1px solid rgba(63,224,255,.28);
+  flex:1 1 0; min-width:0; padding:9px 10px 10px;
+  background:transparent; border:1.5px solid rgba(63,224,255,.4); color:var(--t2);
   display:flex; flex-direction:column; gap:3px;
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  transform:skewX(var(--skew));
 }
-.phase .d{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3)}
-.phase .t{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line)}
-.phase .s{font-size:11px; font-weight:500; color:var(--t2); line-height:1.5}
-.phase .t,.phase .s{word-break:keep-all; overflow-wrap:break-word}
-.phase.on{border-color:var(--neon); box-shadow:inset 0 0 14px rgba(63,224,255,.18)}
-.phase.on .d{color:var(--neon)}
-.phase.done{background:rgba(63,224,255,.1); border-color:rgba(63,224,255,.5)}
-.phase.done .d{color:var(--t2)}
+.phase > *{transform:skewX(14deg)}
+.phase .d{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3); white-space:nowrap}
+.phase .t{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); white-space:nowrap}
+.phase .s{font-size:10.5px; font-weight:500; color:var(--t2); line-height:1.45}
+.phase.on{background:var(--neon); border-color:var(--neon); box-shadow:var(--glow)}
+.phase.on .d{color:rgba(2,18,43,.7)}
+.phase.on .t,.phase.on .s{color:#02122b}
+.phase.done{border-color:rgba(63,224,255,.65)}
+.phase.done .t{color:var(--neon)}
+.nowch .btnpair{width:100%}
+
+/* 게시판 — 입력창과 올리기를 한 줄에 */
+.composer{display:flex; align-items:center; gap:9px}
+.composer input{flex:1 1 auto; min-width:0; min-height:46px}
+.composer .btn{flex:0 0 auto; min-height:46px; padding:0 16px}
+
+/* 빈 상태 — 상자 없이 위아래 선 사이에 한 줄만 */
+.rule-note{
+  padding:16px 4px; text-align:center;
+  border-top:1px solid rgba(63,224,255,.25); border-bottom:1px solid rgba(63,224,255,.25);
+  font-size:13px; font-weight:500; color:var(--t3);
+}
 
 .banner-s{
   position:relative; overflow:hidden; display:flex; align-items:center; gap:12px; width:100%;
@@ -357,12 +386,13 @@ body.fullscreen-on .tabbar{display:none}
    어느 것도 주인공이 아니게 된다. 나머지 탭은 색이 아니라 크기로만
    주인공을 세운다: 제목 하나를 30px 로 올리고 옆 숫자는 작게 둔다. */
 .tophead{padding:17px 16px 19px; border-left:3px solid var(--neon)}
-/* 제목(Gasoek 28px)과 칩을 한 줄에 두면 390px 에서 둘 다 줄바꿈된다.
-   칩을 아래로 내리고 제목에 한 줄을 통째로 준다. */
-.tophead .sect-h{flex-wrap:wrap; align-items:center; gap:8px}
+/* 제목 옆에 칩. 둘 다 nowrap 이라 낱말이 쪼개지지 않고, 폭이 모자라면
+   flex-wrap 이 칩만 아래로 내린다. */
+.tophead .sect-h{flex-wrap:wrap; align-items:center; gap:9px}
 .tophead .sect-h h2{
-  flex:1 1 100%; font-family:var(--disp); font-weight:400; font-size:28px; line-height:1;
+  flex:0 1 auto; font-family:var(--disp); font-weight:400; font-size:26px; line-height:1;
   letter-spacing:-.01em; color:var(--line); text-shadow:2px 2px 0 var(--accent-blue);
+  white-space:nowrap;
 }
 .tophead .sect-h .spacer{display:none}
 .tophead .chip{white-space:nowrap}
@@ -411,7 +441,15 @@ body.fullscreen-on .tabbar{display:none}
   transform:skewX(var(--skew));
 }
 .row-it .mark > *{transform:skewX(14deg)}
-.row-it.pinky .mark{border-color:var(--gold); color:var(--gold)}
+
+/* 대화 목록 아바타 — 카드 프레임을 그대로 줄인 것 */
+.mini{
+  flex:0 0 auto; width:50px; display:block;
+  background:var(--line); border:1.5px solid #000; padding:2.5px;
+}
+.mini-in{display:block; width:100%; aspect-ratio:10/7; overflow:hidden; background:#000}
+.mini-in svg,.mini-in .art-img{display:block; width:100%; height:100%; object-fit:cover}
+.row-it.pinky .mark{border-color:var(--neon); color:var(--neon)}
 .row-it .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px}
 .row-it .nm{font-family:var(--disp); font-weight:400; font-size:15px; color:var(--line)}
 .row-it .sub{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6}
@@ -462,13 +500,13 @@ body.fullscreen-on .tabbar{display:none}
   border:2px solid var(--line); background:var(--ink);
 }
 .price .k{font-family:var(--num); font-size:9px; letter-spacing:.1em; color:var(--t3)}
-.price .v{font-family:var(--num); font-size:14px; color:var(--gold)}
+.price .v{font-family:var(--num); font-size:14px; color:var(--neon)}
 
 /* ── 봉납 ──────────────────────────────────────── */
 .melt{display:flex; flex-direction:column; gap:14px}
-.melt .out{display:flex; flex-direction:column; gap:10px; padding:14px; border:2px solid var(--gold); background:var(--ink)}
+.melt .out{display:flex; flex-direction:column; gap:10px; padding:14px; border:1.5px solid var(--neon); background:var(--ink)}
 .melt .out .k{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.melt .out .v{font-family:var(--num); font-size:25px; color:var(--gold)}
+.melt .out .v{font-family:var(--num); font-size:25px; color:var(--neon)}
 
 /* ── 관계도 ────────────────────────────────────── */
 .bondmap{position:relative; width:100%; height:300px; border:2px solid var(--dim); background:var(--ink); overflow:hidden}
@@ -478,21 +516,24 @@ body.fullscreen-on .tabbar{display:none}
 }
 .bondmap svg{position:relative; z-index:1; width:100%; height:100%; display:block}
 .bondmap .edge{stroke-width:3; stroke-linecap:round}
-.bondmap .edge.link{stroke:#FFC53D}
-.bondmap .edge.deep{stroke:#FFC53D; stroke-width:5}
+.bondmap .edge.link{stroke:#2f6bff}
+.bondmap .edge.deep{stroke:#3fe0ff; stroke-width:5}
 .bondmap .edge.clash{stroke:#FF2B3E; stroke-dasharray:7 7}
 .bondmap .node rect{fill:#1A151F; stroke:#FFFFFF; stroke-width:3}
-.bondmap .node.lime rect{fill:#FFC53D}
+.bondmap .node.lime rect{fill:#2f6bff}
 .bondmap .node.pink rect{fill:#FF2B3E}
 .bondmap .node text{font-family:'Gothic A1',sans-serif; font-weight:700; font-size:11px; fill:#F2EDF5; text-anchor:middle}
 .legend{display:flex; gap:10px; flex-wrap:wrap}
 .legend .it{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:400; color:var(--t2)}
-.legend .sw{width:20px; height:3px; background:var(--gold)}
+.legend .sw{width:20px; height:3px; background:var(--accent-blue)}
 .legend .sw.clash{background:var(--hot)}
 .legend .sw.deep{height:5px}
 
 /* ── 시간표 ────────────────────────────────────── */
 .slots{display:flex; flex-direction:column; gap:10px}
+/* 빈 칸만 남았을 때는 카드 세 장처럼 가로로 늘어놓는다 */
+.slots.row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.slots.row .slot-card{min-height:0}
 .slot-card{
   position:relative; display:flex; flex-direction:column; gap:7px; padding:14px; min-height:96px;
   border:0; border-left:3px solid rgba(63,224,255,.3); background:var(--panel); color:var(--t2);
@@ -510,9 +551,9 @@ body.fullscreen-on .tabbar{display:none}
 .slot-card .left{font-family:var(--num); font-weight:700; font-size:19px; color:var(--neon)}
 .slot-card.busy{border-left-color:var(--neon)}
 .slot-card.busy::after{background-image:none}
-.slot-card.ready{border-left-color:var(--gold); background:var(--ink)}
+.slot-card.ready{border-left-color:var(--neon); background:var(--ink); box-shadow:inset 0 0 18px rgba(63,224,255,.16)}
 .slot-card.ready::after{background-image:none}
-.slot-card.ready .left{color:var(--gold)}
+.slot-card.ready .left{color:var(--neon)}
 .slot-card .call{
   margin-top:6px; width:100%; min-height:40px; border:0;
   background:var(--neon); color:#02122b; font-family:var(--disp); font-weight:400; font-size:14px;
@@ -520,6 +561,30 @@ body.fullscreen-on .tabbar{display:none}
   transform:skewX(var(--skew)); box-shadow:var(--glow);
 }
 .slot-card .call > *{transform:skewX(14deg)}
+
+/* 빈 슬롯 — 카드 비율 점선 칸. 가운데에 + 마름모와 '카드 보내기' */
+.empty-slot{
+  aspect-ratio:63/88; padding:10px 8px; gap:0; justify-content:flex-start;
+  background:transparent; border:1.5px dashed rgba(63,224,255,.4); border-left-width:1.5px;
+  clip-path:none;
+}
+.empty-slot::after{background-image:none}
+.empty-slot .k{align-self:flex-start; white-space:nowrap}
+.empty-slot .mid{
+  flex:1 1 auto; width:100%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:9px;
+}
+.empty-slot .plus{
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+  border:1.5px solid var(--neon); color:var(--neon); transform:rotate(45deg);
+}
+.empty-slot .plus .g{
+  transform:rotate(-45deg);
+  font-family:var(--num); font-weight:700; font-size:19px; line-height:1;
+}
+.empty-slot .cta{
+  font-family:var(--disp); font-weight:400; font-size:12px; color:var(--neon); white-space:nowrap;
+}
 
 /* ── 뽑기 ──────────────────────────────────────── */
 /* ══ 상점 ════════════════════════════════════════════════
@@ -586,7 +651,7 @@ body.fullscreen-on .tabbar{display:none}
   background:var(--hot); color:var(--line); display:flex; flex-direction:column;
   align-items:center; justify-content:center; gap:5px; box-shadow:5px 5px 0 var(--line);
 }
-.pull.ten{background:var(--gold); color:var(--ink)}
+.pull.ten{background:var(--neon); color:#02122b}
 .pull:active{transform:translate(3px,3px); box-shadow:2px 2px 0 var(--line)}
 .pull .big{font-family:var(--disp); font-weight:400; font-size:19px}
 .pull .cost-tag{
@@ -598,7 +663,7 @@ body.fullscreen-on .tabbar{display:none}
   display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:11px;
   border:2px solid var(--dim); background:var(--panel);
 }
-.good .amt{font-family:var(--num); font-size:16px; color:var(--gold)}
+.good .amt{font-family:var(--num); font-size:16px; color:var(--neon)}
 .good .nm{font-size:11.5px; font-weight:400; color:var(--t2)}
 .good button{
   width:100%; min-height:32px; border:2px solid var(--line); background:var(--line); color:var(--ink);
@@ -642,7 +707,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .roll > *{transform:skewX(9deg)}
 .roll .d{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.roll .v{font-family:var(--num); font-size:16px; color:var(--gold)}
+.roll .v{font-family:var(--num); font-size:16px; color:var(--neon)}
 .roll .j{font-family:var(--ui); font-weight:400; font-size:13px; color:var(--line)}
 .roll.fail .v{color:var(--hot)}
 .sysline{align-self:center; font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3); text-align:center}
@@ -676,14 +741,14 @@ body.fullscreen-on .tabbar{display:none}
 .hpbar{display:flex; align-items:center; gap:10px}
 .hpbar .face{
   width:38px; height:38px; flex:0 0 38px; border:2px solid var(--line);
-  background:var(--panel); color:var(--gold);
+  background:var(--panel); color:var(--neon);
   display:flex; align-items:center; justify-content:center;
 }
 .hpbar.foe .face{color:var(--hot)}
 .hpbar .who{display:flex; flex-direction:column; gap:4px; flex:1 1 auto; min-width:0}
 .hpbar .who .n{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line); word-break:break-all}
 .hpbar .hp{height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
-.hpbar .hp > i{display:block; height:100%; background:var(--gold)}
+.hpbar .hp > i{display:block; height:100%; background:var(--neon); box-shadow:var(--glow)}
 .hpbar.foe .hp > i{background:var(--hot)}
 .hpbar .num{font-family:var(--num); font-size:13px; color:var(--line); font-variant-numeric:tabular-nums}
 .field{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
@@ -713,7 +778,7 @@ body.fullscreen-on .tabbar{display:none}
 .gains{display:flex; flex-direction:column; gap:8px; width:100%}
 .gain{display:flex; align-items:center; gap:9px; min-height:42px; padding:0 14px; border:2px solid var(--line); background:var(--panel)}
 .gain .k{font-family:var(--num); font-size:9.5px; letter-spacing:.1em; color:var(--t3)}
-.gain .v{font-family:var(--num); font-size:15px; color:var(--gold)}
+.gain .v{font-family:var(--num); font-size:15px; color:var(--neon)}
 .result .acts{display:flex; flex-direction:column; gap:9px; width:100%}
 .reveal{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:18px}
 .reveal .hdline{font-family:var(--disp); font-weight:400; font-size:32px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
@@ -727,13 +792,15 @@ body.fullscreen-on .tabbar{display:none}
 .chron .hd-r{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
 .chron .n{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
 .chron h3{margin:0; font-family:var(--ui); font-weight:400; font-size:17px; color:var(--line)}
-.chron .res{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--gold)}
+.chron .res{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--neon)}
 .chron .res.bad{color:var(--hot)}
 .chron .body-t{margin:0; font-size:13.5px; font-weight:400; line-height:1.85; color:var(--t2)}
 
+/* 호감도 — 기울인 막대 다섯 칸 */
 .bondbar{display:flex; align-items:center; gap:4px}
-.bondbar .pip{width:14px; height:7px; border:2px solid var(--dim)}
-.bondbar .pip.on{background:var(--gold); border-color:var(--line)}
+.bondbar .pip{width:15px; height:8px; border:1.5px solid rgba(63,224,255,.35);
+              transform:skewX(var(--skew))}
+.bondbar .pip.on{background:var(--neon); border-color:var(--neon); box-shadow:var(--glow)}
 .stack-ava{display:flex; align-items:center}
 .stack-ava .ava{margin-right:-8px}
 .post-acts{display:flex; gap:8px; flex-wrap:wrap}
@@ -776,12 +843,12 @@ body.fullscreen-on .tabbar{display:none}
 .bhead{display:flex; align-items:center; gap:7px}
 .bface{
   width:28px; height:28px; flex:0 0 28px; border:2px solid var(--line); background:var(--panel);
-  display:inline-flex; align-items:center; justify-content:center; color:var(--gold);
+  display:inline-flex; align-items:center; justify-content:center; color:var(--neon);
 }
 .bside.foe .bface{color:var(--hot)}
 .bname{font-family:var(--ui-s); font-weight:600; font-size:12px; color:var(--line); max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .bhp{flex:1 1 auto; height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
-.bhp > i{display:block; height:100%; background:var(--gold)}
+.bhp > i{display:block; height:100%; background:var(--neon)}
 .bside.foe .bhp > i{background:var(--hot)}
 .bnum{font-family:var(--num); font-size:12px; color:var(--line); font-variant-numeric:tabular-nums; min-width:24px; text-align:right}
 .btarget{
@@ -794,7 +861,7 @@ body.fullscreen-on .tabbar{display:none}
   position:relative; height:104px; border:2px dashed var(--dim); background:var(--panel);
   display:flex; align-items:center; justify-content:center; overflow:hidden;
 }
-.bslot.pick{border-style:solid; border-color:var(--gold)}
+.bslot.pick{border-style:solid; border-color:var(--neon)}
 .bunit{
   position:absolute; inset:3px; display:flex; flex-direction:column; gap:3px; padding:5px;
   border:2px solid var(--line); background:var(--ink); text-align:left;
@@ -802,9 +869,9 @@ body.fullscreen-on .tabbar{display:none}
 /* 수비 표시 — 유희왕처럼 눕힌다. 칸보다 가로가 기니 조금 줄인다 */
 .bunit.def{
   inset:3px; transform:rotate(90deg) scale(.82); transform-origin:center;
-  background:var(--panel); border-color:var(--gold);
+  background:var(--panel); border-color:var(--neon);
 }
-.bunit.sel{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold)}
+.bunit.sel{border-color:var(--neon); box-shadow:0 0 0 2px rgba(63,224,255,.5)}
 .bunit.sick{opacity:.6}
 .bunit .bn{flex:1 1 auto; font-family:var(--ui-s); font-weight:600; font-size:11px; color:var(--line);
   line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
@@ -818,7 +885,7 @@ body.fullscreen-on .tabbar{display:none}
 .bunit .el{position:absolute; top:4px; left:4px; width:15px; height:15px; flex:0 0 15px; border-width:2px}
 .bunit .bn{padding-left:19px}
 .bunit .pos{position:absolute; top:5px; right:4px; font-family:var(--num); font-size:7.5px; color:var(--t3)}
-.bunit.def .pos{color:var(--gold)}
+.bunit.def .pos{color:var(--neon)}
 
 .btraps{display:flex; gap:5px; justify-content:center}
 .btrap{
@@ -833,7 +900,7 @@ body.fullscreen-on .tabbar{display:none}
 .ichor{display:inline-flex; gap:2px}
 .ichor{flex-wrap:wrap; max-width:132px; justify-content:flex-end}
 .ichor i{width:9px; height:15px; border:2px solid var(--t3); display:block; background:var(--ink)}
-.ichor i.on{background:var(--gold); border-color:var(--gold)}
+.ichor i.on{background:var(--neon); border-color:var(--neon)}
 
 .bbottom{
   flex:0 0 auto; display:flex; flex-direction:column; gap:7px; padding:8px 10px;
@@ -865,7 +932,7 @@ body.fullscreen-on .tabbar{display:none}
   flex:0 0 68px; height:94px; display:flex; flex-direction:column; gap:2px; padding:4px;
   border:2px solid var(--line); background:var(--panel); text-align:left;
 }
-.hcard.sel{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold)}
+.hcard.sel{border-color:var(--neon); box-shadow:0 0 0 2px rgba(63,224,255,.5)}
 .hcard.no{opacity:.4}
 .hcard .hc{
   width:17px; height:17px; border:2px solid var(--line); background:var(--hot); color:var(--line);
@@ -874,12 +941,12 @@ body.fullscreen-on .tabbar{display:none}
 .hcard .hk{font-family:var(--num); font-size:6.5px; letter-spacing:.06em; color:var(--t3)}
 .hcard .hn{flex:1 1 auto; font-family:var(--ui-s); font-weight:600; font-size:9.5px; color:var(--line);
   line-height:1.2; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
-.hcard .hs{flex:0 0 auto; font-family:var(--num); font-size:9px; color:var(--gold)}
+.hcard .hs{flex:0 0 auto; font-family:var(--num); font-size:9px; color:var(--neon)}
 .hcard .top{display:flex; align-items:center; justify-content:space-between; gap:3px}
 
 .blog{display:flex; flex-direction:column; gap:5px; max-height:50vh; overflow-y:auto; margin-bottom:14px}
 .blog p{margin:0; font-size:12px; font-weight:400; line-height:1.6; color:var(--t2)}
-.blog p.good{color:var(--gold)}
+.blog p.good{color:var(--neon)}
 .blog p.bad{color:var(--hot)}
 
 

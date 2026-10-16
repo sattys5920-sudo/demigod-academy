@@ -19,7 +19,7 @@
   --alert:#ff3d8b;       /* 알림 점 */
   --cost:#ff3d5a;        /* 카드 비용 칸 */
   --paper:#f4f1e8;       /* 카드 능력 박스 바탕 */
-  --gold:#ffd23f;        /* 재화 · 별 (번개 색과 같다) */
+  --gold:#ffd23f;        /* 번개 속성 전용 — UI 에는 쓰지 않는다 */
   --t1:#eaf4ff;
   --t2:#8fb3d9;          /* text-sub */
   --t3:#7f9cc7;          /* text-muted */
@@ -65,11 +65,18 @@ body{
   margin:0; background:var(--bg2); color:var(--t1);
   font-family:var(--body); font-weight:500; line-height:1.6; -webkit-font-smoothing:antialiased;
   overscroll-behavior-y:none;
+  /* 한글은 낱말 단위로만 끊는다 — 음절 중간에서 쪼개지면 안 된다 */
+  word-break:keep-all; overflow-wrap:break-word;
 }
+/* 제목·칩·버튼·짧은 라벨은 아예 끊지 않는다 */
+h1,.chip,.btn,.eyebrow,.seg-btn,.tab,.slab,.wallet,.count{white-space:nowrap}
+/* <i> 를 라벨 조각으로 쓴다. 브라우저 기본이 italic 이라 못 박아 둔다 —
+   기울임은 transform: skewX 로만 준다. */
+i,em,address,cite,dfn,var{font-style:normal}
 [hidden]{display:none !important}
 button,input,textarea,select{font-family:inherit; font-size:inherit}
 button{cursor:pointer}
-:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+:focus-visible{outline:3px solid var(--neon); outline-offset:2px}
 
 /* 배경 — -18° 사선 띠와 가는 네온 라인으로 속도감을 준다 */
 body::before{
@@ -157,7 +164,7 @@ body::before{
 .btn:active{transform:skewX(var(--skew)) translate(2px,2px)}
 .btn.ghost{border-color:rgba(63,224,255,.4); color:var(--t2)}
 .btn.white{background:var(--line); border-color:var(--line); color:var(--bg)}
-.btn.gold{background:var(--gold); border-color:var(--gold); color:var(--bg)}
+.btn.gold{background:var(--neon); border-color:var(--neon); color:#02122b}
 .btn.block{width:100%}
 .btn.lg{min-height:56px; font-size:20px; padding:0 24px}
 .btn[disabled]{opacity:.4}
@@ -192,14 +199,16 @@ body::before{
 }
 .chip > *{transform:skewX(14deg)}
 .chip.hot{background:var(--neon); border-color:var(--neon); color:#02122b}
-.chip.gold{background:var(--gold); border-color:var(--gold); color:#2a1d00}
+.chip.gold{background:transparent; border-color:var(--neon); color:var(--neon)}
 .chip.on{background:var(--neon); border-color:var(--neon); color:#02122b; box-shadow:var(--glow)}
+/* 알림은 핑크만 쓴다 */
+.chip.alert{background:var(--alert); border-color:var(--alert); color:#fff; box-shadow:0 0 10px rgba(255,61,139,.55)}
 
 /* ── 막대 ──────────────────────────────────────── */
 .bar{height:13px; border:1.5px solid var(--neon); background:var(--ink); overflow:hidden;
      transform:skewX(-30deg)}
 .bar > i{display:block; height:100%; background:var(--neon); box-shadow:var(--glow)}
-.bar.gold > i{background:var(--gold); box-shadow:0 0 10px rgba(255,210,63,.6)}
+.bar.gold > i{background:var(--neon); box-shadow:var(--glow)}
 .bar.thin{height:9px}
 /* 점선형 — 칸이 비어 있는 쪽을 점선으로 보여 준다 */
 .bar.dotted{
@@ -227,7 +236,7 @@ input::placeholder{color:var(--t3)}
 /* 아바타도 시스템 안으로 — 노란 사각은 네이비·시안 밖이었다.
    혈통 구분은 테두리 색으로만 남긴다. */
 .ava{background:var(--ink); color:var(--neon)}
-.ava.tone-lime{border-color:var(--gold); color:var(--gold)}
+.ava.tone-lime{border-color:var(--neon); color:var(--neon)}
 .ava.tone-pink{border-color:var(--neon); color:var(--neon)}
 .ava img{width:100%; height:100%; object-fit:cover; display:block}
 .ava.xs{width:28px; height:28px}

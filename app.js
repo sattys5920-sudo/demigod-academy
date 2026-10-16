@@ -389,9 +389,19 @@
     /* 장 번호는 배경에 거대하게 깔린다 — 그리는 쪽은 CSS(attr(data-n)) */
     $('#nowch').setAttribute('data-n', String(ch.n).padStart(2, '0'));
     $('#chEyebrow').textContent = 'CHAPTER ' + String(ch.n).padStart(2, '0') + ' · ' + ch.god;
-    $('#chTitle').textContent = ch.title;
+    /* 제목은 낱말마다 한 줄씩 — 스펙의 '도착하지 / 않는다'. 각 줄은
+       nowrap 이라 낱말 중간에서 끊길 수 없다. */
+    var t = $('#chTitle'); t.textContent = '';
+    String(ch.title).split(/\s+/).forEach(function (w) { t.appendChild(el('span', 'ln', w)); });
     $('#chBoss').textContent = ch.boss.name + ' — ' + ch.boss.weaknessNote;
     $('#chLeft').textContent = 'DAY ' + S.day;
+    /* 오른쪽 사선 칸에 그 장을 맡은 신의 ★3 그림을 넣는다 */
+    var godKey = String(ch.god || '').toLowerCase();
+    var pic = D.cards.cards.filter(function (c) {
+      return c.family === String(ch.god).toUpperCase() && c.art;
+    }).sort(function (a, b) { return b.grade - a.grade; })[0];
+    var img = $('#chArt');
+    if (img) { img.src = pic ? pic.art : ''; img.hidden = !pic; }
 
     var ph = $('#phases'); ph.textContent = '';
     [['DAY 1', '조사', '단서 ' + S.clues + ' / ' + ch.clues],
@@ -406,7 +416,7 @@
   function paintFeed() {
     var f = $('#feed'); f.textContent = '';
     if (!S.feed.length) {
-      var e = el('li'); e.appendChild(el('div', 'empty', '아직 아무도 아무 말도 남기지 않았다.'));
+      var e = el('li'); e.appendChild(el('div', 'rule-note', '아직 아무도 아무 말도 남기지 않았다.'));
       f.appendChild(e); return;
     }
     S.feed.slice().reverse().forEach(function (p) {
@@ -656,13 +666,20 @@
   }
 
   function paintSlots() {
-    $('#capLeft').textContent = '오늘 에테르 ' + fmt(capLeft()) + ' 남음';
+    $('#capLeft').textContent = 'AITHER ' + fmt(capLeft()) + ' 남음';
     var box = $('#slots'); box.textContent = '';
     S.slots.forEach(function (sl, i) {
       var b = el('button', 'slot-card'); b.type = 'button';
       if (!sl) {
-        b.append(el('span', 'k', 'SLOT ' + (i + 1)), el('span', 'nm', '비어 있음'),
-                 el('span', 'left', '+'));
+        /* 빈 칸은 카드 비율(63:88) 점선 칸 — 가운데에 + 마름모와 '카드 보내기' */
+        b.className = 'slot-card empty-slot';
+        b.setAttribute('aria-label', 'SLOT ' + (i + 1) + ' — 카드 보내기');
+        b.append(el('span', 'k', 'SLOT ' + (i + 1)));
+        var mid = el('span', 'mid');
+        var dia = el('span', 'plus');
+        dia.appendChild(el('span', 'g', '+'));   /* 마름모는 돌리고 글자는 되돌린다 */
+        mid.append(dia, el('span', 'cta', '카드 보내기'));
+        b.appendChild(mid);
         b.addEventListener('click', function () { openSlotDlg(i); });
       } else {
         var left = Math.max(0, sl.until - Date.now());
@@ -685,7 +702,10 @@
       }
       box.appendChild(b);
     });
+    /* 빈 칸이 전부면 가로로 셋을 늘어놓는다 */
+    box.classList.toggle('row', S.slots.every(function (x) { return !x; }));
   }
+
   function openSlotDlg(i) {
     var p = $('#slotPick'); p.textContent = '';
     D.schedule.classes.concat(D.schedule.jobs).forEach(function (def) {
@@ -1130,8 +1150,11 @@
       if (th) unread++;
       var li = el('li');
       var b = el('button', 'row-it'); b.type = 'button';
-      var av = el('span', 'ava m'); av.setAttribute('aria-hidden', 'true');
-      avatar(av, { god: (c.family || '').toLowerCase() }, 56);
+      /* 아바타는 번개 아이콘이 아니라 그 카드의 일러스트다 — 카드 프레임 축소판 */
+      var av = el('span', 'mini'); av.setAttribute('aria-hidden', 'true');
+      var mi = el('span', 'mini-in');
+      if (window.DGAArt) DGAArt.paint(mi, c);
+      av.appendChild(mi);
       var txt = el('span', 'txt');
       txt.appendChild(el('span', 'nm', c.short || c.name));
       txt.appendChild(el('span', 'sub', th ? '새 메시지가 왔다' : '호감도 ' + lv + ' / 5'));
@@ -1139,7 +1162,7 @@
       for (var i = 0; i < 5; i++) bb.appendChild(el('span', 'pip' + (i < lv ? ' on' : '')));
       txt.appendChild(bb);
       b.append(av, txt);
-      if (th) b.appendChild(el('span', 'unread', '1'));
+      if (th) b.appendChild(el('span', 'unread', '1'));   /* 핑크 칸 */
       b.addEventListener('click', function () { openTalk(id, th); });
       li.appendChild(b);
       l.appendChild(li);

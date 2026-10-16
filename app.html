@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Chakra+Petch:wght@500;700&family=Gothic+A1:wght@500;700;900&display=swap">
-<link rel="stylesheet" href="theme.css?v=26d21871">
-<link rel="stylesheet" href="app.css?v=0d651468">
+<link rel="stylesheet" href="theme.css?v=55d39d6f">
+<link rel="stylesheet" href="app.css?v=cef823c5">
 </head>
 <body>
 
@@ -69,16 +69,18 @@
         <div class="online" id="online" aria-live="polite"></div>
       </section>
 
-      <article class="panel nowch" id="nowch" data-n="01">
+      <!-- 챕터 카드 — 왼쪽 글, 오른쪽 45% 사선 일러스트, 경계에 네온 라인 -->
+      <article class="nowch" id="nowch" data-n="01">
+        <div class="ch-art" aria-hidden="true"><img id="chArt" src="" alt=""></div>
         <div class="txt">
           <span class="eyebrow" id="chEyebrow">CHAPTER 01 · HERMES</span>
           <h2 id="chTitle">—</h2>
           <p class="hint" id="chBoss">—</p>
-          <div class="phases" id="phases"></div>
-          <div class="btnpair" style="margin-top:4px; width:100%">
-            <button type="button" class="btn" id="openChron"><span class="lab">연대기</span></button>
-            <button type="button" class="btn fill" id="goPhase"><span class="lab">지금 할 일</span></button>
-          </div>
+        </div>
+        <div class="phases" id="phases"></div>
+        <div class="btnpair">
+          <button type="button" class="btn" id="openChron"><span class="lab">연대기</span></button>
+          <button type="button" class="btn fill" id="goPhase"><span class="lab">지금 할 일</span></button>
         </div>
         <div class="side" aria-hidden="true">
           <span class="big" id="chLeft">—</span>
@@ -86,15 +88,10 @@
         </div>
       </article>
 
-      <section class="panel flat composer">
+      <section class="composer">
         <span class="ava m" id="composerAva" aria-hidden="true"></span>
-        <div class="grow">
-          <input type="text" id="sayInput" maxlength="140" placeholder="아카데미에 한 줄 남기기" aria-label="피드에 남길 말" enterkeyhint="send">
-          <div class="row">
-            <span class="hint" style="flex:1 1 auto">140자까지</span>
-            <button type="button" class="btn" id="sayPost">올리기</button>
-          </div>
-        </div>
+        <input type="text" id="sayInput" maxlength="140" placeholder="아카데미에 한 줄 남기기" aria-label="피드에 남길 말" enterkeyhint="send">
+        <button type="button" class="btn fill" id="sayPost"><span>올리기</span></button>
       </section>
 
       <ul class="feed" id="feed"></ul>
@@ -208,7 +205,7 @@
         <section class="panel flat tophead">
           <div class="sect-h">
             <h2>오늘의 시간표</h2><span class="spacer"></span>
-            <span class="chip gold" id="capLeft">오늘 에테르 —</span>
+            <span class="chip" id="capLeft">AITHER —</span>
           </div>
           <p class="hint" style="margin-top:12px">
             걸어 두고 한 번 들른다. <b style="color:var(--lime)">안 들르면 보상이 절반</b>이다.
@@ -292,7 +289,7 @@
     <section class="tabpanel" id="tab-bonds" role="tabpanel" aria-label="인연" hidden>
       <section class="panel flat tophead">
         <div class="sect-h"><h2>모모톡</h2><span class="spacer"></span>
-          <span class="chip hot" id="unreadCount">안 읽음 0</span></div>
+          <span class="chip alert" id="unreadCount">안 읽음 0</span></div>
         <p class="hint" style="margin-top:12px">
           먼저 말을 걸어 온다. 답장을 고르면 이어지고, 호감도가 오르면 장면이 열린다.
         </p>
@@ -527,7 +524,7 @@
 
 <script src="art.js?v=2669a907"></script>
 <script src="battle.js?v=2fdfbaca"></script>
-<script src="app.js?v=f2874e6d"></script>
+<script src="app.js?v=09559f96"></script>
 <script type="module" src="app-auth.js?v=eaa45a43"></script>
 
 </body>
