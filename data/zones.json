@@ -1,0 +1,389 @@
+{
+  "_": "사냥터. 해당 장을 막아내면 열리고, 놓치면 오염된 판으로 열린다.",
+  "zones": [
+    {
+      "id": "severed-line",
+      "name": "끊긴 회선",
+      "chapter": 1,
+      "family": "HERMES",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "black-field",
+      "name": "검은 밀밭",
+      "chapter": 2,
+      "family": "DEMETER",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "idle-forge",
+      "name": "멎지 않는 공방",
+      "chapter": 3,
+      "family": "HEPHAISTOS",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "flooded-under",
+      "name": "잠긴 지하",
+      "chapter": 4,
+      "family": "POSEIDON",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "five-seventeen",
+      "name": "5시 17분의 들판",
+      "chapter": 5,
+      "family": "APOLLO",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "two-moons",
+      "name": "두 달 아래",
+      "chapter": 6,
+      "family": "ARTEMIS",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "endless-front",
+      "name": "멎지 않는 전선",
+      "chapter": 7,
+      "family": "ARES",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "nameless-street",
+      "name": "이름 없는 거리",
+      "chapter": 8,
+      "family": "APHRODITE",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "endless-feast",
+      "name": "끝나지 않는 연회",
+      "chapter": 9,
+      "family": "DIONYSOS",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "empty-shelves",
+      "name": "빈 서가",
+      "chapter": 10,
+      "family": "ATHENA",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "broken-crown",
+      "name": "깨진 왕관의 방",
+      "chapter": 11,
+      "family": "HERA",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "empty-throne",
+      "name": "빈 왕좌",
+      "chapter": 12,
+      "family": "ZEUS",
+      "deckSize": 10,
+      "turns": [
+        3,
+        5
+      ],
+      "mobs": [],
+      "champion": {
+        "name": "",
+        "needs": 3,
+        "drop": "",
+        "note": "3인이라야 잡힌다. 여기서만 나오는 각성 재료"
+      },
+      "drops": {
+        "ether": [
+          null,
+          null
+        ],
+        "material": null
+      },
+      "tainted": {
+        "note": "그 장을 놓쳤을 때 열리는 판. 더 어렵고 드랍이 다르다",
+        "ether": [
+          null,
+          null
+        ]
+      }
+    }
+  ]
+}

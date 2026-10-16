@@ -1,0 +1,42 @@
+{
+  "_": "수치는 전부 임시. 기준 하나로 역산한다 — 한 사람이 시즌 동안 버는 것으로 주력 서넛을 만렙까지.",
+  "currencies": {
+    "ichor": {
+      "name": "이코르",
+      "use": "뽑기"
+    },
+    "ether": {
+      "name": "에테르",
+      "use": "강화"
+    }
+  },
+  "daily": {
+    "etherCap": 600,
+    "capCarryDays": 3
+  },
+  "summon": {
+    "cost1": 120,
+    "cost10": 1080,
+    "rates": {
+      "1": 75,
+      "2": 22,
+      "3": 3
+    },
+    "pity": 50
+  },
+  "enhance": {
+    "levelCostCurve": null,
+    "starNeeds": 3
+  },
+  "party": {
+    "1": 1,
+    "2": 1.2,
+    "3": 1.4
+  },
+  "offering": {
+    "1": 20,
+    "2": 60,
+    "3": 200
+  },
+  "skipPenalty": 0.5
+}

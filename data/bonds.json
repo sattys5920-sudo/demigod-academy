@@ -1,0 +1,58 @@
+{
+  "_": "관계선. 같은 덱에 둘 다 있으면 효과가 붙는다. reveal 은 호감도 몇 단계에서 드러나는지.",
+  "effects": {
+    "link": {
+      "atk": 1,
+      "hp": 0,
+      "note": "연계"
+    },
+    "deep": {
+      "atk": 1,
+      "hp": 1,
+      "note": "깊은 연계"
+    },
+    "clash": {
+      "atk": -1,
+      "hp": -1,
+      "note": "불화"
+    }
+  },
+  "bondLevels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "bonds": [
+    {
+      "a": "nereo",
+      "b": "izumi",
+      "kind": "link",
+      "reveal": 2,
+      "text": ""
+    },
+    {
+      "a": "seri",
+      "b": "kyle",
+      "kind": "link",
+      "reveal": 2,
+      "text": ""
+    },
+    {
+      "a": "allecto",
+      "b": "hayun",
+      "kind": "clash",
+      "reveal": 3,
+      "text": ""
+    },
+    {
+      "a": "nereo",
+      "b": "seri",
+      "kind": "deep",
+      "reveal": 4,
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "_": "알바 중간에 한 번 뜨는 미니게임. grosof4(괴이)의 hallMinigames 에서 옮김.",
+  "kinds": {
+    "oddeven": {
+      "name": "홀짝",
+      "type": "pick",
+      "options": [
+        {
+          "id": "odd",
+          "label": "홀"
+        },
+        {
+          "id": "even",
+          "label": "짝"
+        }
+      ]
+    },
+    "poker": {
+      "name": "하이로우",
+      "type": "pick",
+      "options": [
+        {
+          "id": "high",
+          "label": "하이 (내 패가 더 높다)"
+        },
+        {
+          "id": "low",
+          "label": "로우 (내 패가 더 낮다)"
+        }
+      ]
+    },
+    "robo77": {
+      "name": "로보 77",
+      "type": "pick",
+      "options": [
+        {
+          "id": "over",
+          "label": "오버 (합계 77 초과)"
+        },
+        {
+          "id": "under",
+          "label": "언더 (합계 77 이하)"
+        }
+      ]
+    },
+    "numberbaseball": {
+      "name": "숫자야구",
+      "type": "turns",
+      "turns": 6,
+      "note": "여러 턴에 걸쳐 직접 진행"
+    },
+    "davinci": {
+      "name": "다빈치코드",
+      "type": "turns",
+      "turns": 6,
+      "note": "여러 턴에 걸쳐 직접 진행"
+    }
+  }
+}

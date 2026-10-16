@@ -1,0 +1,496 @@
+{
+  "_": "시즌 1 구조. 본문(text)은 전부 빈칸이고 시놉시스는 season/season-01.md 에 있다.",
+  "id": "s01",
+  "title": "아무도 받지 않는다",
+  "chapterHours": 72,
+  "chapterCount": 12,
+  "resolve": {
+    "완막": "damage >= hp * 1.3",
+    "신막": "damage >= hp",
+    "실패": "damage < hp"
+  },
+  "endings": [
+    {
+      "id": "full",
+      "when": "cleared == 11",
+      "title": "돌아온 하늘",
+      "text": ""
+    },
+    {
+      "id": "held",
+      "when": "cleared >= 8",
+      "title": "지켜 낸 세계",
+      "text": ""
+    },
+    {
+      "id": "half",
+      "when": "cleared >= 4",
+      "title": "반쪽 세계",
+      "text": ""
+    },
+    {
+      "id": "none",
+      "when": "cleared < 4",
+      "title": "주인 없는 하늘",
+      "text": ""
+    }
+  ],
+  "chapters": [
+    {
+      "n": 1,
+      "god": "HERMES",
+      "godKo": "헤르메스",
+      "title": "도착하지 않는다",
+      "zone": "severed-line",
+      "boss": {
+        "name": "돌아오지 못한 전령",
+        "hp": null,
+        "weakness": "named",
+        "weaknessNote": "이름이 붙은 카드에만 피해가 들어간다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c01-perfect"
+        ],
+        "신막": [
+          "c01-win"
+        ],
+        "실패": [
+          "c01-lose"
+        ]
+      },
+      "note": {
+        "완막": "첫 번째 회선",
+        "신막": "돌아온 전령",
+        "실패": "도착하지 않은 신호"
+      }
+    },
+    {
+      "n": 2,
+      "god": "DEMETER",
+      "godKo": "데메테르",
+      "title": "수확이 멎었다",
+      "zone": "black-field",
+      "boss": {
+        "name": "굶주린 밭",
+        "hp": null,
+        "weakness": "heavy",
+        "weaknessNote": "한 번에 크게 때리는 쪽이 듣는다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c02-perfect"
+        ],
+        "신막": [
+          "c02-win"
+        ],
+        "실패": [
+          "c02-lose"
+        ]
+      },
+      "note": {
+        "완막": "그해의 첫 수확",
+        "신막": "검은 밀",
+        "실패": "도시를 덮은 밀"
+      }
+    },
+    {
+      "n": 3,
+      "god": "HEPHAISTOS",
+      "godKo": "헤파이스토스",
+      "title": "주인 없는 공방",
+      "zone": "idle-forge",
+      "boss": {
+        "name": "혼자 돌아가는 공방",
+        "hp": null,
+        "weakness": "varied",
+        "weaknessNote": "매 턴 다른 카드를 내야 한다. 같은 카드를 두 번 내면 막힌다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c03-perfect"
+        ],
+        "신막": [
+          "c03-win"
+        ],
+        "실패": [
+          "c03-lose"
+        ]
+      },
+      "note": {
+        "완막": "주문서",
+        "신막": "멎은 공방",
+        "실패": "걸어 다니는 공산품"
+      }
+    },
+    {
+      "n": 4,
+      "god": "POSEIDON",
+      "godKo": "포세이돈",
+      "title": "바다가 올라온다",
+      "zone": "flooded-under",
+      "boss": {
+        "name": "지하의 파도",
+        "hp": null,
+        "weakness": "flow",
+        "weaknessNote": "흐름을 끊는 카드가 듣는다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c04-perfect"
+        ],
+        "신막": [
+          "c04-win"
+        ],
+        "실패": [
+          "c04-lose"
+        ]
+      },
+      "note": {
+        "완막": "잠긴 도시의 열쇠",
+        "신막": "멎은 파도",
+        "실패": "내륙의 해안선"
+      }
+    },
+    {
+      "n": 5,
+      "god": "APOLLO",
+      "godKo": "아폴론",
+      "title": "해가 뜨지 않는다",
+      "zone": "five-seventeen",
+      "boss": {
+        "name": "뜨지 않는 해",
+        "hp": null,
+        "weakness": "highcost",
+        "weaknessNote": "코스트가 높을수록 크게 듣는다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c05-perfect"
+        ],
+        "신막": [
+          "c05-win"
+        ],
+        "실패": [
+          "c05-lose"
+        ]
+      },
+      "note": {
+        "완막": "첫 아침",
+        "신막": "17분 늦은 해",
+        "실패": "5시 17분"
+      }
+    },
+    {
+      "n": 6,
+      "god": "ARTEMIS",
+      "godKo": "아르테미스",
+      "title": "뒤바뀐 사냥",
+      "zone": "two-moons",
+      "boss": {
+        "name": "두 개의 달",
+        "hp": null,
+        "weakness": "truth",
+        "weaknessNote": "단서를 다 모아야 어느 쪽이 진짜인지 안다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c06-perfect"
+        ],
+        "신막": [
+          "c06-win"
+        ],
+        "실패": [
+          "c06-lose"
+        ]
+      },
+      "note": {
+        "완막": "진짜 달",
+        "신막": "하나가 된 달",
+        "실패": "하루를 잃은 도시"
+      }
+    },
+    {
+      "n": 7,
+      "god": "ARES",
+      "godKo": "아레스",
+      "title": "휴전이 전부 깨졌다",
+      "zone": "endless-front",
+      "boss": {
+        "name": "멎지 않는 싸움",
+        "hp": null,
+        "weakness": "reflect",
+        "weaknessNote": "약점이 없다. 맞은 만큼 되돌려 준다 — 방어가 필요하다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c07-perfect"
+        ],
+        "신막": [
+          "c07-win"
+        ],
+        "실패": [
+          "c07-lose"
+        ]
+      },
+      "note": {
+        "완막": "설명되지 않은 평화",
+        "신막": "멎은 전선",
+        "실패": "모든 대륙의 전선"
+      }
+    },
+    {
+      "n": 8,
+      "god": "APHRODITE",
+      "godKo": "아프로디테",
+      "title": "서로를 알아보지 못한다",
+      "zone": "nameless-street",
+      "boss": {
+        "name": "이름을 먹는 거울",
+        "hp": null,
+        "weakness": "party",
+        "weaknessNote": "파티원이 같은 장에서 싸우고 있을 때만 들어간다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c08-perfect"
+        ],
+        "신막": [
+          "c08-win"
+        ],
+        "실패": [
+          "c08-lose"
+        ]
+      },
+      "note": {
+        "완막": "가장 많이 불린 말",
+        "신막": "다시 불린 이름",
+        "실패": "마지막 세대"
+      }
+    },
+    {
+      "n": 9,
+      "god": "DIONYSOS",
+      "godKo": "디오니소스",
+      "title": "깨어나지 못한다",
+      "zone": "endless-feast",
+      "boss": {
+        "name": "끝나지 않는 밤",
+        "hp": null,
+        "weakness": "presence",
+        "weaknessNote": "같은 시간대에 들어온 사람이 많을수록 세게 들어간다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c09-perfect"
+        ],
+        "신막": [
+          "c09-win"
+        ],
+        "실패": [
+          "c09-lose"
+        ]
+      },
+      "note": {
+        "완막": "기억나지 않는 꿈",
+        "신막": "깨어난 아침",
+        "실패": "마지막으로 깨어 있는 자"
+      }
+    },
+    {
+      "n": 10,
+      "god": "ATHENA",
+      "godKo": "아테나",
+      "title": "적어 둔 것을 잃는다",
+      "zone": "empty-shelves",
+      "boss": {
+        "name": "빈 서가",
+        "hp": null,
+        "weakness": "archive",
+        "weaknessNote": "연대기에 남은 지난 장이 많을수록 세게 들어간다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c10-perfect"
+        ],
+        "신막": [
+          "c10-win"
+        ],
+        "실패": [
+          "c10-lose"
+        ]
+      },
+      "note": {
+        "완막": "돌아온 한 줄",
+        "신막": "복구된 서가",
+        "실패": "빈 연대기"
+      }
+    },
+    {
+      "n": 11,
+      "god": "HERA",
+      "godKo": "헤라",
+      "title": "모든 약속이 무효가 된다",
+      "zone": "broken-crown",
+      "boss": {
+        "name": "깨진 왕관",
+        "hp": null,
+        "weakness": "bound",
+        "weaknessNote": "파티 넷이 전부 참여한 파티만 피해를 넣을 수 있다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c11-perfect"
+        ],
+        "신막": [
+          "c11-win"
+        ],
+        "실패": [
+          "c11-lose"
+        ]
+      },
+      "note": {
+        "완막": "아무도 모르는 계약",
+        "신막": "다시 묶인 맹세",
+        "실패": "풀린 매듭"
+      }
+    },
+    {
+      "n": 12,
+      "god": "ZEUS",
+      "godKo": "제우스",
+      "title": "빈 왕좌",
+      "zone": "empty-throne",
+      "boss": {
+        "name": "왕좌에 앉은 것",
+        "hp": null,
+        "weakness": "final",
+        "weaknessNote": "앞선 열한 장의 결과로 체력이 정해진다"
+      },
+      "clues": 12,
+      "quizCount": 1,
+      "text": {
+        "open": "",
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      },
+      "backdrop": "",
+      "unlock": {
+        "완막": [
+          "c12-perfect"
+        ],
+        "신막": [
+          "c12-win"
+        ],
+        "실패": [
+          "c12-lose"
+        ]
+      },
+      "note": {
+        "완막": "",
+        "신막": "",
+        "실패": ""
+      }
+    }
+  ]
+}

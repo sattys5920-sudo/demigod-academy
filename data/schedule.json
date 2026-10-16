@@ -1,0 +1,123 @@
+{
+  "_": "시간표. 걸어 두고 한 번 들른다. 안 들르면 보상 절반.",
+  "slots": [
+    2,
+    4,
+    8
+  ],
+  "classes": [
+    {
+      "id": "myth",
+      "name": "신화학",
+      "quizCategory": [
+        "암호",
+        "연상",
+        "단어"
+      ],
+      "cardSlots": 3,
+      "reward": "ether",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "number",
+      "name": "수리학",
+      "quizCategory": [
+        "방정식",
+        "수열",
+        "숫자규칙",
+        "경우의 수"
+      ],
+      "cardSlots": 3,
+      "reward": "ether",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "cipher",
+      "name": "기호학",
+      "quizCategory": [
+        "숫자암호",
+        "원소기호",
+        "위치암호",
+        "한글 자모"
+      ],
+      "cardSlots": 3,
+      "reward": "ether",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "obs",
+      "name": "관찰학",
+      "quizCategory": [
+        "애너그램",
+        "패턴",
+        "관찰",
+        "집합"
+      ],
+      "cardSlots": 3,
+      "reward": "ether",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "cvs",
+      "name": "편의점",
+      "minigame": "oddeven",
+      "reward": "ichor",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "cafe",
+      "name": "카페",
+      "minigame": "poker",
+      "reward": "ichor",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "deliv",
+      "name": "배달",
+      "minigame": "robo77",
+      "reward": "ichor",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "tutor",
+      "name": "과외",
+      "minigame": "numberbaseball",
+      "reward": "ichor",
+      "amount": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
