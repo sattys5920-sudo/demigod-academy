@@ -14,7 +14,23 @@
   };
   var fmt = function (n) { return Number(n || 0).toLocaleString('ko-KR'); };
 
-  var UI = window.DGA = { paintAvatar: null, player: { name: '나', profile: null, fam: '' }, onReady: null };
+  /* 게이트가 어디서 멈췄는지 화면이 직접 말하게 한다. 추측으로 고치지 않으려고. */
+  function step(text) {
+    var n = document.getElementById('gateStep');
+    if (n) n.textContent = 'STEP ' + text;
+    window.__step = text;
+  }
+
+  /* 게이트는 app.js 가 치운다. 인증 모듈(app-auth.js)은 gstatic 을 정적으로
+     import 하므로 그쪽이 막히면 모듈 자체가 안 돌고, 거기에 게이트 제거를
+     맡겨 두면 화면이 영원히 '입장 확인 중' 에 갇힌다. */
+  function dropGate() {
+    var g = document.getElementById('gate');
+    if (g) g.remove();
+  }
+
+  var UI = window.DGA = { paintAvatar: null, player: { name: '나', profile: null, fam: '' },
+                          onReady: null, step: step };
 
   /* ── 저장소 ──────────────────────────────────── */
   var uid = 'local';
@@ -1133,26 +1149,65 @@
       save();
     }
     paintAll();
+    dropGate();
   }
 
+  step('2 · 데이터 읽는 중');
   loadData().then(function () {
+    step('3 · 인증 기다리는 중');
     wire();
     setTab('home'); setSeg('cards', 'dex'); setSeg('daily', 'time'); setSeg('shop', 'summon');
     UI.boot = boot;                       /* 이제야 연다 */
-    if (typeof UI.onReady === 'function') UI.onReady();
-    else boot('local');
+    if (typeof UI.onReady === 'function') { UI.onReady(); return; }
+
+    /* 아직 인증 모듈이 안 올라왔다. 모듈 본문이 돌면 __authAlive 가 켜지니,
+       5초 동안 그것만 본다. 켜지면 계속 기다린다(그쪽이 boot 을 부른다).
+       안 켜지면 gstatic 이 막힌 것이므로 브라우저 저장만으로 들여보낸다. */
+    var waited = 0;
+    var watch = setInterval(function () {
+      if (window.__authAlive) { clearInterval(watch); return; }
+      waited += 250;
+      if (waited < 5000) return;
+      clearInterval(watch);
+      step('3 · 인증 없이 들어감');
+      try { boot('local'); }
+      catch (err) {
+        $('#gateTitle').textContent = '화면을 그리지 못했습니다';
+        $('#gateNote').textContent = String(err.message || err);
+      }
+    }, 250);
   }).catch(function (e) {
     $('#gateTitle').textContent = '데이터를 못 읽었습니다';
-    $('#gateNote').textContent = String(e.message || e) + ' — 서버로 열어야 합니다 (python3 -m http.server).';
+    $('#gateNote').textContent = String(e.message || e);
+    step('2 · 데이터 읽기 실패');
   });
 
+  /* 12초가 지나도 게이트가 남아 있으면, 어디서 멈췄는지 보여 주고 길을 준다 */
   setTimeout(function () {
-    if (window.__authResolved) return;
+    var gate = document.getElementById('gate');
+    if (!gate) return;
     var box = $('#gate .box'); if (!box) return;
-    $('#gateTitle').textContent = '연결하지 못했습니다';
-    $('#gateNote').textContent = '인증 모듈을 불러오지 못했습니다. 새로고침해 주세요.';
-    var a = document.createElement('a');
-    a.href = 'index.html'; a.textContent = '로그인 화면으로';
-    box.appendChild(a);
-  }, 8000);
+    $('#gateTitle').textContent = window.__authResolved ? '들어가지 못했습니다' : '연결하지 못했습니다';
+    $('#gateNote').textContent = window.__authResolved
+      ? '아래 단계에서 멈췄습니다. 이 글자를 알려 주시면 바로 찾습니다.'
+      : '인증 모듈을 불러오지 못했습니다. 네트워크를 확인하고 새로고침해 주세요.';
+    if (!box.querySelector('a')) {
+      var a = document.createElement('a');
+      a.href = 'index.html'; a.textContent = '로그인 화면으로';
+      box.appendChild(a);
+    }
+    /* 데이터가 읽혔다면 저장 없이라도 들어가게 해 준다 */
+    if (D && D.cards && typeof UI.boot === 'function' && !box.querySelector('button')) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'btn';
+      b.style.cssText = 'margin-top:4px';
+      b.innerHTML = '<span>그래도 들어가기</span>';
+      b.addEventListener('click', function () {
+        try { UI.boot(window.__uid || 'local', null); gate.remove(); }
+        catch (e) { $('#gateNote').textContent = String(e.message || e); }
+      });
+      box.appendChild(b);
+    }
+  }, 12000);
 })();

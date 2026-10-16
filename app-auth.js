@@ -4,6 +4,10 @@ import { auth } from './firebase-init.js';
 import { godOf, loadProfile, paintAvatar } from './profile.js';
 import { attachStore } from './store.js';
 
+/* import 가 다 풀려 여기까지 왔다는 표시. app.js 가 이걸 보고
+   '인증 모듈이 살아 있으니 더 기다릴지' 를 정한다. */
+window.__authAlive = true;
+
 const UI = window.DGA;
 UI.paintAvatar = paintAvatar;
 
@@ -24,8 +28,11 @@ function fail(title, note) {
   }
 }
 
+const step = (t) => { if (UI && typeof UI.step === 'function') UI.step(t); };
+
 onAuthStateChanged(auth, async (user) => {
   window.__authResolved = true;
+  step('4 · 저장 여는 중');
   if (!user) { location.replace('index.html'); return; }
 
   const profile = loadProfile(user.uid);
@@ -48,6 +55,8 @@ onAuthStateChanged(auth, async (user) => {
   } catch (err) {
     console.warn('[store] 저장을 붙이지 못했습니다:', err);
   }
+  step('5 · 화면 그리는 중');
+  window.__uid = user.uid;
   if (store.put) UI.put = store.put;
   if (!store.cloud) console.info('[store] 브라우저에만 저장합니다.');
 
@@ -59,7 +68,8 @@ onAuthStateChanged(auth, async (user) => {
       fail('화면을 그리지 못했습니다', String((err && err.message) || err));
       return;
     }
-    if (gate) gate.remove();
+    step('6 · 완료');
+    if (gate && gate.isConnected) gate.remove();   /* boot 이 이미 치웠을 수도 있다 */
   };
   if (typeof UI.boot === 'function') start();
   else UI.onReady = start;
