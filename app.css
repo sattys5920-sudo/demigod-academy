@@ -95,6 +95,18 @@ body.fullscreen-on .tabbar{display:none}
   background:var(--panel); border:2px solid var(--line);
   clip-path:polygon(0 9px, 9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
 }
+/* 등급은 이제 틀이 말한다. 그림이 전부 풀컬러라 그림만 봐서는 도감에서
+   ★3 를 찾지 못한다(세 등급의 평균 밝기가 105·101·98 로 사실상 같다).
+   테두리와 그림칸 선을 등급색으로 맞춰 훑을 때 바로 걸리게 한다.
+   clip-path 가 box-shadow 를 잘라 먹으므로 두께와 색으로만 차이를 준다. */
+.card.g1{border-color:var(--line)}
+.card.g2{border-color:var(--gold); border-width:3px}
+.card.g3{border-color:var(--hot);  border-width:3px}
+.card.g2 .art{border-color:rgba(255,197,61,.55)}
+.card.g3 .art{border-color:rgba(255,43,62,.6)}
+.card.g2 .fam{color:var(--gold)}
+.card.g3 .fam{color:var(--hot)}
+
 .card-top{display:flex; align-items:center; justify-content:space-between; gap:4px}
 .cost{
   width:24px; height:24px; flex:0 0 24px; background:var(--hot); color:var(--line);

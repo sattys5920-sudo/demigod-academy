@@ -187,7 +187,7 @@
     opts = opts || {};
     var o = S.owned[c.id];
     var s = stat(c);
-    var n = el('article', 'card' + (c.tone === 'pink' ? ' pinkish' : ''));
+    var n = el('article', 'card g' + (c.grade || 1) + (c.tone === 'pink' ? ' pinkish' : ''));
     var top = el('span', 'card-top');
     top.appendChild(el('span', 'cost', c.cost == null ? '?' : String(c.cost)));
     var badge = el('span', 'el el-' + (c.element || 'none'));
