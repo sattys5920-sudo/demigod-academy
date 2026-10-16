@@ -116,28 +116,6 @@
     var lv = o.lv || 1, st = o.star || c.grade || 1;
     return { atk: (c.atk || 1) + (lv - 1) + (st - 1) * 2, hp: (c.hp || 1) + (lv - 1) + (st - 1) };
   }
-  /* 아직은 간단한 자동 교전이다. 진짜 TCG 규칙(코스트·필드·스킬)은 다음 단계. */
-  function sim(deckIds, foe, seed) {
-    var rand = rng(seed);
-    var deck = deckIds.map(function (id) { return D.cardById[id]; }).filter(Boolean);
-    if (!deck.length) return { win: false, damage: 0, turns: 0, log: ['덱이 비어 있다'] };
-    var foeHp = foe.hp, myHp = 30, turn = 0, dealt = 0, log = [];
-    while (foeHp > 0 && myHp > 0 && turn < 12) {
-      turn++;
-      var c = deck[Math.floor(rand() * deck.length)];
-      var s = stat(c);
-      var mul = elMul(c.element, foe.element);
-      var hit = Math.max(1, Math.round(s.atk * (0.8 + rand() * 0.6) * mul));
-      foeHp -= hit; dealt += hit;
-      log.push({ who: 'me', card: c.short || c.name, hit: hit, mul: mul });
-      if (foeHp <= 0) break;
-      var back = Math.max(1, Math.round(foe.atk * (0.7 + rand() * 0.6)));
-      myHp -= back;
-      log.push({ who: 'foe', hit: back });
-    }
-    return { win: foeHp <= 0, damage: dealt, turns: turn, myHp: Math.max(0, myHp), log: log };
-  }
-
   /* ── 화면 이동 ───────────────────────────────── */
   var TITLES = { home: '신탁', cards: '계보', daily: '일상', shop: '상점', bonds: '인연' };
   var SEGS = {
@@ -649,53 +627,208 @@
     $('#huntOpen').textContent = open + '곳 열림';
   }
   function enterHunt(z, state) {
-    if (!S.deck.length) { alert('덱이 비어 있다. 카드 탭에서 덱을 짜고 오자.'); return; }
-    var foe = { name: z.name + '의 잡몹', element: z.element,
-                hp: state === 'tainted' ? 60 : 40, atk: state === 'tainted' ? 6 : 4 };
+    var foe = { name: z.name + '의 잡몹', element: z.element, deck: foeDeck(z) };
     runBattle(foe, z.name, function (r) {
       var got = r.win ? earnEther(state === 'tainted' ? 120 : 80) : 0;
-      showResult(r.win, z.name, [['AITHER', '+' + fmt(got)], ['DAMAGE', fmt(r.damage)], ['TURNS', r.turns]]);
+      showResult(r.win, z.name, [['AITHER', '+' + fmt(got)], ['TURNS', r.turns], ['MY HP', r.myHp]]);
     });
   }
 
-  /* ── 전투 화면 ───────────────────────────────── */
-  var battleDone = null;
+  /* ── 전투 화면 ─────────────────────────────────
+     규칙은 battle.js 에 있다. 여기는 그리고 누르는 일만 한다. */
+  var G = null, battleDone = null, sel = null;   /* sel: {from:'hand'|'field', i:n} */
+
+  function deckCards() {
+    var list = S.deck.map(function (id) { return D.cardById[id]; }).filter(Boolean);
+    var playable = D.cards.cards.filter(function (c) { return c.cost != null; });
+    while (list.length < 30) list.push(playable[Math.floor(Math.random() * playable.length)]);
+    return list.slice(0, 30);
+  }
+  function foeDeck(zone) {
+    var pool = D.cards.cards.filter(function (c) {
+      return c.cost != null && (c.element === zone.element || c.family === 'COMMON');
+    });
+    if (pool.length < 8) pool = D.cards.cards.filter(function (c) { return c.cost != null; });
+    var out = [];
+    for (var i = 0; i < 30; i++) out.push(pool[Math.floor(Math.random() * pool.length)]);
+    return out;
+  }
+
   function runBattle(foe, title, done) {
-    battleDone = done;
-    var seed = hash(title + ':' + Date.now());
-    var r = sim(S.deck, foe, seed);
+    battleDone = done; sel = null;
+    G = DGABattle.create(deckCards(), foe.deck || deckCards(), hash(title + ':' + Date.now()), 'me');
     $('#battleTitle').textContent = title;
     $('#battleSub').textContent = foe.name + (foe.element ? ' · ' + elKo(foe.element) : '');
     $('#foeName').textContent = foe.name;
-    $('#foeNum').textContent = '0 / ' + foe.hp;
-    $('#foeHp').style.width = '0%';
-    $('#myNum').textContent = r.myHp + ' / 30';
-    $('#myHp').style.width = (r.myHp / 30 * 100) + '%';
-    $('#turnLabel').textContent = 'TURN ' + r.turns;
-    $('#turnMana').textContent = '피해 ' + fmt(r.damage);
-    var ff = $('#foeField'); ff.textContent = '';
-    var mf = $('#myField'); mf.textContent = '';
-    for (var i = 0; i < 3; i++) {
-      ff.appendChild(el('span', 'slotmini foe', 'EMPTY'));
-      mf.appendChild(el('span', 'slotmini', 'EMPTY'));
-    }
-    var hand = $('#hand'); hand.textContent = '';
-    S.deck.slice(0, 5).forEach(function (id) {
-      var c = D.cardById[id]; if (c) hand.appendChild(cardEl(c, { always: true }));
-    });
-    $('#battleResult') && $('#battleResult').remove();
-    battleDone.__r = r;
+    $('#battleMe').textContent = UI.player.name;
+    paintBattle();
     setView('battle');
   }
-  function endTurn() {
-    var r = battleDone && battleDone.__r;
-    if (!r) { setView(null); return; }
-    var fn = battleDone; battleDone = null;
-    fn(r);
+
+  function unitEl(u, who, i) {
+    var n = el('button', 'bunit' + (u.pos === 'def' ? ' def' : '') + (u.sick ? ' sick' : ''));
+    n.type = 'button';
+    if (sel && sel.from === 'field' && sel.who === who && sel.i === i) n.classList.add('sel');
+    var top = el('span', 'top');
+    var badge = el('span', 'el el-' + (u.card.element || 'none'));
+    badge.appendChild(elIcon(u.card.element, 9));
+    n.appendChild(badge);
+    n.appendChild(el('span', 'bn', u.card.short || u.card.name));
+    var st = el('span', 'bs');
+    st.append(el('span', 'ba', String(u.atk)), el('span', 'bd', String(u.hp)));
+    n.appendChild(st);
+    n.appendChild(el('span', 'pos', u.pos === 'def' ? '수비' : '공격'));
+    if (u.shield) n.style.outline = '2px solid var(--gold)';
+    return n;
   }
+
+  function paintBattle() {
+    if (!G) return;
+    $('#turnLabel').textContent = 'TURN ' + G.turn + ' · ' + (G.who === 'me' ? '내 턴' : '상대 턴');
+    $('#foeNum').textContent = Math.max(0, G.foe.hp);
+    $('#myNum').textContent = Math.max(0, G.me.hp);
+    $('#foeHp').style.width = Math.max(0, G.foe.hp / DGABattle.HP * 100) + '%';
+    $('#myHp').style.width = Math.max(0, G.me.hp / DGABattle.HP * 100) + '%';
+
+    var dots = $('#ichorDots'); dots.textContent = '';
+    for (var k = 0; k < Math.max(1, G.me.ichorMax); k++) {
+      dots.appendChild(el('i', k < G.me.ichor ? 'on' : ''));
+    }
+
+    ['foe', 'me'].forEach(function (who) {
+      var f = $('#' + (who === 'foe' ? 'foeField' : 'myField'));
+      f.textContent = '';
+      G[who].field.forEach(function (u, i) {
+        var slot = el('span', 'bslot');
+        if (u) {
+          var n = unitEl(u, who, i);
+          n.addEventListener('click', function () { tapUnit(who, i); });
+          slot.appendChild(n);
+        } else if (who === 'me' && sel && sel.from === 'hand') {
+          slot.classList.add('pick');
+        }
+        f.appendChild(slot);
+      });
+      var t = $('#' + (who === 'foe' ? 'foeTraps' : 'myTraps'));
+      t.textContent = '';
+      G[who].traps.forEach(function (tr) {
+        var b = el('span', 'btrap' + (tr ? ' set' : ''), tr ? '계략' : '빈칸');
+        t.appendChild(b);
+      });
+    });
+
+    /* 상대 본체를 칠 수 있을 때만 버튼이 뜬다 */
+    var canFace = sel && sel.from === 'field' && sel.who === 'me' &&
+                  DGABattle.canAttack(G, 'me', sel.i, 'face');
+    $('#foeFace').hidden = !canFace;
+
+    var hand = $('#hand'); hand.textContent = '';
+    G.me.hand.forEach(function (c, i) {
+      var ok = G.who === 'me' && DGABattle.canPlay(G, 'me', i);
+      var n = el('button', 'hcard' + (ok ? '' : ' no') +
+        (sel && sel.from === 'hand' && sel.i === i ? ' sel' : ''));
+      n.type = 'button';
+      var top = el('span', 'top');
+      top.append(el('span', 'hc', String(c.cost)),
+                 el('span', 'hk', { unit: '인물', ward: '가호', oracle: '신탁', trap: '계략' }[c.kind] || ''));
+      n.append(top, el('span', 'hn', c.name));
+      n.appendChild(el('span', 'hs', c.kind === 'unit' ? c.atk + ' / ' + c.hp : '효과'));
+      n.addEventListener('click', function () { tapHand(i); });
+      hand.appendChild(n);
+    });
+
+    paintActs();
+    $('#endTurn').disabled = G.who !== 'me' || !!G.over;
+    if (G.over) finishBattle();
+  }
+
+  function paintActs() {
+    var box = $('#bActs'); box.textContent = '';
+    if (!G || G.over || G.who !== 'me') return;
+    if (sel && sel.from === 'hand') {
+      var c = G.me.hand[sel.i];
+      if (!c) { sel = null; return; }
+      if (c.kind === 'unit') {
+        box.appendChild(actBtn('세로로 세운다', function () { doPlay('atk'); }));
+        box.appendChild(actBtn('가로로 눕힌다', function () { doPlay('def'); }));
+      } else {
+        box.appendChild(actBtn(c.kind === 'trap' ? '뒷면으로 깐다' : '발동한다', function () { doPlay('atk'); }));
+      }
+      box.appendChild(actBtn('취소', function () { sel = null; paintBattle(); }, true));
+    } else if (sel && sel.from === 'field' && sel.who === 'me') {
+      var u = G.me.field[sel.i];
+      if (!u) { sel = null; return; }
+      if (!G.me.flipped && !u.sick) {
+        box.appendChild(actBtn(u.pos === 'atk' ? '눕히기' : '세우기', function () {
+          DGABattle.flip(G, 'me', sel.i); sel = null; paintBattle();
+        }, true));
+      }
+      box.appendChild(actBtn('취소', function () { sel = null; paintBattle(); }, true));
+    }
+  }
+  function actBtn(label, fn, ghost) {
+    var b = el('button', ghost ? 'ghost' : '', label);
+    b.type = 'button';
+    b.addEventListener('click', fn);
+    return b;
+  }
+
+  function tapHand(i) {
+    if (G.who !== 'me' || G.over) return;
+    if (!DGABattle.canPlay(G, 'me', i)) return;
+    sel = (sel && sel.from === 'hand' && sel.i === i) ? null : { from: 'hand', i: i };
+    paintBattle();
+  }
+  function doPlay(pos) {
+    if (!sel || sel.from !== 'hand') return;
+    DGABattle.playCard(G, 'me', sel.i, pos, null);
+    sel = null; paintBattle();
+  }
+  function tapUnit(who, i) {
+    if (G.over || G.who !== 'me') return;
+    if (who === 'me') {
+      if (sel && sel.from === 'hand') { sel = null; paintBattle(); return; }
+      sel = (sel && sel.from === 'field' && sel.i === i) ? null : { from: 'field', who: 'me', i: i };
+      paintBattle(); return;
+    }
+    if (sel && sel.from === 'field' && sel.who === 'me') {
+      if (DGABattle.canAttack(G, 'me', sel.i, i)) { DGABattle.attack(G, 'me', sel.i, i); sel = null; }
+      paintBattle();
+    }
+  }
+
+  function myEndTurn() {
+    if (!G || G.over || G.who !== 'me') return;
+    sel = null;
+    DGABattle.endTurn(G);
+    paintBattle();
+    setTimeout(function () {
+      if (!G || G.over) { paintBattle(); return; }
+      DGABattle.botTurn(G);
+      paintBattle();
+    }, 500);
+  }
+
+  function finishBattle() {
+    if (!battleDone) return;
+    var fn = battleDone; battleDone = null;
+    var r = { win: G.over === 'me', turns: G.turn,
+              damage: DGABattle.HP - Math.max(0, G.foe.hp), myHp: Math.max(0, G.me.hp) };
+    setTimeout(function () { fn(r); }, 700);
+  }
+
+  function paintLog() {
+    var box = $('#blog'); box.textContent = '';
+    if (!G) return;
+    G.log.slice(-60).forEach(function (l) {
+      box.appendChild(el('p', l.kind === 'good' ? 'good' : (l.kind === 'bad' ? 'bad' : ''), l.text));
+    });
+    box.scrollTop = box.scrollHeight;
+  }
+
   function showResult(win, title, gains) {
     $('#resultWord').textContent = win ? '승리' : '패배';
-    $('#resultWord').style.color = win ? 'var(--lime)' : 'var(--pink)';
+    $('#resultWord').style.color = win ? 'var(--gold)' : 'var(--hot)';
     $('#resultSub').textContent = title;
     var g = $('#resultGains'); g.textContent = '';
     gains.forEach(function (p) {
@@ -941,7 +1074,17 @@
     $('#revealToDex').addEventListener('click', function () {
       setView(null); setTab('cards'); setSeg('cards', 'dex'); paintAll();
     });
-    $('#endTurn').addEventListener('click', endTurn);
+    $('#endTurn').addEventListener('click', myEndTurn);
+    $('#foeFace').addEventListener('click', function () {
+      if (sel && sel.from === 'field' && sel.who === 'me') {
+        DGABattle.attack(G, 'me', sel.i, 'face'); sel = null; paintBattle();
+      }
+    });
+    var lg = $('#logDlg');
+    $('#logOpen').addEventListener('click', function () {
+      paintLog(); if (lg.showModal) lg.showModal(); else lg.setAttribute('open', '');
+    });
+    $('#logClose').addEventListener('click', function () { lg.close(); });
     $('#resultBack').addEventListener('click', function () { setView(null); paintAll(); });
     $('#resultToDex').addEventListener('click', function () {
       setView(null); setTab('cards'); setSeg('cards', 'dex'); paintAll();

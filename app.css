@@ -491,3 +491,104 @@ body.fullscreen-on .tabbar{display:none}
 .ring-ic.el-none{color:var(--t3); border-color:var(--dim)}
 .ring-n{font-family:var(--ui); font-weight:800; font-size:11px; color:var(--t1)}
 .ring-ar{color:var(--t3); display:inline-flex}
+
+/* ── 전투 ──────────────────────────────────────── */
+.bwrap{flex:1 1 auto; display:flex; flex-direction:column; gap:10px; padding:10px 10px 0; min-height:0; justify-content:space-between; padding-bottom:10px}
+.bside{display:flex; flex-direction:column; gap:7px}
+.bside.foe{order:0}
+.bhead{display:flex; align-items:center; gap:7px}
+.bface{
+  width:28px; height:28px; flex:0 0 28px; border:2px solid var(--line); background:var(--panel);
+  display:inline-flex; align-items:center; justify-content:center; color:var(--gold);
+}
+.bside.foe .bface{color:var(--hot)}
+.bname{font-family:var(--ui); font-weight:800; font-size:12px; color:var(--line); max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bhp{flex:1 1 auto; height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
+.bhp > i{display:block; height:100%; background:var(--gold)}
+.bside.foe .bhp > i{background:var(--hot)}
+.bnum{font-family:var(--num); font-size:12px; color:var(--line); font-variant-numeric:tabular-nums; min-width:24px; text-align:right}
+.btarget{
+  min-height:26px; padding:0 9px; border:2px solid var(--hot); background:var(--hot);
+  color:var(--line); font-family:var(--ui); font-weight:800; font-size:11px;
+}
+
+.bfield{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px}
+.bslot{
+  position:relative; height:104px; border:2px dashed var(--dim); background:var(--panel);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.bslot.pick{border-style:solid; border-color:var(--gold)}
+.bunit{
+  position:absolute; inset:3px; display:flex; flex-direction:column; gap:3px; padding:5px;
+  border:2px solid var(--line); background:var(--ink); text-align:left;
+}
+/* 수비 표시 — 유희왕처럼 눕힌다. 칸보다 가로가 기니 조금 줄인다 */
+.bunit.def{
+  inset:3px; transform:rotate(90deg) scale(.82); transform-origin:center;
+  background:var(--panel); border-color:var(--gold);
+}
+.bunit.sel{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold)}
+.bunit.sick{opacity:.6}
+.bunit .bn{flex:1 1 auto; font-family:var(--ui); font-weight:800; font-size:11px; color:var(--line);
+  line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
+.bunit .bs{flex:0 0 auto; display:flex; gap:3px; align-items:center}
+.bunit .ba,.bunit .bd{
+  flex:1 1 0; text-align:center; font-family:var(--num); font-size:11px; padding:2px 0;
+  border:2px solid var(--line); line-height:1;
+}
+.bunit .ba{background:var(--line); color:var(--ink)}
+.bunit .bd{background:var(--ink); color:var(--t1)}
+.bunit .el{position:absolute; top:4px; left:4px; width:15px; height:15px; flex:0 0 15px; border-width:2px}
+.bunit .bn{padding-left:19px}
+.bunit .pos{position:absolute; top:5px; right:4px; font-family:var(--num); font-size:7.5px; color:var(--t3)}
+.bunit.def .pos{color:var(--gold)}
+
+.btraps{display:flex; gap:5px; justify-content:center}
+.btrap{
+  width:34px; height:22px; border:2px solid var(--dim); background:var(--panel);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--num); font-size:8px; color:var(--t3);
+}
+.btrap.set{border-color:var(--hot); color:var(--hot); background:var(--ink)}
+
+.bbar{display:flex; align-items:center; gap:8px; padding:5px 8px; border:2px solid var(--line); background:var(--panel)}
+.bbar .t{font-family:var(--ui); font-weight:800; font-size:12px; color:var(--hot)}
+.ichor{display:inline-flex; gap:2px}
+.ichor{flex-wrap:wrap; max-width:132px; justify-content:flex-end}
+.ichor i{width:9px; height:15px; border:2px solid var(--t3); display:block; background:var(--ink)}
+.ichor i.on{background:var(--gold); border-color:var(--gold)}
+
+.bbottom{
+  flex:0 0 auto; display:flex; flex-direction:column; gap:7px; padding:8px 10px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));
+  border-top:3px solid var(--line); background:var(--bg);
+}
+.bacts{display:flex; gap:6px; min-height:0}
+.bacts:empty{display:none}
+.bacts button{
+  flex:1 1 0; min-height:36px; border:2px solid var(--line); background:var(--hot); color:var(--line);
+  font-family:var(--ui); font-weight:800; font-size:12.5px;
+}
+.bacts button.ghost{background:transparent; border-color:var(--dim); color:var(--t2)}
+.bhand{display:flex; gap:5px; overflow-x:auto; padding-bottom:3px; scrollbar-width:none}
+.bhand::-webkit-scrollbar{display:none}
+.hcard{
+  flex:0 0 68px; height:94px; display:flex; flex-direction:column; gap:2px; padding:4px;
+  border:2px solid var(--line); background:var(--panel); text-align:left;
+}
+.hcard.sel{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold)}
+.hcard.no{opacity:.4}
+.hcard .hc{
+  width:17px; height:17px; border:2px solid var(--line); background:var(--hot); color:var(--line);
+  display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:9px;
+}
+.hcard .hk{font-family:var(--num); font-size:6.5px; letter-spacing:.06em; color:var(--t3)}
+.hcard .hn{flex:1 1 auto; font-family:var(--ui); font-weight:800; font-size:9.5px; color:var(--line);
+  line-height:1.2; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
+.hcard .hs{flex:0 0 auto; font-family:var(--num); font-size:9px; color:var(--gold)}
+.hcard .top{display:flex; align-items:center; justify-content:space-between; gap:3px}
+
+.blog{display:flex; flex-direction:column; gap:5px; max-height:50vh; overflow-y:auto; margin-bottom:14px}
+.blog p{margin:0; font-size:12px; font-weight:400; line-height:1.6; color:var(--t2)}
+.blog p.good{color:var(--gold)}
+.blog p.bad{color:var(--hot)}

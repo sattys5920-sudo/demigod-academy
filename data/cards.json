@@ -56,6 +56,21 @@
         "ARTEMIS",
         "HERMES"
       ]
+    },
+    "종류별": {
+      "인물": 60,
+      "가호": 28,
+      "신탁": 17,
+      "계략": 9
+    },
+    "인물 코스트별": {
+      "1": 8,
+      "2": 20,
+      "3": 9,
+      "4": 10,
+      "5": 3,
+      "6": 6,
+      "7": 4
     }
   },
   "families": [
@@ -77,7 +92,9 @@
     "공통": "특정 신에게 매이지 않는다. 모든 팩에서 나온다. 덱의 바탕을 채운다.",
     "계보": "그 신의 영역. 내 계보 카드는 뽑기에서 조금 더 잘 나온다(픽업).",
     "장 보상": "뽑기로는 영영 안 나온다. 그 장을 겪어야 얻는다. 고르지 않은 분기의 카드는 못 얻는다.",
-    "원소": "계보 카드와 그 장의 보상 카드만 원소를 가지며, 그 신의 원소를 따른다. 공통 카드는 전부 무속성이라 상성이 없다. 상극이면 ×1.5, 역상극이면 ×0.67."
+    "원소": "계보 카드와 그 장의 보상 카드만 원소를 가지며, 그 신의 원소를 따른다. 공통 카드는 전부 무속성이라 상성이 없다. 상극이면 ×1.5, 역상극이면 ×0.67.",
+    "수치": "바닐라 공식 — 인물의 공격+체력 = 2×코스트 + (★1:1, ★2:2, ★3:4). RULES.md 참고.",
+    "종류": "인물 / 가호(지속) / 신탁(즉발) / 계략(뒷면). 인물만 필드에 서고 표시를 가진다."
   },
   "cards": [
     {
@@ -86,15 +103,17 @@
       "short": "사티로스",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 3,
+      "hp": 4,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-02",
@@ -102,15 +121,17 @@
       "short": "님프",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 2,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-03",
@@ -118,15 +139,17 @@
       "short": "켄타우로스",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 2,
+      "hp": 5,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-04",
@@ -134,15 +157,17 @@
       "short": "하르피이아",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-05",
@@ -150,15 +175,17 @@
       "short": "세이렌",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 3,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-06",
@@ -166,15 +193,17 @@
       "short": "키클롭스",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 2,
+      "hp": 3,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-07",
@@ -182,15 +211,17 @@
       "short": "미노타우로스",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 3,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-08",
@@ -198,15 +229,17 @@
       "short": "드리아드",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 1,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-09",
@@ -214,15 +247,17 @@
       "short": "파우누스",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 1,
+      "hp": 4,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-10",
@@ -230,15 +265,17 @@
       "short": "라미아",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 2,
+      "hp": 3,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-11",
@@ -246,15 +283,17 @@
       "short": "엠푸사",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 1,
+      "hp": 4,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-12",
@@ -262,15 +301,17 @@
       "short": "트리톤",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 5,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-13",
@@ -278,15 +319,17 @@
       "short": "네레이드",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 2,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-14",
@@ -294,15 +337,17 @@
       "short": "고르곤",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 1,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-15",
@@ -310,15 +355,17 @@
       "short": "스핑크스",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 4,
+      "hp": 3,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "cm-16",
@@ -326,7 +373,7 @@
       "short": "월계관",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 2,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -334,7 +381,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "ward",
+      "effect": {
+        "key": "damage",
+        "n": 2
+      }
     },
     {
       "id": "cm-17",
@@ -342,7 +394,7 @@
       "short": "올리브 가지",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -350,7 +402,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "ward",
+      "effect": {
+        "key": "heal",
+        "n": 2
+      }
     },
     {
       "id": "cm-18",
@@ -358,7 +415,7 @@
       "short": "리라",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 1,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -366,7 +423,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "ward",
+      "effect": {
+        "key": "buff_atk",
+        "n": 2
+      }
     },
     {
       "id": "cm-19",
@@ -374,7 +436,7 @@
       "short": "암브로시아",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 2,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -382,7 +444,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "ward",
+      "effect": {
+        "key": "shield",
+        "n": 2
+      }
     },
     {
       "id": "cm-20",
@@ -390,7 +457,7 @@
       "short": "넥타르",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 2,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -398,7 +465,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "ward",
+      "effect": {
+        "key": "draw",
+        "n": 2
+      }
     },
     {
       "id": "cm-21",
@@ -406,7 +478,7 @@
       "short": "아리아드네의 실",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -414,7 +486,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "oracle",
+      "effect": {
+        "key": "shield",
+        "n": 2
+      }
     },
     {
       "id": "cm-22",
@@ -422,7 +499,7 @@
       "short": "스틱스의 뱃삯",
       "family": "COMMON",
       "grade": 1,
-      "cost": null,
+      "cost": 1,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -430,7 +507,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "oracle",
+      "effect": {
+        "key": "buff_atk",
+        "n": 2
+      }
     },
     {
       "id": "cm-23",
@@ -438,7 +520,7 @@
       "short": "황금 양털",
       "family": "COMMON",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -446,7 +528,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "ward",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 3
+      }
     },
     {
       "id": "cm-24",
@@ -454,7 +541,7 @@
       "short": "판도라의 상자",
       "family": "COMMON",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -462,7 +549,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "trap",
+      "effect": {
+        "key": "counter",
+        "n": 4
+      }
     },
     {
       "id": "cm-25",
@@ -470,15 +562,20 @@
       "short": "케르베로스",
       "family": "COMMON",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": {
+        "key": "guard",
+        "n": 1
+      }
     },
     {
       "id": "cm-26",
@@ -486,15 +583,20 @@
       "short": "키마이라",
       "family": "COMMON",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 5,
+      "hp": 5,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": {
+        "key": "guard",
+        "n": 1
+      }
     },
     {
       "id": "cm-27",
@@ -502,15 +604,20 @@
       "short": "히드라",
       "family": "COMMON",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 6,
+      "hp": 4,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 1
+      }
     },
     {
       "id": "cm-28",
@@ -518,15 +625,20 @@
       "short": "그리핀",
       "family": "COMMON",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 5,
+      "hp": 3,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 1
+      }
     },
     {
       "id": "cm-29",
@@ -542,7 +654,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": {
+        "key": "pierce",
+        "n": 2
+      }
     },
     {
       "id": "cm-30",
@@ -558,7 +675,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": null
+      "element": null,
+      "kind": "unit",
+      "effect": {
+        "key": "heal",
+        "n": 1
+      }
     },
     {
       "id": "zeus-1",
@@ -566,15 +688,17 @@
       "short": "번개를 쥔 아이",
       "family": "ZEUS",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 2,
+      "hp": 3,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "zeus-2",
@@ -582,7 +706,7 @@
       "short": "독수리의 눈",
       "family": "ZEUS",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -590,7 +714,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 3
+      }
     },
     {
       "id": "zeus-3",
@@ -598,7 +727,7 @@
       "short": "하늘의 재판",
       "family": "ZEUS",
       "grade": 2,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -606,7 +735,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "oracle",
+      "effect": {
+        "key": "draw",
+        "n": 3
+      }
     },
     {
       "id": "zeus-4",
@@ -614,7 +748,7 @@
       "short": "올림포스의 왕좌",
       "family": "ZEUS",
       "grade": 3,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "pink",
@@ -622,7 +756,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "buff_all",
+        "n": 4
+      }
     },
     {
       "id": "hera-1",
@@ -630,7 +769,7 @@
       "short": "맹세의 반지",
       "family": "HERA",
       "grade": 1,
-      "cost": null,
+      "cost": 2,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -638,7 +777,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "shield",
+        "n": 2
+      }
     },
     {
       "id": "hera-2",
@@ -646,15 +790,20 @@
       "short": "공작의 눈",
       "family": "HERA",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 5,
+      "hp": 5,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": {
+        "key": "heal",
+        "n": 1
+      }
     },
     {
       "id": "hera-3",
@@ -662,7 +811,7 @@
       "short": "질투의 서약",
       "family": "HERA",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -670,7 +819,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "trap",
+      "effect": {
+        "key": "counter",
+        "n": 4
+      }
     },
     {
       "id": "hera-4",
@@ -678,15 +832,20 @@
       "short": "왕관을 쓴 자",
       "family": "HERA",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 6,
+      "atk": 7,
+      "hp": 9,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": {
+        "key": "buff_all",
+        "n": 2
+      }
     },
     {
       "id": "poseidon-1",
@@ -694,15 +853,17 @@
       "short": "파도의 아이",
       "family": "POSEIDON",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 2,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "poseidon-2",
@@ -718,7 +879,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": {
+        "key": "damage",
+        "n": 1
+      }
     },
     {
       "id": "poseidon-3",
@@ -726,7 +892,7 @@
       "short": "흔들리는 땅",
       "family": "POSEIDON",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -734,7 +900,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "oracle",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "poseidon-4",
@@ -742,15 +913,20 @@
       "short": "바다의 주인",
       "family": "POSEIDON",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 7,
+      "atk": 9,
+      "hp": 9,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": {
+        "key": "shield",
+        "n": 2
+      }
     },
     {
       "id": "demeter-1",
@@ -758,15 +934,17 @@
       "short": "이삭을 든 아이",
       "family": "DEMETER",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 3,
+      "hp": 2,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "demeter-2",
@@ -774,7 +952,7 @@
       "short": "첫 수확",
       "family": "DEMETER",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -782,7 +960,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "ward",
+      "effect": {
+        "key": "shield",
+        "n": 3
+      }
     },
     {
       "id": "demeter-3",
@@ -790,7 +973,7 @@
       "short": "돌아오지 않는 계절",
       "family": "DEMETER",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -798,7 +981,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "oracle",
+      "effect": {
+        "key": "buff_atk",
+        "n": 3
+      }
     },
     {
       "id": "demeter-4",
@@ -806,15 +994,20 @@
       "short": "대지의 어머니",
       "family": "DEMETER",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 5,
+      "atk": 7,
+      "hp": 7,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "unit",
+      "effect": {
+        "key": "draw",
+        "n": 2
+      }
     },
     {
       "id": "athena-1",
@@ -822,15 +1015,17 @@
       "short": "올빼미의 아이",
       "family": "ATHENA",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "athena-2",
@@ -846,7 +1041,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": {
+        "key": "buff_atk",
+        "n": 1
+      }
     },
     {
       "id": "athena-3",
@@ -854,7 +1054,7 @@
       "short": "짜인 계략",
       "family": "ATHENA",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -862,7 +1062,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "trap",
+      "effect": {
+        "key": "negate",
+        "n": 4
+      }
     },
     {
       "id": "athena-4",
@@ -870,7 +1075,7 @@
       "short": "지혜의 창",
       "family": "ATHENA",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "pink",
@@ -878,7 +1083,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "draw",
+        "n": 4
+      }
     },
     {
       "id": "apollo-1",
@@ -886,15 +1096,17 @@
       "short": "햇살의 아이",
       "family": "APOLLO",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 2,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "apollo-2",
@@ -902,7 +1114,7 @@
       "short": "리라의 현",
       "family": "APOLLO",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -910,7 +1122,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "ward",
+      "effect": {
+        "key": "heal",
+        "n": 3
+      }
     },
     {
       "id": "apollo-3",
@@ -918,7 +1135,7 @@
       "short": "예언의 혀",
       "family": "APOLLO",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -926,7 +1143,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "oracle",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "apollo-4",
@@ -934,15 +1156,20 @@
       "short": "태양을 모는 자",
       "family": "APOLLO",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 6,
+      "atk": 8,
+      "hp": 8,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "pierce",
+        "n": 2
+      }
     },
     {
       "id": "artemis-1",
@@ -950,15 +1177,17 @@
       "short": "달빛의 아이",
       "family": "ARTEMIS",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "artemis-2",
@@ -966,15 +1195,20 @@
       "short": "시위를 당긴 손",
       "family": "ARTEMIS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 4,
+      "hp": 6,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "shield",
+        "n": 1
+      }
     },
     {
       "id": "artemis-3",
@@ -982,7 +1216,7 @@
       "short": "사냥개의 코",
       "family": "ARTEMIS",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -990,7 +1224,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "ward",
+      "effect": {
+        "key": "heal",
+        "n": 3
+      }
     },
     {
       "id": "artemis-4",
@@ -998,15 +1237,20 @@
       "short": "달의 사냥꾼",
       "family": "ARTEMIS",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 7,
+      "atk": 8,
+      "hp": 10,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "buff_all",
+        "n": 2
+      }
     },
     {
       "id": "ares-1",
@@ -1014,15 +1258,17 @@
       "short": "분노의 아이",
       "family": "ARES",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 1,
+      "hp": 4,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "ares-2",
@@ -1038,7 +1284,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 1
+      }
     },
     {
       "id": "ares-3",
@@ -1046,7 +1297,7 @@
       "short": "멎지 않는 창",
       "family": "ARES",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1054,7 +1305,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "ward",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "ares-4",
@@ -1062,15 +1318,20 @@
       "short": "전장의 주인",
       "family": "ARES",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 6,
+      "atk": 9,
+      "hp": 7,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "draw",
+        "n": 2
+      }
     },
     {
       "id": "aphrodite-1",
@@ -1078,15 +1339,17 @@
       "short": "거품의 아이",
       "family": "APHRODITE",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 1,
+      "hp": 4,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "aphrodite-2",
@@ -1094,7 +1357,7 @@
       "short": "조개의 속삭임",
       "family": "APHRODITE",
       "grade": 2,
-      "cost": null,
+      "cost": 2,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1102,7 +1365,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "oracle",
+      "effect": {
+        "key": "shield",
+        "n": 3
+      }
     },
     {
       "id": "aphrodite-3",
@@ -1110,7 +1378,7 @@
       "short": "매혹의 띠",
       "family": "APHRODITE",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1118,7 +1386,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "ward",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "aphrodite-4",
@@ -1126,15 +1399,20 @@
       "short": "사랑의 심판",
       "family": "APHRODITE",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 6,
+      "atk": 7,
+      "hp": 9,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": {
+        "key": "draw",
+        "n": 2
+      }
     },
     {
       "id": "hephaistos-1",
@@ -1150,7 +1428,9 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "hephaistos-2",
@@ -1158,7 +1438,7 @@
       "short": "망치의 무게",
       "family": "HEPHAISTOS",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1166,7 +1446,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "ward",
+      "effect": {
+        "key": "draw",
+        "n": 3
+      }
     },
     {
       "id": "hephaistos-3",
@@ -1174,15 +1459,20 @@
       "short": "자동인형",
       "family": "HEPHAISTOS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 5,
+      "hp": 3,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "shield",
+        "n": 1
+      }
     },
     {
       "id": "hephaistos-4",
@@ -1190,15 +1480,20 @@
       "short": "공방의 주인",
       "family": "HEPHAISTOS",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 7,
+      "atk": 10,
+      "hp": 8,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "draw",
+        "n": 2
+      }
     },
     {
       "id": "hermes-1",
@@ -1214,7 +1509,9 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "hermes-2",
@@ -1222,15 +1519,20 @@
       "short": "날개 달린 신",
       "family": "HERMES",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 3,
+      "hp": 5,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "draw",
+        "n": 1
+      }
     },
     {
       "id": "hermes-3",
@@ -1238,7 +1540,7 @@
       "short": "훔친 소떼",
       "family": "HERMES",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1246,7 +1548,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "oracle",
+      "effect": {
+        "key": "shield",
+        "n": 3
+      }
     },
     {
       "id": "hermes-4",
@@ -1254,15 +1561,20 @@
       "short": "길의 주인",
       "family": "HERMES",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 6,
+      "atk": 9,
+      "hp": 7,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "draw",
+        "n": 2
+      }
     },
     {
       "id": "dionysos-1",
@@ -1270,15 +1582,17 @@
       "short": "포도의 아이",
       "family": "DIONYSOS",
       "grade": 1,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 1,
+      "atk": 2,
+      "hp": 1,
       "tone": "lime",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "unit",
+      "effect": null
     },
     {
       "id": "dionysos-2",
@@ -1286,7 +1600,7 @@
       "short": "끝나지 않는 잔",
       "family": "DIONYSOS",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1294,7 +1608,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "ward",
+      "effect": {
+        "key": "heal",
+        "n": 3
+      }
     },
     {
       "id": "dionysos-3",
@@ -1302,7 +1621,7 @@
       "short": "광기의 행렬",
       "family": "DIONYSOS",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1310,7 +1629,12 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "trap",
+      "effect": {
+        "key": "counter",
+        "n": 4
+      }
     },
     {
       "id": "dionysos-4",
@@ -1318,15 +1642,20 @@
       "short": "축제의 주인",
       "family": "DIONYSOS",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 7,
+      "atk": 10,
+      "hp": 8,
       "tone": "pink",
       "source": "pool",
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "unit",
+      "effect": {
+        "key": "buff_all",
+        "n": 2
+      }
     },
     {
       "id": "c01-win",
@@ -1334,16 +1663,21 @@
       "short": "돌아온 전령",
       "family": "HERMES",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 4,
+      "hp": 6,
       "tone": "lime",
       "source": "chapter",
       "chapter": 1,
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 1
+      }
     },
     {
       "id": "c01-lose",
@@ -1351,7 +1685,7 @@
       "short": "도착하지 않은 신호",
       "family": "HERMES",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "pink",
@@ -1360,7 +1694,12 @@
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "trap",
+      "effect": {
+        "key": "negate",
+        "n": 4
+      }
     },
     {
       "id": "c01-perfect",
@@ -1368,7 +1707,7 @@
       "short": "첫 번째 회선",
       "family": "HERMES",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1377,7 +1716,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "ward",
+      "effect": {
+        "key": "shield",
+        "n": 4
+      }
     },
     {
       "id": "c02-win",
@@ -1385,7 +1729,7 @@
       "short": "검은 밀",
       "family": "DEMETER",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1394,7 +1738,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "ward",
+      "effect": {
+        "key": "draw",
+        "n": 3
+      }
     },
     {
       "id": "c02-lose",
@@ -1402,16 +1751,21 @@
       "short": "도시를 덮은 밀",
       "family": "DEMETER",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 3,
+      "atk": 3,
+      "hp": 5,
       "tone": "pink",
       "source": "chapter",
       "chapter": 2,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "unit",
+      "effect": {
+        "key": "buff_atk",
+        "n": 1
+      }
     },
     {
       "id": "c02-perfect",
@@ -1419,7 +1773,7 @@
       "short": "그해의 첫 수확",
       "family": "DEMETER",
       "grade": 3,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1428,7 +1782,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "oracle",
+      "effect": {
+        "key": "shield",
+        "n": 4
+      }
     },
     {
       "id": "c03-win",
@@ -1436,7 +1795,7 @@
       "short": "멎은 공방",
       "family": "HEPHAISTOS",
       "grade": 2,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1445,7 +1804,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "ward",
+      "effect": {
+        "key": "draw",
+        "n": 3
+      }
     },
     {
       "id": "c03-lose",
@@ -1453,16 +1817,21 @@
       "short": "걸어 다니는 공산품",
       "family": "HEPHAISTOS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 2,
       "tone": "pink",
       "source": "chapter",
       "chapter": 3,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "guard",
+        "n": 1
+      }
     },
     {
       "id": "c03-perfect",
@@ -1470,7 +1839,7 @@
       "short": "주문서",
       "family": "HEPHAISTOS",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1479,7 +1848,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "oracle",
+      "effect": {
+        "key": "damage_all",
+        "n": 4
+      }
     },
     {
       "id": "c04-win",
@@ -1487,7 +1861,7 @@
       "short": "멎은 파도",
       "family": "POSEIDON",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1496,7 +1870,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "oracle",
+      "effect": {
+        "key": "shield",
+        "n": 3
+      }
     },
     {
       "id": "c04-lose",
@@ -1504,16 +1883,21 @@
       "short": "내륙의 해안선",
       "family": "POSEIDON",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 5,
+      "hp": 5,
       "tone": "pink",
       "source": "chapter",
       "chapter": 4,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 1
+      }
     },
     {
       "id": "c04-perfect",
@@ -1521,7 +1905,7 @@
       "short": "잠긴 도시의 열쇠",
       "family": "POSEIDON",
       "grade": 3,
-      "cost": null,
+      "cost": 7,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1530,7 +1914,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "ward",
+      "effect": {
+        "key": "damage_all",
+        "n": 4
+      }
     },
     {
       "id": "c05-win",
@@ -1538,7 +1927,7 @@
       "short": "17분 늦은 해",
       "family": "APOLLO",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1547,7 +1936,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "ward",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "c05-lose",
@@ -1555,7 +1949,7 @@
       "short": "5시 17분",
       "family": "APOLLO",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "pink",
@@ -1564,7 +1958,12 @@
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "trap",
+      "effect": {
+        "key": "negate",
+        "n": 4
+      }
     },
     {
       "id": "c05-perfect",
@@ -1572,7 +1971,7 @@
       "short": "첫 아침",
       "family": "APOLLO",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1581,7 +1980,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "oracle",
+      "effect": {
+        "key": "damage_all",
+        "n": 4
+      }
     },
     {
       "id": "c06-win",
@@ -1589,7 +1993,7 @@
       "short": "하나가 된 달",
       "family": "ARTEMIS",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1598,7 +2002,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "ward",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "c06-lose",
@@ -1606,16 +2015,21 @@
       "short": "하루를 잃은 도시",
       "family": "ARTEMIS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 4,
+      "hp": 6,
       "tone": "pink",
       "source": "chapter",
       "chapter": 6,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "heal",
+        "n": 1
+      }
     },
     {
       "id": "c06-perfect",
@@ -1623,16 +2037,21 @@
       "short": "진짜 달",
       "family": "ARTEMIS",
       "grade": 3,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 5,
+      "atk": 7,
+      "hp": 7,
       "tone": "lime",
       "source": "chapter",
       "chapter": 6,
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": "wind",
+      "kind": "unit",
+      "effect": {
+        "key": "damage",
+        "n": 2
+      }
     },
     {
       "id": "c07-win",
@@ -1640,7 +2059,7 @@
       "short": "멎은 전선",
       "family": "ARES",
       "grade": 2,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1649,7 +2068,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "oracle",
+      "effect": {
+        "key": "shield",
+        "n": 3
+      }
     },
     {
       "id": "c07-lose",
@@ -1657,16 +2081,21 @@
       "short": "모든 대륙의 전선",
       "family": "ARES",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 6,
+      "hp": 4,
       "tone": "pink",
       "source": "chapter",
       "chapter": 7,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "unit",
+      "effect": {
+        "key": "buff_atk",
+        "n": 1
+      }
     },
     {
       "id": "c07-perfect",
@@ -1674,7 +2103,7 @@
       "short": "설명되지 않은 평화",
       "family": "ARES",
       "grade": 3,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1683,7 +2112,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": "fire",
+      "kind": "ward",
+      "effect": {
+        "key": "buff_all",
+        "n": 4
+      }
     },
     {
       "id": "c08-win",
@@ -1691,7 +2125,7 @@
       "short": "다시 불린 이름",
       "family": "APHRODITE",
       "grade": 2,
-      "cost": null,
+      "cost": 2,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1700,7 +2134,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "oracle",
+      "effect": {
+        "key": "gain_ichor",
+        "n": 3
+      }
     },
     {
       "id": "c08-lose",
@@ -1708,16 +2147,21 @@
       "short": "마지막 세대",
       "family": "APHRODITE",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 2,
       "tone": "pink",
       "source": "chapter",
       "chapter": 8,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "unit",
+      "effect": {
+        "key": "heal",
+        "n": 1
+      }
     },
     {
       "id": "c08-perfect",
@@ -1725,7 +2169,7 @@
       "short": "가장 많이 불린 말",
       "family": "APHRODITE",
       "grade": 3,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1734,7 +2178,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": "water",
+      "kind": "ward",
+      "effect": {
+        "key": "pierce",
+        "n": 4
+      }
     },
     {
       "id": "c09-win",
@@ -1742,7 +2191,7 @@
       "short": "깨어난 아침",
       "family": "DIONYSOS",
       "grade": 2,
-      "cost": null,
+      "cost": 4,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1751,7 +2200,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "oracle",
+      "effect": {
+        "key": "damage",
+        "n": 3
+      }
     },
     {
       "id": "c09-lose",
@@ -1759,16 +2213,21 @@
       "short": "마지막으로 깨어 있는 자",
       "family": "DIONYSOS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 2,
       "tone": "pink",
       "source": "chapter",
       "chapter": 9,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "unit",
+      "effect": {
+        "key": "guard",
+        "n": 1
+      }
     },
     {
       "id": "c09-perfect",
@@ -1776,7 +2235,7 @@
       "short": "기억나지 않는 꿈",
       "family": "DIONYSOS",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1785,7 +2244,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "earth",
+      "kind": "trap",
+      "effect": {
+        "key": "counter",
+        "n": 5
+      }
     },
     {
       "id": "c10-win",
@@ -1793,7 +2257,7 @@
       "short": "복구된 서가",
       "family": "ATHENA",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1802,7 +2266,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "shield",
+        "n": 3
+      }
     },
     {
       "id": "c10-lose",
@@ -1810,7 +2279,7 @@
       "short": "빈 연대기",
       "family": "ATHENA",
       "grade": 2,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "pink",
@@ -1819,7 +2288,12 @@
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "trap",
+      "effect": {
+        "key": "counter",
+        "n": 4
+      }
     },
     {
       "id": "c10-perfect",
@@ -1827,7 +2301,7 @@
       "short": "돌아온 한 줄",
       "family": "ATHENA",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1836,7 +2310,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "oracle",
+      "effect": {
+        "key": "damage_all",
+        "n": 4
+      }
     },
     {
       "id": "c11-win",
@@ -1844,7 +2323,7 @@
       "short": "다시 묶인 맹세",
       "family": "HERA",
       "grade": 2,
-      "cost": null,
+      "cost": 3,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1853,7 +2332,12 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "buff_atk",
+        "n": 3
+      }
     },
     {
       "id": "c11-lose",
@@ -1861,7 +2345,7 @@
       "short": "풀린 매듭",
       "family": "HERA",
       "grade": 2,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "pink",
@@ -1870,7 +2354,12 @@
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "trap",
+      "effect": {
+        "key": "counter",
+        "n": 4
+      }
     },
     {
       "id": "c11-perfect",
@@ -1878,7 +2367,7 @@
       "short": "아무도 모르는 계약",
       "family": "HERA",
       "grade": 3,
-      "cost": null,
+      "cost": 5,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1887,7 +2376,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "oracle",
+      "effect": {
+        "key": "pierce",
+        "n": 4
+      }
     },
     {
       "id": "c12-win",
@@ -1895,16 +2389,21 @@
       "short": "빈 왕좌에 앉은 자",
       "family": "ZEUS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 2,
+      "atk": 4,
+      "hp": 2,
       "tone": "lime",
       "source": "chapter",
       "chapter": 12,
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": {
+        "key": "shield",
+        "n": 1
+      }
     },
     {
       "id": "c12-lose",
@@ -1912,16 +2411,21 @@
       "short": "주인 없는 하늘",
       "family": "ZEUS",
       "grade": 2,
-      "cost": null,
-      "atk": null,
-      "hp": null,
+      "cost": 4,
+      "atk": 6,
+      "hp": 4,
       "tone": "pink",
       "source": "chapter",
       "chapter": 12,
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "unit",
+      "effect": {
+        "key": "damage",
+        "n": 1
+      }
     },
     {
       "id": "c12-perfect",
@@ -1929,7 +2433,7 @@
       "short": "돌아온 하늘",
       "family": "ZEUS",
       "grade": 3,
-      "cost": null,
+      "cost": 6,
       "atk": null,
       "hp": null,
       "tone": "lime",
@@ -1938,7 +2442,12 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": "bolt",
+      "kind": "ward",
+      "effect": {
+        "key": "draw",
+        "n": 4
+      }
     }
   ],
   "godElements": {
