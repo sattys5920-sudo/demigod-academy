@@ -1,0 +1,67 @@
+name: Firebase 배포
+
+# 보안 규칙과 호스팅을 올린다.
+# 저장소 Settings → Secrets and variables → Actions 에 FIREBASE_SERVICE_ACCOUNT 를
+# 넣어 두면 그 뒤로는 push 할 때마다 자동으로 올라간다.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'firestore.rules'
+      - 'firestore.indexes.json'
+      - 'firebase.json'
+      - '.firebaserc'
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - 'data/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 서비스 계정 키가 있는지 확인
+        id: check
+        env:
+          KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "has_key=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT 시크릿이 없어 건너뜁니다."
+          else
+            echo "has_key=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 키 파일 쓰기
+        if: steps.check.outputs.has_key == 'true'
+        env:
+          KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: printf '%s' "$KEY" > "$RUNNER_TEMP/sa.json"
+
+      - name: firebase-tools 설치
+        if: steps.check.outputs.has_key == 'true'
+        run: npm i -g firebase-tools@13
+
+      - name: 보안 규칙 올리기
+        if: steps.check.outputs.has_key == 'true'
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
+        run: firebase deploy --only firestore:rules --project demig0d --non-interactive
+
+      - name: 호스팅 올리기
+        if: steps.check.outputs.has_key == 'true'
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
+        run: firebase deploy --only hosting --project demig0d --non-interactive
+
+      - name: 키 지우기
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
