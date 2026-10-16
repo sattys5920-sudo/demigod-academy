@@ -39,7 +39,10 @@
     try { var raw = localStorage.getItem(key()); if (raw) return JSON.parse(raw); } catch (_) {}
     return null;
   }
-  function save() { try { localStorage.setItem(key(), JSON.stringify(S)); } catch (_) {} }
+  function save() {
+    if (typeof UI.put === 'function') { UI.put(S); return; }   /* store.js 가 붙으면 그쪽으로 */
+    try { localStorage.setItem(key(), JSON.stringify(S)); } catch (_) {}
+  }
 
   /* ── 데이터 ──────────────────────────────────── */
   var D = {};
@@ -904,9 +907,9 @@
   }
 
   /* ── 시작 ────────────────────────────────────── */
-  UI.boot = function (who) {
+  UI.boot = function (who, initial) {
     uid = who || 'local';
-    S = load() || fresh();
+    S = initial || load() || fresh();
     if (!Object.keys(S.owned).length) {
       /* 처음이면 ★1 두 장을 쥐여 준다 — 덱이 아예 비면 아무것도 못 한다 */
       pool(1).slice(0, 2).forEach(function (c) { S.owned[c.id] = { n: 1, lv: 1, star: 1 }; S.deck.push(c.id); });

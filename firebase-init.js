@@ -20,7 +20,8 @@ export const firebaseConfig = {
 
 export const EMAIL_DOMAIN = '@demigod-academy.example';
 
-export const auth = getAuth(initializeApp(firebaseConfig));
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 auth.useDeviceLanguage();
 
 /* 아이디에는 제한이 없다 — 한글도 공백도 기호도 쓸 수 있다.

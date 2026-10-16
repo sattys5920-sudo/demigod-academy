@@ -1,0 +1,99 @@
+rules_version = '2';
+
+/* 데미갓 아카데미 — 보안 규칙
+   원칙 셋.
+   1. 세계(world · seasons)는 누구나 읽고 아무도 못 쓴다. 결산기만 admin 권한으로 쓴다.
+   2. 내 것(users/{uid})은 나만 쓴다. 다만 이름과 접속 시각은 서로 보여야 한다.
+   3. 기여는 사람당 장당 문서 하나로 묶고 상한을 건다. 혼자 몰아서 분기를 뒤집지 못하게. */
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isMe(uid)  { return signedIn() && request.auth.uid == uid; }
+    function unchanged(f) { return request.resource.data[f] == resource.data[f]; }
+
+    /* ── 사람 ───────────────────────────────────── */
+    match /users/{uid} {
+      /* 이름·아바타·마지막 접속은 서로 보인다 (접속 현황과 파티에 필요) */
+      allow read: if signedIn();
+      allow create, update: if isMe(uid);
+      allow delete: if false;
+
+      /* 저장 전체 — 나만 */
+      match /{document=**} {
+        allow read, write: if isMe(uid);
+      }
+    }
+
+    /* ── 세계 ───────────────────────────────────── */
+    match /world/{doc} {
+      allow read: if signedIn();
+      allow write: if false;            /* 결산기(Admin SDK)만 */
+    }
+    match /seasons/{sid} {
+      allow read: if signedIn();
+      allow write: if false;
+
+      match /chapters/{n} {
+        allow read: if signedIn();
+        /* 그 장의 기록 한 단락만, 주인공이, 마감 전에, 한 번 */
+        allow update: if signedIn()
+          && resource.data.protagonist == request.auth.uid
+          && request.time < resource.data.deadline
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['note'])
+          && request.resource.data.note is string
+          && request.resource.data.note.size() <= 600;
+        allow create, delete: if false;
+      }
+    }
+
+    /* ── 기여 — 사람당 장당 문서 하나 ───────────── */
+    match /contributions/{id} {
+      allow read: if signedIn();
+      allow create, update: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.season + '_'
+               + string(request.resource.data.chapter) + '_'
+               + request.auth.uid
+        && request.resource.data.damage is int
+        && request.resource.data.damage >= 0
+        && request.resource.data.damage <= 50000;   /* 1인 장당 상한 */
+      allow delete: if false;
+    }
+
+    /* ── 1일차 조사 — 내가 뒤진 지점 ────────────── */
+    match /scouting/{id} {
+      allow read: if signedIn();
+      allow create, update: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.spots is list
+        && request.resource.data.spots.size() <= 3;   /* 하루 셋 */
+      allow delete: if false;
+    }
+
+    /* ── 피드 — 누구나 읽고, 자기 글만 ──────────── */
+    match /feed/{id} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 140;
+      allow update, delete: if false;    /* 올린 글은 못 고친다 */
+    }
+
+    /* ── 사냥터 방 — 동시 접속 파티 ─────────────── */
+    match /rooms/{id} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.host == request.auth.uid;
+      allow update: if signedIn();       /* 합류·나가기 */
+      allow delete: if signedIn() && resource.data.host == request.auth.uid;
+    }
+
+    /* 그 밖은 전부 막는다 */
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
