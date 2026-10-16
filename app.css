@@ -4,38 +4,66 @@
 .hd{
   position:sticky; top:0; z-index:20; flex:0 0 auto;
   display:flex; align-items:center; gap:9px; padding:0 12px; height:var(--hd);
-  background:var(--bg); border-bottom:3px solid var(--line);
+  background:var(--bg); border-bottom:1.5px solid var(--neon);
 }
+/* 헤더 밑에 -18° 네온 실선 하나 */
 .hd::after{
-  content:""; position:absolute; left:0; right:0; bottom:-3px; height:3px; background:var(--hot);
-  clip-path:polygon(0 0, 38% 0, 34% 100%, 0 100%);
+  content:""; position:absolute; left:0; right:0; bottom:-1.5px; height:3px;
+  background:var(--neon); box-shadow:var(--glow);
+  clip-path:polygon(0 0, 46% 0, 38% 100%, 0 100%);
 }
 .logo{
-  width:34px; height:34px; flex:0 0 34px; background:var(--hot); border:2px solid var(--line);
+  width:36px; height:36px; flex:0 0 36px; background:var(--neon); color:#02122b;
+  border:1.5px solid var(--line);
   display:flex; align-items:center; justify-content:center;
-  clip-path:polygon(0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+  transform:skewX(var(--skew));
 }
-.hd h1{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); white-space:nowrap}
-.icons{display:flex; gap:5px}
+.logo > *{transform:skewX(14deg)}
+.hd h1{
+  margin:0; font-family:var(--disp); font-weight:400; font-size:28px; line-height:1;
+  color:var(--line); white-space:nowrap; transform:skewX(var(--skew));
+  text-shadow:2px 2px 0 var(--accent-blue);
+}
+/* "// SHOP" 같은 영문 라벨 */
+.hd .en{
+  font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px;
+  color:var(--neon); white-space:nowrap; align-self:center;
+}
+.icons{display:flex; gap:6px}
 .iconbtn{
-  width:34px; height:34px; position:relative; padding:0; overflow:hidden;
-  border:2px solid var(--dim); background:transparent; color:var(--line);
+  width:34px; height:34px; min-width:34px; position:relative; padding:0; overflow:visible;
+  border:1px solid var(--neon); background:transparent; color:var(--neon);
   display:inline-flex; align-items:center; justify-content:center;
-  clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
-.iconbtn .dot{
-  position:absolute; top:1px; right:1px; width:9px; height:9px; background:var(--hot);
-}
+.iconbtn::after{content:""; position:absolute; inset:-6px}   /* 손가락이 닿는 넓이 44px */
+.iconbtn .dot{position:absolute; top:-3px; right:-3px; width:8px; height:8px;
+              background:var(--alert); box-shadow:0 0 8px var(--alert)}
 .wallets{display:flex; flex-direction:column; gap:3px}
 .wallet{
-  display:inline-flex; align-items:center; gap:5px; min-height:20px; padding:0 7px;
-  border:2px solid var(--line); background:var(--ink); color:var(--t1); justify-content:flex-end;
+  display:inline-flex; align-items:center; gap:6px; min-height:21px; padding:0 9px;
+  border:1px solid rgba(63,224,255,.5); background:transparent; color:var(--t1);
+  justify-content:flex-end; transform:skewX(var(--skew));
 }
+.wallet > *{transform:skewX(14deg)}
 .wallet svg{display:none}
-.wallet .lbl{font-family:var(--num); font-size:8.5px; letter-spacing:.08em; color:var(--t3)}
-.wallet .val{font-family:var(--num); font-size:12px; font-variant-numeric:tabular-nums}
-#walletEtherBox{border-color:var(--gold)}
+.wallet .lbl{font-family:var(--num); font-weight:700; font-size:8px; letter-spacing:2px; color:var(--t3)}
+.wallet .val{font-family:var(--num); font-weight:700; font-size:12px; font-variant-numeric:tabular-nums}
+#walletEtherBox{border-color:rgba(255,210,63,.6)}
 #walletEtherBox .val{color:var(--gold)}
+
+/* 헤더는 390px 를 기준으로 짰다. 그보다 좁으면 영문 라벨부터 접고,
+   더 좁으면 제목과 재화를 줄인다 — 잘리는 것보다 작아지는 쪽이 낫다. */
+@media (max-width:389px){
+  .hd .en{display:none}
+}
+@media (max-width:359px){
+  .hd{gap:7px; padding:0 9px}
+  .hd h1{font-size:22px}
+  .logo{width:30px; height:30px; flex:0 0 30px}
+  .wallet{padding:0 7px; gap:4px}
+  .wallet .lbl{font-size:7px; letter-spacing:1.2px}
+  .wallet .val{font-size:11px}
+}
 
 .body{
   flex:1 1 auto; padding:14px 12px;
@@ -43,35 +71,41 @@
 }
 .tabpanel{display:flex; flex-direction:column; gap:14px}
 
-/* 하단 탭 바 — 항상 보인다 */
+/* 하단 내비 — 5칸. 활성 칸은 시안 글자 + 상단 3px 네온 바 */
 .tabbar{
   position:fixed; bottom:0; left:50%; transform:translateX(-50%); z-index:30;
   width:100%; max-width:var(--app);
   display:flex; gap:0; height:var(--tb);
   padding-bottom:env(safe-area-inset-bottom, 0px);
-  background:var(--bg); border-top:3px solid var(--line);
+  background:#020614; border-top:1px solid rgba(63,224,255,.3);
 }
 .tab{
   flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:3px; position:relative;
+  justify-content:center; gap:4px; position:relative;
   border:0; background:transparent; color:var(--t3);
-  font-family:var(--ui-s); font-weight:600; font-size:11px; padding:0;
+  font-family:var(--ui); font-weight:700; font-size:11px; padding:0;
 }
-@media (max-width:360px){ .tab{font-size:10px; gap:2px} }
-.tab + .tab{border-left:2px solid var(--dim)}
-.tab[aria-selected="true"]{background:var(--hot); color:var(--line)}
-.tab .dot{position:absolute; top:8px; right:18%; width:7px; height:7px; background:var(--gold)}
+@media (max-width:360px){ .tab{font-size:10px; gap:3px} }
+.tab[aria-selected="true"]{color:var(--neon)}
+.tab[aria-selected="true"]::before{
+  content:""; position:absolute; top:0; left:12%; right:12%; height:3px;
+  background:var(--neon); box-shadow:var(--glow);
+}
+.tab .dot{position:absolute; top:10px; right:22%; width:7px; height:7px;
+          background:var(--alert); box-shadow:0 0 8px var(--alert)}
 body.fullscreen-on .tabbar{display:none}
 
-/* ── 세그먼트 ──────────────────────────────────── */
-.seg{display:flex; gap:0; border:2px solid var(--line); background:var(--ink)}
+/* ── 세그먼트 탭 — 텍스트형 ───────────────────── */
+.seg{display:flex; gap:0; border:0; background:transparent; border-bottom:1px solid rgba(63,224,255,.25)}
 .seg-btn{
-  flex:1 1 0; min-width:0; min-height:40px; border:0; background:transparent;
-  color:var(--t2); font-family:var(--ui); font-weight:400; font-size:13px; padding:0 2px;
+  flex:1 1 0; min-width:0; min-height:44px; border:0; background:transparent; position:relative;
+  color:var(--t3); font-family:var(--ui); font-weight:700; font-size:13px; padding:0 2px;
 }
-.seg-btn + .seg-btn{border-left:2px solid var(--dim)}
-.seg-btn[aria-selected="true"]{background:var(--line); color:var(--ink)}
-.segpanel{display:flex; flex-direction:column; gap:14px}
+.seg-btn[aria-selected="true"]{color:var(--line)}
+.seg-btn[aria-selected="true"]::after{
+  content:""; position:absolute; left:14%; right:14%; bottom:-1px; height:3px;
+  background:var(--neon); box-shadow:var(--glow);
+}
 
 .filters{
   display:flex; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px;
@@ -91,130 +125,140 @@ body.fullscreen-on .tabbar{display:none}
 
 /* ── 카드 ──────────────────────────────────────── */
 /* ══ 카드 ════════════════════════════════════════════════
-   그림이 주인공이다. 그래서 그림을 카드의 바닥으로 깔고, 나머지는
-   그 위에 얹거나 아래로 녹아들게 한다.
-
-   전에는 카드 테두리 안에 7px 여백, 그 안에 또 그림칸 테두리가 있어
-   '액자 안의 액자' 였다. 게다가 ATK 가 흰 상자라 카드에서 가장 밝은
-   것이 수치였고, 눈이 그림보다 숫자를 먼저 봤다. 둘 다 뒤집는다. */
-.card{
-  position:relative; display:flex; flex-direction:column; padding:0; overflow:hidden;
-  background:var(--ink); border:2px solid var(--line);
-  clip-path:polygon(0 9px, 9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
+   실물 TCG 와 같은 63:88. 일러스트가 굵은 검은 외곽선의 팝아트라서
+   카드만은 UI 의 네온 규칙에서 빠져나와 '흰 테두리 + 검은 외곽선'
+   만화풍 프레임을 쓴다. 그래야 그림과 틀이 한 몸으로 읽힌다. */
+.tcg{
+  position:relative; display:block; width:100%; aspect-ratio:63/88;
+  background:var(--line); border:2px solid #000; padding:4px;
+  box-shadow:3px 4px 0 #000;
+}
+.tcg.big{padding:8px; border-width:3px; box-shadow:10px 12px 0 #000}
+.tcg-in{
+  display:flex; flex-direction:column; height:100%;
+  background:var(--card-inner); border:2px solid #000; overflow:hidden;
 }
 
-/* 등급은 틀이 말한다. 그림이 전부 풀컬러라 그림만 봐서는 도감에서 ★3 를
-   찾지 못한다(세 등급의 평균 밝기가 105·101·98 로 사실상 같다). */
-.card.g1{border-color:var(--line)}
-.card.g2{border-color:var(--gold); border-width:3px}
-.card.g3{border-color:var(--hot);  border-width:3px}
-.card.g2 .fam{color:var(--gold)}
-.card.g3 .fam{color:var(--hot)}
+/* 1 · 머리 줄 — 비용 · 이름 · 속성 */
+.tcg-hd{display:flex; align-items:stretch; gap:0; flex:0 0 auto; border-bottom:2px solid #000}
+.tcg-cost{
+  flex:0 0 auto; aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  background:var(--cost); color:#fff; border-right:2px solid #000;
+  font-family:var(--num); font-weight:700; font-size:11px;
+}
+.tcg.big .tcg-cost{font-size:18px}
+.tcg-name{
+  flex:1 1 auto; min-width:0; display:flex; align-items:center; padding:0 5px;
+  font-family:var(--disp); font-weight:400; font-size:9px; line-height:1.05; color:var(--line);
+  word-break:keep-all; overflow:hidden;
+}
+.tcg.big .tcg-name{font-size:22px; padding:0 10px}
+.tcg-el{
+  flex:0 0 auto; aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  border-left:2px solid #000; color:#000;
+}
+.tcg-el.el-bolt {background:var(--el-bolt)}
+.tcg-el.el-water{background:var(--el-water)}
+.tcg-el.el-fire {background:var(--el-fire)}
+.tcg-el.el-earth{background:var(--el-earth)}
+.tcg-el.el-wind {background:var(--el-wind)}
+.tcg-el.el-none {background:var(--el-none)}
 
-/* 그림 — 카드 폭을 가득 채운다. 테두리 없음, 여백 없음. */
-.art{
-  position:relative; flex:0 0 auto; aspect-ratio:4/3; width:100%; overflow:hidden;
-  background:var(--ink); border:0;
-  display:flex; align-items:center; justify-content:center;
+/* 2 · 일러스트 — 10:7, 큰 카드는 10:6.5 */
+.tcg-art{
+  position:relative; flex:0 0 auto; width:100%; aspect-ratio:10/7; overflow:hidden;
+  background:#000; border-bottom:2px solid #000; display:block;
 }
-.art svg,.art-img{display:block; width:100%; height:100%; object-fit:cover}
-/* 그림 아래 끝만 어둠으로 녹인다 — 글자 띠와의 이음매일 뿐이다.
-   길게 깔면 그림을 잡아먹는다(인물의 손과 다리가 검정에 묻혔다). */
-.art::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:13%;
-  background:linear-gradient(to bottom, transparent 0%, rgba(11,9,16,.5) 70%, var(--ink) 100%);
-  pointer-events:none;
-}
-.art.sealed{aspect-ratio:auto; flex:1 1 auto; min-height:58px}
-.art.sealed::after{
-  height:100%;
-  background:repeating-linear-gradient(-45deg, rgba(255,43,62,.09) 0 5px, transparent 5px 11px);
-}
+.tcg.big .tcg-art{aspect-ratio:10/6.5}
+.tcg-art svg,.tcg-art .art-img{display:block; width:100%; height:100%; object-fit:cover}
 
-/* 비용과 원소 — 그림 위에 얹는다 */
-.card-top{
-  position:absolute; top:6px; left:6px; right:6px; z-index:2;
-  display:flex; align-items:center; gap:5px; pointer-events:none;
+/* 3 · 타입 띠 — 속성 색 위에 검은 글씨 */
+.tcg-type{
+  flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:2.5px 5px;
+  border-bottom:2px solid #000; color:#000; background:var(--el-none);
+  font-family:var(--ui); font-weight:700; font-size:6.5px; letter-spacing:.2px; line-height:1;
 }
-.cost{
-  width:22px; height:22px; flex:0 0 22px; background:var(--hot); color:var(--line);
-  border:2px solid var(--line);
-  display:flex; align-items:center; justify-content:center; font-family:var(--num); font-size:11px;
-}
-.card-top .el{width:22px; height:22px; flex:0 0 22px; background:rgba(11,9,16,.86)}
-.card-top .el.el-none{color:var(--t2); border-color:var(--line)}
-.card-top .el.el-earth{background:rgba(11,9,16,.86)}
+.tcg.big .tcg-type{font-size:10px; padding:6px 9px; line-height:1.2}
+.tcg[data-el=bolt]  .tcg-type:not(.none){background:var(--el-bolt)}
+.tcg[data-el=water] .tcg-type:not(.none){background:var(--el-water)}
+.tcg[data-el=fire]  .tcg-type:not(.none){background:var(--el-fire)}
+.tcg[data-el=earth] .tcg-type:not(.none){background:var(--el-earth)}
+.tcg[data-el=wind]  .tcg-type:not(.none){background:var(--el-wind)}
+.tcg-type.none{background:#9aa8c2}        /* 공통(무속성)은 회색 띠 */
+.tcg-type .t{flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.tcg-type .r{flex:0 0 auto; font-family:var(--num); font-weight:700; letter-spacing:-.5px}
 
-/* 글자 띠 — 그림 밑에서 이어진다. 그림을 덮어 올라탄다. */
-.card-info{
-  position:relative; z-index:1; background:var(--ink);
-  display:flex; flex-direction:column; gap:3px; padding:5px 7px 7px;
+/* 4 · 능력 박스 — 남는 높이 전부. 종이 바탕에 검은 글씨 */
+.tcg-abil{
+  flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:2px;
+  padding:3px 5px; background:var(--paper); color:#101010; overflow:hidden;
 }
-.card-line{display:flex; align-items:center; gap:6px; min-width:0}
-/* 계보 이름은 길이가 제각각이다(공통 ~ HEPHAISTOS). 줄이지 않으면 320px
-   에서 카드 밖으로 삐져나가 화면이 통째로 가로로 밀린다. */
-.fam{flex:1 1 auto; font-family:var(--num); font-size:8px; letter-spacing:.06em; color:var(--t3);
-     min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.rank{flex:0 0 auto; display:inline-flex; align-items:center; gap:1px;
-      font-family:var(--num); font-size:9px; color:var(--gold)}
-.glyph{position:relative; z-index:1; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line); text-align:center}
-
-/* 이름은 포스터 얼굴로. 본문체를 쓰면 그림만 포스터고 글자는 설명문이 된다. */
-.cname{margin:0; font-family:var(--ui); font-weight:400; font-size:13px; line-height:1.2;
-       color:var(--line); word-break:keep-all; overflow-wrap:break-word}
-
-/* 수치는 숫자 그 자체다 — 상자를 두르지 않는다 */
-.stats{display:flex; align-items:flex-end; gap:10px; margin-top:1px}
-.stat{display:flex; align-items:baseline; gap:3px}
-.stat b{font-family:var(--num); font-weight:400; font-size:15px; line-height:1; color:var(--line)}
-.stat i{font-family:var(--num); font-style:normal; font-size:7px; letter-spacing:.14em; color:var(--t3)}
-.stat.hp b{color:var(--t2)}
-/* 효능 한 줄 — 수치 옆에 붙는다. 좁으니 짧은 꼴만 쓴다. */
-.eff{
-  display:inline-flex; align-items:center; height:16px; padding:0 6px;
-  background:var(--dim); color:var(--t1);
-  font-family:var(--ui-s); font-weight:600; font-size:9.5px; letter-spacing:.01em;
-  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+/* 작은 카드는 능력명과 한 줄 요약까지만 — 넘치면 줄을 자른다 */
+.tcg:not(.big) .ab-t{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.tcg.big .tcg-abil{gap:7px; padding:10px 11px}
+.ab{display:flex; flex-direction:column; gap:1px; min-width:0; line-height:1}
+.tcg.big .ab{gap:3px}
+.ab-h{display:flex; align-items:center; gap:3px; min-width:0}
+.ab-h b{font-family:var(--ui); font-weight:900; font-size:7px; line-height:1.2; color:#101010;
+        overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.tcg.big .ab-h b{font-size:13px}
+.ab-h i{
+  flex:0 0 auto; font-family:var(--ui); font-style:normal; font-weight:700; font-size:5.5px;
+  padding:1px 3px; background:#101010; color:var(--paper); letter-spacing:.3px;
 }
-.card.g2 .eff{background:rgba(255,197,61,.2); color:var(--gold)}
-.card.g3 .eff{background:rgba(255,43,62,.2); color:var(--hot)}
+.tcg.big .ab-h i{font-size:9px; padding:2px 6px}
+.ab-t{font-family:var(--ui); font-weight:500; font-size:6.5px; line-height:1.25; color:#2a2a2a;
+      word-break:keep-all; overflow:hidden}
+.tcg.big .ab-t{font-size:11px; line-height:1.55}
+.tcg-noab{font-family:var(--ui); font-weight:500; font-size:6.5px; color:#5a5a5a}
+.tcg.big .tcg-noab{font-size:11px}
+.tcg-flavor{
+  margin-top:auto; padding-top:7px; border-top:1px solid rgba(16,16,16,.25);
+  font-family:var(--ui); font-weight:500; font-style:italic; font-size:10px; line-height:1.5;
+  color:#4a4a4a; word-break:keep-all;
+}
+.tcg-lock{
+  /* 작은 카드의 능력 칸은 24px 뿐이다 — 세로로 쌓으면 글자가 잘린다 */
+  flex:1 1 auto; display:flex; flex-direction:row; align-items:center; justify-content:center;
+  gap:4px; color:#6a7490; font-family:var(--ui); font-weight:700; font-size:8px;
+  white-space:nowrap; letter-spacing:.5px;
+}
+.tcg.big .tcg-lock{flex-direction:column; gap:8px; font-size:12px}
+
+/* 5 · 아래 줄 — ATK · HP · 카드 번호 */
+.tcg-ft{
+  flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:4px;
+  padding:3px 5px; border-top:2px solid #000; background:var(--card-inner); line-height:1;
+}
+.tcg.big .tcg-ft{padding:8px 10px; line-height:1.2}
+.tcg-stats{display:flex; gap:7px}
+.tcg.big .tcg-stats{gap:14px}
+.tcg-stat{display:flex; align-items:baseline; gap:2px}
+.tcg-stat i{font-family:var(--num); font-style:normal; font-weight:700; font-size:5.5px;
+            letter-spacing:1.5px; color:var(--t3)}
+.tcg.big .tcg-stat i{font-size:9px; letter-spacing:2px}
+.tcg-stat b{font-family:var(--num); font-weight:700; font-size:10px; color:var(--line)}
+.tcg.big .tcg-stat b{font-size:20px}
+.tcg-no{font-family:var(--num); font-weight:500; font-size:5.5px; letter-spacing:1.5px; color:var(--t3)}
+.tcg.big .tcg-no{font-size:10px; letter-spacing:2px}
+
+/* 미보유 — 프레임을 죽이고 그림을 회색으로 */
+.tcg.locked{background:#3a4566; border-color:#1b2440; box-shadow:3px 4px 0 #0a1026}
+.tcg.locked .tcg-in{border-color:#1b2440}
+.tcg.locked .tcg-art{filter:grayscale(1) brightness(.35)}
+.tcg.locked .tcg-abil{background:#121b36}
+.tcg.locked .tcg-cost{background:#4a5577}
+.tcg.locked .tcg-name{color:#8e9bbd}
+.tcg.locked .tcg-type{background:#4a5577; color:#0e1430}
+.tcg.locked .tcg-stat b{color:#8e9bbd}
+.tcg.faded{opacity:.75}
 .tappable{cursor:pointer}
+.tappable:focus-visible{outline:3px solid var(--neon); outline-offset:3px}
 
-/* 자세히 보기 */
-.cardzoom{
-  width:100%; aspect-ratio:4/3; overflow:hidden; background:var(--ink);
-  border:3px solid var(--line);
-  clip-path:polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
-}
-.cardzoom svg,.cardzoom .art-img{display:block; width:100%; height:100%; object-fit:cover}
-.facts{display:flex; flex-wrap:wrap; gap:6px; margin:12px 0}
-.fact{
-  display:inline-flex; align-items:baseline; gap:5px; padding:4px 9px 5px;
-  border:2px solid var(--dim);
-}
-.fact i{font-family:var(--num); font-style:normal; font-size:7.5px; letter-spacing:.14em; color:var(--t3)}
-.fact b{font-family:var(--num); font-weight:400; font-size:13px; color:var(--line)}
-.effbox{padding:11px 13px 13px; background:var(--ink); border-left:4px solid var(--hot); margin-bottom:12px}
-
-/* 전투 — 고른 카드가 무슨 일을 하는지 */
-.actnote{
-  flex:1 0 100%; display:flex; flex-direction:column; gap:3px; margin-bottom:2px;
-  padding:9px 11px; background:var(--ink); border-left:4px solid var(--hot);
-}
-.actnote b{font-family:var(--ui); font-weight:400; font-size:13px; color:var(--line)}
-.actnote span{font-size:12px; color:var(--t2); line-height:1.6; word-break:keep-all}
-
-.kindtag{
-  display:inline-flex; align-items:center; height:17px; padding:0 7px;
-  border:2px solid var(--dim); color:var(--t2);
-  font-family:var(--ui-s); font-weight:600; font-size:10px;
-}
-
-.grid6{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
-.grid6 .card{min-height:150px}
-.grid-sm{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
-.grid-sm .card{min-height:140px}
-.grid-sm .card.sel{outline:3px solid var(--gold); outline-offset:-3px}
+/* 카드 그리드 — 3열, 간격 10px */
+.grid6{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
+.grid-sm{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
+.grid-sm .tcg.sel{outline:3px solid var(--neon); outline-offset:-3px; box-shadow:var(--glow)}
 
 /* ── 홈 ────────────────────────────────────────── */
 /* 접속 표시 — 다른 상자와 폭이 같으면 격자가 안 깨진다. 내용만큼만 차지한다. */
@@ -397,7 +441,7 @@ body.fullscreen-on .tabbar{display:none}
 
 /* ── 승급 ──────────────────────────────────────── */
 .grow-wrap{display:flex; flex-direction:column; gap:14px}
-.grow-wrap .card{width:128px; align-self:center; min-height:184px; box-shadow:5px 5px 0 var(--hot)}
+.grow-wrap .tcg{width:132px; align-self:center}
 .grow-wrap .meter{display:flex; flex-direction:column; gap:12px}
 .lvrow{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
 .lvrow .lv{
@@ -471,48 +515,64 @@ body.fullscreen-on .tabbar{display:none}
 }
 
 /* ── 뽑기 ──────────────────────────────────────── */
-/* ══ 상점의 주인공 — 뽑기 배너 ═══════════════════════════
-   홈의 '지금 장' 과 같은 규칙으로 짠다. 다만 색이 다르다:
-   빨강은 '지금 해야 할 일', 금색은 '뽑기와 보상' 을 뜻한다.      */
-.banner{
-  display:flex; flex-direction:column; gap:12px;
-  margin:0 -12px; padding:20px 22px 44px 18px;
-  background:var(--gold); color:var(--ink);
-  border:0; border-top:3px solid var(--line); border-bottom:3px solid var(--line);
-  box-shadow:none; overflow:hidden;
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 28px), 0 100%);
+/* ══ 상점 ════════════════════════════════════════════════
+   사선 평행사변형 안에 키 일러스트. 시안·검정 이중 테두리. */
+.banner{position:relative; margin:0 -12px; padding-bottom:34px}
+.banner-art{
+  position:relative; height:186px; overflow:hidden;
+  background:var(--panel); border-top:1.5px solid var(--neon); border-bottom:1.5px solid var(--neon);
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 34px), 0 100%);
+  box-shadow:inset 0 0 0 3px #000;
 }
-.banner::before{                  /* ★3 — 배너의 숫자 자리 */
-  content:"★3"; position:absolute; left:-10px; bottom:-38px;
-  font-family:var(--num); font-size:112px; line-height:1; letter-spacing:-.04em;
-  color:rgba(11,9,16,.15); pointer-events:none;
-}
-.banner::after{
+.banner-art img{width:100%; height:100%; object-fit:cover; display:block; opacity:.92}
+.banner-art::after{                    /* 사선 띠를 한 겹 더 얹어 속도감 */
   content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:
-    repeating-linear-gradient(-45deg, rgba(11,9,16,.075) 0 2px, transparent 2px 10px),
-    radial-gradient(rgba(11,9,16,.15) 1.2px, transparent 1.3px);
-  background-size:auto, 7px 7px;
+  background-image:repeating-linear-gradient(-18deg, rgba(3,8,32,.42) 0 3px, transparent 3px 14px);
 }
-.banner > *{position:relative; z-index:1}
-.banner .txt{display:flex; flex-direction:column; gap:9px; align-items:flex-start}
-.banner .eyebrow{
-  display:inline-block; margin-left:-2px; padding:4px 10px 5px;
-  background:var(--ink); color:var(--gold); transform:skewX(-9deg);
+.banner-tag{
+  position:absolute; top:10px; left:12px; z-index:2;
+  padding:3px 9px; background:#000; color:var(--neon);
+  font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px;
+  transform:skewX(var(--skew));
 }
-.banner h2{
-  margin:0; font-family:var(--disp); font-weight:400;
-  font-size:clamp(31px, 10.2vw, 41px); line-height:.95; letter-spacing:-.02em; color:var(--ink);
+/* 제목은 배너 아래쪽에 겹친다 */
+.banner-ttl{
+  position:relative; width:fit-content; max-width:calc(100% - 28px);
+  margin:-46px 14px 0; z-index:2;
+  display:flex; align-items:flex-end; gap:8px; transform:skewX(var(--skew));
 }
-.banner .hint{color:rgba(11,9,16,.76)}
+.banner-ttl .l1{
+  font-family:var(--disp); font-weight:400; font-size:26px; line-height:1;
+  color:transparent; -webkit-text-stroke:1.5px var(--neon); padding-bottom:6px;
+}
+.banner-ttl .l2{
+  font-family:var(--disp); font-weight:400; font-size:68px; line-height:.82; color:#fff;
+  -webkit-text-stroke:3px #000;
+  text-shadow:5px 6px 0 var(--accent-blue);
+  paint-order:stroke fill;
+}
+.banner-odds{
+  position:absolute; right:12px; bottom:40px; z-index:3; margin:0;
+  display:flex; gap:14px; text-align:right;
+}
+.banner-odds div{display:flex; flex-direction:column; gap:2px}
+.banner-odds dt{font-family:var(--num); font-weight:700; font-size:8px; letter-spacing:2px; color:var(--t3)}
+.banner-odds dd{margin:0; font-family:var(--num); font-weight:700; font-size:15px; color:var(--neon)}
 
-/* 카드 세 장은 겹쳐 쥔 모양으로. 가운데 장이 양옆 이름을 가리지 않게 벌린다. */
-/* 세 장을 벌려 쥔 모양. 폭을 비율로 잡아야 좁은 화면에서도 서로 안 가린다. */
-.packfan{position:relative; height:168px; align-self:center; width:100%; max-width:300px; margin-top:2px}
-.packfan .card{position:absolute; width:30%; min-width:76px; height:132px; box-shadow:4px 4px 0 rgba(11,9,16,.32)}
-.packfan .card:nth-child(1){left:0;  top:28px; transform:rotate(-14deg)}
-.packfan .card:nth-child(2){right:0; top:28px; transform:rotate(14deg)}
-.packfan .card:nth-child(3){left:35%; top:0; z-index:1}
+/* PICK UP ★3 — 좌우 ±2°, 가운데는 올리고 네온 */
+.pickup{margin-top:4px}
+.pickup-h{
+  margin:0 0 10px; font-family:var(--num); font-weight:700; font-size:11px; letter-spacing:3px;
+  color:var(--t2);
+}
+.pickup-h b{color:var(--neon)}
+.pickup-row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; align-items:end}
+.pick{display:block}
+.pick.p0{transform:rotate(-2deg)}
+.pick.p2{transform:rotate(2deg)}
+.pick.p1{transform:translateY(-12px)}
+.pick.p1 .tcg{box-shadow:3px 4px 0 #000, var(--glow)}
+
 .pulls{display:flex; gap:10px}
 .pull{
   flex:1 1 0; min-height:64px; padding:0 10px; border:3px solid var(--line);
@@ -630,12 +690,6 @@ body.fullscreen-on .tabbar{display:none}
 .turnbar .t{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--hot)}
 .turnbar .m{font-family:var(--num); font-size:10.5px; color:var(--t2)}
 .hand{position:relative; height:132px; flex:0 0 132px; display:flex; align-items:flex-end; justify-content:center}
-.hand .card{position:absolute; bottom:-14px; width:78px; height:114px; transform-origin:50% 100%}
-.hand .card:nth-child(1){transform:rotate(-13deg) translate(-108px,18px)}
-.hand .card:nth-child(2){transform:rotate(-6deg) translate(-55px,4px)}
-.hand .card:nth-child(3){transform:rotate(0) translate(0,-2px)}
-.hand .card:nth-child(4){transform:rotate(6deg) translate(55px,4px)}
-.hand .card:nth-child(5){transform:rotate(13deg) translate(108px,18px)}
 .endturn{
   position:absolute; right:12px; bottom:18px; z-index:2; min-height:44px; padding:0 18px;
   border:2px solid var(--line); background:var(--hot); color:var(--line);
@@ -657,7 +711,7 @@ body.fullscreen-on .tabbar{display:none}
 .reveal{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:18px}
 .reveal .hdline{font-family:var(--disp); font-weight:400; font-size:32px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
 .reveal .pulled{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; width:100%}
-.reveal .pulled .card{min-height:140px}
+
 .reveal .acts{display:flex; flex-direction:column; gap:9px; width:100%}
 
 /* 연대기 */
@@ -682,27 +736,29 @@ body.fullscreen-on .tabbar{display:none}
    점선이 크롭 마크처럼 보여서 뺐다. */
 .el{
   display:inline-flex; align-items:center; justify-content:center;
-  width:20px; height:20px; flex:0 0 20px; border:2px solid var(--line);
-  background:var(--ink); color:var(--line);
+  width:20px; height:20px; flex:0 0 20px; border:1.5px solid currentColor;
+  background:var(--ink);
 }
-.el.el-fire {color:var(--hot)}
-.el.el-bolt {color:var(--gold)}
-.el.el-earth{background:var(--dim)}
-.el.el-water{color:var(--line)}
-.el.el-wind {color:var(--t2)}
-.el.el-none {color:var(--t3); border-color:var(--dim)}
+.el.el-bolt {color:var(--el-bolt)}
+.el.el-water{color:var(--el-water)}
+.el.el-fire {color:var(--el-fire)}
+.el.el-earth{color:var(--el-earth)}
+.el.el-wind {color:var(--el-wind)}
+.el.el-none {color:var(--el-none)}
 
 .ring{display:flex; align-items:center; gap:2px; flex-wrap:wrap}
 .ring-it{display:inline-flex; align-items:center; gap:4px}
 .ring-ic{
   display:inline-flex; align-items:center; justify-content:center;
-  width:26px; height:26px; border:2px solid var(--line); background:var(--ink); color:var(--line);
+  width:30px; height:30px; flex:0 0 30px; border:1.5px solid currentColor;
+  background:var(--ink);
 }
-.ring-ic.el-fire {color:var(--hot)}
-.ring-ic.el-bolt {color:var(--gold)}
-.ring-ic.el-earth{background:var(--dim)}
-.ring-ic.el-wind {color:var(--t2)}
-.ring-ic.el-none{color:var(--t3); border-color:var(--dim)}
+.ring-ic.el-bolt {color:var(--el-bolt)}
+.ring-ic.el-water{color:var(--el-water)}
+.ring-ic.el-fire {color:var(--el-fire)}
+.ring-ic.el-earth{color:var(--el-earth)}
+.ring-ic.el-wind {color:var(--el-wind)}
+.ring-ic.el-none {color:var(--el-none)}
 .ring-n{font-family:var(--ui-s); font-weight:600; font-size:11px; color:var(--t1)}
 .ring-ar{color:var(--t3); display:inline-flex}
 
@@ -808,3 +864,29 @@ body.fullscreen-on .tabbar{display:none}
 .blog p{margin:0; font-size:12px; font-weight:400; line-height:1.6; color:var(--t2)}
 .blog p.good{color:var(--gold)}
 .blog p.bad{color:var(--hot)}
+
+
+/* ══ 카드 상세 ═══════════════════════════════════════════
+   큰 카드 300px 를 가운데 두고, 속성 색 빛과 검은 하드 그림자를 준다.
+   작은 카드에서 줄인 것(능력 전문·설정 문구)을 여기서 돌려받는다. */
+.detbody{padding:18px 12px 30px; display:flex; flex-direction:column; gap:18px; align-items:center}
+.detcard{width:min(300px, calc(100% - 24px))}
+.detcard .tcg{filter:drop-shadow(0 0 18px rgba(63,224,255,.35))}
+.detcard[data-el=bolt]  .tcg{filter:drop-shadow(0 0 18px rgba(255,210,63,.4))}
+.detcard[data-el=water] .tcg{filter:drop-shadow(0 0 18px rgba(63,224,255,.45))}
+.detcard[data-el=fire]  .tcg{filter:drop-shadow(0 0 18px rgba(255,122,89,.45))}
+.detcard[data-el=earth] .tcg{filter:drop-shadow(0 0 18px rgba(217,179,108,.45))}
+.detcard[data-el=wind]  .tcg{filter:drop-shadow(0 0 18px rgba(168,240,198,.45))}
+
+/* 카드 아래 정보 3칸 */
+.detfacts{display:flex; gap:0; width:min(340px,100%); margin:0; border:1px solid rgba(63,224,255,.35)}
+.detfacts div{
+  flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:11px 6px 12px;
+}
+.detfacts div + div{border-left:1px solid rgba(63,224,255,.22)}
+.detfacts dt{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px; color:var(--t3)}
+.detfacts dd{margin:0; font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line)}
+.detbody .btnpair{width:min(340px,100%)}
+.detbody .msg{text-align:center}
+#detNo{font-family:var(--num); font-weight:700; letter-spacing:2px}

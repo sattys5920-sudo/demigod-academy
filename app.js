@@ -63,7 +63,7 @@
   /* ── 데이터 ──────────────────────────────────── */
   var D = {};
   function loadData() {
-    var files = ['cards', 'bonds', 'season-01', 'zones', 'schedule', 'economy', 'quiz', 'minigames', 'talks', 'elements'];
+    var files = ['cards', 'bonds', 'season-01', 'zones', 'schedule', 'economy', 'quiz', 'minigames', 'talks', 'elements', 'flavor'];
     return Promise.all(files.map(function (f) {
       return fetch('data/' + f + '.json').then(function (r) {
         if (!r.ok) throw new Error(f + ' ' + r.status);
@@ -73,6 +73,7 @@
       files.forEach(function (f, i) { D[f.replace('-01', '')] = got[i]; });
       D.cardById = {};
       D.cards.cards.forEach(function (c) { D.cardById[c.id] = c; });
+      buildNumbers();
     });
   }
 
@@ -102,6 +103,19 @@
     sv.innerHTML = EL_PATH[key] || EL_PATH.none;
     return sv;
   }
+  /* 자물쇠 — 미보유 카드에만 쓴다 */
+  function lockIcon(px) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var sv = document.createElementNS(ns, 'svg');
+    sv.setAttribute('width', String(px || 14)); sv.setAttribute('height', String(px || 14));
+    sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('fill', 'none');
+    sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '2.4');
+    sv.setAttribute('stroke-linecap', 'round'); sv.setAttribute('stroke-linejoin', 'round');
+    sv.setAttribute('aria-hidden', 'true');
+    sv.innerHTML = '<rect x="4" y="10.5" width="16" height="11"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>';
+    return sv;
+  }
+
   function elKo(key) {
     if (!D.elements) return '';
     if (!key) return (D.elements.none && D.elements.none.ko) || '무속성';
@@ -134,18 +148,21 @@
   }
   /* ── 화면 이동 ───────────────────────────────── */
   var TITLES = { home: '신탁', cards: '계보', daily: '일상', shop: '상점', bonds: '인연' };
+  var TITLES_EN = { home: '// ORACLE', cards: '// CODEX', daily: '// ROUTINE',
+                    shop: '// SHOP', bonds: '// BONDS' };
   var SEGS = {
     cards: ['dex', 'deck', 'grow', 'melt', 'bondmap'],
     daily: ['time', 'hunt'],
     shop: ['summon', 'goods']
   };
-  var VIEWS = ['chron', 'scout', 'quiz', 'talk', 'reveal', 'battle', 'result'];
+  var VIEWS = ['carddet', 'chron', 'scout', 'quiz', 'talk', 'reveal', 'battle', 'result'];
   var curTab = 'home';
 
   function setTab(name) {
     if (!TITLES[name]) return;
     curTab = name;
     $('#screenTitle').textContent = TITLES[name];
+    $('#screenEn').textContent = TITLES_EN[name] || '';
     Object.keys(TITLES).forEach(function (k) { $('#tab-' + k).hidden = k !== name; });
     all('[data-tab]').forEach(function (b) {
       b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === name));
@@ -183,101 +200,176 @@
   }
 
   /* ── 카드 조각 ───────────────────────────────── */
+  /* ── 카드 ══════════════════════════════════════════════
+     실물 TCG 와 같은 63:88. 구조는 위에서 아래로
+       바깥 프레임(흰 바탕·검은 외곽선) → 안쪽 패널 →
+       머리 줄(비용·이름·속성) → 일러스트(10:7) → 타입 띠 →
+       능력 박스(종이 바탕) → 아래 줄(ATK·HP·번호)
+     작은 카드는 능력 한 줄만, 큰 카드는 전문과 설정 문구까지. */
+  var EL_KO  = { bolt: '번개', water: '물', fire: '불', earth: '땅', wind: '바람' };
+  var LINEAGE = { ZEUS: '제우스', HERA: '헤라', POSEIDON: '포세이돈', DEMETER: '데메테르',
+                  ATHENA: '아테나', APOLLO: '아폴론', ARTEMIS: '아르테미스', ARES: '아레스',
+                  APHRODITE: '아프로디테', HEPHAISTOS: '헤파이스토스', HERMES: '헤르메스',
+                  DIONYSOS: '디오니소스' };
+  var FAM_LETTER = { COMMON: 'C', ZEUS: 'Z', HERA: 'H', POSEIDON: 'P', DEMETER: 'D',
+                     ATHENA: 'A', APOLLO: 'L', ARTEMIS: 'R', ARES: 'E', APHRODITE: 'F',
+                     HEPHAISTOS: 'V', HERMES: 'M', DIONYSOS: 'Y' };
+  var cardNo = {};                      /* id → 'Z-001' */
+  function buildNumbers() {
+    var seen = {};
+    D.cards.cards.forEach(function (c) {
+      var L = FAM_LETTER[c.family] || 'X';
+      seen[L] = (seen[L] || 0) + 1;
+      cardNo[c.id] = L + '-' + String(seen[L]).padStart(3, '0');
+    });
+  }
+
+  /* 우리 데이터를 디자인 시스템이 바라는 모양으로 옮긴다 */
+  function cardView(c) {
+    var o = S.owned[c.id], st = stat(c);
+    var et = window.DGABattle && DGABattle.effectText ? DGABattle.effectText(c.effect) : null;
+    return {
+      id: cardNo[c.id] || c.id,
+      name: c.name,
+      type: c.family === 'COMMON' ? '공통' : '계보',
+      element: EL_KO[c.element] || null,
+      elKey: c.element || 'none',
+      lineage: c.family === 'COMMON' ? '' : (LINEAGE[c.family] || c.family) + '의 혈통',
+      rarity: o ? (o.star || c.grade) : c.grade,
+      cost: c.cost, atk: c.atk == null ? null : st.atk, hp: c.hp == null ? null : st.hp,
+      abilities: et ? [{ name: et.name, trigger: et.trigger, text: et.long, short: et.short }] : [],
+      flavor: (D.flavor && D.flavor[c.id]) || '',
+      owned: o ? o.n : 0,
+      lv: o ? o.lv : 1,
+      raw: c
+    };
+  }
+
+  function elIconBox(key, size) {
+    var b = el('span', 'tcg-el el-' + key);
+    b.appendChild(elIcon(key === 'none' ? null : key, size || 11));
+    return b;
+  }
+
   function cardEl(c, opts) {
     opts = opts || {};
-    var o = S.owned[c.id];
-    var s = stat(c);
-    var n = el('article', 'card g' + (c.grade || 1) + (c.tone === 'pink' ? ' pinkish' : ''));
-    /* 비용과 원소는 그림 위에 얹는다 — 따로 칸을 내주면 그림이 줄고
-       카드가 '액자 안의 액자' 가 된다. */
-    var top = el('span', 'card-top');
-    top.appendChild(el('span', 'cost', c.cost == null ? '?' : String(c.cost)));
-    var badge = el('span', 'el el-' + (c.element || 'none'));
-    badge.title = elKo(c.element);
-    badge.appendChild(elIcon(c.element, 13));
-    top.appendChild(badge);
-    var art = el('span', 'art');
-    /* 그림은 art.js 가 그린다. c.art 가 있으면 그 파일을, 없으면 문장을. */
-    if (window.DGAArt) window.DGAArt.paint(art, c);
-    else art.appendChild(el('span', 'glyph', c.short || c.name));
-    var rank = el('span', 'rank');
-    for (var i = 0; i < (o ? (o.star || c.grade) : c.grade); i++) {
-      var sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      sv.setAttribute('width', '12'); sv.setAttribute('height', '12');
-      sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('fill', 'none');
-      sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '3');
-      sv.setAttribute('stroke-linecap', 'round'); sv.setAttribute('stroke-linejoin', 'round');
-      sv.innerHTML = '<path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.3 6.2L12 17l-5.5 3 1.3-6.2L3 9.5l6.4-.7L12 3Z"/>';
-      rank.appendChild(sv);
-    }
-    if (o && o.lv > 1) rank.appendChild(document.createTextNode(' LV ' + o.lv));
-    var name = el('h3', 'cname', c.name);
+    var v = cardView(c);
+    var big = !!opts.big;
+    var have = v.owned > 0 || opts.always;
+    var n = el('article', 'tcg' + (big ? ' big' : '') + (have ? '' : ' locked'));
+    n.setAttribute('data-el', v.elKey);
 
-    /* 수치는 흰 상자가 아니라 숫자다. 상자로 두면 카드에서 가장 밝은 것이
-       수치가 되어, 눈이 그림보다 ATK 를 먼저 본다. */
-    var stats = el('span', 'stats');
-    if (c.atk == null && c.hp == null) {
-      /* 가호·신탁·계략에는 공격력도 체력도 없다. '? ATK ? HP' 로 두면
-         빈칸을 보여 주는 셈이라, 그 자리에 무슨 카드인지를 적는다. */
-      stats.appendChild(el('span', 'kindtag',
-        { unit: '인물', ward: '가호', oracle: '신탁', trap: '계략' }[c.kind] || ''));
+    var inner = el('span', 'tcg-in');
+
+    /* 1 · 머리 줄 */
+    var hd = el('span', 'tcg-hd');
+    hd.appendChild(el('span', 'tcg-cost', v.cost == null ? '?' : String(v.cost)));
+    hd.appendChild(el('span', 'tcg-name', v.name));
+    if (v.element && have) hd.appendChild(elIconBox(v.elKey, big ? 15 : 11));
+    inner.appendChild(hd);
+
+    /* 2 · 일러스트 */
+    var art = el('span', 'tcg-art');
+    if (window.DGAArt) DGAArt.paint(art, c);
+    inner.appendChild(art);
+
+    /* 3 · 타입 띠 */
+    var tp = el('span', 'tcg-type' + (v.element && have ? '' : ' none'));
+    tp.appendChild(el('span', 't',
+      have ? [v.type + ' 카드', v.element, v.lineage].filter(Boolean).join(' · ')
+           : v.type + ' 카드'));
+    var rk = el('span', 'r');
+    for (var i = 0; i < v.rarity; i++) rk.appendChild(document.createTextNode('★'));
+    tp.appendChild(rk);
+    inner.appendChild(tp);
+
+    /* 4 · 능력 박스 */
+    var ab = el('span', 'tcg-abil');
+    if (!have) {
+      var lk = el('span', 'tcg-lock');
+      lk.appendChild(lockIcon(big ? 22 : 14));
+      lk.appendChild(el('span', '', '미보유'));
+      ab.appendChild(lk);
     } else {
-      [['atk', 'ATK', c.atk == null ? '-' : s.atk],
-       ['hp',  'HP',  c.hp  == null ? '-' : s.hp]].forEach(function (p) {
-        var box = el('span', 'stat ' + p[0]);
-        box.append(el('b', '', String(p[2])), el('i', '', p[1]));
-        stats.appendChild(box);
+      if (!v.abilities.length) {
+        ab.appendChild(el('span', 'tcg-noab', big ? '특별한 능력 없이 수치로만 싸운다.' : '능력 없음'));
+      }
+      v.abilities.forEach(function (a) {
+        var row = el('span', 'ab');
+        var h = el('span', 'ab-h');
+        h.append(el('b', '', '◆ ' + a.name), el('i', '', a.trigger));
+        row.appendChild(h);
+        row.appendChild(el('span', 'ab-t', big ? a.text : a.short));
+        ab.appendChild(row);
       });
+      /* 설정 문구는 능력이 없는 카드에도 붙는다 — 없으면 종이 칸이 빈다 */
+      if (big && v.flavor) ab.appendChild(el('span', 'tcg-flavor', v.flavor));
     }
+    inner.appendChild(ab);
 
-    /* 효능 — 한 줄로. 설명문은 battle.js 가 쥐고 있다(규칙 옆). */
-    var et = window.DGABattle && DGABattle.effectText ? DGABattle.effectText(c.effect) : null;
-    if (et) stats.appendChild(el('span', 'eff', et.short));
+    /* 5 · 아래 줄 */
+    var ft = el('span', 'tcg-ft');
+    var sv = el('span', 'tcg-stats');
+    [['ATK', v.atk], ['HP', v.hp]].forEach(function (p) {
+      var box = el('span', 'tcg-stat');
+      box.append(el('i', '', p[0]), el('b', '', have ? (p[1] == null ? '–' : String(p[1])) : '?'));
+      sv.appendChild(box);
+    });
+    ft.append(sv, el('span', 'tcg-no', v.id));
+    inner.appendChild(ft);
 
-    /* 그림 밑으로 글자가 녹아들게 — 띠를 하나로 묶는다 */
-    var info = el('span', 'card-info');
-    var line = el('span', 'card-line');
-    line.append(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family), rank);
-    info.append(line, name, stats);
-    n.append(art, top, info);
+    n.appendChild(inner);
+    if (!have && !opts.always) n.classList.add('faded');
     if (opts.detail) {
       n.classList.add('tappable');
-      n.addEventListener('click', function () { openCard(c); });
+      n.setAttribute('role', 'button');
+      n.setAttribute('tabindex', '0');
+      n.setAttribute('aria-label', v.name + ' 자세히 보기');
+      var go = function () { openCard(c); };
+      n.addEventListener('click', go);
+      n.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+      });
     }
-    if (!o && !opts.always) n.style.opacity = '.4';
     return n;
   }
 
-  /* 카드 하나를 크게 펼친다 — 효능은 한 줄로 줄이면 뜻이 사라지는 것들이
-     있다(보호막·관통·수비 자세). 여기서는 문장 그대로 보여 준다. */
-  var KIND_KO = { unit: '인물', ward: '가호', oracle: '신탁', trap: '계략' };
+  /* 카드 상세 — 한 장을 300px 로 펼친다. 작은 카드에서 줄인 것(능력 전문과
+     설정 문구)을 여기서 돌려준다. 스펙의 접근성 조항이 말하는 보완이다. */
+  var BEATS = { bolt: 'water', water: 'fire', fire: 'earth', earth: 'wind', wind: 'bolt' };
+  var detCard = null;
   function openCard(c) {
-    var o = S.owned[c.id], st = stat(c);
-    var art = $('#cardDlgArt'); art.textContent = '';
-    if (window.DGAArt) DGAArt.paint(art, c);
-    $('#cardDlgName').textContent = c.name;
-    $('#cardDlgMeta').textContent =
-      (c.family === 'COMMON' ? '공통' : c.family) + ' · ' + (KIND_KO[c.kind] || '') +
-      ' · ★' + (o ? (o.star || c.grade) : c.grade);
+    detCard = c;
+    var v = cardView(c);
+    var box = $('#detCard'); box.textContent = '';
+    box.appendChild(cardEl(c, { big: true }));
+    box.setAttribute('data-el', v.elKey);
+    $('#detNo').textContent = v.id;
 
-    var f = $('#cardDlgFacts'); f.textContent = '';
-    function fact(k, v) {
-      var b = el('span', 'fact');
-      b.append(el('i', '', k), el('b', '', v));
-      f.appendChild(b);
-    }
-    fact('COST', c.cost == null ? '-' : String(c.cost));
-    fact('ELEMENT', elKo(c.element));
-    if (c.atk != null) fact('ATK', String(st.atk));
-    if (c.hp != null) fact('HP', String(st.hp));
-    if (o && o.lv > 1) fact('LV', String(o.lv));
+    $('#detOwn').textContent = v.owned ? v.owned + '장' : '미보유';
+    var strongOf = BEATS[c.element], weakOf = null;
+    Object.keys(BEATS).forEach(function (k) { if (BEATS[k] === c.element) weakOf = k; });
+    $('#detStrong').textContent = c.element ? (EL_KO[strongOf] || '—') : '없음';
+    $('#detWeak').textContent   = c.element ? (EL_KO[weakOf] || '—')   : '없음';
 
-    var et = window.DGABattle && DGABattle.effectText ? DGABattle.effectText(c.effect) : null;
-    $('#cardDlgEffName').textContent = et ? et.short : '효능 없음';
-    $('#cardDlgEff').textContent = et ? et.long
-      : (c.kind === 'unit' ? '특별한 효능 없이 수치로만 싸운다.' : '아직 효능이 정해지지 않았다.');
-    $('#cardDlgOwn').textContent = o ? ('가지고 있다 · ' + o.n + '장') : '아직 없는 카드다.';
-    $('#cardDlg').showModal();
+    var inDeck = S.deck.indexOf(c.id) >= 0;
+    var add = $('#detDeck');
+    add.disabled = !v.owned;
+    add.querySelector('.lab').textContent = inDeck ? '덱에서 빼기' : '덱에 추가';
+    $('#detGrow').disabled = !v.owned;
+    $('#detMsg').textContent = '';
+    setView('carddet');
+  }
+  function detDeckToggle() {
+    if (!detCard) return;
+    var i = S.deck.indexOf(detCard.id);
+    if (i >= 0) { S.deck.splice(i, 1); $('#detMsg').textContent = '덱에서 뺐다.'; }
+    else if (S.deck.length >= 30) { $('#detMsg').textContent = '덱은 30장까지다.'; return; }
+    else { S.deck.push(detCard.id); $('#detMsg').textContent = '덱에 넣었다. (' + S.deck.length + ' / 30)'; }
+    save();
+    var inDeck = S.deck.indexOf(detCard.id) >= 0;
+    $('#detDeck').querySelector('.lab').textContent = inDeck ? '덱에서 빼기' : '덱에 추가';
+    paintDex(); paintDeck();
   }
 
   /* ── 홈 ──────────────────────────────────────── */
@@ -350,7 +442,7 @@
     paintRing();
     var list = D.cards.cards.filter(function (c) { return dexFam === '전체' || c.family === dexFam; });
     var g = $('#dexGrid'); g.textContent = '';
-    list.forEach(function (c) { g.appendChild(cardEl(c, { always: true, detail: true })); });
+    list.forEach(function (c) { g.appendChild(cardEl(c, { detail: true })); });
     var have = D.cards.cards.filter(function (c) { return S.owned[c.id]; }).length;
     $('#dexCount').innerHTML = have + ' <span style="color:var(--t3)">/ ' + D.cards.cards.length + '</span>';
     $('#dexBar').style.width = Math.round(have / D.cards.cards.length * 100) + '%';
@@ -947,11 +1039,28 @@
     return c;
   }
   function paintSummon() {
-    $('#cost1').textContent = fmt(D.economy.summon.cost1);
-    $('#cost12').textContent = fmt(D.economy.summon.cost12);
-    $('#pityVal').textContent = S.pity;
-    $('#pityMax').textContent = D.economy.summon.pity;
-    $('#pityBar').style.width = Math.min(100, S.pity / D.economy.summon.pity * 100) + '%';
+    var e = D.economy.summon;
+    $('#cost1').textContent = '◆ ' + fmt(e.cost1);
+    $('#cost12').textContent = '◆ ' + fmt(e.cost12) + ' · ★3 GUARANTEED';
+    var set = function (id, v) { var n = $(id); if (n) n.textContent = v; };
+    set('#pityVal', S.pity); set('#pityVal2', S.pity);
+    set('#pityMax', e.pity);
+    var bar = $('#pityBar');
+    if (bar) bar.style.width = Math.min(100, S.pity / e.pity * 100) + '%';
+
+    /* PICK UP ★3 — 작은 카드 셋. 가운데가 주인공이다. */
+    var row = $('#pickupRow');
+    if (row) {
+      row.textContent = '';
+      var three = D.cards.cards.filter(function (c) { return c.grade === 3 && c.family !== 'COMMON'; });
+      [0, 1, 2].forEach(function (k) {
+        var c = three[(k * 7) % three.length];
+        if (!c) return;
+        var w = el('span', 'pick p' + k);
+        w.appendChild(cardEl(c, { always: true, detail: true }));
+        row.appendChild(w);
+      });
+    }
   }
   var lastPull = 1;
   function doPull(n) {
@@ -1200,7 +1309,11 @@
       if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
     });
     $('#profileClose').addEventListener('click', function () { dlg.close(); });
-    $('#cardDlgClose').addEventListener('click', function () { $('#cardDlg').close(); });
+    $('#detDeck').addEventListener('click', detDeckToggle);
+    $('#detGrow').addEventListener('click', function () {
+      if (!detCard) return;
+      setView(null); setTab('cards'); setSeg('cards', 'grow');
+    });
     setInterval(function () { if (curTab === 'daily') paintSlots(); }, 10000);
   }
   function postSay() {

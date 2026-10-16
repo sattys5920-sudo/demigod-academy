@@ -7,9 +7,9 @@
 <title>데미갓 아카데미</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;600&display=swap">
-<link rel="stylesheet" href="theme.css?v=bc1a0fc9">
-<link rel="stylesheet" href="app.css?v=17619140">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Chakra+Petch:wght@500;700&family=Gothic+A1:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="theme.css?v=a31f4c2a">
+<link rel="stylesheet" href="app.css?v=0d16bd6e">
 </head>
 <body>
 
@@ -33,17 +33,15 @@
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
     </span>
     <h1 id="screenTitle">신탁</h1>
+    <span class="en" id="screenEn">// ORACLE</span>
     <span class="spacer"></span>
 
     <div class="icons">
-      <button type="button" class="iconbtn" id="profileOpen" aria-label="프로필">
-        <span class="ava s" id="hdAva" aria-hidden="true" style="border:0; width:100%; height:100%"></span>
-      </button>
       <button type="button" class="iconbtn" aria-label="우편함 · 읽지 않음 있음">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
         <span class="dot" aria-hidden="true"></span>
       </button>
-      <button type="button" class="iconbtn" aria-label="설정">
+      <button type="button" class="iconbtn" id="profileOpen" aria-label="설정과 프로필">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10"/><path d="M18 7h2"/><path d="M4 17h4"/><path d="M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg>
       </button>
     </div>
@@ -241,28 +239,40 @@
       </div>
 
       <div class="segpanel" id="seg-summon">
-        <article class="panel banner">
-          <div class="txt">
-            <span class="eyebrow">BANNER 01</span>
-            <h2>심야의 폭풍</h2>
-            <p class="hint">★3 확률 3%. 50회 안에 ★3 하나는 반드시 나온다.</p>
+
+        <!-- 배너 — 사선 평행사변형 안에 키 일러스트, 시안·검정 이중 테두리 -->
+        <section class="banner" aria-labelledby="bannerTitle">
+          <div class="banner-art">
+            <span class="banner-tag">BANNER_01 · LIMITED</span>
+            <img src="art/cards/zeus-4.webp" alt="" aria-hidden="true">
           </div>
-          <div class="packfan" aria-hidden="true">
-            <span class="card"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art sealed" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
-            <span class="card pinkish"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art sealed" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
-            <span class="card"><span class="card-top"><span class="cost">?</span><span class="fam">SEALED</span></span><span class="art sealed" style="height:124px"><span class="glyph">?</span></span><span class="cname">봉인된 카드</span></span>
-          </div>
-        </article>
-        <div class="pulls">
-          <button type="button" class="pull" data-pull="1"><span class="big">1장</span><span class="cost-tag" id="cost1">—</span></button>
-          <button type="button" class="pull ten" data-pull="12"><span class="big">12장 팩</span><span class="cost-tag" id="cost12">—</span></button>
-        </div>
-        <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--pink);margin:0"></p>
-        <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:14px"><h2>천장</h2><span class="spacer"></span>
-            <span class="count"><span id="pityVal">0</span> <span style="color:var(--t3)">/ <span id="pityMax">50</span></span></span></div>
-          <div class="bar pinkbar" role="img" aria-label="천장"><i id="pityBar" style="width:0%"></i></div>
+          <h2 class="banner-ttl" id="bannerTitle">
+            <span class="l1">심야의</span><span class="l2">폭풍</span>
+          </h2>
+          <dl class="banner-odds">
+            <div><dt>★3 RATE</dt><dd>3.00%</dd></div>
+            <div><dt>PITY</dt><dd><span id="pityVal2">0</span>/50</dd></div>
+          </dl>
         </section>
+
+        <!-- PICK UP ★3 -->
+        <section class="pickup" aria-labelledby="pickupTitle">
+          <h3 class="pickup-h" id="pickupTitle">PICK UP <b>★3</b></h3>
+          <div class="pickup-row" id="pickupRow"></div>
+        </section>
+
+        <!-- 주 버튼 쌍 -->
+        <div class="btnpair">
+          <button type="button" class="btn" data-pull="1">
+            <span class="lab">1장<span class="sub" id="cost1">◆ —</span></span>
+          </button>
+          <button type="button" class="btn fill" data-pull="12">
+            <span class="lab">12장 팩<span class="sub" id="cost12">◆ — · ★3 GUARANTEED</span></span>
+          </button>
+        </div>
+
+        <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--pink);margin:0"></p>
+
       </div>
 
       <div class="segpanel" id="seg-goods" hidden>
@@ -318,6 +328,29 @@
 </div>
 
 <!-- ══ 풀스크린 · 연대기 ═══════════════════════════ -->
+<!-- 카드 상세 -->
+<div class="full" id="carddet" hidden>
+  <div class="topbar">
+    <button type="button" class="exit" data-close="carddet" aria-label="뒤로가기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+    </button>
+    <span class="ttl"><span class="n">카드 상세</span><span class="s" id="detNo">—</span></span>
+  </div>
+  <div class="detbody">
+    <div class="detcard" id="detCard"></div>
+    <dl class="detfacts">
+      <div><dt>보유</dt><dd id="detOwn">—</dd></div>
+      <div><dt>강함</dt><dd id="detStrong">—</dd></div>
+      <div><dt>약함</dt><dd id="detWeak">—</dd></div>
+    </dl>
+    <div class="btnpair">
+      <button type="button" class="btn" id="detGrow"><span class="lab">승급</span></button>
+      <button type="button" class="btn fill" id="detDeck"><span class="lab">덱에 추가</span></button>
+    </div>
+    <p class="msg" id="detMsg" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
 <div class="full" id="chron" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="chron" aria-label="연대기 닫기">
@@ -482,25 +515,6 @@
 </dialog>
 
 <!-- ══ 시간표 걸기 ═════════════════════════════════ -->
-<dialog class="dlg" id="cardDlg" aria-labelledby="cardDlgName">
-  <div class="cardzoom" id="cardDlgArt" aria-hidden="true"></div>
-  <div class="dlg-hd" style="margin-top:13px">
-    <span class="who">
-      <span class="n" id="cardDlgName">—</span>
-      <span class="r" id="cardDlgMeta">—</span>
-    </span>
-  </div>
-  <div class="facts" id="cardDlgFacts"></div>
-  <div class="effbox">
-    <span class="eyebrow" id="cardDlgEffName">—</span>
-    <p class="hint" id="cardDlgEff" style="margin-top:5px">—</p>
-  </div>
-  <p class="hint" id="cardDlgOwn" style="font-size:12px">—</p>
-  <div class="dlg-acts">
-    <button type="button" class="btn ghost block" id="cardDlgClose"><span>닫기</span></button>
-  </div>
-</dialog>
-
 <dialog class="dlg" id="slotDlg" aria-labelledby="slotDlgTitle">
   <div class="dlg-hd">
     <span class="ic" aria-hidden="true" style="width:56px;height:56px;flex:0 0 56px;border-radius:50%;background:var(--lime);border:4px solid var(--line);display:flex;align-items:center;justify-content:center">
@@ -512,9 +526,9 @@
 </dialog>
 
 <script src="art.js?v=2669a907"></script>
-<script src="battle.js?v=d09f908c"></script>
-<script src="app.js?v=2d9ca94f"></script>
-<script type="module" src="app-auth.js?v=3e0d0c7a"></script>
+<script src="battle.js?v=2fdfbaca"></script>
+<script src="app.js?v=f2874e6d"></script>
+<script type="module" src="app-auth.js?v=eaa45a43"></script>
 
 </body>
 </html>

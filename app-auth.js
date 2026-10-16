@@ -41,13 +41,15 @@ onAuthStateChanged(auth, async (user) => {
   const god = godOf(profile.god);
   UI.player = { name: profile.name, profile, fam: god.key.toUpperCase() };
 
-  document.getElementById('profileName').textContent = profile.name;
-  document.getElementById('profileFam').textContent = god.key.toUpperCase() + ' · ' + god.line;
-  document.getElementById('battleMe').textContent = profile.name;
+  /* 화면이 바뀌며 사라진 자리가 있을 수 있다. 하나가 없다고 인증이
+     통째로 죽으면 게이트에 갇힌다 — 전에 그렇게 당했다. */
+  const put = (id, text) => { const n = document.getElementById(id); if (n) n.textContent = text; };
+  put('profileName', profile.name);
+  put('profileFam', god.key.toUpperCase() + ' · ' + god.line);
+  put('battleMe', profile.name);
 
-  paintAvatar(document.getElementById('hdAva'), profile, 46);
-  paintAvatar(document.getElementById('dlgAva'), profile, 88);
-  paintAvatar(document.getElementById('composerAva'), profile, 56);
+  const ava = (id, px) => { const n = document.getElementById(id); if (n) paintAvatar(n, profile, px); };
+  ava('hdAva', 46); ava('dlgAva', 88); ava('composerAva', 56);
 
   let store = { initial: null, put: null, cloud: false };
   try {

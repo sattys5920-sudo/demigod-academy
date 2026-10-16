@@ -85,23 +85,23 @@
      규칙을 고칠 때 설명이 같이 안 고쳐져 둘이 어긋난다.
      short 는 카드 위에 한 줄로, long 은 자세히 보기와 손패에 쓴다. */
   var TEXT = {
-    buff_atk:   function (n) { return ['공격 +' + n,     '내 인물 하나의 공격력이 ' + n + ' 오른다.']; },
-    buff_all:   function ()  { return ['전체 +1/+1',     '내 인물 전부의 공격력과 체력이 1씩 오른다.']; },
-    damage:     function (n) { return ['피해 ' + n,      '상대 인물 하나에 ' + n + ' 피해를 준다.']; },
-    damage_all: function (n) { return ['전체 피해 ' + n, '상대 인물 전부에 ' + n + ' 피해를 준다.']; },
-    heal:       function (n) { return ['회복 ' + n,      '내 본체 체력을 ' + n + ' 회복한다.']; },
-    draw:       function (n) { return ['뽑기 ' + n,      '카드를 ' + n + '장 뽑는다.']; },
-    gain_ichor: function (n) { return ['이코르 +' + n,   '이번 턴에 쓸 이코르가 ' + n + ' 늘어난다.']; },
-    shield:     function ()  { return ['보호막',         '피해를 한 번 흘려 넘긴다. 한 번 쓰면 사라진다.']; },
-    guard:      function ()  { return ['수비 자세',      '눕혀서 나온다. 받는 피해가 절반이고, 대신 반격하지 않는다.']; },
-    pierce:     function ()  { return ['관통',           '수비 자세로 선 상대도 절반으로 깎이지 않고 그대로 때린다.']; },
-    counter:    function (n) { return ['반사 ' + n,      '엎어 둔다. 상대가 공격해 오면 그 인물에게 ' + n + ' 피해를 돌려준다.']; },
-    negate:     function ()  { return ['공격 무효',      '엎어 둔다. 상대의 공격 한 번을 통째로 없앤다.']; }
+    buff_atk:   function (n) { return ['공격 +' + n,     '내 인물 하나의 공격력이 ' + n + ' 오른다.',          '고양',      '등장']; },
+    buff_all:   function ()  { return ['전체 +1/+1',     '내 인물 전부의 공격력과 체력이 1씩 오른다.',          '군세',      '등장']; },
+    damage:     function (n) { return ['피해 ' + n,      '상대 인물 하나에 ' + n + ' 피해를 준다.',            '일격',      '발동']; },
+    damage_all: function (n) { return ['전체 피해 ' + n, '상대 인물 전부에 ' + n + ' 피해를 준다.',            '진노',      '발동']; },
+    heal:       function (n) { return ['회복 ' + n,      '내 본체 체력을 ' + n + ' 회복한다.',                 '치유',      '발동']; },
+    draw:       function (n) { return ['뽑기 ' + n,      '카드를 ' + n + '장 뽑는다.',                         '계시',      '발동']; },
+    gain_ichor: function (n) { return ['이코르 +' + n,   '이번 턴에 쓸 이코르가 ' + n + ' 늘어난다.',          '이코르의 샘', '발동']; },
+    shield:     function ()  { return ['보호막',         '피해를 한 번 흘려 넘긴다. 한 번 쓰면 사라진다.',      '가호의 막',  '지속']; },
+    guard:      function ()  { return ['수비 자세',      '눕혀서 나온다. 받는 피해가 절반이고, 대신 반격하지 않는다.', '방벽',  '지속']; },
+    pierce:     function ()  { return ['관통',           '수비 자세로 선 상대도 절반으로 깎이지 않고 그대로 때린다.',  '관통',  '지속']; },
+    counter:    function (n) { return ['반사 ' + n,      '엎어 둔다. 상대가 공격해 오면 그 인물에게 ' + n + ' 피해를 돌려준다.', '되갚음', '반응']; },
+    negate:     function ()  { return ['공격 무효',      '엎어 둔다. 상대의 공격 한 번을 통째로 없앤다.',       '무효 선언', '반응']; }
   };
   function effectText(eff) {
     if (!eff || !TEXT[eff.key]) return null;
     var t = TEXT[eff.key](eff.n || 1);
-    return { short: t[0], long: t[1] };
+    return { short: t[0], long: t[1], name: t[2], trigger: t[3] };
   }
 
   /* ── 능력 ──────────────────────────────────── */

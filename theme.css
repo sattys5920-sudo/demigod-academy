@@ -4,51 +4,66 @@
    톤: 검정 · 흰 아웃라인 · 주홍 한 점. 둥근 알약 대신 잘린 모서리와 기울임.
    ══════════════════════════════════════════════════════════ */
 :root{
-  --bg:#0B0910;
-  --bg2:#141019;
-  --panel:#1A151F;
-  --ink:#0B0910;
+  /* ── 디자인 시스템 ───────────────────────────
+     네이비와 시안 두 색으로 절제한다. 색은 카드 그림이 담당한다.
+     이름은 그대로 두고 값만 바꿔, 앱 전체가 한 번에 따라오게 한다. */
+  --bg:#030820;          /* 기본 배경 — 거의 검은 네이비 */
+  --bg2:#01040f;         /* 폰 바깥 */
+  --panel:#081a52;       /* 패널 · 사선 띠 */
+  --card-inner:#0b1638;  /* 카드 안쪽 바탕 */
+  --ink:#030820;
   --line:#FFFFFF;
-  --hot:#FF2B3E;
-  --gold:#FFC53D;
-  --t1:#F2EDF5;
-  --t2:#B9AEC4;
-  --t3:#8C7F99;
-  --dim:#352B3E;
+  --neon:#3fe0ff;        /* 메인 포인트 · 활성 */
+  --hot:#3fe0ff;         /* 옛 이름 — 이제 네온을 가리킨다 */
+  --accent-blue:#2f6bff; /* 글자 그림자 오프셋 */
+  --alert:#ff3d8b;       /* 알림 점 */
+  --cost:#ff3d5a;        /* 카드 비용 칸 */
+  --paper:#f4f1e8;       /* 카드 능력 박스 바탕 */
+  --gold:#ffd23f;        /* 재화 · 별 (번개 색과 같다) */
+  --t1:#eaf4ff;
+  --t2:#8fb3d9;          /* text-sub */
+  --t3:#7f9cc7;          /* text-muted */
+  --dim:#14306b;
 
-  --app:480px;          /* 앱 폭 */
-  --cut:14px;           /* 잘린 모서리 */
+  /* 속성 */
+  --el-bolt:#ffd23f;
+  --el-water:#3fe0ff;
+  --el-fire:#ff7a59;
+  --el-earth:#d9b36c;
+  --el-wind:#a8f0c6;
+  --el-none:#6b84b3;
+
+  --glow:0 0 12px rgba(63,224,255,.7);
+  --skew:-14deg;
+
+  --app:480px;
+  --cut:14px;
   --cut-s:9px;
-  --hd:64px;
-  --tb:68px;
+  --hd:70px;
+  --tb:72px;
 
-  /* 네 얼굴을 역할대로 나눠 쓴다. 굵기로 위계를 만들지 않는다 —
-     굵게 하면 한글이 뭉개져 안 읽히므로, 얼굴·크기·색으로만 나눈다.
-
-     --disp  Black Han Sans · 간판. 한 굵기뿐이고 좁고 세다. 20px 이상만.
-     --ui    Do Hyeon · 버튼·탭·카드 이름. 한 굵기뿐이라 절대 뭉개지지 않는다.
-     --num   Anton · 라틴 마이크로 라벨과 숫자. 블랙 한 산스의 라틴 짝.
-     --ui-s  13px 미만 라벨. Do Hyeon 은 이 크기에서 답답하므로 본문체를 쓴다.
-     --body  IBM Plex Sans KR · 본문. 네모진 끝과 각진 ㅇ 이 있어 평범하지 않다. */
-  --disp:'Black Han Sans','Do Hyeon',sans-serif;
-  --ui:'Do Hyeon','IBM Plex Sans KR',sans-serif;
-  --num:'Anton','Do Hyeon',sans-serif;
-  --ui-s:'IBM Plex Sans KR',system-ui,sans-serif;
-  --body:'IBM Plex Sans KR',system-ui,sans-serif;
+  /* 제목·버튼·카드 이름 Gasoek One · 숫자와 영문 라벨 Chakra Petch ·
+     본문 Gothic A1. 시스템 기본 폰트는 쓰지 않는다. */
+  --disp:'Gasoek One','Gothic A1',sans-serif;
+  --ui:'Gothic A1',sans-serif;
+  --num:'Chakra Petch','Gothic A1',sans-serif;
+  --ui-s:'Gothic A1',sans-serif;
+  --body:'Gothic A1',sans-serif;
 }
+
 
 /* --disp · --ui · --num 은 굵기가 하나뿐인 얼굴이다. h1~h6 이나 strong 은
    기본이 굵게라, 브라우저가 없는 굵기를 억지로 만들어(가짜 굵게) 한글을
    뭉갠다. 위계는 굵기가 아니라 얼굴·크기·색으로만 준다. */
 h1,h2,h3,h4,h5,h6{font-weight:400}
-strong,b{font-weight:600}
+strong,b{font-weight:700}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 html,body{height:100%}
 body{
   margin:0; background:var(--bg2); color:var(--t1);
-  font-family:var(--body); font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased;
+  font-family:var(--body); font-weight:500; line-height:1.6; -webkit-font-smoothing:antialiased;
   overscroll-behavior-y:none;
 }
 [hidden]{display:none !important}
@@ -56,26 +71,34 @@ button,input,textarea,select{font-family:inherit; font-size:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--gold); outline-offset:2px}
 
-/* 넓은 화면 — 폰을 가운데 세우고 둘레는 사선 줄무늬 */
+/* 배경 — -18° 사선 띠와 가는 네온 라인으로 속도감을 준다 */
 body::before{
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
   background-color:var(--bg2);
-  background-image:repeating-linear-gradient(
-    -45deg, #19131F 0 18px, #141019 18px 36px);
+  background-image:repeating-linear-gradient(-18deg,
+    #05103a 0 26px, #01040f 26px 52px);
 }
 .app{
   position:relative; z-index:1;
   width:100%; max-width:var(--app); margin:0 auto; min-height:100dvh;
   background:var(--bg); display:flex; flex-direction:column;
-  box-shadow:0 0 0 3px var(--line);
+  box-shadow:0 0 0 2px var(--neon);
 }
+/* 화면 바닥에도 사선 띠를 깐다 — 위는 패널 색, 사이에 네온 실선 */
+.app::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    repeating-linear-gradient(-18deg, rgba(8,26,82,.55) 0 60px, transparent 60px 150px),
+    repeating-linear-gradient(-18deg, rgba(63,224,255,.1) 0 1px, transparent 1px 150px);
+}
+.app > *{position:relative; z-index:1}
 @media (max-width:520px){ .app{box-shadow:none} }
 
 /* 하프톤 — 페르소나식 망점 */
 .halftone{
   position:fixed; inset:0; pointer-events:none; z-index:40;
-  background-image:radial-gradient(#FFFFFF 1.1px, transparent 1.2px);
-  background-size:12px 12px; opacity:.085;
+  background-image:radial-gradient(#3fe0ff 1px, transparent 1.1px);
+  background-size:13px 13px; opacity:.055;
 }
 
 /* ── 모양 조각 ─────────────────────────────────── */
@@ -91,90 +114,118 @@ body::before{
 
 /* ── 패널 ──────────────────────────────────────── */
 .panel{
-  position:relative; background:var(--panel); border:3px solid var(--line);
+  position:relative; background:var(--panel); border:1.5px solid rgba(63,224,255,.45);
   padding:16px 16px 18px;
   clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
                     100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
 }
-.panel.flat{padding:13px 14px; border-width:2px}
-.panel.hot{background:var(--hot); color:var(--ink); border-color:var(--line)}
+.panel.flat{padding:13px 14px}
+.panel.hot{background:var(--neon); color:var(--bg); border-color:var(--line)}
 .panel.ink{background:var(--ink)}
 
-/* 제목 — 살짝 기울인 검정 띠 */
+/* 제목 — 기울인 네온 띠 */
 .slab{
   display:inline-flex; align-items:center; gap:8px;
-  padding:5px 14px 6px; background:var(--line); color:var(--ink);
-  transform:skewX(-9deg); margin-left:-4px;
+  padding:5px 14px 6px; background:var(--neon); color:var(--bg);
+  transform:skewX(var(--skew));
 }
-.slab > *{transform:skewX(9deg)}
-.slab .k{font-family:var(--num); font-size:9px; letter-spacing:.18em}
-.slab h2{margin:0; font-family:var(--ui); font-weight:400; font-size:15px; line-height:1.15}
-.slab.hot{background:var(--hot); color:var(--line)}
+.slab > *{transform:skewX(14deg)}
+.slab .k{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px}
+.slab h2{margin:0; font-family:var(--disp); font-weight:400; font-size:15px; line-height:1.15}
+.slab.hot{background:var(--line); color:var(--bg)}
 
-.eyebrow{font-family:var(--num); font-size:10.5px; letter-spacing:.2em; color:var(--hot)}
+.eyebrow{font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:2.5px; color:var(--neon)}
 .sect-h{display:flex; align-items:center; gap:10px}
-.sect-h h2{margin:0; font-family:var(--ui); font-weight:400; font-size:16px; color:var(--line)}
+.sect-h h2{margin:0; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line)}
 /* 한글은 음절 단위로 끊으면 '쪽지시험 · 장 / 비' 처럼 낱말이 쪼개진다.
    낱말 단위로 끊되, 끊을 데가 없는 긴 문자열은 그때만 쪼갠다. */
-.hint{margin:0; font-size:13px; font-weight:400; color:var(--t2); line-height:1.75;
+.hint{margin:0; font-size:13px; font-weight:500; color:var(--t2); line-height:1.75;
       word-break:keep-all; overflow-wrap:break-word}
-.count{font-family:var(--num); font-size:13px; color:var(--hot); font-variant-numeric:tabular-nums}
+.count{font-family:var(--num); font-weight:700; font-size:13px; color:var(--neon); font-variant-numeric:tabular-nums}
 
-/* ── 버튼 — 기울인 평행사변형 + 단단한 그림자 ──── */
+/* ── 버튼 ──────────────────────────────────────────
+   주 버튼 쌍은 사선으로 맞물린다 — 왼쪽은 외곽선형, 오른쪽은 채움형.
+   겹쳐 놓아야 '맞물렸다' 가 되므로 오른쪽에 음수 여백을 준다. */
 .btn{
   position:relative; display:inline-flex; align-items:center; justify-content:center;
-  min-height:44px; padding:0 20px; border:3px solid var(--line);
-  background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:400; font-size:15px; line-height:1;
-  transform:skewX(-9deg); box-shadow:5px 5px 0 var(--line);
+  min-height:46px; padding:0 20px; border:1.5px solid var(--neon);
+  background:transparent; color:var(--neon);
+  font-family:var(--disp); font-weight:400; font-size:15px; line-height:1;
+  transform:skewX(var(--skew));
 }
-.btn > *{transform:skewX(9deg)}
-.btn:active{transform:skewX(-9deg) translate(3px,3px); box-shadow:2px 2px 0 var(--line)}
-.btn.ghost{background:transparent; color:var(--line); border-color:var(--dim); box-shadow:none}
-.btn.ghost:active{transform:skewX(-9deg); border-color:var(--line)}
-.btn.white{background:var(--line); color:var(--ink)}
-.btn.gold{background:var(--gold); color:var(--ink)}
+.btn > *{transform:skewX(14deg)}
+.btn:active{transform:skewX(var(--skew)) translate(2px,2px)}
+.btn.ghost{border-color:rgba(63,224,255,.4); color:var(--t2)}
+.btn.white{background:var(--line); border-color:var(--line); color:var(--bg)}
+.btn.gold{background:var(--gold); border-color:var(--gold); color:var(--bg)}
 .btn.block{width:100%}
-.btn.lg{min-height:58px; font-family:var(--disp); font-weight:400; font-size:22px; padding:0 26px; box-shadow:7px 7px 0 var(--line)}
-.btn[disabled]{opacity:.45; box-shadow:5px 5px 0 var(--dim)}
-.btn[disabled]:active{transform:skewX(-9deg)}
+.btn.lg{min-height:56px; font-size:20px; padding:0 24px}
+.btn[disabled]{opacity:.4}
+.btn[disabled]:active{transform:skewX(var(--skew))}
+
+/* 강조형 — 시안으로 채우고 빛을 준다 */
+.btn.fill{background:var(--neon); border-color:var(--neon); color:#02122b;
+          box-shadow:var(--glow)}
+
+/* 맞물린 한 쌍 */
+.btnpair{display:flex; align-items:stretch}
+.btnpair > .btn{transform:none; flex:0 0 auto; min-height:54px}
+.btnpair > .btn > *{transform:none}
+.btnpair > .btn:first-child{
+  flex:1 1 42%; justify-content:center; padding-right:26px;
+  clip-path:polygon(0 0, 100% 0, 84% 100%, 0 100%);
+}
+.btnpair > .btn:last-child{
+  flex:1 1 58%; margin-left:-24px; padding-left:30px;
+  clip-path:polygon(16% 0, 100% 0, 100% 100%, 0 100%);
+}
+.btnpair .sub{display:block; font-family:var(--num); font-weight:700; font-size:9px;
+              letter-spacing:2px; opacity:.85; margin-top:3px}
+.btnpair .lab{display:flex; flex-direction:column; align-items:center; line-height:1.1}
 
 /* ── 칩 ────────────────────────────────────────── */
 .chip{
-  display:inline-flex; align-items:center; gap:5px; min-height:26px; padding:0 10px;
-  border:2px solid var(--dim); color:var(--t2);
-  font-family:var(--num); font-size:10px; letter-spacing:.06em;
-  clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+  display:inline-flex; align-items:center; gap:5px; min-height:26px; padding:0 11px;
+  border:1.5px solid rgba(63,224,255,.4); color:var(--t2); background:transparent;
+  font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:2px;
+  transform:skewX(var(--skew));
 }
-.chip.hot{background:var(--hot); border-color:var(--line); color:var(--line)}
-.chip.gold{background:var(--gold); border-color:var(--line); color:var(--ink)}
-.chip.on{background:var(--line); border-color:var(--line); color:var(--ink)}
+.chip > *{transform:skewX(14deg)}
+.chip.hot{background:var(--neon); border-color:var(--neon); color:#02122b}
+.chip.gold{background:var(--gold); border-color:var(--gold); color:#2a1d00}
+.chip.on{background:var(--neon); border-color:var(--neon); color:#02122b; box-shadow:var(--glow)}
 
 /* ── 막대 ──────────────────────────────────────── */
-.bar{height:13px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
-.bar > i{display:block; height:100%; background:var(--hot)}
-.bar.gold > i{background:var(--gold)}
-.bar.thin{height:9px; border-width:2px}
+.bar{height:13px; border:1.5px solid var(--neon); background:var(--ink); overflow:hidden;
+     transform:skewX(-30deg)}
+.bar > i{display:block; height:100%; background:var(--neon); box-shadow:var(--glow)}
+.bar.gold > i{background:var(--gold); box-shadow:0 0 10px rgba(255,210,63,.6)}
+.bar.thin{height:9px}
+/* 점선형 — 칸이 비어 있는 쪽을 점선으로 보여 준다 */
+.bar.dotted{
+  background-image:repeating-linear-gradient(90deg,
+    rgba(63,224,255,.28) 0 2px, transparent 2px 7px);
+}
 
 /* ── 입력 ──────────────────────────────────────── */
 .field{display:flex; flex-direction:column; gap:7px}
 .field label{font-family:var(--num); font-size:10px; letter-spacing:.16em; color:var(--t3)}
 input[type=text],input[type=password],input[type=email]{
   width:100%; min-height:48px; padding:0 14px;
-  border:2px solid var(--dim); background:var(--ink); color:var(--t1);
+  border:1.5px solid var(--dim); background:var(--ink); color:var(--t1);
   font-size:15px; font-weight:500;
 }
-input:focus{border-color:var(--hot); outline:none}
+input:focus{border-color:var(--neon); outline:none; box-shadow:var(--glow)}
 input::placeholder{color:var(--t3)}
 
 /* ── 아바타 ────────────────────────────────────── */
 .ava{
   display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
-  border:2px solid var(--line); overflow:hidden; background:var(--panel);
+  border:1.5px solid var(--neon); overflow:hidden; background:var(--panel);
   clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
 .ava.tone-lime{background:var(--gold)}
-.ava.tone-pink{background:var(--hot)}
+.ava.tone-pink{background:var(--neon)}
 .ava img{width:100%; height:100%; object-fit:cover; display:block}
 .ava.xs{width:28px; height:28px}
 .ava.s{width:38px; height:38px}
@@ -182,25 +233,25 @@ input::placeholder{color:var(--t3)}
 .ava.l{width:76px; height:76px; border-width:3px}
 
 /* ── 메시지 ────────────────────────────────────── */
-.msg{min-height:20px; font-size:13px; font-weight:500; color:var(--hot); line-height:1.6}
-.msg.ok{color:var(--gold)}
+.msg{min-height:20px; font-size:13px; font-weight:700; color:var(--alert); line-height:1.6}
+.msg.ok{color:var(--neon)}
 .empty{
-  padding:22px 16px; border:2px dashed var(--dim);
+  padding:22px 16px; border:1.5px dashed var(--dim);
   text-align:center; font-size:13px; font-weight:400; color:var(--t3); line-height:1.8;
 }
 
 /* ── 다이얼로그 ────────────────────────────────── */
 dialog.dlg{
-  width:min(var(--app), calc(100vw - 24px)); padding:20px; border:3px solid var(--line);
-  background:var(--panel); color:var(--t1); box-shadow:7px 7px 0 var(--hot);
+  width:min(var(--app), calc(100vw - 24px)); padding:20px; border:1.5px solid var(--neon);
+  background:var(--panel); color:var(--t1); box-shadow:10px 12px 0 #000, var(--glow);
   clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
                     100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
 }
-dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
+dialog.dlg::backdrop{background:rgba(3,8,32,.9)}
 .dlg-hd{display:flex; align-items:center; gap:12px; margin-bottom:14px}
 .dlg-hd .who{display:flex; flex-direction:column; gap:3px; min-width:0}
-.dlg-hd .who .n{font-family:var(--ui); font-weight:400; font-size:18px; color:var(--line); word-break:break-all}
-.dlg-hd .who .r{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
+.dlg-hd .who .n{font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); word-break:break-all}
+.dlg-hd .who .r{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2px; color:var(--t3)}
 .dlg-acts{display:flex; flex-direction:column; gap:9px}
 .dlg-acts > a{text-decoration:none}
 
@@ -211,7 +262,7 @@ dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
 }
 #gate .box{display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; max-width:300px}
 #gate .ring{
-  width:56px; height:56px; background:var(--hot); border:3px solid var(--line);
+  width:56px; height:56px; background:var(--neon); border:1.5px solid var(--line);
   display:flex; align-items:center; justify-content:center;
   clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
 }
@@ -219,12 +270,13 @@ dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
 #gate small{font-size:13px; font-weight:400; color:var(--t2); line-height:1.7}
 #gate a{
   min-height:44px; display:inline-flex; align-items:center; padding:0 18px;
-  border:3px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:400; font-size:15px; text-decoration:none; transform:skewX(-9deg);
+  border:1.5px solid var(--neon); background:var(--neon); color:#02122b;
+  font-family:var(--disp); font-weight:400; font-size:15px; text-decoration:none;
+  transform:skewX(var(--skew));
 }
-#gate a > *{transform:skewX(9deg)}
+#gate a > *{transform:skewX(14deg)}
 
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important}
-  .btn:active{transform:skewX(-9deg)}
+  .btn:active{transform:skewX(var(--skew))}
 }
