@@ -230,14 +230,54 @@
       });
     }
 
+    /* 효능 — 한 줄로. 설명문은 battle.js 가 쥐고 있다(규칙 옆). */
+    var et = window.DGABattle && DGABattle.effectText ? DGABattle.effectText(c.effect) : null;
+    if (et) stats.appendChild(el('span', 'eff', et.short));
+
     /* 그림 밑으로 글자가 녹아들게 — 띠를 하나로 묶는다 */
     var info = el('span', 'card-info');
     var line = el('span', 'card-line');
     line.append(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family), rank);
     info.append(line, name, stats);
     n.append(art, top, info);
+    if (opts.detail) {
+      n.classList.add('tappable');
+      n.addEventListener('click', function () { openCard(c); });
+    }
     if (!o && !opts.always) n.style.opacity = '.4';
     return n;
+  }
+
+  /* 카드 하나를 크게 펼친다 — 효능은 한 줄로 줄이면 뜻이 사라지는 것들이
+     있다(보호막·관통·수비 자세). 여기서는 문장 그대로 보여 준다. */
+  var KIND_KO = { unit: '인물', ward: '가호', oracle: '신탁', trap: '계략' };
+  function openCard(c) {
+    var o = S.owned[c.id], st = stat(c);
+    var art = $('#cardDlgArt'); art.textContent = '';
+    if (window.DGAArt) DGAArt.paint(art, c);
+    $('#cardDlgName').textContent = c.name;
+    $('#cardDlgMeta').textContent =
+      (c.family === 'COMMON' ? '공통' : c.family) + ' · ' + (KIND_KO[c.kind] || '') +
+      ' · ★' + (o ? (o.star || c.grade) : c.grade);
+
+    var f = $('#cardDlgFacts'); f.textContent = '';
+    function fact(k, v) {
+      var b = el('span', 'fact');
+      b.append(el('i', '', k), el('b', '', v));
+      f.appendChild(b);
+    }
+    fact('COST', c.cost == null ? '-' : String(c.cost));
+    fact('ELEMENT', elKo(c.element));
+    if (c.atk != null) fact('ATK', String(st.atk));
+    if (c.hp != null) fact('HP', String(st.hp));
+    if (o && o.lv > 1) fact('LV', String(o.lv));
+
+    var et = window.DGABattle && DGABattle.effectText ? DGABattle.effectText(c.effect) : null;
+    $('#cardDlgEffName').textContent = et ? et.short : '효능 없음';
+    $('#cardDlgEff').textContent = et ? et.long
+      : (c.kind === 'unit' ? '특별한 효능 없이 수치로만 싸운다.' : '아직 효능이 정해지지 않았다.');
+    $('#cardDlgOwn').textContent = o ? ('가지고 있다 · ' + o.n + '장') : '아직 없는 카드다.';
+    $('#cardDlg').showModal();
   }
 
   /* ── 홈 ──────────────────────────────────────── */
@@ -310,7 +350,7 @@
     paintRing();
     var list = D.cards.cards.filter(function (c) { return dexFam === '전체' || c.family === dexFam; });
     var g = $('#dexGrid'); g.textContent = '';
-    list.forEach(function (c) { g.appendChild(cardEl(c, { always: true })); });
+    list.forEach(function (c) { g.appendChild(cardEl(c, { always: true, detail: true })); });
     var have = D.cards.cards.filter(function (c) { return S.owned[c.id]; }).length;
     $('#dexCount').innerHTML = have + ' <span style="color:var(--t3)">/ ' + D.cards.cards.length + '</span>';
     $('#dexBar').style.width = Math.round(have / D.cards.cards.length * 100) + '%';
@@ -771,7 +811,10 @@
       top.append(el('span', 'hc', String(c.cost)),
                  el('span', 'hk', { unit: '인물', ward: '가호', oracle: '신탁', trap: '계략' }[c.kind] || ''));
       n.append(top, el('span', 'hn', c.name));
-      n.appendChild(el('span', 'hs', c.kind === 'unit' ? c.atk + ' / ' + c.hp : '효과'));
+      var het = window.DGABattle.effectText(c.effect);
+      n.appendChild(el('span', 'hs', c.kind === 'unit'
+        ? c.atk + ' / ' + c.hp
+        : (het ? het.short : '효과')));
       n.addEventListener('click', function () { tapHand(i); });
       hand.appendChild(n);
     });
@@ -787,6 +830,13 @@
     if (sel && sel.from === 'hand') {
       var c = G.me.hand[sel.i];
       if (!c) { sel = null; return; }
+      /* 고른 카드가 무슨 일을 하는지 — 내는 자리에서 읽혀야 소용이 있다 */
+      var pet = DGABattle.effectText(c.effect);
+      if (pet) {
+        var tip = el('span', 'actnote');
+        tip.append(el('b', '', pet.short), el('span', '', pet.long));
+        box.appendChild(tip);
+      }
       if (c.kind === 'unit') {
         box.appendChild(actBtn('세로로 세운다', function () { doPlay('atk'); }));
         box.appendChild(actBtn('가로로 눕힌다', function () { doPlay('def'); }));
@@ -916,7 +966,7 @@
     for (var i = 0; i < n; i++) got.push(drawOne());
     save(); paintSummon();
     var box = $('#revealCards'); box.textContent = '';
-    got.forEach(function (c) { box.appendChild(cardEl(c, { always: true })); });
+    got.forEach(function (c) { box.appendChild(cardEl(c, { always: true, detail: true })); });
     var best = got.reduce(function (m, c) { return Math.max(m, c.grade); }, 1);
     $('#revealTitle').textContent = best === 3 ? '★3 강림' : (best === 2 ? '괜찮은 손' : '소환 완료');
     $('#revealSub').textContent = (n > 1 ? n + '장 팩' : '1장')
@@ -1150,6 +1200,7 @@
       if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
     });
     $('#profileClose').addEventListener('click', function () { dlg.close(); });
+    $('#cardDlgClose').addEventListener('click', function () { $('#cardDlg').close(); });
     setInterval(function () { if (curTab === 'daily') paintSlots(); }, 10000);
   }
   function postSay() {

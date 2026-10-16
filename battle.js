@@ -80,6 +80,30 @@
     draw(g, g.who);
   }
 
+  /* ── 효능 설명 ────────────────────────────────
+     규칙을 집행하는 곳 바로 옆에 둔다. 화면 쪽에 따로 적어 두면
+     규칙을 고칠 때 설명이 같이 안 고쳐져 둘이 어긋난다.
+     short 는 카드 위에 한 줄로, long 은 자세히 보기와 손패에 쓴다. */
+  var TEXT = {
+    buff_atk:   function (n) { return ['공격 +' + n,     '내 인물 하나의 공격력이 ' + n + ' 오른다.']; },
+    buff_all:   function ()  { return ['전체 +1/+1',     '내 인물 전부의 공격력과 체력이 1씩 오른다.']; },
+    damage:     function (n) { return ['피해 ' + n,      '상대 인물 하나에 ' + n + ' 피해를 준다.']; },
+    damage_all: function (n) { return ['전체 피해 ' + n, '상대 인물 전부에 ' + n + ' 피해를 준다.']; },
+    heal:       function (n) { return ['회복 ' + n,      '내 본체 체력을 ' + n + ' 회복한다.']; },
+    draw:       function (n) { return ['뽑기 ' + n,      '카드를 ' + n + '장 뽑는다.']; },
+    gain_ichor: function (n) { return ['이코르 +' + n,   '이번 턴에 쓸 이코르가 ' + n + ' 늘어난다.']; },
+    shield:     function ()  { return ['보호막',         '피해를 한 번 흘려 넘긴다. 한 번 쓰면 사라진다.']; },
+    guard:      function ()  { return ['수비 자세',      '눕혀서 나온다. 받는 피해가 절반이고, 대신 반격하지 않는다.']; },
+    pierce:     function ()  { return ['관통',           '수비 자세로 선 상대도 절반으로 깎이지 않고 그대로 때린다.']; },
+    counter:    function (n) { return ['반사 ' + n,      '엎어 둔다. 상대가 공격해 오면 그 인물에게 ' + n + ' 피해를 돌려준다.']; },
+    negate:     function ()  { return ['공격 무효',      '엎어 둔다. 상대의 공격 한 번을 통째로 없앤다.']; }
+  };
+  function effectText(eff) {
+    if (!eff || !TEXT[eff.key]) return null;
+    var t = TEXT[eff.key](eff.n || 1);
+    return { short: t[0], long: t[1] };
+  }
+
   /* ── 능력 ──────────────────────────────────── */
   function myUnits(s) { return s.field.filter(Boolean); }
   function applyEffect(g, who, eff, selfUnit) {
@@ -205,6 +229,7 @@
     if (!canAttack(g, who, from, to)) return false;
     var s = g[who], ow = who === 'me' ? 'foe' : 'me', o = g[ow], u = s.field[from];
     u.acted = true;
+    if (springNegate(g, ow)) { cleanup(g); return true; }
 
     if (to === 'face') {
       var dmg = Math.max(1, Math.round(u.atk));
@@ -235,6 +260,22 @@
   }
 
   /* 상대가 공격하면 깔아 둔 계략이 터진다 */
+  /* 무효 계략은 피해가 들어가기 전에 터진다 — 그게 '무효' 의 뜻이다.
+     반사(counter)는 맞은 뒤에 돌려주지만, 이쪽은 공격 자체를 없앤다. */
+  function springNegate(g, ownerWho) {
+    var s = g[ownerWho];
+    for (var i = 0; i < s.traps.length; i++) {
+      var tr = s.traps[i];
+      if (!tr || tr.face !== 'down') continue;
+      var eff = tr.card.effect;
+      if (!eff || eff.key !== 'negate') continue;
+      s.traps[i] = null;
+      say(g, tr.card.name + ' 발동 — 공격이 무효가 됐다', ownerWho === 'me' ? 'good' : 'bad');
+      return true;
+    }
+    return false;
+  }
+
   function springTraps(g, ownerWho, attacker) {
     var s = g[ownerWho];
     for (var i = 0; i < s.traps.length; i++) {
@@ -304,6 +345,7 @@
   }
 
   var API = { create: create, playCard: playCard, useCoinIfUseful: useCoinIfUseful, flip: flip, attack: attack,
+              effectText: effectText,
               canPlay: canPlay, canAttack: canAttack, endTurn: endTurn, botTurn: botTurn,
               hasGuard: hasGuard, mul: mul, FIELD: FIELD, TRAPS: TRAPS, HP: HP };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
