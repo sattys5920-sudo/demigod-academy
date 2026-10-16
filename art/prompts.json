@@ -1,0 +1,686 @@
+[
+ {
+  "id": "cm-01",
+  "name": "사티로스",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a satyr with shaggy goat legs and small curled horns, mid-dance, playing a reed pipe. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-02",
+  "name": "님프",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a woodland nymph stepping out of a laurel trunk, hair streaming like leaves. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-03",
+  "name": "켄타우로스",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a centaur rearing on its hind legs, drawing a short recurve bow. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-04",
+  "name": "하르피이아",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a harpy with vast ragged wings and hooked talons, screaming mid-dive. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-05",
+  "name": "세이렌",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a siren perched on a sea rock, bird-bodied, mouth open in song. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-06",
+  "name": "키클롭스",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a one-eyed cyclops heaving a boulder above its head. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-07",
+  "name": "미노타우로스",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a minotaur lowering its massive bull horns to charge. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-08",
+  "name": "드리아드",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a dryad whose arms split into oak limbs, feet rooted into the ground. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-09",
+  "name": "파우누스",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a faun with slender horns, crouched and alert in tall grass. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-10",
+  "name": "라미아",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a lamia, woman above and a great serpent coil below, rising up. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-11",
+  "name": "엠푸사",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an empusa with one bronze leg and one donkey leg, hair burning. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-12",
+  "name": "트리톤",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a triton merman blowing a spiral conch horn, fish tail curling behind. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-13",
+  "name": "네레이드",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a nereid sea-nymph riding the crest of a breaking wave, arms spread. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-14",
+  "name": "고르곤",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a gorgon crowned with writhing snakes, caught mid-stare. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-15",
+  "name": "스핑크스",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a sphinx with a lion's body and feathered wings, seated, posing a riddle. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-16",
+  "name": "월계관",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a laurel victory wreath resting on an empty marble pedestal. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-17",
+  "name": "올리브 가지",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a single olive branch heavy with fruit, held out in offering. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-18",
+  "name": "리라",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an ancient tortoise-shell lyre, its strings still vibrating. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-19",
+  "name": "암브로시아",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a sealed clay amphora of ambrosia, divine vapour curling from its mouth. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-20",
+  "name": "넥타르",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a shallow kylix cup brimming with nectar, one drop falling from the rim. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-21",
+  "name": "아리아드네의 실",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a ball of thread unspooling away into a labyrinth corridor. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-22",
+  "name": "스틱스의 뱃삯",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a single worn obol coin held between two fingers above black water. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "cm-23",
+  "name": "황금 양털",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the Golden Fleece hung on an oak bough, a coiled serpent guarding it. Confident and forceful."
+ },
+ {
+  "id": "cm-24",
+  "name": "판도라의 상자",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: Pandora's jar with the lid ajar, a thin stream of shadow escaping. Confident and forceful."
+ },
+ {
+  "id": "cm-25",
+  "name": "케르베로스",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: Cerberus, three snarling hound heads straining against one chain. Confident and forceful."
+ },
+ {
+  "id": "cm-26",
+  "name": "키마이라",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a chimera — lion in front, goat rising from its back, serpent for a tail. Confident and forceful."
+ },
+ {
+  "id": "cm-27",
+  "name": "히드라",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a many-necked hydra, two new heads bursting from a severed stump. Confident and forceful."
+ },
+ {
+  "id": "cm-28",
+  "name": "그리핀",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a griffin with an eagle's head and a lion's haunches, wings flared wide. Confident and forceful."
+ },
+ {
+  "id": "cm-29",
+  "name": "하윤 · 명계의 문지기",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a solemn young gatekeeper of the underworld in a dark himation, a heavy key ring in hand, standing before a black doorway. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "cm-30",
+  "name": "미르 · 안개의 아이",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse parallel diagonal stripes. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a small figure half dissolved into drifting mist, only the eyes still sharp. Confident and forceful."
+ },
+ {
+  "id": "zeus-1",
+  "name": "번개를 쥔 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod gripping a crackling lightning bolt in both hands, chiton whipping in the wind. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "zeus-2",
+  "name": "독수리의 눈",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a great eagle's head in close profile, one unblinking eye filling the frame. Confident and forceful."
+ },
+ {
+  "id": "zeus-3",
+  "name": "하늘의 재판",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a thunderbolt striking a pair of scales from directly above. Confident and forceful."
+ },
+ {
+  "id": "zeus-4",
+  "name": "올림포스의 왕좌",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an immense empty marble throne on a cloud summit, lightning arcing across its back. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "hera-1",
+  "name": "맹세의 반지",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: two hands clasped over a plain gold ring, an oath being bound. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "hera-2",
+  "name": "공작의 눈",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a peacock fanning its full tail, every eye-spot open and staring. Confident and forceful."
+ },
+ {
+  "id": "hera-3",
+  "name": "질투의 서약",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a knotted cord drawing tight around a wedding crown. Confident and forceful."
+ },
+ {
+  "id": "hera-4",
+  "name": "왕관을 쓴 자",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a regal queen crowned in gold, peacock feathers rising behind her like a throne. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "poseidon-1",
+  "name": "파도의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod standing calf-deep in surf, a small wave curling up at their call. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "poseidon-2",
+  "name": "네레오 · 파도의 아들",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a sea-born youth with braided kelp hair riding a dolphin through spray. Confident and forceful."
+ },
+ {
+  "id": "poseidon-3",
+  "name": "흔들리는 땅",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a trident driven into the seabed, cracks radiating out through the stone. Confident and forceful."
+ },
+ {
+  "id": "poseidon-4",
+  "name": "바다의 주인",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the lord of the sea rising from a towering wave, trident raised, storm at his back. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "demeter-1",
+  "name": "이삭을 든 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod cradling a sheaf of wheat, barefoot in a ploughed furrow. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "demeter-2",
+  "name": "첫 수확",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a harvest basket overflowing with grain and split pomegranates. Confident and forceful."
+ },
+ {
+  "id": "demeter-3",
+  "name": "돌아오지 않는 계절",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a barren field under a frozen sky, one dead stalk still standing. Confident and forceful."
+ },
+ {
+  "id": "demeter-4",
+  "name": "대지의 어머니",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the mother of the earth, wheat crown, arms open as fields surge up around her. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "athena-1",
+  "name": "올빼미의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod with a small owl on their shoulder, holding a wax writing tablet. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "athena-2",
+  "name": "세리 · 올빼미의 눈",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a keen-eyed young scout in a crested helm, an owl's wings spread behind them. Confident and forceful."
+ },
+ {
+  "id": "athena-3",
+  "name": "짜인 계략",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a loom whose woven cloth turns into a spider's web. Confident and forceful."
+ },
+ {
+  "id": "athena-4",
+  "name": "지혜의 창",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a tall spear and an aegis shield crossed in front of an olive tree. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "apollo-1",
+  "name": "햇살의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod haloed in hard sunrays, a small lyre under one arm. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "apollo-2",
+  "name": "리라의 현",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a hand plucking a lyre string, the note drawn as a shockwave. Confident and forceful."
+ },
+ {
+  "id": "apollo-3",
+  "name": "예언의 혀",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a priestess over a smoking fissure, mouth open, laurel smoke coiling around her. Confident and forceful."
+ },
+ {
+  "id": "apollo-4",
+  "name": "태양을 모는 자",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a charioteer driving four flame-maned horses across the sky, sun disc behind them. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "artemis-1",
+  "name": "달빛의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod beneath a crescent moon, a hound pressed to their heel. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "artemis-2",
+  "name": "시위를 당긴 손",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a hunter at full draw, arrow nocked, eye sighting along the shaft. Confident and forceful."
+ },
+ {
+  "id": "artemis-3",
+  "name": "사냥개의 코",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a hunting hound's head low to the ground, scenting, ears pricked forward. Confident and forceful."
+ },
+ {
+  "id": "artemis-4",
+  "name": "달의 사냥꾼",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the moon huntress mid-leap, bow drawn, a blazing crescent behind her. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "ares-1",
+  "name": "분노의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod clenching a notched short sword, jaw set hard. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "ares-2",
+  "name": "알렉토 · 붉은 손",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a fury with blood-red hands and a knotted whip, wings of torn shadow. Confident and forceful."
+ },
+ {
+  "id": "ares-3",
+  "name": "멎지 않는 창",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a spear driven clean through a shield, still quivering. Confident and forceful."
+ },
+ {
+  "id": "ares-4",
+  "name": "전장의 주인",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the lord of battle astride a war-horse over a field of broken spears. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "aphrodite-1",
+  "name": "거품의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod stepping out of sea-foam onto a shell-strewn shore. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "aphrodite-2",
+  "name": "조개의 속삭임",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a great open scallop shell, a whisper leaving it drawn as spreading ripples. Confident and forceful."
+ },
+ {
+  "id": "aphrodite-3",
+  "name": "매혹의 띠",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an embroidered golden girdle floating in air, knotted with doves. Confident and forceful."
+ },
+ {
+  "id": "aphrodite-4",
+  "name": "사랑의 심판",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a goddess holding out a golden apple, three shadowed hands reaching for it. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "hephaistos-1",
+  "name": "카일 · 불씨 도둑",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a soot-faced young smith cupping a stolen ember in both hands. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "hephaistos-2",
+  "name": "망치의 무게",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a massive smith's hammer at rest on an anvil, sparks still hanging in the air. Confident and forceful."
+ },
+ {
+  "id": "hephaistos-3",
+  "name": "자동인형",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a bronze automaton servant of riveted plates, seams glowing from within. Confident and forceful."
+ },
+ {
+  "id": "hephaistos-4",
+  "name": "공방의 주인",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the master smith at the forge, hammer raised, molten metal spraying. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "hermes-1",
+  "name": "이즈미 · 전령의 딸",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young messenger mid-run, winged sandals, a sealed scroll in one hand. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "hermes-2",
+  "name": "날개 달린 신",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a winged-heeled god leaping between clouds, caduceus in hand. Confident and forceful."
+ },
+ {
+  "id": "hermes-3",
+  "name": "훔친 소떼",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a herd of cattle led away backwards, every hoofprint pointing the wrong way. Confident and forceful."
+ },
+ {
+  "id": "hermes-4",
+  "name": "길의 주인",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the lord of roads at a crossroads cairn, countless paths radiating out behind him. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "dionysos-1",
+  "name": "포도의 아이",
+  "grade": 1,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent bone white only — the accent is the SAME white #F2EDF5, so this piece is two-tone black and white. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a young demigod in a vine wreath, holding up a heavy bunch of grapes. Quiet, grounded, everyday scale."
+ },
+ {
+  "id": "dionysos-2",
+  "name": "끝나지 않는 잔",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a kantharos cup that will not empty, wine spilling endlessly over its lip. Confident and forceful."
+ },
+ {
+  "id": "dionysos-3",
+  "name": "광기의 행렬",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a maenad procession whirling with thyrsus staves, faces lost in frenzy. Confident and forceful."
+ },
+ {
+  "id": "dionysos-4",
+  "name": "축제의 주인",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the lord of revels enthroned on a wine barrel, vines erupting around him. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c01-win",
+  "name": "돌아온 전령",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a messenger arriving at last, dust-caked, holding a sealed letter high. Confident and forceful."
+ },
+ {
+  "id": "c01-lose",
+  "name": "도착하지 않은 신호",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a dead signal tower, beacon cold, severed cables hanging loose. Confident and forceful."
+ },
+ {
+  "id": "c01-perfect",
+  "name": "첫 번째 회선",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: one restored line — a single live cable strung between two distant towers. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c02-win",
+  "name": "검은 밀",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a field of blackened wheat with one stalk still gold. Confident and forceful."
+ },
+ {
+  "id": "c02-lose",
+  "name": "도시를 덮은 밀",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: wheat grown monstrously tall, swallowing a city's rooftops. Confident and forceful."
+ },
+ {
+  "id": "c02-perfect",
+  "name": "그해의 첫 수확",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the year's first sheaf raised against a clearing sky. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c03-win",
+  "name": "멎은 공방",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a silent workshop, every machine stopped mid-motion. Confident and forceful."
+ },
+ {
+  "id": "c03-lose",
+  "name": "걸어 다니는 공산품",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: mass-produced bronze figures walking in lockstep off the line. Confident and forceful."
+ },
+ {
+  "id": "c03-perfect",
+  "name": "주문서",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an order slip burning at the edges, forge-light behind it. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c04-win",
+  "name": "멎은 파도",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a wave frozen mid-break, the water hanging perfectly still. Confident and forceful."
+ },
+ {
+  "id": "c04-lose",
+  "name": "내륙의 해안선",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a new coastline cut straight through an inland city, waves at the doors. Confident and forceful."
+ },
+ {
+  "id": "c04-perfect",
+  "name": "잠긴 도시의 열쇠",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a great key lifted out of drowned streets, water streaming off it. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c05-win",
+  "name": "17분 늦은 해",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the sun rising seventeen minutes late over a waiting city. Confident and forceful."
+ },
+ {
+  "id": "c05-lose",
+  "name": "5시 17분",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: every clock in a public square stopped at 5:17. Confident and forceful."
+ },
+ {
+  "id": "c05-perfect",
+  "name": "첫 아침",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the first true morning, hard sunrays breaking over rooftops. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c06-win",
+  "name": "하나가 된 달",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: two moons merging back into a single disc. Confident and forceful."
+ },
+ {
+  "id": "c06-lose",
+  "name": "하루를 잃은 도시",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a city that lost a day — calendars torn, streets emptied. Confident and forceful."
+ },
+ {
+  "id": "c06-perfect",
+  "name": "진짜 달",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse spiral gust curls. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the true moon restored, vast and knife-sharp above the hunt. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c07-win",
+  "name": "멎은 전선",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a battle line gone still, spears lowered into the dust. Confident and forceful."
+ },
+ {
+  "id": "c07-lose",
+  "name": "모든 대륙의 전선",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: war fronts drawn across every continent of a cracked globe. Confident and forceful."
+ },
+ {
+  "id": "c07-perfect",
+  "name": "설명되지 않은 평화",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rising flame tongues. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an unexplained peace — weapons laid down in an empty field. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c08-win",
+  "name": "다시 불린 이름",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a name spoken again, drawn as ripples crossing still water. Confident and forceful."
+ },
+ {
+  "id": "c08-lose",
+  "name": "마지막 세대",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the last generation — one figure alone in an empty amphitheatre. Confident and forceful."
+ },
+ {
+  "id": "c08-perfect",
+  "name": "가장 많이 불린 말",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse rolling wave lines. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the most-spoken word blooming outward in hard rings of light. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c09-win",
+  "name": "깨어난 아침",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a city waking at last, every shutter thrown open. Confident and forceful."
+ },
+ {
+  "id": "c09-lose",
+  "name": "마지막으로 깨어 있는 자",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the last one awake among sleeping crowds. Confident and forceful."
+ },
+ {
+  "id": "c09-perfect",
+  "name": "기억나지 않는 꿈",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse stacked stone-brick courses. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a dream nobody remembers, dissolving into vine and smoke. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c10-win",
+  "name": "복구된 서가",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a restored library shelf, books back in order, one still glowing. Confident and forceful."
+ },
+ {
+  "id": "c10-lose",
+  "name": "빈 연대기",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an open chronicle with every page blank. Confident and forceful."
+ },
+ {
+  "id": "c10-perfect",
+  "name": "돌아온 한 줄",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: one restored line of text burning on an open page. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c11-win",
+  "name": "다시 묶인 맹세",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an oath re-tied — a knotted cord pulled fast around two rings. Confident and forceful."
+ },
+ {
+  "id": "c11-lose",
+  "name": "풀린 매듭",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: an unravelled knot, the cord ends drifting apart. Confident and forceful."
+ },
+ {
+  "id": "c11-perfect",
+  "name": "아무도 모르는 계약",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a contract nobody knows, sealed and lying face-down. Monumental and overwhelming — this is the rarest card in the set."
+ },
+ {
+  "id": "c12-win",
+  "name": "빈 왕좌에 앉은 자",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: someone seated on the empty throne of Olympus, face lost in shadow. Confident and forceful."
+ },
+ {
+  "id": "c12-lose",
+  "name": "주인 없는 하늘",
+  "grade": 2,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent warm gold #FFC53D. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: a sky with no master, storms colliding unchecked. Confident and forceful."
+ },
+ {
+  "id": "c12-perfect",
+  "name": "돌아온 하늘",
+  "grade": 3,
+  "prompt": "Flat graphic illustration, silkscreen concert-poster aesthetic (in the spirit of Persona 5 UI art): hard-edged shapes, heavy confident black contour lines, flat fills, visible halftone dot texture and fine diagonal screen-print lines. STRICTLY three colours only: deep near-black background #0B0910, bone white #F2EDF5, and one accent hot crimson #FF2B3E. No other hues. No gradients, no soft shading, no glow, no 3D render, no photographic lighting. Bold diagonal composition, dramatic silhouette that still reads at thumbnail size. One subject, centred, filling the frame and cropped by the edges. Ancient Greek mythology. Background motif: sparse jagged lightning zigzags. No text, no letters, no numbers, no logo, no signature, no watermark, no border, no card frame, no UI. Square 1:1 format, flat background, full bleed. Subject: the sky returned — clouds parting above a restored throne. Monumental and overwhelming — this is the rarest card in the set."
+ }
+]

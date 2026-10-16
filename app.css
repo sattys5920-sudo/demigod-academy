@@ -106,11 +106,14 @@ body.fullscreen-on .tabbar{display:none}
    에서 카드 밖으로 삐져나가 화면이 통째로 가로로 밀린다. */
 .fam{font-family:var(--num); font-size:8px; letter-spacing:.04em; color:var(--t3); text-align:right;
      min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+/* 그림칸은 4:3 으로 고정한다. 2:1 레터박스에 진짜 그림을 넣으면
+   인물의 위아래가 잘린다. 생성 그림은 정사각으로 받아 여기서 자른다. */
 .art{
-  position:relative; flex:1 1 auto; min-height:58px; overflow:hidden;
+  position:relative; flex:0 0 auto; aspect-ratio:4/3; width:100%; overflow:hidden;
   background:var(--ink); border:2px solid var(--dim);
   display:flex; align-items:center; justify-content:center;
 }
+.art.sealed{aspect-ratio:auto; flex:1 1 auto; min-height:58px}
 /* 빗금은 이제 '봉인된 카드'(뽑기 배너) 전용이다. 나머지 칸은 문장이 채운다. */
 .art.sealed::after{
   content:""; position:absolute; inset:0;

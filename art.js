@@ -19,7 +19,7 @@
 (function () {
   'use strict';
 
-  var W = 120, H = 60;                         /* 그림칸 비율 (112×58) */
+  var W = 120, H = 90, CY = 45;                /* 그림칸 비율 4:3 — 진짜 그림이 들어올 자리다 */
 
   /* ── 씨앗 ──────────────────────────────────── */
   function seedOf(str) {
@@ -58,11 +58,11 @@
       case 'bolt':
         for (i = -1; i < 9; i++) {
           var x = i * 16;
-          d.push('M' + x + ' 0 L' + (x + 8) + ' 20 L' + x + ' 34 L' + (x + 9) + ' 60');
+          d.push('M' + x + ' 0 L' + (x + 9) + ' 30 L' + x + ' 51 L' + (x + 10) + ' 90');
         }
         break;
       case 'water':
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 9; i++) {
           var y = 5 + i * 11;
           d.push('M-6 ' + y + ' q 9 -6 18 0 t 18 0 t 18 0 t 18 0 t 18 0 t 18 0 t 18 0');
         }
@@ -70,24 +70,24 @@
       case 'fire':
         for (i = -1; i < 10; i++) {
           var fx = i * 14 + 7;
-          d.push('M' + fx + ' 60 q -5 -16 0 -26 q 5 10 0 26');
+          d.push('M' + fx + ' 90 q -6 -24 0 -39 q 6 15 0 39');
         }
         break;
       case 'earth':
-        for (i = 0; i < 5; i++) d.push('M0 ' + (i * 13 + 4) + ' H120');
+        for (i = 0; i < 7; i++) d.push('M0 ' + (i * 13 + 4) + ' H120');
         for (i = 0; i < 10; i++) {
           var bx = i * 13 + ((i % 2) ? 6 : 0);
-          d.push('M' + bx + ' 4 V17 M' + bx + ' 30 V43');
+          d.push('M' + bx + ' 4 V17 M' + bx + ' 30 V43 M' + bx + ' 56 V69');
         }
         break;
       case 'wind':
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 7; i++) {
           var wy = 8 + i * 12;
           d.push('M-4 ' + wy + ' h70 a7 7 0 1 0 -7 -7');
         }
         break;
       default:                                     /* 무속성 — 사선. 문양을 잡아먹지 않게 성기게 */
-        for (i = -3; i < 11; i++) d.push('M' + (i * 17) + ' 60 L' + (i * 17 + 34) + ' -8');
+        for (i = -3; i < 13; i++) d.push('M' + (i * 17) + ' 90 L' + (i * 17 + 50) + ' -8');
         return '<path d="' + d.join(' ') + '" stroke="' + c.glow +
                '" stroke-width="1.3" fill="none"/>';
     }
@@ -182,35 +182,35 @@
   /* ── 문양 뒤에 까는 인장 ─────────────────────── */
   function sealPath(kind, r) {
     switch (kind) {
-      case 0: return 'M60 ' + (30 - r) + 'a' + r + ' ' + r + ' 0 1 0 .01 0Z';
-      case 1: return 'M60 ' + (30 - r) + 'L' + (60 + r) + ' 30L60 ' + (30 + r) + 'L' + (60 - r) + ' 30Z';
+      case 0: return 'M60 ' + (CY - r) + 'a' + r + ' ' + r + ' 0 1 0 .01 0Z';
+      case 1: return 'M60 ' + (CY - r) + 'L' + (60 + r) + ' ' + CY + 'L60 ' + (CY + r) + 'L' + (60 - r) + ' ' + CY + 'Z';
       case 2:
         var h = r * 0.866;
-        return 'M' + (60 - r) + ' 30L' + (60 - r / 2) + ' ' + (30 - h) + 'L' + (60 + r / 2) + ' ' + (30 - h) +
-               'L' + (60 + r) + ' 30L' + (60 + r / 2) + ' ' + (30 + h) + 'L' + (60 - r / 2) + ' ' + (30 + h) + 'Z';
+        return 'M' + (60 - r) + ' ' + CY + 'L' + (60 - r / 2) + ' ' + (CY - h) + 'L' + (60 + r / 2) + ' ' + (CY - h) +
+               'L' + (60 + r) + ' ' + CY + 'L' + (60 + r / 2) + ' ' + (CY + h) + 'L' + (60 - r / 2) + ' ' + (CY + h) + 'Z';
       default:
-        return 'M' + (60 - r) + ' ' + (30 + r) + 'V30a' + r + ' ' + r + ' 0 0 1 ' + (r * 2) + ' 0v' + r + 'Z';
+        return 'M' + (60 - r) + ' ' + (CY + r) + 'V' + CY + 'a' + r + ' ' + r + ' 0 0 1 ' + (r * 2) + ' 0v' + r + 'Z';
     }
   }
 
   /* ── 종류 = 테두리 ───────────────────────────── */
   function frame(kind, c) {
     var s = ' stroke="' + c.line + '" stroke-width="2.4" fill="none" opacity=".85"';
-    if (kind === 'ward')   return '<path d="M4 8v44M116 8v44"' + s + '/>';
-    if (kind === 'trap')   return '<path d="M0 30h120"' + s + ' opacity=".45"/>';
+    if (kind === 'ward')   return '<path d="M4 12v66M116 12v66"' + s + '/>';
+    if (kind === 'trap')   return '<path d="M0 45h120"' + s + ' opacity=".45"/>';
     if (kind === 'oracle') return '<path d="M52 7l1.6 3.4L57 12l-3.4 1.6L52 17l-1.6-3.4L47 12l3.4-1.6ZM60 4l1.2 2.6L64 8l-2.8 1.2L60 12l-1.2-2.8L56 8l2.8-1.4ZM68 7l1.6 3.4L73 12l-3.4 1.6L68 17l-1.6-3.4L63 12l3.4-1.6Z" fill="' + c.line + '" opacity=".8"/>';
-    return '<path d="M20 55h80"' + s + '/>';
+    return '<path d="M20 83h80"' + s + '/>';
   }
 
   /* ── 등급 장식 ───────────────────────────────── */
   function rays(grade, c, off) {
     if (grade < 2) return '';
     var n = grade === 3 ? 16 : 10, out = [], i;
-    var far = grade === 3 ? 62 : 48;
+    var far = grade === 3 ? 66 : 52;
     for (i = 0; i < n; i++) {
       var a = (i / n) * Math.PI * 2 + off;
-      out.push('M' + (60 + Math.cos(a) * 22).toFixed(1) + ' ' + (30 + Math.sin(a) * 22).toFixed(1) +
-               'L' + (60 + Math.cos(a) * far).toFixed(1) + ' ' + (30 + Math.sin(a) * far * .68).toFixed(1));
+      out.push('M' + (60 + Math.cos(a) * 26).toFixed(1) + ' ' + (CY + Math.sin(a) * 26).toFixed(1) +
+               'L' + (60 + Math.cos(a) * far).toFixed(1) + ' ' + (CY + Math.sin(a) * far * .82).toFixed(1));
     }
     return '<path d="' + out.join('') + '" stroke="' + c.glow + '" stroke-width="2.4" fill="none"/>';
   }
@@ -225,28 +225,28 @@
              '" stroke-width="' + (w || 1.9) + '" stroke-linecap="round" stroke-linejoin="round">' +
              '<path d="' + d + '"/></g>';
     };
-    var k = grade === 3 ? 1.8 : (grade === 2 ? 1.65 : 1.5);
-    var mid = function (s) { return 'translate(' + (60 - 12 * s) + ' ' + (30 - 12 * s) + ') scale(' + s + ')'; };
+    var k = grade === 3 ? 2.4 : (grade === 2 ? 2.2 : 2.0);
+    var mid = function (s) { return 'translate(' + (60 - 12 * s) + ' ' + (CY - 12 * s) + ') scale(' + s + ')'; };
 
     switch (variant) {
       case 1:   /* 거울 둘 */
-        return g('translate(' + (33 - 12 * 1.15) + ' ' + (30 - 12 * 1.15) + ') scale(1.15)', 1.9) +
-               g('translate(' + (87 + 12 * 1.15) + ' ' + (30 - 12 * 1.15) + ') scale(-1.15 1.15)', 1.9);
+        return g('translate(' + (33 - 12 * 1.7) + ' ' + (CY - 12 * 1.7) + ') scale(1.7)', 1.9) +
+               g('translate(' + (87 + 12 * 1.7) + ' ' + (CY - 12 * 1.7) + ') scale(-1.7 1.7)', 1.9);
       case 2:   /* 가운데 큰 것 + 양옆 작은 것 */
-        return g('translate(' + (26 - 12 * .78) + ' ' + (32 - 12 * .78) + ') scale(.78)', 2.4) +
-               g('translate(' + (94 - 12 * .78) + ' ' + (32 - 12 * .78) + ') scale(.78)', 2.4) +
+        return g('translate(' + (24 - 12 * 1.05) + ' ' + (CY + 4 - 12 * 1.05) + ') scale(1.05)', 2.4) +
+               g('translate(' + (96 - 12 * 1.05) + ' ' + (CY + 4 - 12 * 1.05) + ') scale(1.05)', 2.4) +
                g(mid(k * .92));
       case 3:   /* 고리 안에 가둠 */
-        return '<path d="M60 7a23 23 0 1 0 .01 0Z" fill="none" stroke="' + c.line +
-               '" stroke-width="1.7" opacity=".55"/>' + g(mid(k * .82));
+        return '<path d="M60 ' + (CY - 32) + 'a32 32 0 1 0 .01 0Z" fill="none" stroke="' + c.line +
+               '" stroke-width="1.7" opacity=".55"/>' + g(mid(k * .84));
       case 4:   /* 크게 — 칸 밖으로 잘린다 */
-        return g('translate(' + (60 - 12 * 2.9) + ' ' + (30 - 12 * 2.9) + ') scale(2.9)', 1.25);
+        return g('translate(' + (60 - 12 * 4.1) + ' ' + (CY - 12 * 4.1) + ') scale(4.1)', 1.25);
       case 5:   /* 비스듬히 */
-        return g('rotate(-14 60 30) ' + mid(k));
+        return g('rotate(-14 60 ' + CY + ') ' + mid(k));
       case 6:   /* 뒤에 작게 깔리고, 앞에 하나 */
-        return '<g transform="translate(14 8) scale(.52)" fill="none" stroke="' + c.line +
+        return '<g transform="translate(8 10) scale(.72)" fill="none" stroke="' + c.line +
                '" stroke-width="3" opacity=".22"><path d="' + d + '"/></g>' +
-               '<g transform="translate(78 26) scale(.52)" fill="none" stroke="' + c.line +
+               '<g transform="translate(84 44) scale(.72)" fill="none" stroke="' + c.line +
                '" stroke-width="3" opacity=".22"><path d="' + d + '"/></g>' +
                g(mid(k * .95));
       default:  /* 단독 */
@@ -284,7 +284,7 @@
              '<rect width="' + W + '" height="' + H + '" fill="' + INK + '"/>' +
              field(card.element, c) +
              rays(grade, c, rnd() * 0.4) +
-             '<path d="' + sealPath(pick(rnd, 4), 19 + pick(rnd, 4)) + '" fill="rgba(11,9,16,.5)" ' +
+             '<path d="' + sealPath(pick(rnd, 4), 28 + pick(rnd, 6)) + '" fill="rgba(11,9,16,.5)" ' +
                    'stroke="' + c.soft + '" stroke-width="1.8"/>' +
              place(d, variant, grade, c) +
              frame(card.kind, c) +
