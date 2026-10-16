@@ -1,0 +1,42 @@
+{
+  "_": "오원소. 각 원소는 하나를 이기고 하나에게 진다. 나머지 둘과는 비긴다.",
+  "cycle": [
+    "bolt",
+    "water",
+    "fire",
+    "earth",
+    "wind"
+  ],
+  "multiplier": {
+    "strong": 1.5,
+    "weak": 0.67,
+    "even": 1.0
+  },
+  "list": {
+    "bolt": {
+      "ko": "번개",
+      "beats": "water",
+      "why": "번개는 물을 타고 흐른다"
+    },
+    "water": {
+      "ko": "물",
+      "beats": "fire",
+      "why": "물은 불을 끈다"
+    },
+    "fire": {
+      "ko": "불",
+      "beats": "earth",
+      "why": "불은 들을 태운다"
+    },
+    "earth": {
+      "ko": "땅",
+      "beats": "wind",
+      "why": "산은 바람을 막는다"
+    },
+    "wind": {
+      "ko": "바람",
+      "beats": "bolt",
+      "why": "바람은 구름을 흩어 번개를 끊는다"
+    }
+  }
+}

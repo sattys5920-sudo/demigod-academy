@@ -10,6 +10,20 @@
       "★1": 34,
       "★2": 31,
       "★3": 13
+    },
+    "원소별 (전체)": {
+      "땅": 27,
+      "물": 20,
+      "바람": 20,
+      "불": 27,
+      "번개": 20
+    },
+    "원소별 (뽑기 풀)": {
+      "땅": 18,
+      "물": 14,
+      "바람": 14,
+      "불": 18,
+      "번개": 14
     }
   },
   "families": [
@@ -30,7 +44,8 @@
   "rules": {
     "공통": "특정 신에게 매이지 않는다. 모든 팩에서 나온다. 덱의 바탕을 채운다.",
     "계보": "그 신의 영역. 내 계보 카드는 뽑기에서 조금 더 잘 나온다(픽업).",
-    "장 보상": "뽑기로는 영영 안 나온다. 그 장을 겪어야 얻는다. 고르지 않은 분기의 카드는 못 얻는다."
+    "장 보상": "뽑기로는 영영 안 나온다. 그 장을 겪어야 얻는다. 고르지 않은 분기의 카드는 못 얻는다.",
+    "원소": "모든 카드에 오원소 중 하나가 붙는다. 상극이면 피해 ×1.5, 역상극이면 ×0.67. 계보 카드와 그 장의 보상 카드는 그 신의 원소를 따른다."
   },
   "cards": [
     {
@@ -46,7 +61,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "cm-02",
@@ -61,7 +77,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "cm-03",
@@ -76,7 +93,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "cm-04",
@@ -91,7 +109,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "cm-05",
@@ -106,7 +125,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "cm-06",
@@ -121,7 +141,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "cm-07",
@@ -136,7 +157,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "cm-08",
@@ -151,7 +173,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "cm-09",
@@ -166,7 +189,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "cm-10",
@@ -181,7 +205,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "cm-11",
@@ -196,7 +221,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "cm-12",
@@ -211,7 +237,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "cm-13",
@@ -226,7 +253,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "cm-14",
@@ -241,7 +269,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "cm-15",
@@ -256,7 +285,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "cm-16",
@@ -271,7 +301,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "cm-17",
@@ -286,7 +317,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "cm-18",
@@ -301,7 +333,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "cm-19",
@@ -316,7 +349,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "cm-20",
@@ -331,7 +365,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "cm-21",
@@ -346,7 +381,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "cm-22",
@@ -361,7 +397,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "cm-23",
@@ -376,7 +413,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "cm-24",
@@ -391,7 +429,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "cm-25",
@@ -406,7 +445,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "cm-26",
@@ -421,7 +461,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "cm-27",
@@ -436,7 +477,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "cm-28",
@@ -451,7 +493,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "cm-29",
@@ -466,7 +509,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "cm-30",
@@ -481,7 +525,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "zeus-1",
@@ -496,7 +541,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "zeus-2",
@@ -511,7 +557,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "zeus-3",
@@ -526,7 +573,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "zeus-4",
@@ -541,7 +589,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "hera-1",
@@ -556,7 +605,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "hera-2",
@@ -571,7 +621,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "hera-3",
@@ -586,7 +637,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "hera-4",
@@ -601,7 +653,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "poseidon-1",
@@ -616,7 +669,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "poseidon-2",
@@ -631,7 +685,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "poseidon-3",
@@ -646,7 +701,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "poseidon-4",
@@ -661,7 +717,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "demeter-1",
@@ -676,7 +733,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "demeter-2",
@@ -691,7 +749,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "demeter-3",
@@ -706,7 +765,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "demeter-4",
@@ -721,7 +781,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "athena-1",
@@ -736,7 +797,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "athena-2",
@@ -751,7 +813,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "athena-3",
@@ -766,7 +829,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "athena-4",
@@ -781,7 +845,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "apollo-1",
@@ -796,7 +861,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "apollo-2",
@@ -811,7 +877,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "apollo-3",
@@ -826,7 +893,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "apollo-4",
@@ -841,7 +909,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "artemis-1",
@@ -856,7 +925,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "artemis-2",
@@ -871,7 +941,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "artemis-3",
@@ -886,7 +957,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "artemis-4",
@@ -901,7 +973,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "ares-1",
@@ -916,7 +989,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "ares-2",
@@ -931,7 +1005,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "ares-3",
@@ -946,7 +1021,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "ares-4",
@@ -961,7 +1037,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "aphrodite-1",
@@ -976,7 +1053,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "aphrodite-2",
@@ -991,7 +1069,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "aphrodite-3",
@@ -1006,7 +1085,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "aphrodite-4",
@@ -1021,7 +1101,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "hephaistos-1",
@@ -1036,7 +1117,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "hephaistos-2",
@@ -1051,7 +1133,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "hephaistos-3",
@@ -1066,7 +1149,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "hephaistos-4",
@@ -1081,7 +1165,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "hermes-1",
@@ -1096,7 +1181,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "hermes-2",
@@ -1111,7 +1197,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "hermes-3",
@@ -1126,7 +1213,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "hermes-4",
@@ -1141,7 +1229,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "dionysos-1",
@@ -1156,7 +1245,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "dionysos-2",
@@ -1171,7 +1261,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "dionysos-3",
@@ -1186,7 +1277,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "dionysos-4",
@@ -1201,7 +1293,8 @@
       "source": "pool",
       "chapter": null,
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c01-win",
@@ -1217,7 +1310,8 @@
       "chapter": 1,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "c01-lose",
@@ -1233,7 +1327,8 @@
       "chapter": 1,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "c01-perfect",
@@ -1249,7 +1344,8 @@
       "chapter": 1,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "c02-win",
@@ -1265,7 +1361,8 @@
       "chapter": 2,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c02-lose",
@@ -1281,7 +1378,8 @@
       "chapter": 2,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c02-perfect",
@@ -1297,7 +1395,8 @@
       "chapter": 2,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c03-win",
@@ -1313,7 +1412,8 @@
       "chapter": 3,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c03-lose",
@@ -1329,7 +1429,8 @@
       "chapter": 3,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c03-perfect",
@@ -1345,7 +1446,8 @@
       "chapter": 3,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c04-win",
@@ -1361,7 +1463,8 @@
       "chapter": 4,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "c04-lose",
@@ -1377,7 +1480,8 @@
       "chapter": 4,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "c04-perfect",
@@ -1393,7 +1497,8 @@
       "chapter": 4,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "c05-win",
@@ -1409,7 +1514,8 @@
       "chapter": 5,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c05-lose",
@@ -1425,7 +1531,8 @@
       "chapter": 5,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c05-perfect",
@@ -1441,7 +1548,8 @@
       "chapter": 5,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c06-win",
@@ -1457,7 +1565,8 @@
       "chapter": 6,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "c06-lose",
@@ -1473,7 +1582,8 @@
       "chapter": 6,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "c06-perfect",
@@ -1489,7 +1599,8 @@
       "chapter": 6,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "wind"
     },
     {
       "id": "c07-win",
@@ -1505,7 +1616,8 @@
       "chapter": 7,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c07-lose",
@@ -1521,7 +1633,8 @@
       "chapter": 7,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c07-perfect",
@@ -1537,7 +1650,8 @@
       "chapter": 7,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "fire"
     },
     {
       "id": "c08-win",
@@ -1553,7 +1667,8 @@
       "chapter": 8,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "c08-lose",
@@ -1569,7 +1684,8 @@
       "chapter": 8,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "c08-perfect",
@@ -1585,7 +1701,8 @@
       "chapter": 8,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "water"
     },
     {
       "id": "c09-win",
@@ -1601,7 +1718,8 @@
       "chapter": 9,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c09-lose",
@@ -1617,7 +1735,8 @@
       "chapter": 9,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c09-perfect",
@@ -1633,7 +1752,8 @@
       "chapter": 9,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c10-win",
@@ -1649,7 +1769,8 @@
       "chapter": 10,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c10-lose",
@@ -1665,7 +1786,8 @@
       "chapter": 10,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c10-perfect",
@@ -1681,7 +1803,8 @@
       "chapter": 10,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "earth"
     },
     {
       "id": "c11-win",
@@ -1697,7 +1820,8 @@
       "chapter": 11,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "c11-lose",
@@ -1713,7 +1837,8 @@
       "chapter": 11,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "c11-perfect",
@@ -1729,7 +1854,8 @@
       "chapter": 11,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "c12-win",
@@ -1745,7 +1871,8 @@
       "chapter": 12,
       "outcome": "신막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "c12-lose",
@@ -1761,7 +1888,8 @@
       "chapter": 12,
       "outcome": "실패",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     },
     {
       "id": "c12-perfect",
@@ -1777,7 +1905,22 @@
       "chapter": 12,
       "outcome": "완막",
       "skill": null,
-      "likes": []
+      "likes": [],
+      "element": "bolt"
     }
-  ]
+  ],
+  "godElements": {
+    "ZEUS": "번개",
+    "HERA": "번개",
+    "POSEIDON": "물",
+    "APHRODITE": "물",
+    "HEPHAISTOS": "불",
+    "ARES": "불",
+    "APOLLO": "불",
+    "DEMETER": "땅",
+    "DIONYSOS": "땅",
+    "ATHENA": "땅",
+    "HERMES": "바람",
+    "ARTEMIS": "바람"
+  }
 }

@@ -47,7 +47,7 @@
   /* ── 데이터 ──────────────────────────────────── */
   var D = {};
   function loadData() {
-    var files = ['cards', 'bonds', 'season-01', 'zones', 'schedule', 'economy', 'quiz', 'minigames', 'talks'];
+    var files = ['cards', 'bonds', 'season-01', 'zones', 'schedule', 'economy', 'quiz', 'minigames', 'talks', 'elements'];
     return Promise.all(files.map(function (f) {
       return fetch('data/' + f + '.json').then(function (r) {
         if (!r.ok) throw new Error(f + ' ' + r.status);
@@ -58,6 +58,38 @@
       D.cardById = {};
       D.cards.cards.forEach(function (c) { D.cardById[c.id] = c; });
     });
+  }
+
+  /* ── 오원소 ──────────────────────────────────── */
+  var EL_PATH = {
+    fire:  '<path d="M12 3c3 4 5 6 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 .5 2 1.5 2.5 2 2 .5-1-1-4 1-7Z"/>',
+    water: '<path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9Z"/>',
+    earth: '<path d="M3 19h18"/><path d="m5 19 5-9 3 5 2-3 4 7"/>',
+    wind:  '<path d="M3 9h10a3 3 0 1 0-3-3"/><path d="M3 14h13a3 3 0 1 1-3 3"/>',
+    bolt:  '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>'
+  };
+  function elIcon(key, px) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var sv = document.createElementNS(ns, 'svg');
+    sv.setAttribute('width', String(px || 12)); sv.setAttribute('height', String(px || 12));
+    sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('fill', 'none');
+    sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '2.5');
+    sv.setAttribute('stroke-linecap', 'round'); sv.setAttribute('stroke-linejoin', 'round');
+    sv.setAttribute('aria-hidden', 'true');
+    sv.innerHTML = EL_PATH[key] || EL_PATH.bolt;
+    return sv;
+  }
+  function elKo(key) {
+    var e = D.elements && D.elements.list[key];
+    return e ? e.ko : '';
+  }
+  /* 상극이면 1.5배, 역상극이면 0.67배, 아니면 그대로 */
+  function elMul(mine, theirs) {
+    if (!D.elements || !mine || !theirs) return 1;
+    var L = D.elements.list, M = D.elements.multiplier;
+    if (L[mine] && L[mine].beats === theirs) return M.strong;
+    if (L[theirs] && L[theirs].beats === mine) return M.weak;
+    return M.even;
   }
 
   /* ── 전투 — 같은 입력이면 같은 결과 (순수) ───── */
@@ -85,9 +117,10 @@
       turn++;
       var c = deck[Math.floor(rand() * deck.length)];
       var s = stat(c);
-      var hit = Math.max(1, Math.round(s.atk * (0.8 + rand() * 0.6)));
+      var mul = elMul(c.element, foe.element);
+      var hit = Math.max(1, Math.round(s.atk * (0.8 + rand() * 0.6) * mul));
       foeHp -= hit; dealt += hit;
-      log.push({ who: 'me', card: c.short || c.name, hit: hit });
+      log.push({ who: 'me', card: c.short || c.name, hit: hit, mul: mul });
       if (foeHp <= 0) break;
       var back = Math.max(1, Math.round(foe.atk * (0.7 + rand() * 0.6)));
       myHp -= back;
@@ -154,7 +187,11 @@
     var n = el('article', 'card' + (c.tone === 'pink' ? ' pinkish' : ''));
     var top = el('span', 'card-top');
     top.appendChild(el('span', 'cost', c.cost == null ? '?' : String(c.cost)));
-    top.appendChild(el('span', 'fam', c.family));
+    var badge = el('span', 'el el-' + (c.element || 'bolt'));
+    badge.title = elKo(c.element);
+    badge.appendChild(elIcon(c.element, 11));
+    top.appendChild(badge);
+    top.appendChild(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family));
     var art = el('span', 'art');
     art.appendChild(el('span', 'glyph', c.short || c.name));
     art.firstChild.style.fontSize = '15px';
@@ -244,12 +281,36 @@
         b.setAttribute('aria-pressed', String(b.textContent === dexFam));
       });
     }
+    paintRing();
     var list = D.cards.cards.filter(function (c) { return dexFam === '전체' || c.family === dexFam; });
     var g = $('#dexGrid'); g.textContent = '';
     list.forEach(function (c) { g.appendChild(cardEl(c, { always: true })); });
     var have = D.cards.cards.filter(function (c) { return S.owned[c.id]; }).length;
     $('#dexCount').innerHTML = have + ' <span style="color:var(--t3)">/ ' + D.cards.cards.length + '</span>';
     $('#dexBar').style.width = Math.round(have / D.cards.cards.length * 100) + '%';
+  }
+
+  /* 상극 고리 — 번개 → 물 → 불 → 땅 → 바람 → 번개 */
+  function paintRing() {
+    var box = $('#elRing');
+    if (!box || box.children.length || !D.elements) return;
+    D.elements.cycle.forEach(function (k, i) {
+      var e = D.elements.list[k];
+      var it = el('span', 'ring-it');
+      var ic = el('span', 'ring-ic el-' + k);
+      ic.appendChild(elIcon(k, 14));
+      it.append(ic, el('span', 'ring-n', e.ko));
+      it.title = e.why;
+      box.appendChild(it);
+      var ar = el('span', 'ring-ar');
+      ar.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12"/><path d="m12 6 6 6-6 6"/></svg>';
+      box.appendChild(ar);
+    });
+    var first = el('span', 'ring-it');
+    var ic0 = el('span', 'ring-ic el-' + D.elements.cycle[0]);
+    ic0.appendChild(elIcon(D.elements.cycle[0], 14));
+    first.append(ic0, el('span', 'ring-n', D.elements.list[D.elements.cycle[0]].ko));
+    box.appendChild(first);
   }
 
   function paintDeck() {
@@ -569,8 +630,8 @@
       txt.appendChild(el('span', 'nm', z.name));
       txt.appendChild(el('span', 'sub',
         state === 'locked' ? ('제 ' + z.chapter + ' 장을 막아야 열린다')
-        : state === 'tainted' ? '오염된 판 — 더 어렵고 드랍이 다르다'
-        : (z.family + ' 계보 · 덱 10장 · 3~5턴')));
+        : state === 'tainted' ? ('오염된 판 · ' + elKo(z.element) + ' — 더 어렵고 드랍이 다르다')
+        : (elKo(z.element) + ' · ' + z.family + ' 계보 · 덱 10장')));
       b.append(mark, txt, el('span', 'go', state === 'locked' ? '잠김' : '입장'));
       if (state !== 'locked') b.addEventListener('click', function () { enterHunt(z, state); });
       li.appendChild(b);
@@ -580,7 +641,8 @@
   }
   function enterHunt(z, state) {
     if (!S.deck.length) { alert('덱이 비어 있다. 카드 탭에서 덱을 짜고 오자.'); return; }
-    var foe = { name: z.name + '의 잡몹', hp: state === 'tainted' ? 60 : 40, atk: state === 'tainted' ? 6 : 4 };
+    var foe = { name: z.name + '의 잡몹', element: z.element,
+                hp: state === 'tainted' ? 60 : 40, atk: state === 'tainted' ? 6 : 4 };
     runBattle(foe, z.name, function (r) {
       var got = r.win ? earnEther(state === 'tainted' ? 120 : 80) : 0;
       showResult(r.win, z.name, [['AITHER', '+' + fmt(got)], ['DAMAGE', fmt(r.damage)], ['TURNS', r.turns]]);
@@ -594,7 +656,7 @@
     var seed = hash(title + ':' + Date.now());
     var r = sim(S.deck, foe, seed);
     $('#battleTitle').textContent = title;
-    $('#battleSub').textContent = foe.name;
+    $('#battleSub').textContent = foe.name + (foe.element ? ' · ' + elKo(foe.element) : '');
     $('#foeName').textContent = foe.name;
     $('#foeNum').textContent = '0 / ' + foe.hp;
     $('#foeHp').style.width = '0%';
