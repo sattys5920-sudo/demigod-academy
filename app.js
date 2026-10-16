@@ -71,7 +71,9 @@
     /* 바람 — 소용돌이 */
     wind:  '<path d="M4 8h9a3 3 0 1 0-3-3"/><path d="M4 13h13a3 3 0 1 1-3 3"/><path d="M4 18h6"/>',
     /* 번개 */
-    bolt:  '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>'
+    bolt:  '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>',
+    /* 무속성 — 비어 있는 고리 */
+    none:  '<circle cx="12" cy="12" r="6.5"/>'
   };
   function elIcon(key, px) {
     var ns = 'http://www.w3.org/2000/svg';
@@ -81,16 +83,18 @@
     sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '2.5');
     sv.setAttribute('stroke-linecap', 'round'); sv.setAttribute('stroke-linejoin', 'round');
     sv.setAttribute('aria-hidden', 'true');
-    sv.innerHTML = EL_PATH[key] || EL_PATH.bolt;
+    sv.innerHTML = EL_PATH[key] || EL_PATH.none;
     return sv;
   }
   function elKo(key) {
-    var e = D.elements && D.elements.list[key];
+    if (!D.elements) return '';
+    if (!key) return (D.elements.none && D.elements.none.ko) || '무속성';
+    var e = D.elements.list[key];
     return e ? e.ko : '';
   }
   /* 상극이면 1.5배, 역상극이면 0.67배, 아니면 그대로 */
   function elMul(mine, theirs) {
-    if (!D.elements || !mine || !theirs) return 1;
+    if (!D.elements || !mine || !theirs) return 1;   /* 무속성은 상성이 없다 */
     var L = D.elements.list, M = D.elements.multiplier;
     if (L[mine] && L[mine].beats === theirs) return M.strong;
     if (L[theirs] && L[theirs].beats === mine) return M.weak;
@@ -192,7 +196,7 @@
     var n = el('article', 'card' + (c.tone === 'pink' ? ' pinkish' : ''));
     var top = el('span', 'card-top');
     top.appendChild(el('span', 'cost', c.cost == null ? '?' : String(c.cost)));
-    var badge = el('span', 'el el-' + (c.element || 'bolt'));
+    var badge = el('span', 'el el-' + (c.element || 'none'));
     badge.title = elKo(c.element);
     badge.appendChild(elIcon(c.element, 13));
     top.appendChild(badge);

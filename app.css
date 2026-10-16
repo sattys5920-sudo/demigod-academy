@@ -476,6 +476,7 @@ body.fullscreen-on .tabbar{display:none}
 .el.el-earth{background:var(--dim)}
 .el.el-water{color:var(--line)}
 .el.el-wind {color:var(--t2)}
+.el.el-none {color:var(--t3); border-color:var(--dim)}
 
 .ring{display:flex; align-items:center; gap:2px; flex-wrap:wrap}
 .ring-it{display:inline-flex; align-items:center; gap:4px}
@@ -487,5 +488,6 @@ body.fullscreen-on .tabbar{display:none}
 .ring-ic.el-bolt {color:var(--gold)}
 .ring-ic.el-earth{background:var(--dim)}
 .ring-ic.el-wind {color:var(--t2)}
+.ring-ic.el-none{color:var(--t3); border-color:var(--dim)}
 .ring-n{font-family:var(--ui); font-weight:800; font-size:11px; color:var(--t1)}
 .ring-ar{color:var(--t3); display:inline-flex}

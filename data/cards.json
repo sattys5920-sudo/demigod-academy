@@ -24,6 +24,38 @@
       "바람": 14,
       "불": 18,
       "번개": 14
+    },
+    "원소별": {
+      "무속성": 30,
+      "번개": 21,
+      "불": 21,
+      "물": 14,
+      "땅": 14,
+      "바람": 14
+    },
+    "신 배치": {
+      "불": [
+        "APOLLO",
+        "ARES",
+        "HEPHAISTOS"
+      ],
+      "번개": [
+        "ATHENA",
+        "HERA",
+        "ZEUS"
+      ],
+      "물": [
+        "APHRODITE",
+        "POSEIDON"
+      ],
+      "땅": [
+        "DEMETER",
+        "DIONYSOS"
+      ],
+      "바람": [
+        "ARTEMIS",
+        "HERMES"
+      ]
     }
   },
   "families": [
@@ -45,7 +77,7 @@
     "공통": "특정 신에게 매이지 않는다. 모든 팩에서 나온다. 덱의 바탕을 채운다.",
     "계보": "그 신의 영역. 내 계보 카드는 뽑기에서 조금 더 잘 나온다(픽업).",
     "장 보상": "뽑기로는 영영 안 나온다. 그 장을 겪어야 얻는다. 고르지 않은 분기의 카드는 못 얻는다.",
-    "원소": "모든 카드에 오원소 중 하나가 붙는다. 상극이면 피해 ×1.5, 역상극이면 ×0.67. 계보 카드와 그 장의 보상 카드는 그 신의 원소를 따른다."
+    "원소": "계보 카드와 그 장의 보상 카드만 원소를 가지며, 그 신의 원소를 따른다. 공통 카드는 전부 무속성이라 상성이 없다. 상극이면 ×1.5, 역상극이면 ×0.67."
   },
   "cards": [
     {
@@ -62,7 +94,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": null
     },
     {
       "id": "cm-02",
@@ -78,7 +110,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": null
     },
     {
       "id": "cm-03",
@@ -94,7 +126,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": null
     },
     {
       "id": "cm-04",
@@ -110,7 +142,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": null
     },
     {
       "id": "cm-05",
@@ -126,7 +158,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": null
     },
     {
       "id": "cm-06",
@@ -142,7 +174,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": null
     },
     {
       "id": "cm-07",
@@ -158,7 +190,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": null
     },
     {
       "id": "cm-08",
@@ -174,7 +206,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": null
     },
     {
       "id": "cm-09",
@@ -190,7 +222,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": null
     },
     {
       "id": "cm-10",
@@ -206,7 +238,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": null
     },
     {
       "id": "cm-11",
@@ -222,7 +254,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": null
     },
     {
       "id": "cm-12",
@@ -238,7 +270,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": null
     },
     {
       "id": "cm-13",
@@ -254,7 +286,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": null
     },
     {
       "id": "cm-14",
@@ -270,7 +302,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": null
     },
     {
       "id": "cm-15",
@@ -286,7 +318,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": null
     },
     {
       "id": "cm-16",
@@ -302,7 +334,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": null
     },
     {
       "id": "cm-17",
@@ -318,7 +350,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": null
     },
     {
       "id": "cm-18",
@@ -334,7 +366,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": null
     },
     {
       "id": "cm-19",
@@ -350,7 +382,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": null
     },
     {
       "id": "cm-20",
@@ -366,7 +398,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": null
     },
     {
       "id": "cm-21",
@@ -382,7 +414,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": null
     },
     {
       "id": "cm-22",
@@ -398,7 +430,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": null
     },
     {
       "id": "cm-23",
@@ -414,7 +446,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": null
     },
     {
       "id": "cm-24",
@@ -430,7 +462,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": null
     },
     {
       "id": "cm-25",
@@ -446,7 +478,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": null
     },
     {
       "id": "cm-26",
@@ -462,7 +494,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "fire"
+      "element": null
     },
     {
       "id": "cm-27",
@@ -478,7 +510,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "water"
+      "element": null
     },
     {
       "id": "cm-28",
@@ -494,7 +526,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": null
     },
     {
       "id": "cm-29",
@@ -510,7 +542,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "bolt"
+      "element": null
     },
     {
       "id": "cm-30",
@@ -526,7 +558,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "wind"
+      "element": null
     },
     {
       "id": "zeus-1",
@@ -798,7 +830,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "athena-2",
@@ -814,7 +846,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "athena-3",
@@ -830,7 +862,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "athena-4",
@@ -846,7 +878,7 @@
       "chapter": null,
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "apollo-1",
@@ -1770,7 +1802,7 @@
       "outcome": "신막",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "c10-lose",
@@ -1787,7 +1819,7 @@
       "outcome": "실패",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "c10-perfect",
@@ -1804,7 +1836,7 @@
       "outcome": "완막",
       "skill": null,
       "likes": [],
-      "element": "earth"
+      "element": "bolt"
     },
     {
       "id": "c11-win",
@@ -1912,14 +1944,14 @@
   "godElements": {
     "ZEUS": "번개",
     "HERA": "번개",
+    "ATHENA": "번개",
     "POSEIDON": "물",
     "APHRODITE": "물",
+    "APOLLO": "불",
     "HEPHAISTOS": "불",
     "ARES": "불",
-    "APOLLO": "불",
     "DEMETER": "땅",
     "DIONYSOS": "땅",
-    "ATHENA": "땅",
     "HERMES": "바람",
     "ARTEMIS": "바람"
   }
