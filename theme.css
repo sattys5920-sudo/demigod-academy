@@ -19,7 +19,6 @@
   --alert:#ff3d8b;       /* 알림 점 */
   --cost:#ff3d5a;        /* 카드 비용 칸 */
   --paper:#f4f1e8;       /* 카드 능력 박스 바탕 */
-  --gold:#ffd23f;        /* 번개 속성 전용 — UI 에는 쓰지 않는다 */
   --t1:#eaf4ff;
   --t2:#8fb3d9;          /* text-sub */
   --t3:#7f9cc7;          /* text-muted */
@@ -38,7 +37,6 @@
 
   --app:480px;
   --cut:14px;
-  --cut-s:9px;
   --hd:70px;
   --tb:72px;
 
@@ -69,7 +67,7 @@ body{
   word-break:keep-all; overflow-wrap:break-word;
 }
 /* 제목·칩·버튼·짧은 라벨은 아예 끊지 않는다 */
-h1,.chip,.btn,.eyebrow,.seg-btn,.tab,.slab,.wallet,.count{white-space:nowrap}
+h1, .chip, .btn, .eyebrow, .seg-btn, .tab, .wallet, .count{white-space:nowrap}
 /* <i> 를 라벨 조각으로 쓴다. 브라우저 기본이 italic 이라 못 박아 둔다 —
    기울임은 transform: skewX 로만 준다. */
 i,em,address,cite,dfn,var{font-style:normal}
@@ -107,16 +105,6 @@ body::before{
   background-image:radial-gradient(#3fe0ff 1px, transparent 1.1px);
   background-size:13px 13px; opacity:.055;
 }
-
-/* ── 모양 조각 ─────────────────────────────────── */
-.cut{
-  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
-                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
-}
-.cut-s{
-  clip-path:polygon(0 var(--cut-s), var(--cut-s) 0, 100% 0,
-                    100% calc(100% - var(--cut-s)), calc(100% - var(--cut-s)) 100%, 0 100%);
-}
 .spacer{flex:1 1 auto}
 
 /* ── 패널 ──────────────────────────────────────── */
@@ -127,19 +115,6 @@ body::before{
                     100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
 }
 .panel.flat{padding:13px 14px}
-.panel.hot{background:var(--neon); color:var(--bg); border-color:var(--line)}
-.panel.ink{background:var(--ink)}
-
-/* 제목 — 기울인 네온 띠 */
-.slab{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:5px 14px 6px; background:var(--neon); color:var(--bg);
-  transform:skewX(var(--skew));
-}
-.slab > *{transform:skewX(14deg)}
-.slab .k{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px}
-.slab h2{margin:0; font-family:var(--disp); font-weight:400; font-size:15px; line-height:1.15}
-.slab.hot{background:var(--line); color:var(--bg)}
 
 .eyebrow{font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:2.5px; color:var(--neon)}
 .sect-h{display:flex; align-items:center; gap:10px}
@@ -198,7 +173,6 @@ body::before{
   transform:skewX(var(--skew));
 }
 .chip > *{transform:skewX(14deg)}
-.chip.hot{background:var(--neon); border-color:var(--neon); color:#02122b}
 .chip.gold{background:transparent; border-color:var(--neon); color:var(--neon)}
 .chip.on{background:var(--neon); border-color:var(--neon); color:#02122b; box-shadow:var(--glow)}
 /* 알림은 핑크만 쓴다 */
@@ -209,7 +183,6 @@ body::before{
      transform:skewX(-30deg)}
 .bar > i{display:block; height:100%; background:var(--neon); box-shadow:var(--glow)}
 .bar.gold > i{background:var(--neon); box-shadow:var(--glow)}
-.bar.thin{height:9px}
 /* 점선형 — 칸이 비어 있는 쪽을 점선으로 보여 준다 */
 .bar.dotted{
   background-image:repeating-linear-gradient(90deg,
@@ -228,16 +201,14 @@ input:focus{border-color:var(--neon); outline:none; box-shadow:var(--glow)}
 input::placeholder{color:var(--t3)}
 
 /* ── 아바타 ────────────────────────────────────── */
+/* 아바타도 시스템 안이다 — 노란 사각은 네이비·시안 밖이었다.
+   혈통 구분은 지금 색으로 하지 않는다. */
 .ava{
   display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
-  border:1.5px solid var(--neon); overflow:hidden; background:var(--panel);
+  border:1.5px solid var(--neon); overflow:hidden;
+  background:var(--ink); color:var(--neon);
   clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
-/* 아바타도 시스템 안으로 — 노란 사각은 네이비·시안 밖이었다.
-   혈통 구분은 테두리 색으로만 남긴다. */
-.ava{background:var(--ink); color:var(--neon)}
-.ava.tone-lime{border-color:var(--neon); color:var(--neon)}
-.ava.tone-pink{border-color:var(--neon); color:var(--neon)}
 .ava img{width:100%; height:100%; object-fit:cover; display:block}
 .ava.xs{width:28px; height:28px}
 .ava.s{width:38px; height:38px}

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Chakra+Petch:wght@500;700&family=Gothic+A1:wght@500;700;900&display=swap">
-<link rel="stylesheet" href="theme.css?v=55d39d6f">
-<link rel="stylesheet" href="app.css?v=cef823c5">
+<link rel="stylesheet" href="theme.css?v=09ccafa8">
+<link rel="stylesheet" href="app.css?v=dac1927d">
 </head>
 <body>
 
@@ -52,7 +52,7 @@
       <span class="lbl">ICHOR</span>
       <span class="val" id="walletIchor">0</span>
     </span>
-    <span class="wallet" id="walletEtherBox" title="에테르 — 강화에 쓴다" style="background:var(--lime); border-color:var(--line)">
+    <span class="wallet" id="walletEtherBox" title="에테르 — 강화에 쓴다">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
       <span class="lbl">AITHER</span>
       <span class="val" id="walletEther">0</span>
@@ -71,7 +71,7 @@
 
       <!-- 챕터 카드 — 왼쪽 글, 오른쪽 45% 사선 일러스트, 경계에 네온 라인 -->
       <article class="nowch" id="nowch" data-n="01">
-        <div class="ch-art" aria-hidden="true"><img id="chArt" src="" alt=""></div>
+        <div class="ch-art" aria-hidden="true"><img id="chArt" alt="" hidden src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
         <div class="txt">
           <span class="eyebrow" id="chEyebrow">CHAPTER 01 · HERMES</span>
           <h2 id="chTitle">—</h2>
@@ -113,7 +113,7 @@
             <h2>수집 현황</h2><span class="spacer"></span>
             <span class="count" id="dexCount">0 <span style="color:var(--t3)">/ 0</span></span>
           </div>
-          <div class="bar" role="img" aria-label="수집률"><i id="dexBar" style="width:0%"></i></div>
+          <div class="bar dotted" role="img" aria-label="수집률"><i id="dexBar" style="width:0%"></i></div>
         </section>
         <section class="panel flat">
           <div class="sect-h" style="margin-bottom:12px"><h2>상성</h2>
@@ -181,7 +181,7 @@
             <span class="eyebrow">BONDS</span><h2>관계도</h2>
           </div>
           <p class="hint" style="margin-bottom:16px">
-            같은 덱에 넣으면 효과가 붙는다. <b style="color:var(--lime)">관계는 호감도를 올려야 드러난다.</b>
+            같은 덱에 넣으면 효과가 붙는다. <b style="color:var(--neon)">관계는 호감도를 올려야 드러난다.</b>
           </p>
           <div class="bondmap" id="bondMap"></div>
           <div class="legend" style="margin-top:16px">
@@ -208,7 +208,7 @@
             <span class="chip" id="capLeft">AITHER —</span>
           </div>
           <p class="hint" style="margin-top:12px">
-            걸어 두고 한 번 들른다. <b style="color:var(--lime)">안 들르면 보상이 절반</b>이다.
+            걸어 두고 한 번 들른다. <b style="color:var(--neon)">안 들르면 보상이 절반</b>이다.
             수업에 보낸 카드는 그동안 덱에 못 쓴다.
           </p>
         </section>
@@ -220,7 +220,7 @@
           <div class="sect-h"><h2>사냥터</h2><span class="spacer"></span>
             <span class="chip" id="huntOpen">0곳 열림</span></div>
           <p class="hint" style="margin-top:12px">
-            막아낸 장의 배경이 열린다. 덱 10장, 3~5턴. <b style="color:var(--lime)">파티는 지금 접속한 사람하고만.</b>
+            막아낸 장의 배경이 열린다. 덱 10장, 3~5턴. <b style="color:var(--neon)">파티는 지금 접속한 사람하고만.</b>
           </p>
         </section>
         <ul class="rows" id="huntList"></ul>
@@ -268,7 +268,7 @@
           </button>
         </div>
 
-        <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--pink);margin:0"></p>
+        <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--alert);margin:0"></p>
 
       </div>
 
@@ -397,7 +397,7 @@
     <span class="ava s" id="talkAva" aria-hidden="true"></span>
     <span class="ttl"><span class="n" id="talkName">—</span><span class="s" id="talkFam">—</span></span>
     <span class="spacer"></span>
-    <span class="bondbar" id="talkBond" aria-label="호감도"></span>
+    <span class="bondbar" id="talkBond" role="img" aria-label="호감도"></span>
   </div>
   <div class="log" id="talkLog"></div>
   <div class="deck-bar">
@@ -452,7 +452,7 @@
     <div class="bbar">
       <span class="t" id="turnLabel">TURN 1</span>
       <span class="spacer"></span>
-      <span class="ichor" id="ichorDots" aria-label="이코르"></span>
+      <span class="ichor" id="ichorDots" role="img" aria-label="이코르"></span>
     </div>
 
     <div class="bside me">
@@ -514,7 +514,7 @@
 <!-- ══ 시간표 걸기 ═════════════════════════════════ -->
 <dialog class="dlg" id="slotDlg" aria-labelledby="slotDlgTitle">
   <div class="dlg-hd">
-    <span class="ic" aria-hidden="true" style="width:56px;height:56px;flex:0 0 56px;border-radius:50%;background:var(--lime);border:4px solid var(--line);display:flex;align-items:center;justify-content:center">
+    <span class="ic" aria-hidden="true" style="width:56px;height:56px;flex:0 0 56px;background:var(--neon);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
     </span>
     <span class="who"><span class="n" id="slotDlgTitle">무엇을 할까</span><span class="r">SET A SLOT</span></span>
@@ -524,7 +524,7 @@
 
 <script src="art.js?v=2669a907"></script>
 <script src="battle.js?v=2fdfbaca"></script>
-<script src="app.js?v=09559f96"></script>
+<script src="app.js?v=494514ce"></script>
 <script type="module" src="app-auth.js?v=eaa45a43"></script>
 
 </body>

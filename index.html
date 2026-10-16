@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Chakra+Petch:wght@500;700&family=Gothic+A1:wght@500;700;900&display=swap">
-<link rel="stylesheet" href="theme.css?v=55d39d6f">
-<link rel="stylesheet" href="page.css?v=9874dc03">
+<link rel="stylesheet" href="theme.css?v=09ccafa8">
+<link rel="stylesheet" href="page.css?v=05a5de45">
 </head>
 <body>
 
@@ -53,7 +53,7 @@
             </button>
           </div>
         </div>
-        <label class="remember" for="remember">
+        <label class="remember">
           <input id="remember" name="remember" type="checkbox">
           <span>아이디 기억하기</span>
         </label>
@@ -140,7 +140,7 @@
   <form method="dialog" id="adminForm" novalidate>
     <div class="field">
       <label for="adminCode">ADMIN CODE · 9자리</label>
-      <input id="adminCode" name="adminCode" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" placeholder="000000000">
+      <input id="adminCode" name="adminCode" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="current-password" placeholder="000000000">
     </div>
     <div class="msg" id="adminMsg" role="status" aria-live="polite"></div>
     <div class="dlg-actions">

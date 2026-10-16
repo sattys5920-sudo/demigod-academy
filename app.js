@@ -122,20 +122,9 @@
     var e = D.elements.list[key];
     return e ? e.ko : '';
   }
-  /* 상극이면 1.5배, 역상극이면 0.67배, 아니면 그대로 */
-  function elMul(mine, theirs) {
-    if (!D.elements || !mine || !theirs) return 1;   /* 무속성은 상성이 없다 */
-    var L = D.elements.list, M = D.elements.multiplier;
-    if (L[mine] && L[mine].beats === theirs) return M.strong;
-    if (L[theirs] && L[theirs].beats === mine) return M.weak;
-    return M.even;
-  }
+  /* 상성 계산과 난수는 battle.js 가 쥐고 있다 — 여기 있던 두 벌은
+     아무도 안 부르는 복사본이었다. */
 
-  /* ── 전투 — 같은 입력이면 같은 결과 (순수) ───── */
-  function rng(seed) {
-    var x = seed >>> 0 || 1;
-    return function () { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0; return x / 4294967296; };
-  }
   function hash(str) {
     var h = 2166136261;
     for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
@@ -396,7 +385,6 @@
     $('#chBoss').textContent = ch.boss.name + ' — ' + ch.boss.weaknessNote;
     $('#chLeft').textContent = 'DAY ' + S.day;
     /* 오른쪽 사선 칸에 그 장을 맡은 신의 ★3 그림을 넣는다 */
-    var godKey = String(ch.god || '').toLowerCase();
     var pic = D.cards.cards.filter(function (c) {
       return c.family === String(ch.god).toUpperCase() && c.art;
     }).sort(function (a, b) { return b.grade - a.grade; })[0];
@@ -575,9 +563,9 @@
     var price = el('span', 'price');
     price.append(el('span', 'k', 'AITHER'), el('span', 'v', fmt(cost)));
     var go = el('button', 'btn', '강화하기'); go.type = 'button';
-    var msg = el('p', 'msg'); msg.style.cssText = 'min-height:22px;font-size:13px;font-weight:700;color:var(--lime);margin:0';
+    var msg = el('p', 'msg'); msg.style.cssText = 'min-height:22px;font-size:13px;font-weight:700;color:var(--neon);margin:0';
     go.addEventListener('click', function () {
-      if (!spend('ether', cost)) { msg.style.color = 'var(--pink)'; msg.textContent = '에테르가 모자란다. ' + fmt(cost) + ' 필요.'; return; }
+      if (!spend('ether', cost)) { msg.style.color = 'var(--alert)'; msg.textContent = '에테르가 모자란다. ' + fmt(cost) + ' 필요.'; return; }
       o.lv += 1; save(); paintGrow();
     });
     foot.append(price, el('span', 'spacer'), go);
@@ -860,7 +848,6 @@
     var n = el('button', 'bunit' + (u.pos === 'def' ? ' def' : '') + (u.sick ? ' sick' : ''));
     n.type = 'button';
     if (sel && sel.from === 'field' && sel.who === who && sel.i === i) n.classList.add('sel');
-    var top = el('span', 'top');
     var badge = el('span', 'el el-' + (u.card.element || 'none'));
     badge.appendChild(elIcon(u.card.element, 9));
     n.appendChild(badge);
@@ -869,7 +856,7 @@
     st.append(el('span', 'ba', String(u.atk)), el('span', 'bd', String(u.hp)));
     n.appendChild(st);
     n.appendChild(el('span', 'pos', u.pos === 'def' ? '수비' : '공격'));
-    if (u.shield) n.style.outline = '2px solid var(--gold)';
+    if (u.shield) n.style.outline = '2px solid var(--neon)';
     return n;
   }
 
@@ -1029,7 +1016,7 @@
 
   function showResult(win, title, gains) {
     $('#resultWord').textContent = win ? '승리' : '패배';
-    $('#resultWord').style.color = win ? 'var(--gold)' : 'var(--hot)';
+    $('#resultWord').style.color = win ? 'var(--neon)' : 'var(--alert)';
     $('#resultSub').textContent = title;
     var g = $('#resultGains'); g.textContent = '';
     gains.forEach(function (p) {
@@ -1065,8 +1052,6 @@
     var set = function (id, v) { var n = $(id); if (n) n.textContent = v; };
     set('#pityVal', S.pity); set('#pityVal2', S.pity);
     set('#pityMax', e.pity);
-    var bar = $('#pityBar');
-    if (bar) bar.style.width = Math.min(100, S.pity / e.pity * 100) + '%';
 
     /* PICK UP ★3 — 작은 카드 셋. 가운데가 주인공이다. */
     var row = $('#pickupRow');

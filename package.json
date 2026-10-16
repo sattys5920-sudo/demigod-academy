@@ -1,0 +1,19 @@
+{
+  "name": "demigod-academy",
+  "private": true,
+  "description": "데미갓 아카데미 — 빌드 단계가 없는 정적 웹앱. 이 package.json 은 린터만 담는다.",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html && npm run lint:refs",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"*.css\"",
+    "lint:html": "html-validate app.html index.html setup.html",
+    "lint:refs": "node tools/check-refs.mjs"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "globals": "^16.0.0",
+    "html-validate": "^11.16.2",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}

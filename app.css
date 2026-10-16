@@ -362,25 +362,6 @@ body.fullscreen-on .tabbar{display:none}
   font-size:13px; font-weight:500; color:var(--t3);
 }
 
-.banner-s{
-  position:relative; overflow:hidden; display:flex; align-items:center; gap:12px; width:100%;
-  padding:14px; background:var(--hot); color:var(--line); border:3px solid var(--line); text-align:left;
-  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
-                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
-}
-.banner-s::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(-45deg, rgba(11,9,16,.18) 0 7px, transparent 7px 15px);
-}
-.banner-s > *{position:relative; z-index:1}
-.banner-s .mark{
-  width:40px; height:40px; flex:0 0 40px; background:var(--line); color:var(--ink);
-  display:flex; align-items:center; justify-content:center;
-}
-.banner-s .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px}
-.banner-s .kicker{font-family:var(--num); font-size:10px; letter-spacing:.16em}
-.banner-s .line{font-family:var(--disp); font-weight:400; font-size:19px; line-height:1.2}
-
 /* ══ 탭의 머리 ═══════════════════════════════════════════
    빨간 면은 홈, 금색 면은 상점의 몫이다 — 세 번째 색 면을 만들면
    어느 것도 주인공이 아니게 된다. 나머지 탭은 색이 아니라 크기로만
@@ -398,10 +379,6 @@ body.fullscreen-on .tabbar{display:none}
 .tophead .chip{white-space:nowrap}
 .tophead .count{font-size:15px}
 .tophead .bar{height:16px}
-
-.composer{display:flex; gap:10px; align-items:flex-start}
-.composer .grow{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:8px}
-.composer .row{display:flex; gap:8px; align-items:center}
 
 /* 피드 — 한 줄씩 좌우로 어긋나게. 똑바로 쌓으면 목록처럼 읽힌다. */
 .feed{display:flex; flex-direction:column; gap:11px; list-style:none; margin:0; padding:0}
@@ -644,20 +621,6 @@ body.fullscreen-on .tabbar{display:none}
 .pick.p2{transform:rotate(2deg)}
 .pick.p1{transform:translateY(-12px)}
 .pick.p1 .tcg{box-shadow:3px 4px 0 #000, var(--glow)}
-
-.pulls{display:flex; gap:10px}
-.pull{
-  flex:1 1 0; min-height:64px; padding:0 10px; border:3px solid var(--line);
-  background:var(--hot); color:var(--line); display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:5px; box-shadow:5px 5px 0 var(--line);
-}
-.pull.ten{background:var(--neon); color:#02122b}
-.pull:active{transform:translate(3px,3px); box-shadow:2px 2px 0 var(--line)}
-.pull .big{font-family:var(--disp); font-weight:400; font-size:19px}
-.pull .cost-tag{
-  display:inline-flex; align-items:center; gap:4px; height:22px; padding:0 9px;
-  border:2px solid currentColor; font-family:var(--num); font-size:10.5px;
-}
 .goods{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
 .good{
   display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:11px;
@@ -674,7 +637,7 @@ body.fullscreen-on .tabbar{display:none}
 .full{
   position:fixed; inset:0; left:50%; transform:translateX(-50%); z-index:50;
   width:100%; max-width:var(--app); background:var(--bg);
-  display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden;
+  display:flex; flex-direction:column; overflow:hidden auto;
 }
 .full > .topbar{
   position:sticky; top:0; z-index:3; flex:0 0 auto;
@@ -728,46 +691,14 @@ body.fullscreen-on .tabbar{display:none}
   width:24px; height:24px; flex:0 0 24px; border:2px solid var(--hot); color:var(--hot);
   display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:10px;
 }
-.choice.fight{border-color:var(--hot)}
 .talk{display:flex; gap:8px}
 .talk input{flex:1 1 auto; min-width:0; min-height:44px}
 .talk .send{
   min-height:44px; padding:0 15px; border:2px solid var(--line); background:var(--hot);
   color:var(--line); font-family:var(--ui); font-weight:400; font-size:13px;
 }
-
-/* 전투 */
-.fieldwrap{flex:1 1 auto; display:flex; flex-direction:column; gap:10px; padding:14px}
-.hpbar{display:flex; align-items:center; gap:10px}
-.hpbar .face{
-  width:38px; height:38px; flex:0 0 38px; border:2px solid var(--line);
-  background:var(--panel); color:var(--neon);
-  display:flex; align-items:center; justify-content:center;
-}
-.hpbar.foe .face{color:var(--hot)}
-.hpbar .who{display:flex; flex-direction:column; gap:4px; flex:1 1 auto; min-width:0}
-.hpbar .who .n{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line); word-break:break-all}
-.hpbar .hp{height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
-.hpbar .hp > i{display:block; height:100%; background:var(--neon); box-shadow:var(--glow)}
-.hpbar.foe .hp > i{background:var(--hot)}
-.hpbar .num{font-family:var(--num); font-size:13px; color:var(--line); font-variant-numeric:tabular-nums}
 .field{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
-.slotmini{
-  height:74px; border:2px dashed var(--dim); background:var(--panel);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--num); font-size:9.5px; letter-spacing:.1em; color:var(--t3);
-}
-.slotmini.on{border-style:solid; border-color:var(--line); flex-direction:column; gap:4px; color:var(--line)}
-.turnbar{display:flex; align-items:center; gap:10px; padding:9px 13px; border:2px solid var(--line); background:var(--panel)}
-.turnbar .t{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--hot)}
-.turnbar .m{font-family:var(--num); font-size:10.5px; color:var(--t2)}
 .hand{position:relative; height:132px; flex:0 0 132px; display:flex; align-items:flex-end; justify-content:center}
-.endturn{
-  position:absolute; right:12px; bottom:18px; z-index:2; min-height:44px; padding:0 18px;
-  border:2px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:400; font-size:15px; box-shadow:4px 4px 0 var(--line); transform:skewX(-9deg);
-}
-.endturn > *{transform:skewX(9deg)}
 
 /* 결과 · 뽑기 연출 */
 .result{align-items:center; justify-content:center; padding:18px}
@@ -801,9 +732,6 @@ body.fullscreen-on .tabbar{display:none}
 .bondbar .pip{width:15px; height:8px; border:1.5px solid rgba(63,224,255,.35);
               transform:skewX(var(--skew))}
 .bondbar .pip.on{background:var(--neon); border-color:var(--neon); box-shadow:var(--glow)}
-.stack-ava{display:flex; align-items:center}
-.stack-ava .ava{margin-right:-8px}
-.post-acts{display:flex; gap:8px; flex-wrap:wrap}
 
 /* ── 오원소 ────────────────────────────────────
    색 셋(주홍·금색·흰색)과 모양만으로 가른다. 테두리 장난은 안 한다 —
@@ -873,8 +801,9 @@ body.fullscreen-on .tabbar{display:none}
 }
 .bunit.sel{border-color:var(--neon); box-shadow:0 0 0 2px rgba(63,224,255,.5)}
 .bunit.sick{opacity:.6}
-.bunit .bn{flex:1 1 auto; font-family:var(--ui-s); font-weight:600; font-size:11px; color:var(--line);
-  line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
+.bunit .bn{flex:1 1 auto; padding-left:19px; font-family:var(--ui-s); font-weight:600; font-size:11px;
+  color:var(--line); line-height:1.25; overflow:hidden;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
 .bunit .bs{flex:0 0 auto; display:flex; gap:3px; align-items:center}
 .bunit .ba,.bunit .bd{
   flex:1 1 0; text-align:center; font-family:var(--num); font-size:11px; padding:2px 0;
@@ -883,7 +812,6 @@ body.fullscreen-on .tabbar{display:none}
 .bunit .ba{background:var(--line); color:var(--ink)}
 .bunit .bd{background:var(--ink); color:var(--t1)}
 .bunit .el{position:absolute; top:4px; left:4px; width:15px; height:15px; flex:0 0 15px; border-width:2px}
-.bunit .bn{padding-left:19px}
 .bunit .pos{position:absolute; top:5px; right:4px; font-family:var(--num); font-size:7.5px; color:var(--t3)}
 .bunit.def .pos{color:var(--neon)}
 
@@ -897,8 +825,7 @@ body.fullscreen-on .tabbar{display:none}
 
 .bbar{display:flex; align-items:center; gap:8px; padding:5px 8px; border:2px solid var(--line); background:var(--panel)}
 .bbar .t{font-family:var(--ui-s); font-weight:600; font-size:12px; color:var(--hot)}
-.ichor{display:inline-flex; gap:2px}
-.ichor{flex-wrap:wrap; max-width:132px; justify-content:flex-end}
+.ichor{display:inline-flex; flex-wrap:wrap; gap:2px; max-width:132px; justify-content:flex-end}
 .ichor i{width:9px; height:15px; border:2px solid var(--t3); display:block; background:var(--ink)}
 .ichor i.on{background:var(--neon); border-color:var(--neon)}
 
