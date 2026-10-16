@@ -62,10 +62,15 @@
 
   /* ── 오원소 ──────────────────────────────────── */
   var EL_PATH = {
-    fire:  '<path d="M12 3c3 4 5 6 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 .5 2 1.5 2.5 2 2 .5-1-1-4 1-7Z"/>',
-    water: '<path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9Z"/>',
-    earth: '<path d="M3 19h18"/><path d="m5 19 5-9 3 5 2-3 4 7"/>',
-    wind:  '<path d="M3 9h10a3 3 0 1 0-3-3"/><path d="M3 14h13a3 3 0 1 1-3 3"/>',
+    /* 불 — 끝이 뾰족한 불꽃. 물방울과 안 헷갈리게 위를 꺾었다 */
+    fire:  '<path d="M12 2c0 4-4 5-4 9a4 4 0 0 0 8 0c0-2-1-3-2-4 1 4-2 4-2 2 0-3 2-4 0-7Z"/>',
+    /* 물 — 둥근 물방울 */
+    water: '<path d="M12 3c3.4 4.2 5 6.6 5 9a5 5 0 0 1-10 0c0-2.4 1.6-4.8 5-9Z"/>',
+    /* 땅 — 산 */
+    earth: '<path d="M2 20h20"/><path d="m4 20 6-11 4 7 2.5-4L22 20"/>',
+    /* 바람 — 소용돌이 */
+    wind:  '<path d="M4 8h9a3 3 0 1 0-3-3"/><path d="M4 13h13a3 3 0 1 1-3 3"/><path d="M4 18h6"/>',
+    /* 번개 */
     bolt:  '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>'
   };
   function elIcon(key, px) {
@@ -189,7 +194,7 @@
     top.appendChild(el('span', 'cost', c.cost == null ? '?' : String(c.cost)));
     var badge = el('span', 'el el-' + (c.element || 'bolt'));
     badge.title = elKo(c.element);
-    badge.appendChild(elIcon(c.element, 11));
+    badge.appendChild(elIcon(c.element, 13));
     top.appendChild(badge);
     top.appendChild(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family));
     var art = el('span', 'art');
@@ -298,7 +303,7 @@
       var e = D.elements.list[k];
       var it = el('span', 'ring-it');
       var ic = el('span', 'ring-ic el-' + k);
-      ic.appendChild(elIcon(k, 14));
+      ic.appendChild(elIcon(k, 16));
       it.append(ic, el('span', 'ring-n', e.ko));
       it.title = e.why;
       box.appendChild(it);
@@ -308,7 +313,7 @@
     });
     var first = el('span', 'ring-it');
     var ic0 = el('span', 'ring-ic el-' + D.elements.cycle[0]);
-    ic0.appendChild(elIcon(D.elements.cycle[0], 14));
+    ic0.appendChild(elIcon(D.elements.cycle[0], 16));
     first.append(ic0, el('span', 'ring-n', D.elements.list[D.elements.cycle[0]].ko));
     box.appendChild(first);
   }
