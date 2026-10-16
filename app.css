@@ -22,6 +22,9 @@
 .hd h1{
   margin:0; font-family:var(--disp); font-weight:400; font-size:28px; line-height:1;
   color:var(--line); white-space:nowrap; transform:skewX(var(--skew));
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.5px var(--carve);
   text-shadow:2px 2px 0 var(--accent-blue);
 }
 /* "// SHOP" 같은 영문 라벨 */
@@ -135,6 +138,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .tcg.big{padding:8px; border-width:3px; box-shadow:10px 12px 0 #000}
 .tcg-in{
+  --carve:var(--card-inner);
   display:flex; flex-direction:column; height:100%;
   background:var(--card-inner); border:2px solid #000; overflow:hidden;
 }
@@ -151,8 +155,11 @@ body.fullscreen-on .tabbar{display:none}
   flex:1 1 auto; min-width:0; display:flex; align-items:center; padding:0 5px;
   font-family:var(--disp); font-weight:400; font-size:9px; line-height:1.05; color:var(--line);
   word-break:keep-all; overflow:hidden;
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.3px var(--carve);
 }
-.tcg.big .tcg-name{font-size:22px; padding:0 10px}
+.tcg.big .tcg-name{font-size:22px; padding:0 10px; -webkit-text-stroke-width:.5px}
 .tcg-el{
   flex:0 0 auto; aspect-ratio:1; display:flex; align-items:center; justify-content:center;
   border-left:2px solid #000; color:#000;
@@ -176,9 +183,10 @@ body.fullscreen-on .tabbar{display:none}
 .tcg-type{
   flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:2.5px 5px;
   border-bottom:2px solid #000; color:#000; background:var(--el-none);
-  font-family:var(--ui); font-weight:700; font-size:6.5px; letter-spacing:.2px; line-height:1;
+  /* 작은데 굵으면 메워진다 — 크기를 조금 올리고 굵기를 내린다 */
+  font-family:var(--ui); font-weight:500; font-size:7px; letter-spacing:.2px; line-height:1;
 }
-.tcg.big .tcg-type{font-size:10px; padding:6px 9px; line-height:1.2}
+.tcg.big .tcg-type{font-weight:700; font-size:10px; padding:6px 9px; line-height:1.2}
 .tcg[data-el=bolt]  .tcg-type:not(.none){background:var(--el-bolt)}
 .tcg[data-el=water] .tcg-type:not(.none){background:var(--el-water)}
 .tcg[data-el=fire]  .tcg-type:not(.none){background:var(--el-fire)}
@@ -199,18 +207,18 @@ body.fullscreen-on .tabbar{display:none}
 .ab{display:flex; flex-direction:column; gap:1px; min-width:0; line-height:1}
 .tcg.big .ab{gap:3px}
 .ab-h{display:flex; align-items:center; gap:3px; min-width:0}
-.ab-h b{font-family:var(--ui); font-weight:900; font-size:7px; line-height:1.2; color:#101010;
+.ab-h b{font-family:var(--ui); font-weight:700; font-size:7.5px; line-height:1.2; color:#101010;
         overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.tcg.big .ab-h b{font-size:13px}
+.tcg.big .ab-h b{font-weight:900; font-size:13px}
 .ab-h i{
   flex:0 0 auto; font-family:var(--ui); font-style:normal; font-weight:700; font-size:5.5px;
   padding:1px 3px; background:#101010; color:var(--paper); letter-spacing:.3px;
 }
-.tcg.big .ab-h i{font-size:9px; padding:2px 6px}
-.ab-t{font-family:var(--ui); font-weight:500; font-size:6.5px; line-height:1.25; color:#2a2a2a;
+.tcg.big .ab-h i{font-weight:700; font-size:9px; padding:2px 6px}
+.ab-t{font-family:var(--ui); font-weight:500; font-size:7px; line-height:1.25; color:#2a2a2a;
       word-break:keep-all; overflow:hidden}
 .tcg.big .ab-t{font-size:11px; line-height:1.55}
-.tcg-noab{font-family:var(--ui); font-weight:500; font-size:6.5px; color:#5a5a5a}
+.tcg-noab{font-family:var(--ui); font-weight:500; font-size:7px; color:#5a5a5a}
 .tcg.big .tcg-noab{font-size:11px}
 .tcg-flavor{
   margin-top:auto; padding-top:7px; border-top:1px solid rgba(16,16,16,.25);
@@ -221,7 +229,7 @@ body.fullscreen-on .tabbar{display:none}
 .tcg-lock{
   /* 작은 카드의 능력 칸은 24px 뿐이다 — 세로로 쌓으면 글자가 잘린다 */
   flex:1 1 auto; display:flex; flex-direction:row; align-items:center; justify-content:center;
-  gap:4px; color:#6a7490; font-family:var(--ui); font-weight:700; font-size:8px;
+  gap:4px; color:#8795b8; font-family:var(--ui); font-weight:500; font-size:8.5px;
   white-space:nowrap; letter-spacing:.5px;
 }
 .tcg.big .tcg-lock{flex-direction:column; gap:8px; font-size:12px}
@@ -314,7 +322,8 @@ body.fullscreen-on .tabbar{display:none}
   margin:0; display:flex; flex-direction:column; align-items:flex-start;
   font-family:var(--disp); font-weight:400; font-size:40px; line-height:1.06;
   letter-spacing:-.01em; color:#fff;
-  -webkit-text-stroke:2px #000; paint-order:stroke fill;
+  /* 2px 는 40px 한글의 속공간을 메워 '않는다' 가 뭉갠다 */
+  -webkit-text-stroke:1px #000; paint-order:stroke fill;
   text-shadow:3px 4px 0 var(--accent-blue);
 }
 .nowch h2 .ln{display:block; white-space:nowrap}
@@ -341,11 +350,12 @@ body.fullscreen-on .tabbar{display:none}
 }
 .phase > *{transform:skewX(14deg)}
 .phase .d{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3); white-space:nowrap}
-.phase .t{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); white-space:nowrap}
+.phase .t{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); white-space:nowrap; -webkit-text-stroke:.4px var(--carve);}
 .phase .s{font-size:10.5px; font-weight:500; color:var(--t2); line-height:1.45}
 .phase.on{background:var(--neon); border-color:var(--neon); box-shadow:var(--glow)}
 .phase.on .d{color:rgba(2,18,43,.7)}
 .phase.on .t,.phase.on .s{color:#02122b}
+.phase.on .t{--carve:var(--neon)}
 .phase.done{border-color:rgba(63,224,255,.65)}
 .phase.done .t{color:var(--neon)}
 .nowch .btnpair{width:100%}
@@ -374,6 +384,9 @@ body.fullscreen-on .tabbar{display:none}
   flex:0 1 auto; font-family:var(--disp); font-weight:400; font-size:26px; line-height:1;
   letter-spacing:-.01em; color:var(--line); text-shadow:2px 2px 0 var(--accent-blue);
   white-space:nowrap;
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.5px var(--carve);
 }
 .tophead .sect-h .spacer{display:none}
 .tophead .chip{white-space:nowrap}
@@ -391,7 +404,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .post-hd{display:flex; align-items:center; gap:9px}
 .post-hd .who{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:1px}
-.post-hd .nm{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); word-break:break-all}
+.post-hd .nm{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); word-break:break-all; -webkit-text-stroke:.4px var(--carve);}
 .post-hd .mt{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3)}
 .post-hd .tm{font-family:var(--num); font-weight:700; font-size:9.5px; color:var(--t3)}
 .post .say{margin:0; font-size:14px; font-weight:500; line-height:1.75; color:var(--t1); word-break:break-word}
@@ -428,7 +441,7 @@ body.fullscreen-on .tabbar{display:none}
 .mini-in svg,.mini-in .art-img{display:block; width:100%; height:100%; object-fit:cover}
 .row-it.pinky .mark{border-color:var(--neon); color:var(--neon)}
 .row-it .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px}
-.row-it .nm{font-family:var(--disp); font-weight:400; font-size:15px; color:var(--line)}
+.row-it .nm{font-family:var(--disp); font-weight:400; font-size:15px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
 .row-it .sub{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6}
 .row-it .go{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2px; color:var(--t3)}
 .row-it .unread{
@@ -524,7 +537,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .slot-card > *{position:relative; z-index:1}
 .slot-card .k{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2.5px; color:var(--t3)}
-.slot-card .nm{font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line)}
+.slot-card .nm{font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
 .slot-card .left{font-family:var(--num); font-weight:700; font-size:19px; color:var(--neon)}
 .slot-card.busy{border-left-color:var(--neon)}
 .slot-card.busy::after{background-image:none}
@@ -533,7 +546,11 @@ body.fullscreen-on .tabbar{display:none}
 .slot-card.ready .left{color:var(--neon)}
 .slot-card .call{
   margin-top:6px; width:100%; min-height:40px; border:0;
+  --carve:var(--neon);
   background:var(--neon); color:#02122b; font-family:var(--disp); font-weight:400; font-size:14px;
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.4px var(--carve);
   display:inline-flex; align-items:center; justify-content:center;
   transform:skewX(var(--skew)); box-shadow:var(--glow);
 }
@@ -561,6 +578,9 @@ body.fullscreen-on .tabbar{display:none}
 }
 .empty-slot .cta{
   font-family:var(--disp); font-weight:400; font-size:12px; color:var(--neon); white-space:nowrap;
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.3px var(--carve);
 }
 
 /* ── 뽑기 ──────────────────────────────────────── */
@@ -592,11 +612,13 @@ body.fullscreen-on .tabbar{display:none}
 }
 .banner-ttl .l1{
   font-family:var(--disp); font-weight:400; font-size:26px; line-height:1;
-  color:transparent; -webkit-text-stroke:1.5px var(--neon); padding-bottom:6px;
+  /* 속 빈 글자는 획이 굵을수록 속공간부터 메워진다 — 1px 이 한글의 한계다 */
+  color:transparent; -webkit-text-stroke:1px var(--neon); padding-bottom:6px;
 }
 .banner-ttl .l2{
   font-family:var(--disp); font-weight:400; font-size:68px; line-height:.82; color:#fff;
-  -webkit-text-stroke:3px #000;
+  /* 3px 은 글자 뒤로 깔리며 양옆으로 1.5px 씩 번져 폭·풍의 속공간을 닫는다 */
+  -webkit-text-stroke:1.5px #000;
   text-shadow:5px 6px 0 var(--accent-blue);
   paint-order:stroke fill;
 }
@@ -843,13 +865,17 @@ body.fullscreen-on .tabbar{display:none}
   flex:1 0 100%; display:flex; flex-direction:column; gap:3px; margin-bottom:2px;
   padding:9px 12px; background:var(--panel); border-left:3px solid var(--neon);
 }
-.actnote b{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--neon)}
+.actnote b{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--neon); -webkit-text-stroke:.4px var(--carve);}
 .actnote span{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6; word-break:keep-all}
 .bacts:empty{display:none}
 .bacts button{
+  --carve:var(--neon);
   flex:1 1 0; min-height:40px; border:0; background:var(--neon); color:#02122b;
   font-family:var(--disp); font-weight:400; font-size:13.5px;
   transform:skewX(var(--skew));
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.4px var(--carve);
 }
 .bacts button > *{transform:skewX(14deg)}
 .bacts button.ghost{background:transparent; border:1.5px solid rgba(63,224,255,.4); color:var(--t2)}
@@ -890,14 +916,14 @@ body.fullscreen-on .tabbar{display:none}
 .detcard[data-el=wind]  .tcg{filter:drop-shadow(0 0 18px rgba(168,240,198,.45))}
 
 /* 카드 아래 정보 3칸 */
-.detfacts{display:flex; gap:0; width:min(340px,100%); margin:0; border:1px solid rgba(63,224,255,.35)}
+.detfacts{--carve:var(--bg); display:flex; gap:0; width:min(340px,100%); margin:0; border:1px solid rgba(63,224,255,.35)}
 .detfacts div{
   flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:4px;
   padding:11px 6px 12px;
 }
 .detfacts div + div{border-left:1px solid rgba(63,224,255,.22)}
 .detfacts dt{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px; color:var(--t3)}
-.detfacts dd{margin:0; font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line)}
+.detfacts dd{margin:0; font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
 .detbody .btnpair{width:min(340px,100%)}
 .detbody .msg{text-align:center}
 #detNo{font-family:var(--num); font-weight:700; letter-spacing:2px}

@@ -33,6 +33,9 @@
   --el-none:#6b84b3;
 
   --glow:0 0 12px rgba(63,224,255,.7);
+  /* 가세크 원은 한 굵기짜리 민짜 얼굴이라 한글 ㅇ·ㅎ 의 속공간이 먼저 메워진다.
+     바닥색 한 겹을 글자 위에 덮어 획을 깎는다 — 면이 바뀌는 곳에서 이 값을 다시 잡는다. */
+  --carve:var(--bg);
   --skew:-14deg;
 
   --app:480px;
@@ -109,6 +112,7 @@ body::before{
 
 /* ── 패널 ──────────────────────────────────────── */
 .panel{
+  --carve:var(--panel);
   position:relative; background:var(--panel); border:1.5px solid rgba(63,224,255,.45);
   padding:16px 16px 18px;
   clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
@@ -118,7 +122,7 @@ body::before{
 
 .eyebrow{font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:2.5px; color:var(--neon)}
 .sect-h{display:flex; align-items:center; gap:10px}
-.sect-h h2{margin:0; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line)}
+.sect-h h2{margin:0; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
 /* 한글은 음절 단위로 끊으면 '쪽지시험 · 장 / 비' 처럼 낱말이 쪼개진다.
    낱말 단위로 끊되, 끊을 데가 없는 긴 문자열은 그때만 쪼갠다. */
 .hint{margin:0; font-size:13px; font-weight:500; color:var(--t2); line-height:1.75;
@@ -134,6 +138,9 @@ body::before{
   background:transparent; color:var(--neon);
   font-family:var(--disp); font-weight:400; font-size:15px; line-height:1;
   transform:skewX(var(--skew));
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.4px var(--carve);
 }
 .btn > *{transform:skewX(14deg)}
 .btn:active{transform:skewX(var(--skew)) translate(2px,2px)}
@@ -146,7 +153,7 @@ body::before{
 .btn[disabled]:active{transform:skewX(var(--skew))}
 
 /* 강조형 — 시안으로 채우고 빛을 준다 */
-.btn.fill{background:var(--neon); border-color:var(--neon); color:#02122b;
+.btn.fill{background:var(--neon); border-color:var(--neon); color:#02122b; --carve:var(--neon);
           box-shadow:var(--glow)}
 
 /* 맞물린 한 쌍 */
@@ -234,7 +241,7 @@ dialog.dlg{
 dialog.dlg::backdrop{background:rgba(3,8,32,.9)}
 .dlg-hd{display:flex; align-items:center; gap:12px; margin-bottom:14px}
 .dlg-hd .who{display:flex; flex-direction:column; gap:3px; min-width:0}
-.dlg-hd .who .n{font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); word-break:break-all}
+.dlg-hd .who .n{font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); word-break:break-all; -webkit-text-stroke:.5px var(--carve);}
 .dlg-hd .who .r{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2px; color:var(--t3)}
 .dlg-acts{display:flex; flex-direction:column; gap:9px}
 .dlg-acts > a{text-decoration:none}
@@ -250,13 +257,17 @@ dialog.dlg::backdrop{background:rgba(3,8,32,.9)}
   display:flex; align-items:center; justify-content:center;
   clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
 }
-#gate p{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line)}
+#gate p{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); -webkit-text-stroke:.5px var(--carve);}
 #gate small{font-size:13px; font-weight:400; color:var(--t2); line-height:1.7}
 #gate a{
   min-height:44px; display:inline-flex; align-items:center; padding:0 18px;
+  --carve:var(--neon);
   border:1.5px solid var(--neon); background:var(--neon); color:#02122b;
   font-family:var(--disp); font-weight:400; font-size:15px; text-decoration:none;
   transform:skewX(var(--skew));
+  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
+     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
+  -webkit-text-stroke:.4px var(--carve);
 }
 #gate a > *{transform:skewX(14deg)}
 
