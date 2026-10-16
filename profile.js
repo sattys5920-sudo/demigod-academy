@@ -91,7 +91,7 @@ export function paintAvatar(el, profile, px) {
   svg.setAttribute('height', String(Math.round(size * 0.52)));
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('fill', 'none');
-  svg.setAttribute('stroke', '#14061F');
+  svg.setAttribute('stroke', 'currentColor');   /* 혈통 색은 .ava 의 색이 정한다 */
   svg.setAttribute('stroke-width', '2.5');
   svg.setAttribute('stroke-linecap', 'round');
   svg.setAttribute('stroke-linejoin', 'round');

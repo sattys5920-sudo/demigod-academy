@@ -224,8 +224,11 @@ input::placeholder{color:var(--t3)}
   border:1.5px solid var(--neon); overflow:hidden; background:var(--panel);
   clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
-.ava.tone-lime{background:var(--gold)}
-.ava.tone-pink{background:var(--neon)}
+/* 아바타도 시스템 안으로 — 노란 사각은 네이비·시안 밖이었다.
+   혈통 구분은 테두리 색으로만 남긴다. */
+.ava{background:var(--ink); color:var(--neon)}
+.ava.tone-lime{border-color:var(--gold); color:var(--gold)}
+.ava.tone-pink{border-color:var(--neon); color:var(--neon)}
 .ava img{width:100%; height:100%; object-fit:cover; display:block}
 .ava.xs{width:28px; height:28px}
 .ava.s{width:38px; height:38px}
@@ -236,8 +239,9 @@ input::placeholder{color:var(--t3)}
 .msg{min-height:20px; font-size:13px; font-weight:700; color:var(--alert); line-height:1.6}
 .msg.ok{color:var(--neon)}
 .empty{
-  padding:22px 16px; border:1.5px dashed var(--dim);
-  text-align:center; font-size:13px; font-weight:400; color:var(--t3); line-height:1.8;
+  position:relative; padding:22px 16px; border:0; border-left:3px solid var(--dim);
+  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.07) 0 2px, transparent 2px 13px);
+  text-align:center; font-size:13px; font-weight:500; color:var(--t3); line-height:1.8;
 }
 
 /* ── 다이얼로그 ────────────────────────────────── */

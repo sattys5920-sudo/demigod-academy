@@ -262,93 +262,76 @@ body.fullscreen-on .tabbar{display:none}
 
 /* ── 홈 ────────────────────────────────────────── */
 /* 접속 표시 — 다른 상자와 폭이 같으면 격자가 안 깨진다. 내용만큼만 차지한다. */
+/* 접속 띠 — 내용만큼만 차지한다 */
 .strip{
-  align-self:flex-start; max-width:100%; padding:6px 18px 7px 9px;
-  background:var(--ink); border:0; border-left:5px solid var(--hot);
+  align-self:flex-start; max-width:100%; padding:7px 18px 8px 11px;
+  background:var(--panel); border:0; border-left:3px solid var(--neon);
   clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 100%, 0 100%);
 }
 .online{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-.online .n{font-size:12px; font-weight:400; color:var(--t2)}
+.online .n{font-size:12px; font-weight:500; color:var(--t2)}
 
 /* ══ 홈의 주인공 — 지금 장 ═══════════════════════════════
-   화면에 압도적으로 큰 것이 하나는 있어야 한다. 그 하나가 여기다.
-
-   · 폭을 .body 의 좌우 여백 밖으로 흘려 보내 격자를 깬다
-   · 빨강을 테두리가 아니라 바닥으로 쓴다 (화면의 1/4 가 빨강이 된다)
-   · 장 번호를 150px 로 뒤에 깔고, 아래를 비스듬히 잘라 낸다
-   · 망점과 사선 줄을 면 위에 얹어 평면을 깬다                        */
+   전에는 이 면을 통째로 강조색으로 칠했다. 그 색이 네온으로 바뀌자
+   화면 절반이 시안이 됐다 — '네이비와 시안으로 절제하고 색은 그림이
+   담당한다' 는 규칙과 정면으로 어긋난다. 바닥은 패널 네이비로 돌리고,
+   시안은 획·띠지·도장·버튼에만 쓴다. */
 .nowch{
   display:flex; flex-direction:column; gap:13px;
-  margin:0 -12px;                /* .body 의 padding:0 12px 를 되돌려 끝까지 */
-  padding:20px 22px 46px 18px;   /* 아래 46px 은 비스듬히 잘려 나갈 몫 */
-  background:var(--hot); color:var(--ink);
-  border:0; border-top:3px solid var(--line); border-bottom:3px solid var(--line);
-  box-shadow:none; overflow:hidden;
+  margin:0 -12px;                /* .body 의 좌우 여백을 되돌려 끝까지 */
+  padding:20px 22px 44px 18px;
+  background:var(--panel); color:var(--t1);
+  border:0; border-top:1.5px solid var(--neon); border-bottom:1.5px solid var(--neon);
+  overflow:hidden;
   clip-path:polygon(0 0, 100% 0, 100% calc(100% - 30px), 0 100%);
 }
-.nowch::before{                   /* 장 번호 — 반쯤 잘려 나간다 */
-  content:attr(data-n); position:absolute; right:-12px; bottom:-46px;
-  font-family:var(--num); font-size:154px; line-height:1; letter-spacing:-.05em;
-  color:rgba(11,9,16,.19); pointer-events:none;
+.nowch::before{                   /* 장 번호 — 네온 외곽선만 남기고 반쯤 자른다 */
+  content:attr(data-n); position:absolute; right:-10px; bottom:-44px;
+  font-family:var(--num); font-weight:700; font-size:150px; line-height:1; letter-spacing:-.05em;
+  color:transparent; -webkit-text-stroke:2px rgba(63,224,255,.22); pointer-events:none;
 }
-.nowch::after{                    /* 질감 — 사선 줄 + 망점 */
+.nowch::after{                    /* -18° 사선 띠 */
   content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:
-    repeating-linear-gradient(-45deg, rgba(11,9,16,.085) 0 2px, transparent 2px 10px),
-    radial-gradient(rgba(11,9,16,.17) 1.2px, transparent 1.3px);
-  background-size:auto, 7px 7px;
+  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.07) 0 2px, transparent 2px 13px);
 }
 .nowch > *{position:relative; z-index:1}
 
 .nowch .txt{display:flex; flex-direction:column; gap:11px; align-items:flex-start}
-/* 띠지로 박아 넣는다 — 빨간 면 위에서 가장 또렷한 대비 */
 .nowch .eyebrow{
-  display:inline-block; margin-left:-2px; padding:4px 10px 5px;
-  background:var(--ink); color:var(--hot); transform:skewX(-9deg);
+  display:inline-block; margin-left:-2px; padding:4px 11px 5px;
+  background:var(--neon); color:#02122b; transform:skewX(var(--skew));
 }
 .nowch h2{
   margin:0; font-family:var(--disp); font-weight:400;
-  font-size:clamp(31px, 10.2vw, 41px); line-height:.95; letter-spacing:-.02em;
-  color:var(--ink); text-wrap:balance;
+  font-size:clamp(30px, 9.8vw, 40px); line-height:.98; letter-spacing:-.01em;
+  color:var(--line); text-wrap:balance; text-shadow:3px 3px 0 var(--accent-blue);
 }
-.nowch .hint{color:rgba(11,9,16,.74)}
+.nowch .hint{color:var(--t2)}
 
 /* DAY 도장 — 격자 밖으로 비뚤게 박힌다 */
 .nowch .side{
   display:block; position:absolute; top:15px; right:13px; z-index:2;
-  padding:4px 9px 5px; border:3px solid var(--ink); background:var(--hot);
-  transform:rotate(6deg); text-align:center;
+  padding:5px 10px 6px; border:1.5px solid var(--neon); background:var(--ink);
+  transform:rotate(6deg); text-align:center; box-shadow:var(--glow);
 }
-.nowch .side .big{display:block; font-family:var(--num); font-size:15px; line-height:1; color:var(--ink)}
-.nowch .side .cap{display:block; font-family:var(--num); font-size:6.5px; letter-spacing:.14em; color:rgba(11,9,16,.62)}
-
-/* 빨간 바닥 위에서는 전부 뒤집는다 */
-.nowch .phase{border-color:var(--ink); background:rgba(11,9,16,.13)}
-.nowch .phase .d{color:rgba(11,9,16,.6)}
-.nowch .phase .t{color:var(--ink)}
-.nowch .phase .s{color:rgba(11,9,16,.72)}
-.nowch .phase.on{background:var(--ink); border-color:var(--ink)}
-.nowch .phase.on .d{color:var(--hot)}
-.nowch .phase.on .t{color:var(--line)}
-.nowch .phase.on .s{color:var(--t2)}
-.nowch .phase.done{background:var(--line); border-color:var(--ink)}
-.nowch .btn{background:var(--ink); color:var(--line); border-color:var(--ink); box-shadow:5px 5px 0 var(--line)}
-.nowch .btn:active{box-shadow:2px 2px 0 var(--line)}
-.nowch .btn.ghost{background:transparent; color:var(--ink); border-color:var(--ink); box-shadow:none}
+.nowch .side .big{display:block; font-family:var(--num); font-weight:700; font-size:15px; line-height:1; color:var(--neon)}
+.nowch .side .cap{display:block; font-family:var(--num); font-weight:700; font-size:6.5px; letter-spacing:2px; color:var(--t3)}
 
 .phases{display:flex; gap:6px}
 .phase{
-  flex:1 1 0; min-width:0; padding:8px 8px 9px; border:2px solid var(--dim); background:var(--ink);
+  flex:1 1 0; min-width:0; padding:9px 9px 10px; background:var(--ink);
+  border:1px solid rgba(63,224,255,.28);
   display:flex; flex-direction:column; gap:3px;
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
 }
-.phase .d{font-family:var(--num); font-size:9px; letter-spacing:.1em; color:var(--t3)}
-.phase .t{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line)}
-.phase .s{font-size:11px; font-weight:400; color:var(--t2); line-height:1.5}
+.phase .d{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3)}
+.phase .t{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line)}
+.phase .s{font-size:11px; font-weight:500; color:var(--t2); line-height:1.5}
 .phase .t,.phase .s{word-break:keep-all; overflow-wrap:break-word}
-.phase.on{border-color:var(--hot)}
-.phase.on .d{color:var(--hot)}
-.phase.done{background:var(--line)}
-.phase.done .d,.phase.done .t,.phase.done .s{color:var(--ink)}
+.phase.on{border-color:var(--neon); box-shadow:inset 0 0 14px rgba(63,224,255,.18)}
+.phase.on .d{color:var(--neon)}
+.phase.done{background:rgba(63,224,255,.1); border-color:rgba(63,224,255,.5)}
+.phase.done .d{color:var(--t2)}
 
 .banner-s{
   position:relative; overflow:hidden; display:flex; align-items:center; gap:12px; width:100%;
@@ -373,12 +356,16 @@ body.fullscreen-on .tabbar{display:none}
    빨간 면은 홈, 금색 면은 상점의 몫이다 — 세 번째 색 면을 만들면
    어느 것도 주인공이 아니게 된다. 나머지 탭은 색이 아니라 크기로만
    주인공을 세운다: 제목 하나를 30px 로 올리고 옆 숫자는 작게 둔다. */
-.tophead{padding:17px 16px 19px; border-left:5px solid var(--hot)}
-.tophead .sect-h{align-items:flex-end; gap:12px}
+.tophead{padding:17px 16px 19px; border-left:3px solid var(--neon)}
+/* 제목(Gasoek 28px)과 칩을 한 줄에 두면 390px 에서 둘 다 줄바꿈된다.
+   칩을 아래로 내리고 제목에 한 줄을 통째로 준다. */
+.tophead .sect-h{flex-wrap:wrap; align-items:center; gap:8px}
 .tophead .sect-h h2{
-  font-family:var(--disp); font-weight:400; font-size:30px; line-height:.95;
-  letter-spacing:-.01em; color:var(--line);
+  flex:1 1 100%; font-family:var(--disp); font-weight:400; font-size:28px; line-height:1;
+  letter-spacing:-.01em; color:var(--line); text-shadow:2px 2px 0 var(--accent-blue);
 }
+.tophead .sect-h .spacer{display:none}
+.tophead .chip{white-space:nowrap}
 .tophead .count{font-size:15px}
 .tophead .bar{height:16px}
 
@@ -392,38 +379,47 @@ body.fullscreen-on .tabbar{display:none}
 .feed .post:nth-child(even){margin-left:17px}
 .post{
   display:flex; flex-direction:column; gap:9px; padding:13px;
-  background:var(--panel); border:2px solid var(--line);
-  clip-path:polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  background:var(--panel); border:0; border-left:3px solid rgba(63,224,255,.4);
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
 }
 .post-hd{display:flex; align-items:center; gap:9px}
 .post-hd .who{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:1px}
-.post-hd .nm{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line); word-break:break-all}
-.post-hd .mt{font-family:var(--num); font-size:9px; letter-spacing:.08em; color:var(--t3)}
-.post-hd .tm{font-family:var(--num); font-size:9.5px; color:var(--t3)}
-.post .say{margin:0; font-size:14px; font-weight:400; line-height:1.75; color:var(--t1); word-break:break-word}
+.post-hd .nm{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); word-break:break-all}
+.post-hd .mt{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3)}
+.post-hd .tm{font-family:var(--num); font-weight:700; font-size:9.5px; color:var(--t3)}
+.post .say{margin:0; font-size:14px; font-weight:500; line-height:1.75; color:var(--t1); word-break:break-word}
 
 /* ── 목록 행 ───────────────────────────────────── */
 .rows{display:flex; flex-direction:column; gap:9px; list-style:none; margin:0; padding:0}
+/* 목록 행 — 왼쪽 네온 획과 사선 잘림. 둥근 모서리는 쓰지 않는다. */
 .row-it{
-  display:flex; align-items:center; gap:11px; padding:11px 12px; width:100%; text-align:left;
-  border:2px solid var(--dim); background:var(--panel); color:var(--t1);
-  clip-path:polygon(0 9px, 9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
+  position:relative; display:flex; align-items:center; gap:11px; padding:12px 13px;
+  width:100%; min-height:62px; text-align:left;
+  border:0; border-left:3px solid var(--neon); background:var(--panel); color:var(--t1);
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
 }
-.row-it[aria-disabled="true"],.row-it[disabled]{opacity:.4}
+.row-it::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.05) 0 2px, transparent 2px 14px);
+}
+.row-it > *{position:relative; z-index:1}
+.row-it[aria-disabled="true"],.row-it[disabled]{opacity:.35; border-left-color:var(--dim)}
 .row-it .mark{
-  width:40px; height:40px; flex:0 0 40px; border:2px solid var(--line);
-  background:var(--ink); color:var(--hot);
+  width:40px; height:40px; flex:0 0 40px; border:1.5px solid var(--neon);
+  background:var(--ink); color:var(--neon);
   display:flex; align-items:center; justify-content:center;
+  transform:skewX(var(--skew));
 }
-.row-it.pinky .mark{color:var(--gold)}
+.row-it .mark > *{transform:skewX(14deg)}
+.row-it.pinky .mark{border-color:var(--gold); color:var(--gold)}
 .row-it .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px}
-.row-it .nm{font-family:var(--ui); font-weight:400; font-size:14.5px; color:var(--line)}
-.row-it .sub{font-size:12px; font-weight:400; color:var(--t2); line-height:1.6}
-.row-it .go{font-family:var(--num); font-size:9.5px; letter-spacing:.1em; color:var(--t3)}
+.row-it .nm{font-family:var(--disp); font-weight:400; font-size:15px; color:var(--line)}
+.row-it .sub{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6}
+.row-it .go{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2px; color:var(--t3)}
 .row-it .unread{
-  width:21px; height:21px; flex:0 0 21px; background:var(--hot); border:2px solid var(--line);
-  color:var(--line); display:inline-flex; align-items:center; justify-content:center;
-  font-family:var(--num); font-size:9px;
+  width:21px; height:21px; flex:0 0 21px; background:var(--alert); border:0;
+  color:#fff; display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--num); font-weight:700; font-size:9px; box-shadow:0 0 9px var(--alert);
 }
 
 /* ── 덱 ────────────────────────────────────────── */
@@ -498,21 +494,32 @@ body.fullscreen-on .tabbar{display:none}
 /* ── 시간표 ────────────────────────────────────── */
 .slots{display:flex; flex-direction:column; gap:10px}
 .slot-card{
-  display:flex; flex-direction:column; gap:7px; padding:14px; min-height:96px;
-  border:2px dashed var(--dim); background:var(--panel); color:var(--t2);
+  position:relative; display:flex; flex-direction:column; gap:7px; padding:14px; min-height:96px;
+  border:0; border-left:3px solid rgba(63,224,255,.3); background:var(--panel); color:var(--t2);
   text-align:left; align-items:flex-start; justify-content:center; width:100%;
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
 }
-.slot-card .k{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.slot-card .nm{font-family:var(--ui); font-weight:400; font-size:16px; color:var(--line)}
-.slot-card .left{font-family:var(--num); font-size:19px; color:var(--hot)}
-.slot-card.busy{border-style:solid}
-.slot-card.ready{border-style:solid; border-color:var(--gold); background:var(--ink)}
+/* 비어 있는 칸은 점선 대신 성긴 사선으로 — 둥근 점선 상자는 시스템 밖이다 */
+.slot-card::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.08) 0 2px, transparent 2px 12px);
+}
+.slot-card > *{position:relative; z-index:1}
+.slot-card .k{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2.5px; color:var(--t3)}
+.slot-card .nm{font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line)}
+.slot-card .left{font-family:var(--num); font-weight:700; font-size:19px; color:var(--neon)}
+.slot-card.busy{border-left-color:var(--neon)}
+.slot-card.busy::after{background-image:none}
+.slot-card.ready{border-left-color:var(--gold); background:var(--ink)}
+.slot-card.ready::after{background-image:none}
 .slot-card.ready .left{color:var(--gold)}
 .slot-card .call{
-  margin-top:6px; width:100%; min-height:36px; border:2px solid var(--line);
-  background:var(--hot); color:var(--line); font-family:var(--ui); font-weight:400; font-size:13px;
+  margin-top:6px; width:100%; min-height:40px; border:0;
+  background:var(--neon); color:#02122b; font-family:var(--disp); font-weight:400; font-size:14px;
   display:inline-flex; align-items:center; justify-content:center;
+  transform:skewX(var(--skew)); box-shadow:var(--glow);
 }
+.slot-card .call > *{transform:skewX(14deg)}
 
 /* ── 뽑기 ──────────────────────────────────────── */
 /* ══ 상점 ════════════════════════════════════════════════
@@ -836,12 +843,22 @@ body.fullscreen-on .tabbar{display:none}
 /* 설명이 들어오면 줄을 바꿔야 한다 — 같은 줄에 두면 버튼이 세로로
    찌그러져 '발 / 동 / 한 / 다' 가 된다. */
 .bacts{display:flex; flex-wrap:wrap; gap:6px; min-height:0}
+/* 고른 카드가 무슨 일을 하는지 — 내는 자리에서 읽혀야 소용이 있다.
+   버튼과 같은 줄에 두면 버튼이 세로로 찌그러져 '발 / 동 / 한 / 다' 가 된다. */
+.actnote{
+  flex:1 0 100%; display:flex; flex-direction:column; gap:3px; margin-bottom:2px;
+  padding:9px 12px; background:var(--panel); border-left:3px solid var(--neon);
+}
+.actnote b{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--neon)}
+.actnote span{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6; word-break:keep-all}
 .bacts:empty{display:none}
 .bacts button{
-  flex:1 1 0; min-height:36px; border:2px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--ui-s); font-weight:600; font-size:12.5px;
+  flex:1 1 0; min-height:40px; border:0; background:var(--neon); color:#02122b;
+  font-family:var(--disp); font-weight:400; font-size:13.5px;
+  transform:skewX(var(--skew));
 }
-.bacts button.ghost{background:transparent; border-color:var(--dim); color:var(--t2)}
+.bacts button > *{transform:skewX(14deg)}
+.bacts button.ghost{background:transparent; border:1.5px solid rgba(63,224,255,.4); color:var(--t2)}
 .bhand{display:flex; gap:5px; overflow-x:auto; padding-bottom:3px; scrollbar-width:none}
 .bhand::-webkit-scrollbar{display:none}
 .hcard{
