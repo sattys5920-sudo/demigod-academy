@@ -196,8 +196,9 @@
     top.appendChild(badge);
     top.appendChild(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family));
     var art = el('span', 'art');
-    art.appendChild(el('span', 'glyph', c.short || c.name));
-    art.firstChild.style.fontSize = '15px';
+    /* 그림은 art.js 가 그린다. c.art 가 있으면 그 파일을, 없으면 문장을. */
+    if (window.DGAArt) window.DGAArt.paint(art, c);
+    else art.appendChild(el('span', 'glyph', c.short || c.name));
     var rank = el('span', 'rank');
     for (var i = 0; i < (o ? (o.star || c.grade) : c.grade); i++) {
       var sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg');

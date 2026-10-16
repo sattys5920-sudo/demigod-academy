@@ -111,10 +111,12 @@ body.fullscreen-on .tabbar{display:none}
   background:var(--ink); border:2px solid var(--dim);
   display:flex; align-items:center; justify-content:center;
 }
-.art::after{
+/* 빗금은 이제 '봉인된 카드'(뽑기 배너) 전용이다. 나머지 칸은 문장이 채운다. */
+.art.sealed::after{
   content:""; position:absolute; inset:0;
   background-image:repeating-linear-gradient(-45deg, rgba(255,43,62,.09) 0 5px, transparent 5px 11px);
 }
+.art svg,.art-img{display:block; width:100%; height:100%; object-fit:cover}
 .glyph{position:relative; z-index:1; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line); text-align:center}
 .rank{display:inline-flex; align-items:center; gap:2px; font-family:var(--num); font-size:9px; color:var(--gold)}
 .cname{margin:0; font-family:var(--ui-s); font-weight:600; font-size:11.5px; line-height:1.4; color:var(--line)}
