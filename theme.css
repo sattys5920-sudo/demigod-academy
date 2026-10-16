@@ -22,13 +22,26 @@
   --hd:64px;
   --tb:68px;
 
-  /* Gasoek One 은 아주 굵은 전시용이라 18px 이상에서만 쓴다.
-     그보다 작은 라벨·버튼은 --ui(고딕 800), 본문은 --body(고딕 400). */
-  --disp:'Gasoek One','Gothic A1',sans-serif;
-  --ui:'Gothic A1',system-ui,sans-serif;
-  --num:'Archivo Black','Gothic A1',sans-serif;
-  --body:'Gothic A1',system-ui,sans-serif;
+  /* 네 얼굴을 역할대로 나눠 쓴다. 굵기로 위계를 만들지 않는다 —
+     굵게 하면 한글이 뭉개져 안 읽히므로, 얼굴·크기·색으로만 나눈다.
+
+     --disp  Black Han Sans · 간판. 한 굵기뿐이고 좁고 세다. 20px 이상만.
+     --ui    Do Hyeon · 버튼·탭·카드 이름. 한 굵기뿐이라 절대 뭉개지지 않는다.
+     --num   Anton · 라틴 마이크로 라벨과 숫자. 블랙 한 산스의 라틴 짝.
+     --ui-s  13px 미만 라벨. Do Hyeon 은 이 크기에서 답답하므로 본문체를 쓴다.
+     --body  IBM Plex Sans KR · 본문. 네모진 끝과 각진 ㅇ 이 있어 평범하지 않다. */
+  --disp:'Black Han Sans','Do Hyeon',sans-serif;
+  --ui:'Do Hyeon','IBM Plex Sans KR',sans-serif;
+  --num:'Anton','Do Hyeon',sans-serif;
+  --ui-s:'IBM Plex Sans KR',system-ui,sans-serif;
+  --body:'IBM Plex Sans KR',system-ui,sans-serif;
 }
+
+/* --disp · --ui · --num 은 굵기가 하나뿐인 얼굴이다. h1~h6 이나 strong 은
+   기본이 굵게라, 브라우저가 없는 굵기를 억지로 만들어(가짜 굵게) 한글을
+   뭉갠다. 위계는 굵기가 아니라 얼굴·크기·색으로만 준다. */
+h1,h2,h3,h4,h5,h6{font-weight:400}
+strong,b{font-weight:600}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -95,12 +108,12 @@ body::before{
 }
 .slab > *{transform:skewX(9deg)}
 .slab .k{font-family:var(--num); font-size:9px; letter-spacing:.18em}
-.slab h2{margin:0; font-family:var(--ui); font-weight:800; font-size:15px; line-height:1.15}
+.slab h2{margin:0; font-family:var(--ui); font-weight:400; font-size:15px; line-height:1.15}
 .slab.hot{background:var(--hot); color:var(--line)}
 
 .eyebrow{font-family:var(--num); font-size:10.5px; letter-spacing:.2em; color:var(--hot)}
 .sect-h{display:flex; align-items:center; gap:10px}
-.sect-h h2{margin:0; font-family:var(--ui); font-weight:800; font-size:16px; color:var(--line)}
+.sect-h h2{margin:0; font-family:var(--ui); font-weight:400; font-size:16px; color:var(--line)}
 .hint{margin:0; font-size:13px; font-weight:400; color:var(--t2); line-height:1.75}
 .count{font-family:var(--num); font-size:13px; color:var(--hot); font-variant-numeric:tabular-nums}
 
@@ -109,7 +122,7 @@ body::before{
   position:relative; display:inline-flex; align-items:center; justify-content:center;
   min-height:44px; padding:0 20px; border:3px solid var(--line);
   background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:800; font-size:15px; line-height:1;
+  font-family:var(--ui); font-weight:400; font-size:15px; line-height:1;
   transform:skewX(-9deg); box-shadow:5px 5px 0 var(--line);
 }
 .btn > *{transform:skewX(9deg)}
@@ -183,7 +196,7 @@ dialog.dlg{
 dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
 .dlg-hd{display:flex; align-items:center; gap:12px; margin-bottom:14px}
 .dlg-hd .who{display:flex; flex-direction:column; gap:3px; min-width:0}
-.dlg-hd .who .n{font-family:var(--ui); font-weight:800; font-size:18px; color:var(--line); word-break:break-all}
+.dlg-hd .who .n{font-family:var(--ui); font-weight:400; font-size:18px; color:var(--line); word-break:break-all}
 .dlg-hd .who .r{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
 .dlg-acts{display:flex; flex-direction:column; gap:9px}
 .dlg-acts > a{text-decoration:none}
@@ -199,12 +212,12 @@ dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
   display:flex; align-items:center; justify-content:center;
   clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
 }
-#gate p{margin:0; font-family:var(--disp); font-size:20px; color:var(--line)}
+#gate p{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line)}
 #gate small{font-size:13px; font-weight:400; color:var(--t2); line-height:1.7}
 #gate a{
   min-height:44px; display:inline-flex; align-items:center; padding:0 18px;
   border:3px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:800; font-size:15px; text-decoration:none; transform:skewX(-9deg);
+  font-family:var(--ui); font-weight:400; font-size:15px; text-decoration:none; transform:skewX(-9deg);
 }
 #gate a > *{transform:skewX(9deg)}
 

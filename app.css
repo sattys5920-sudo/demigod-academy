@@ -15,7 +15,7 @@
   display:flex; align-items:center; justify-content:center;
   clip-path:polygon(0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
 }
-.hd h1{margin:0; font-family:var(--disp); font-size:20px; color:var(--line); white-space:nowrap}
+.hd h1{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); white-space:nowrap}
 .icons{display:flex; gap:5px}
 .iconbtn{
   width:34px; height:34px; position:relative; padding:0; overflow:hidden;
@@ -55,7 +55,7 @@
   flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center;
   justify-content:center; gap:3px; position:relative;
   border:0; background:transparent; color:var(--t3);
-  font-family:var(--ui); font-weight:800; font-size:11px; padding:0;
+  font-family:var(--ui-s); font-weight:600; font-size:11px; padding:0;
 }
 @media (max-width:360px){ .tab{font-size:10px; gap:2px} }
 .tab + .tab{border-left:2px solid var(--dim)}
@@ -67,7 +67,7 @@ body.fullscreen-on .tabbar{display:none}
 .seg{display:flex; gap:0; border:2px solid var(--line); background:var(--ink)}
 .seg-btn{
   flex:1 1 0; min-width:0; min-height:40px; border:0; background:transparent;
-  color:var(--t2); font-family:var(--ui); font-weight:800; font-size:13px; padding:0 2px;
+  color:var(--t2); font-family:var(--ui); font-weight:400; font-size:13px; padding:0 2px;
 }
 .seg-btn + .seg-btn{border-left:2px solid var(--dim)}
 .seg-btn[aria-selected="true"]{background:var(--line); color:var(--ink)}
@@ -76,11 +76,15 @@ body.fullscreen-on .tabbar{display:none}
 .filters{
   display:flex; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px;
   scrollbar-width:none; -webkit-overflow-scrolling:touch;
+  /* .segpanel 이 세로 플렉스라 이 줄은 플렉스 아이템이고, 아이템의 min-width 는
+     기본이 auto 다. 그대로 두면 칩이 길어질 때 옆으로 안 밀고 상자를 넓혀 버려
+     화면 전체가 가로로 스크롤된다. 0 으로 못 박아야 여기서만 밀린다. */
+  min-width:0; max-width:100%;
 }
 .filters::-webkit-scrollbar{display:none}
 .filter{
   flex:0 0 auto; white-space:nowrap; min-height:32px; padding:0 11px; border:2px solid var(--dim); background:transparent;
-  color:var(--t2); font-family:var(--ui); font-weight:700; font-size:12px;
+  color:var(--t2); font-family:var(--ui-s); font-weight:600; font-size:12px;
   clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
 .filter[aria-pressed="true"]{background:var(--hot); border-color:var(--line); color:var(--line)}
@@ -98,7 +102,10 @@ body.fullscreen-on .tabbar{display:none}
   display:flex; align-items:center; justify-content:center; font-family:var(--num); font-size:11px;
 }
 .card.pinkish .cost{background:var(--gold); color:var(--ink)}
-.fam{font-family:var(--num); font-size:8px; letter-spacing:.04em; color:var(--t3); text-align:right}
+/* 계보 이름은 길이가 제각각이다(공통 ~ HEPHAISTOS). 줄이지 않으면 320px
+   에서 카드 밖으로 삐져나가 화면이 통째로 가로로 밀린다. */
+.fam{font-family:var(--num); font-size:8px; letter-spacing:.04em; color:var(--t3); text-align:right;
+     min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .art{
   position:relative; flex:1 1 auto; min-height:58px; overflow:hidden;
   background:var(--ink); border:2px solid var(--dim);
@@ -108,9 +115,9 @@ body.fullscreen-on .tabbar{display:none}
   content:""; position:absolute; inset:0;
   background-image:repeating-linear-gradient(-45deg, rgba(255,43,62,.09) 0 5px, transparent 5px 11px);
 }
-.glyph{position:relative; z-index:1; font-family:var(--disp); font-size:16px; color:var(--line); text-align:center}
+.glyph{position:relative; z-index:1; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line); text-align:center}
 .rank{display:inline-flex; align-items:center; gap:2px; font-family:var(--num); font-size:9px; color:var(--gold)}
-.cname{margin:0; font-family:var(--ui); font-weight:700; font-size:11.5px; line-height:1.4; color:var(--line)}
+.cname{margin:0; font-family:var(--ui-s); font-weight:600; font-size:11.5px; line-height:1.4; color:var(--line)}
 .stats{display:flex; gap:4px}
 .stat{
   flex:1 1 0; min-width:0; height:20px; display:flex; align-items:center; justify-content:center;
@@ -128,7 +135,7 @@ body.fullscreen-on .tabbar{display:none}
 .online .n{font-size:12px; font-weight:400; color:var(--t2)}
 
 .nowch{display:flex; flex-direction:column; gap:12px; box-shadow:6px 6px 0 var(--hot)}
-.nowch h2{margin:0; font-family:var(--disp); font-size:27px; line-height:1.1; color:var(--line); text-wrap:balance}
+.nowch h2{margin:0; font-family:var(--disp); font-weight:400; font-size:27px; line-height:1.1; color:var(--line); text-wrap:balance}
 .nowch .side{display:none}
 .phases{display:flex; gap:6px}
 .phase{
@@ -136,7 +143,7 @@ body.fullscreen-on .tabbar{display:none}
   display:flex; flex-direction:column; gap:3px;
 }
 .phase .d{font-family:var(--num); font-size:9px; letter-spacing:.1em; color:var(--t3)}
-.phase .t{font-family:var(--ui); font-weight:800; font-size:13.5px; color:var(--line)}
+.phase .t{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line)}
 .phase .s{font-size:11px; font-weight:400; color:var(--t2); line-height:1.5}
 .phase.on{border-color:var(--hot)}
 .phase.on .d{color:var(--hot)}
@@ -160,7 +167,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .banner-s .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px}
 .banner-s .kicker{font-family:var(--num); font-size:10px; letter-spacing:.16em}
-.banner-s .line{font-family:var(--disp); font-size:19px; line-height:1.2}
+.banner-s .line{font-family:var(--disp); font-weight:400; font-size:19px; line-height:1.2}
 
 .composer{display:flex; gap:10px; align-items:flex-start}
 .composer .grow{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:8px}
@@ -174,7 +181,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .post-hd{display:flex; align-items:center; gap:9px}
 .post-hd .who{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:1px}
-.post-hd .nm{font-family:var(--ui); font-weight:800; font-size:13.5px; color:var(--line); word-break:break-all}
+.post-hd .nm{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line); word-break:break-all}
 .post-hd .mt{font-family:var(--num); font-size:9px; letter-spacing:.08em; color:var(--t3)}
 .post-hd .tm{font-family:var(--num); font-size:9.5px; color:var(--t3)}
 .post .say{margin:0; font-size:14px; font-weight:400; line-height:1.75; color:var(--t1); word-break:break-word}
@@ -194,7 +201,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .row-it.pinky .mark{color:var(--gold)}
 .row-it .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px}
-.row-it .nm{font-family:var(--ui); font-weight:800; font-size:14.5px; color:var(--line)}
+.row-it .nm{font-family:var(--ui); font-weight:400; font-size:14.5px; color:var(--line)}
 .row-it .sub{font-size:12px; font-weight:400; color:var(--t2); line-height:1.6}
 .row-it .go{font-family:var(--num); font-size:9.5px; letter-spacing:.1em; color:var(--t3)}
 .row-it .unread{
@@ -280,20 +287,20 @@ body.fullscreen-on .tabbar{display:none}
   text-align:left; align-items:flex-start; justify-content:center; width:100%;
 }
 .slot-card .k{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.slot-card .nm{font-family:var(--ui); font-weight:800; font-size:16px; color:var(--line)}
+.slot-card .nm{font-family:var(--ui); font-weight:400; font-size:16px; color:var(--line)}
 .slot-card .left{font-family:var(--num); font-size:19px; color:var(--hot)}
 .slot-card.busy{border-style:solid}
 .slot-card.ready{border-style:solid; border-color:var(--gold); background:var(--ink)}
 .slot-card.ready .left{color:var(--gold)}
 .slot-card .call{
   margin-top:6px; width:100%; min-height:36px; border:2px solid var(--line);
-  background:var(--hot); color:var(--line); font-family:var(--ui); font-weight:800; font-size:13px;
+  background:var(--hot); color:var(--line); font-family:var(--ui); font-weight:400; font-size:13px;
   display:inline-flex; align-items:center; justify-content:center;
 }
 
 /* ── 뽑기 ──────────────────────────────────────── */
 .banner{display:flex; flex-direction:column; gap:12px; box-shadow:6px 6px 0 var(--gold)}
-.banner h2{margin:0; font-family:var(--disp); font-size:27px; line-height:1.1; color:var(--line)}
+.banner h2{margin:0; font-family:var(--disp); font-weight:400; font-size:27px; line-height:1.1; color:var(--line)}
 .packfan{position:relative; height:150px; align-self:center; width:220px}
 .packfan .card{position:absolute; width:92px; height:132px}
 .packfan .card:nth-child(1){left:0; top:14px; transform:rotate(-11deg)}
@@ -307,7 +314,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .pull.ten{background:var(--gold); color:var(--ink)}
 .pull:active{transform:translate(3px,3px); box-shadow:2px 2px 0 var(--line)}
-.pull .big{font-family:var(--disp); font-size:19px}
+.pull .big{font-family:var(--disp); font-weight:400; font-size:19px}
 .pull .cost-tag{
   display:inline-flex; align-items:center; gap:4px; height:22px; padding:0 9px;
   border:2px solid currentColor; font-family:var(--num); font-size:10.5px;
@@ -321,7 +328,7 @@ body.fullscreen-on .tabbar{display:none}
 .good .nm{font-size:11.5px; font-weight:400; color:var(--t2)}
 .good button{
   width:100%; min-height:32px; border:2px solid var(--line); background:var(--line); color:var(--ink);
-  font-family:var(--ui); font-weight:800; font-size:12px;
+  font-family:var(--ui-s); font-weight:600; font-size:12px;
 }
 
 /* ── 풀스크린 ──────────────────────────────────── */
@@ -341,13 +348,13 @@ body.fullscreen-on .tabbar{display:none}
   display:inline-flex; align-items:center; justify-content:center;
 }
 .full > .topbar .ttl{display:flex; flex-direction:column; gap:1px; min-width:0}
-.full > .topbar .ttl .n{font-family:var(--ui); font-weight:800; font-size:15.5px; color:var(--line)}
+.full > .topbar .ttl .n{font-family:var(--ui); font-weight:400; font-size:15.5px; color:var(--line)}
 .full > .topbar .ttl .s{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
 
 .log{flex:1 1 auto; display:flex; flex-direction:column; gap:11px; padding:14px}
 .bub{display:flex; gap:9px; align-items:flex-start}
 .bub .txt{flex:0 1 auto; min-width:0; padding:10px 13px; border:2px solid var(--dim); background:var(--panel)}
-.bub .nm{display:block; font-family:var(--ui); font-weight:800; font-size:11.5px; color:var(--t3); margin-bottom:5px}
+.bub .nm{display:block; font-family:var(--ui-s); font-weight:600; font-size:11.5px; color:var(--t3); margin-bottom:5px}
 .bub .ln{margin:0; font-size:14px; font-weight:400; line-height:1.75; color:var(--t1); word-break:break-word}
 .bub.gm .txt{border-color:var(--hot); background:var(--ink)}
 .bub.gm .nm{color:var(--hot)}
@@ -362,7 +369,7 @@ body.fullscreen-on .tabbar{display:none}
 .roll > *{transform:skewX(9deg)}
 .roll .d{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
 .roll .v{font-family:var(--num); font-size:16px; color:var(--gold)}
-.roll .j{font-family:var(--ui); font-weight:800; font-size:13px; color:var(--line)}
+.roll .j{font-family:var(--ui); font-weight:400; font-size:13px; color:var(--line)}
 .roll.fail .v{color:var(--hot)}
 .sysline{align-self:center; font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3); text-align:center}
 
@@ -375,7 +382,7 @@ body.fullscreen-on .tabbar{display:none}
 .choices{display:flex; flex-direction:column; gap:8px}
 .choice{
   width:100%; min-height:48px; padding:9px 13px; border:2px solid var(--dim);
-  background:var(--panel); color:var(--line); font-family:var(--ui); font-weight:700; font-size:14px;
+  background:var(--panel); color:var(--line); font-family:var(--ui); font-weight:400; font-size:14px;
   text-align:left; line-height:1.45; display:flex; align-items:center; gap:9px;
 }
 .choice .no{
@@ -387,7 +394,7 @@ body.fullscreen-on .tabbar{display:none}
 .talk input{flex:1 1 auto; min-width:0; min-height:44px}
 .talk .send{
   min-height:44px; padding:0 15px; border:2px solid var(--line); background:var(--hot);
-  color:var(--line); font-family:var(--ui); font-weight:800; font-size:13px;
+  color:var(--line); font-family:var(--ui); font-weight:400; font-size:13px;
 }
 
 /* 전투 */
@@ -400,7 +407,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .hpbar.foe .face{color:var(--hot)}
 .hpbar .who{display:flex; flex-direction:column; gap:4px; flex:1 1 auto; min-width:0}
-.hpbar .who .n{font-family:var(--ui); font-weight:800; font-size:13.5px; color:var(--line); word-break:break-all}
+.hpbar .who .n{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--line); word-break:break-all}
 .hpbar .hp{height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
 .hpbar .hp > i{display:block; height:100%; background:var(--gold)}
 .hpbar.foe .hp > i{background:var(--hot)}
@@ -413,7 +420,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .slotmini.on{border-style:solid; border-color:var(--line); flex-direction:column; gap:4px; color:var(--line)}
 .turnbar{display:flex; align-items:center; gap:10px; padding:9px 13px; border:2px solid var(--line); background:var(--panel)}
-.turnbar .t{font-family:var(--ui); font-weight:800; font-size:13.5px; color:var(--hot)}
+.turnbar .t{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--hot)}
 .turnbar .m{font-family:var(--num); font-size:10.5px; color:var(--t2)}
 .hand{position:relative; height:132px; flex:0 0 132px; display:flex; align-items:flex-end; justify-content:center}
 .hand .card{position:absolute; bottom:-14px; width:78px; height:114px; transform-origin:50% 100%}
@@ -425,14 +432,14 @@ body.fullscreen-on .tabbar{display:none}
 .endturn{
   position:absolute; right:12px; bottom:18px; z-index:2; min-height:44px; padding:0 18px;
   border:2px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:800; font-size:15px; box-shadow:4px 4px 0 var(--line); transform:skewX(-9deg);
+  font-family:var(--ui); font-weight:400; font-size:15px; box-shadow:4px 4px 0 var(--line); transform:skewX(-9deg);
 }
 .endturn > *{transform:skewX(9deg)}
 
 /* 결과 · 뽑기 연출 */
 .result{align-items:center; justify-content:center; padding:18px}
 .result .inner{width:100%; display:flex; flex-direction:column; gap:16px; align-items:center}
-.result .win{font-family:var(--disp); font-size:48px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
+.result .win{font-family:var(--disp); font-weight:400; font-size:48px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
 .result .sub{font-family:var(--num); font-size:10px; letter-spacing:.18em; color:var(--t2); text-align:center}
 .rewards{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; width:100%}
 .gains{display:flex; flex-direction:column; gap:8px; width:100%}
@@ -441,7 +448,7 @@ body.fullscreen-on .tabbar{display:none}
 .gain .v{font-family:var(--num); font-size:15px; color:var(--gold)}
 .result .acts{display:flex; flex-direction:column; gap:9px; width:100%}
 .reveal{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:18px}
-.reveal .hdline{font-family:var(--disp); font-size:32px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
+.reveal .hdline{font-family:var(--disp); font-weight:400; font-size:32px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
 .reveal .pulled{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; width:100%}
 .reveal .pulled .card{min-height:140px}
 .reveal .acts{display:flex; flex-direction:column; gap:9px; width:100%}
@@ -451,8 +458,8 @@ body.fullscreen-on .tabbar{display:none}
 .chron.lost{border-style:dashed; border-color:var(--dim); background:transparent; color:var(--t3)}
 .chron .hd-r{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
 .chron .n{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.chron h3{margin:0; font-family:var(--ui); font-weight:800; font-size:17px; color:var(--line)}
-.chron .res{font-family:var(--ui); font-weight:800; font-size:13.5px; color:var(--gold)}
+.chron h3{margin:0; font-family:var(--ui); font-weight:400; font-size:17px; color:var(--line)}
+.chron .res{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--gold)}
 .chron .res.bad{color:var(--hot)}
 .chron .body-t{margin:0; font-size:13.5px; font-weight:400; line-height:1.85; color:var(--t2)}
 
@@ -489,7 +496,7 @@ body.fullscreen-on .tabbar{display:none}
 .ring-ic.el-earth{background:var(--dim)}
 .ring-ic.el-wind {color:var(--t2)}
 .ring-ic.el-none{color:var(--t3); border-color:var(--dim)}
-.ring-n{font-family:var(--ui); font-weight:800; font-size:11px; color:var(--t1)}
+.ring-n{font-family:var(--ui-s); font-weight:600; font-size:11px; color:var(--t1)}
 .ring-ar{color:var(--t3); display:inline-flex}
 
 /* ── 전투 ──────────────────────────────────────── */
@@ -502,14 +509,14 @@ body.fullscreen-on .tabbar{display:none}
   display:inline-flex; align-items:center; justify-content:center; color:var(--gold);
 }
 .bside.foe .bface{color:var(--hot)}
-.bname{font-family:var(--ui); font-weight:800; font-size:12px; color:var(--line); max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bname{font-family:var(--ui-s); font-weight:600; font-size:12px; color:var(--line); max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .bhp{flex:1 1 auto; height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
 .bhp > i{display:block; height:100%; background:var(--gold)}
 .bside.foe .bhp > i{background:var(--hot)}
 .bnum{font-family:var(--num); font-size:12px; color:var(--line); font-variant-numeric:tabular-nums; min-width:24px; text-align:right}
 .btarget{
   min-height:26px; padding:0 9px; border:2px solid var(--hot); background:var(--hot);
-  color:var(--line); font-family:var(--ui); font-weight:800; font-size:11px;
+  color:var(--line); font-family:var(--ui-s); font-weight:600; font-size:11px;
 }
 
 .bfield{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px}
@@ -529,7 +536,7 @@ body.fullscreen-on .tabbar{display:none}
 }
 .bunit.sel{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold)}
 .bunit.sick{opacity:.6}
-.bunit .bn{flex:1 1 auto; font-family:var(--ui); font-weight:800; font-size:11px; color:var(--line);
+.bunit .bn{flex:1 1 auto; font-family:var(--ui-s); font-weight:600; font-size:11px; color:var(--line);
   line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
 .bunit .bs{flex:0 0 auto; display:flex; gap:3px; align-items:center}
 .bunit .ba,.bunit .bd{
@@ -552,7 +559,7 @@ body.fullscreen-on .tabbar{display:none}
 .btrap.set{border-color:var(--hot); color:var(--hot); background:var(--ink)}
 
 .bbar{display:flex; align-items:center; gap:8px; padding:5px 8px; border:2px solid var(--line); background:var(--panel)}
-.bbar .t{font-family:var(--ui); font-weight:800; font-size:12px; color:var(--hot)}
+.bbar .t{font-family:var(--ui-s); font-weight:600; font-size:12px; color:var(--hot)}
 .ichor{display:inline-flex; gap:2px}
 .ichor{flex-wrap:wrap; max-width:132px; justify-content:flex-end}
 .ichor i{width:9px; height:15px; border:2px solid var(--t3); display:block; background:var(--ink)}
@@ -567,7 +574,7 @@ body.fullscreen-on .tabbar{display:none}
 .bacts:empty{display:none}
 .bacts button{
   flex:1 1 0; min-height:36px; border:2px solid var(--line); background:var(--hot); color:var(--line);
-  font-family:var(--ui); font-weight:800; font-size:12.5px;
+  font-family:var(--ui-s); font-weight:600; font-size:12.5px;
 }
 .bacts button.ghost{background:transparent; border-color:var(--dim); color:var(--t2)}
 .bhand{display:flex; gap:5px; overflow-x:auto; padding-bottom:3px; scrollbar-width:none}
@@ -583,7 +590,7 @@ body.fullscreen-on .tabbar{display:none}
   display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:9px;
 }
 .hcard .hk{font-family:var(--num); font-size:6.5px; letter-spacing:.06em; color:var(--t3)}
-.hcard .hn{flex:1 1 auto; font-family:var(--ui); font-weight:800; font-size:9.5px; color:var(--line);
+.hcard .hn{flex:1 1 auto; font-family:var(--ui-s); font-weight:600; font-size:9.5px; color:var(--line);
   line-height:1.2; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
 .hcard .hs{flex:0 0 auto; font-family:var(--num); font-size:9px; color:var(--gold)}
 .hcard .top{display:flex; align-items:center; justify-content:space-between; gap:3px}
