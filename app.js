@@ -153,7 +153,7 @@
     top.appendChild(el('span', 'fam', c.family));
     var art = el('span', 'art');
     art.appendChild(el('span', 'glyph', c.short || c.name));
-    art.firstChild.style.fontSize = '20px';
+    art.firstChild.style.fontSize = '15px';
     var rank = el('span', 'rank');
     for (var i = 0; i < (o ? (o.star || c.grade) : c.grade); i++) {
       var sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -316,7 +316,7 @@
     var nx = el('span', 'lv next'); nx.append(el('span', 'k', 'NEXT'), el('span', 'v', String(o.lv + 1)));
     var ar = el('span', 'arrow');
     ar.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg>';
-    row.append(lv, ar, nx, el('span', 'spacer'), el('span', 'chip lime', '★ ' + o.star + ' / 3 · ' + (o.n || 1) + '장 보유'));
+    row.append(lv, ar, nx, el('span', 'spacer'), el('span', 'chip gold', '★ ' + o.star + ' / 3 · ' + (o.n || 1) + '장 보유'));
     m.appendChild(row);
 
     var cost = 60 + (o.lv - 1) * 40;
@@ -341,7 +341,7 @@
     var foot = el('div', 'fusefoot');
     var price = el('span', 'price');
     price.append(el('span', 'k', 'AITHER'), el('span', 'v', fmt(cost)));
-    var go = el('button', 'btn-md', '강화하기'); go.type = 'button';
+    var go = el('button', 'btn', '강화하기'); go.type = 'button';
     var msg = el('p', 'msg'); msg.style.cssText = 'min-height:22px;font-size:13px;font-weight:700;color:var(--lime);margin:0';
     go.addEventListener('click', function () {
       if (!spend('ether', cost)) { msg.style.color = 'var(--pink)'; msg.textContent = '에테르가 모자란다. ' + fmt(cost) + ' 필요.'; return; }
@@ -382,7 +382,7 @@
     var ids = Object.keys(S.owned);
     var ns = 'http://www.w3.org/2000/svg';
     var svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('viewBox', '0 0 600 420');
+    svg.setAttribute('viewBox', '0 0 360 300');
     if (!ids.length) {
       box.appendChild(el('div', 'empty', '가진 카드가 없어 관계도가 비어 있다.'));
       return;
@@ -390,7 +390,7 @@
     var pos = {};
     ids.forEach(function (id, i) {
       var ang = (i / ids.length) * Math.PI * 2 - Math.PI / 2;
-      pos[id] = { x: 300 + Math.cos(ang) * 150, y: 210 + Math.sin(ang) * 140 };
+      pos[id] = { x: 180 + Math.cos(ang) * 112, y: 142 + Math.sin(ang) * 94 };
     });
     D.bonds.bonds.forEach(function (bd) {
       if (!pos[bd.a] || !pos[bd.b]) return;
@@ -406,10 +406,12 @@
       var c = D.cardById[id];
       var g = document.createElementNS(ns, 'g');
       g.setAttribute('class', 'node ' + (c.tone === 'pink' ? 'pink' : 'lime'));
-      var ci = document.createElementNS(ns, 'circle');
-      ci.setAttribute('cx', pos[id].x); ci.setAttribute('cy', pos[id].y); ci.setAttribute('r', '26');
+      var ci = document.createElementNS(ns, 'rect');
+      ci.setAttribute('x', pos[id].x - 19); ci.setAttribute('y', pos[id].y - 19);
+      ci.setAttribute('width', '38'); ci.setAttribute('height', '38');
+      ci.setAttribute('transform', 'rotate(45 ' + pos[id].x + ' ' + pos[id].y + ')');
       var tx = document.createElementNS(ns, 'text');
-      tx.setAttribute('x', pos[id].x); tx.setAttribute('y', pos[id].y + 48);
+      tx.setAttribute('x', pos[id].x); tx.setAttribute('y', pos[id].y + 40);
       tx.textContent = c.short || c.name;
       g.append(ci, tx);
       svg.appendChild(g);
@@ -467,7 +469,7 @@
       var isClass = !!def.quizCategory;
       D.schedule.slots.forEach(function (h) {
         if (h !== 2) return;   /* 틀만 — 지금은 2시간만 */
-        var b = el('button', 'btn-ghost', (isClass ? '수업 · ' : '알바 · ') + def.name);
+        var b = el('button', 'btn ghost', (isClass ? '수업 · ' : '알바 · ') + def.name);
         b.type = 'button'; b.style.width = '100%';
         b.addEventListener('click', function () {
           S.slots[i] = { kind: isClass ? 'class' : 'job', id: def.id, hours: h,
@@ -477,7 +479,7 @@
         p.appendChild(b);
       });
     });
-    var c = el('button', 'btn-ghost', '닫기'); c.type = 'button'; c.style.width = '100%';
+    var c = el('button', 'btn ghost', '닫기'); c.type = 'button'; c.style.width = '100%';
     c.addEventListener('click', function () { $('#slotDlg').close(); });
     p.appendChild(c);
     var dlg = $('#slotDlg');
@@ -508,7 +510,7 @@
     $('#quizCat').textContent = (def ? def.name + ' · ' : '') + quizItem.category;
     var b = $('#quizBody'); b.textContent = '';
     var box = el('div', 'bub gm');
-    var av = el('span', 'ava s tone-lime');
+    var av = el('span', 'ava s tone-pink');
     av.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>';
     var t = el('span', 'txt');
     t.append(el('span', 'nm', '쪽지시험'), el('p', 'ln', quizItem.question));
@@ -529,7 +531,7 @@
     b.appendChild(r);
     if (quizItem.solution) {
       var s = el('div', 'bub gm');
-      var av = el('span', 'ava s tone-lime');
+      var av = el('span', 'ava s tone-pink');
       var t = el('span', 'txt');
       t.append(el('span', 'nm', '풀이'), el('p', 'ln', quizItem.solution));
       s.append(av, t); b.appendChild(s);
@@ -541,7 +543,7 @@
     b.appendChild(g);
     if (quizSlot != null) { S.slots[quizSlot] = null; }
     quizItem = null; save(); paintSlots();
-    var back = el('button', 'btn-md', '돌아가기'); back.type = 'button';
+    var back = el('button', 'btn', '돌아가기'); back.type = 'button';
     back.style.cssText = 'align-self:center;margin-top:8px';
     back.addEventListener('click', function () { setView(null); });
     b.appendChild(back);

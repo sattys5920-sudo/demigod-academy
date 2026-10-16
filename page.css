@@ -1,0 +1,111 @@
+/* 입장(index) · 프로필 만들기(setup) — 공통 토큰은 theme.css */
+
+.app{padding-bottom:28px}
+.hd{
+  position:relative; flex:0 0 auto; display:flex; align-items:center; gap:10px;
+  padding:0 14px; height:var(--hd); border-bottom:3px solid var(--line); background:var(--bg);
+}
+.hd::after{
+  content:""; position:absolute; left:0; right:0; bottom:-3px; height:3px; background:var(--hot);
+  clip-path:polygon(0 0, 38% 0, 34% 100%, 0 100%);
+}
+.logo{
+  width:34px; height:34px; flex:0 0 34px; background:var(--hot); border:2px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  clip-path:polygon(0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+}
+.hd h1{margin:0; font-family:var(--disp); font-size:19px; color:var(--line); white-space:nowrap}
+.wordmark{font-family:var(--disp); font-size:19px; color:var(--line)}
+.build,.step{
+  display:inline-flex; align-items:center; min-height:22px; padding:0 9px;
+  border:2px solid var(--line); background:var(--line); color:var(--ink);
+  font-family:var(--num); font-size:8.5px; letter-spacing:.14em;
+}
+
+/* ── 입장 ──────────────────────────────────────── */
+.auth{padding:18px 14px; display:flex; flex-direction:column; gap:14px}
+.seg{display:flex; border:2px solid var(--line); background:var(--ink)}
+.seg-btn{
+  flex:1 1 0; min-height:44px; border:0; background:transparent; color:var(--t2);
+  font-family:var(--disp); font-size:14px;
+}
+.seg-btn + .seg-btn{border-left:2px solid var(--dim)}
+.seg-btn[aria-selected="true"]{background:var(--hot); color:var(--line)}
+
+.pane{display:flex; flex-direction:column; gap:14px}
+.inputwrap{position:relative; display:flex; align-items:center}
+.inputwrap input{padding-right:50px}
+.peek{
+  position:absolute; right:5px; width:38px; height:38px; border:2px solid var(--dim);
+  background:transparent; color:var(--t3);
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.remember{display:flex; align-items:center; gap:9px; font-size:12px; font-weight:700; color:var(--t2)}
+.remember input{width:20px; height:20px; min-height:0; accent-color:var(--hot)}
+.rule{font-size:11.5px; font-weight:700; color:var(--t3); line-height:1.7; margin:0}
+.stack{display:flex; flex-direction:column; gap:9px}
+.admin-slot{display:flex; flex-direction:column; gap:9px; padding-top:4px; border-top:2px solid var(--dim)}
+
+.result{
+  display:flex; flex-direction:column; gap:13px; align-items:center; text-align:center;
+  padding:20px 14px; border:3px solid var(--line); background:var(--panel);
+  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
+                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+.result .badge{
+  width:56px; height:56px; background:var(--hot); border:3px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+}
+.result h2{margin:0; font-family:var(--disp); font-size:24px; color:var(--line)}
+.result .who{
+  display:inline-flex; align-items:center; gap:8px; min-height:34px; padding:0 13px;
+  border:2px solid var(--line); background:var(--ink);
+}
+.result .who .k{font-family:var(--num); font-size:8.5px; letter-spacing:.14em; color:var(--t3)}
+.result .who .v{font-family:var(--disp); font-size:15px; color:var(--line); word-break:break-all}
+.result .stack{width:100%}
+.result.admin{border-color:var(--gold); box-shadow:6px 6px 0 var(--gold)}
+.result.admin .badge{background:var(--gold); color:var(--ink)}
+
+/* ── 프로필 만들기 ─────────────────────────────── */
+.body{padding:16px 14px; display:flex; flex-direction:column; gap:14px}
+.col-main,.col-side{display:flex; flex-direction:column; gap:14px}
+
+.sigs{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:9px}
+.sig{
+  display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 4px;
+  border:2px solid var(--dim); background:transparent; color:var(--t3);
+}
+.sig[aria-pressed="true"]{border-color:var(--hot); background:var(--ink); color:var(--line)}
+.sig .mark{
+  width:44px; height:44px; border:2px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  clip-path:polygon(0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+}
+.sig .mark.tone-lime{background:var(--gold)}
+.sig .mark.tone-pink{background:var(--hot)}
+.sig .nm{font-family:var(--disp); font-size:11px; line-height:1.2; text-align:center}
+.sig .ln{font-size:9.5px; font-weight:700; color:var(--t3); text-align:center}
+
+.upload{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+
+.card-prev{
+  display:flex; flex-direction:column; gap:10px; padding:11px;
+  background:var(--panel); border:3px solid var(--line); box-shadow:6px 6px 0 var(--hot);
+  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
+                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+.card-prev .art{
+  position:relative; height:156px; overflow:hidden; background:var(--ink); border:2px solid var(--dim);
+  display:flex; align-items:center; justify-content:center;
+}
+.card-prev .art::after{
+  content:""; position:absolute; inset:0;
+  background-image:repeating-linear-gradient(-45deg, rgba(255,43,62,.16) 0 5px, transparent 5px 11px);
+}
+.card-prev .ava{position:relative; z-index:1; width:88px; height:88px; border-width:3px}
+.card-prev .nm{margin:0; font-family:var(--disp); font-size:19px; line-height:1.2; color:var(--line); word-break:break-all}
+.card-prev .fam{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
+
+.foot{display:flex; align-items:baseline; gap:9px}
+.foot .len{font-family:var(--num); font-size:10px; color:var(--t3); font-variant-numeric:tabular-nums}

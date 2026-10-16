@@ -2,215 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0B0910">
 <title>데미갓 아카데미 입장</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Gasoek+One&family=Gothic+A1:wght@400;700;900&display=swap">
-<style>
-:root{
-  --bg:#14061F;
-  --panel:#1E0B2C;
-  --line:#FFFFFF;
-  --lime:#C6FF3D;
-  --pink:#FF2E93;
-  --t1:#E4D8EE;
-  --t2:#B7A5C4;
-  --t3:#9B86AD;
-  --dim:#3B2450;
-  --ink:#14061F;
-  --disp:'Gasoek One','Gothic A1',sans-serif;
-  --num:'Archivo Black','Gothic A1',sans-serif;
-  --body:'Gothic A1',system-ui,sans-serif;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; background:var(--bg); color:var(--t1);
-  font-family:var(--body); -webkit-font-smoothing:antialiased;
-}
-.halftone{
-  position:fixed; inset:0; pointer-events:none; z-index:3;
-  background-image:radial-gradient(#FFFFFF 1.4px, transparent 1.5px);
-  background-size:16px 16px; opacity:.07;
-}
-button{font-family:inherit}
-[hidden]{display:none !important}
-:focus-visible{outline:4px solid var(--pink); outline-offset:3px}
-
-.stage{
-  position:relative; width:100%; max-width:1280px; min-height:832px;
-  margin:0 auto; display:flex; flex-direction:column; overflow:hidden;
-}
-.blob{
-  position:absolute; width:520px; height:520px; border-radius:50%;
-  background:var(--lime); opacity:.18; top:-150px; left:-130px;
-  z-index:0; pointer-events:none;
-}
-
-/* header */
-.hd{
-  position:relative; z-index:2; height:92px; flex:0 0 92px;
-  display:flex; align-items:center; gap:16px; padding:0 26px;
-  border-bottom:5px solid var(--line); background:var(--bg);
-}
-.logo{
-  width:52px; height:52px; flex:0 0 52px; border-radius:50%;
-  background:var(--lime); border:4px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-}
-.wordmark{font-family:var(--disp); font-size:26px; color:var(--line); white-space:nowrap}
-.spacer{flex:1 1 auto}
-.build{
-  min-height:44px; display:inline-flex; align-items:center; gap:10px;
-  padding:0 20px; border-radius:999px;
-  background:var(--line); border:4px solid var(--line); color:var(--ink);
-}
-.build .lbl{font-family:var(--num); font-size:11px; letter-spacing:.14em}
-.build .val{font-family:var(--num); font-size:15px}
-
-/* centered auth */
-.body{
-  position:relative; z-index:2; flex:1 1 auto;
-  display:flex; align-items:center; justify-content:center;
-  padding:26px;
-}
-.auth{
-  width:100%; max-width:460px; display:flex; flex-direction:column; gap:20px;
-  padding:26px; border-radius:28px;
-  background:var(--line); color:var(--ink); border:5px solid var(--ink);
-  box-shadow:10px 10px 0 var(--lime);
-}
-.seg{display:flex; gap:12px}
-.seg-btn{
-  flex:1 1 0; min-height:52px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--ink); background:transparent; color:var(--ink);
-  font-family:var(--disp); font-size:18px;
-}
-.seg-btn:hover{background:#EFE6F6}
-.seg-btn[aria-selected="true"]{background:var(--lime); box-shadow:6px 6px 0 var(--ink)}
-.pane{display:flex; flex-direction:column; gap:18px}
-.field{display:flex; flex-direction:column; gap:6px}
-.field label{font-family:var(--num); font-size:11px; letter-spacing:.14em; color:#5B4470}
-.inputwrap{position:relative; display:flex}
-.field input{
-  width:100%; min-height:56px; padding:0 16px;
-  border-radius:18px; border:4px solid var(--ink); background:var(--line);
-  color:var(--ink); font-family:var(--body); font-size:16px; font-weight:700;
-}
-.field input::placeholder{color:#9B86AD; font-weight:400}
-.field input:focus{background:#F6F1FA}
-.peek{
-  position:absolute; right:8px; top:50%; transform:translateY(-50%);
-  width:44px; height:44px; border-radius:50%; border:0; background:transparent;
-  color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center;
-}
-.peek:hover{background:#EFE6F6}
-.remember{display:flex; align-items:center; gap:12px; min-height:44px; cursor:pointer}
-.remember input{width:26px; height:26px; accent-color:#14061F; margin:0}
-.remember span{font-size:14px; font-weight:700}
-.msg:empty{display:none}
-.msg > b{
-  display:block; padding:12px 16px; border-radius:18px;
-  border:4px solid var(--ink); background:var(--pink); color:var(--ink);
-  font-size:13px; line-height:1.5; font-weight:700;
-}
-.msg.ok > b{background:var(--lime)}
-.btn-main{
-  width:100%; min-height:68px; border-radius:999px; cursor:pointer;
-  border:5px solid var(--ink); background:var(--lime); color:var(--ink);
-  font-family:var(--disp); font-size:26px; box-shadow:8px 8px 0 var(--ink);
-  display:inline-flex; align-items:center; justify-content:center; gap:12px;
-}
-.btn-main:hover{transform:translate(2px,2px); box-shadow:4px 4px 0 var(--ink)}
-.admin-slot{display:flex; flex-direction:column; gap:12px}
-.rule{height:4px; background:var(--ink); border-radius:999px}
-.btn-admin{
-  width:100%; min-height:56px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--ink); background:var(--ink); color:var(--lime);
-  font-family:var(--disp); font-size:17px;
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-}
-.btn-admin:hover{background:var(--panel)}
-
-/* result panes */
-.result{gap:18px; text-align:center}
-.result .badge{
-  align-self:center; width:96px; height:96px; border-radius:50%;
-  border:5px solid var(--ink); background:var(--lime);
-  display:flex; align-items:center; justify-content:center;
-}
-.result.admin .badge{background:var(--pink)}
-.result h2{margin:0; font-family:var(--disp); font-size:34px; line-height:1.15}
-.who{
-  align-self:center; display:inline-flex; align-items:center; gap:10px;
-  min-height:44px; padding:0 18px; border-radius:999px; border:4px solid var(--ink);
-}
-.who .k{font-family:var(--num); font-size:11px; letter-spacing:.14em; color:#5B4470}
-.who .v{font-family:var(--num); font-size:15px}
-.btn-ghost{
-  width:100%; min-height:52px; border-radius:999px; cursor:pointer;
-  border:4px solid var(--ink); background:transparent; color:var(--ink);
-  font-family:var(--disp); font-size:16px;
-  display:inline-flex; align-items:center; justify-content:center;
-}
-.btn-ghost:hover{background:#EFE6F6}
-.stack{display:flex; flex-direction:column; gap:12px}
-
-/* dialog */
-dialog.dlg{
-  width:min(420px, calc(100vw - 32px)); padding:26px; border:5px solid var(--line);
-  border-radius:28px; background:var(--panel); color:var(--t1);
-  box-shadow:10px 10px 0 var(--pink);
-}
-dialog.dlg::backdrop{background:rgba(20,6,31,.78)}
-.dlg-hd{display:flex; align-items:center; gap:14px; margin-bottom:18px}
-.dlg-hd .ic{
-  width:52px; height:52px; flex:0 0 52px; border-radius:50%;
-  background:var(--pink); border:4px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-}
-.dlg-hd h2{margin:0; font-family:var(--disp); font-size:24px; color:var(--line)}
-.dlg form{display:flex; flex-direction:column; gap:16px}
-.dlg label{font-family:var(--num); font-size:11px; letter-spacing:.14em; color:var(--t3)}
-.dlg input{
-  width:100%; min-height:60px; padding:0 18px; border-radius:18px;
-  border:4px solid var(--line); background:var(--ink); color:var(--line);
-  font-family:var(--num); font-size:22px; letter-spacing:.24em; text-align:center;
-}
-.dlg .msg > b{border-color:var(--line)}
-.dlg-actions{display:flex; gap:12px}
-.dlg-actions button{
-  flex:1 1 0; min-height:56px; border-radius:999px; cursor:pointer;
-  font-family:var(--disp); font-size:17px; border:4px solid var(--line);
-}
-.dlg-actions .go{background:var(--pink); color:var(--ink)}
-.dlg-actions .go:hover{background:var(--lime)}
-.dlg-actions .no{background:transparent; color:var(--t1)}
-.dlg-actions .no:hover{background:var(--dim)}
-
-button[disabled]{opacity:.45; cursor:not-allowed}
-.btn-main[disabled]:hover{transform:none; box-shadow:8px 8px 0 var(--ink)}
-
-@media (max-width:640px){
-  .stage{min-height:0}
-  .hd{padding:0 16px; gap:10px}
-  .wordmark{font-size:19px}
-  .build .lbl{display:none}
-  .body{padding:16px; align-items:flex-start}
-  .auth{padding:20px; border-radius:24px; box-shadow:6px 6px 0 var(--lime)}
-  .btn-main{font-size:22px; min-height:60px}
-}
-@media (prefers-reduced-motion:reduce){
-  *{transition:none !important}
-  .btn-main:hover{transform:none}
-}
-</style>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="page.css">
 </head>
 <body>
 
 <div class="halftone" aria-hidden="true"></div>
 
-<div class="stage">
-  <div class="blob" aria-hidden="true"></div>
+<div class="app">
 
   <header class="hd">
     <span class="logo" aria-hidden="true">
@@ -253,14 +56,14 @@ button[disabled]{opacity:.45; cursor:not-allowed}
           <span>아이디 기억하기</span>
         </label>
         <div class="msg" id="loginMsg" role="status" aria-live="polite"></div>
-        <button type="submit" class="btn-main">
+        <button type="submit" class="btn block">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="M15 12H9"/><path d="m18 12-3.5-3.5M18 12l-3.5 3.5"/></svg>
           입장하기
         </button>
 
         <div class="admin-slot">
           <div class="rule" aria-hidden="true"></div>
-          <button type="button" class="btn-admin" id="adminOpen">
+          <button type="button" class="btn ghost block" id="adminOpen">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
             관리자 입장
           </button>
@@ -291,7 +94,7 @@ button[disabled]{opacity:.45; cursor:not-allowed}
           </div>
         </div>
         <div class="msg" id="signupMsg" role="status" aria-live="polite"></div>
-        <button type="submit" class="btn-main">
+        <button type="submit" class="btn block">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19h6"/><path d="M19 16v6"/><circle cx="10" cy="8" r="4"/><path d="M3 20c.7-3.6 3.4-5.5 7-5.5 1 0 1.9.15 2.7.43"/></svg>
           가입하기
         </button>
@@ -305,8 +108,8 @@ button[disabled]{opacity:.45; cursor:not-allowed}
         <h2>입장 완료</h2>
         <span class="who"><span class="k">ID</span><span class="v" id="whoId">—</span></span>
         <div class="stack">
-          <a class="btn-main" href="app.html" style="text-decoration:none">시작하기</a>
-          <button type="button" class="btn-ghost" data-logout>다른 아이디로 입장</button>
+          <a class="btn block" href="app.html" style="text-decoration:none">시작하기</a>
+          <button type="button" class="btn ghost block" data-logout>다른 아이디로 입장</button>
         </div>
       </div>
 
@@ -317,8 +120,8 @@ button[disabled]{opacity:.45; cursor:not-allowed}
         </span>
         <h2>관리자 모드</h2>
         <div class="stack">
-          <button type="button" class="btn-main" id="adminGo">관리자 콘솔 열기</button>
-          <button type="button" class="btn-ghost" data-logout>나가기</button>
+          <button type="button" class="btn block" id="adminGo">관리자 콘솔 열기</button>
+          <button type="button" class="btn ghost block" data-logout>나가기</button>
         </div>
       </div>
     </main>

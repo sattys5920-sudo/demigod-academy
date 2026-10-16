@@ -1,0 +1,211 @@
+/* ══════════════════════════════════════════════════════════
+   데미갓 아카데미 — 공통 테마
+   모바일 전용. 넓은 화면에서도 폰 폭으로 가운데 세운다.
+   톤: 검정 · 흰 아웃라인 · 주홍 한 점. 둥근 알약 대신 잘린 모서리와 기울임.
+   ══════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0B0910;
+  --bg2:#141019;
+  --panel:#1A151F;
+  --ink:#0B0910;
+  --line:#FFFFFF;
+  --hot:#FF2B3E;
+  --gold:#FFC53D;
+  --t1:#F2EDF5;
+  --t2:#B9AEC4;
+  --t3:#8C7F99;
+  --dim:#352B3E;
+
+  --app:480px;          /* 앱 폭 */
+  --cut:14px;           /* 잘린 모서리 */
+  --cut-s:9px;
+  --hd:64px;
+  --tb:68px;
+
+  --disp:'Gasoek One','Gothic A1',sans-serif;
+  --num:'Archivo Black','Gothic A1',sans-serif;
+  --body:'Gothic A1',system-ui,sans-serif;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg2); color:var(--t1);
+  font-family:var(--body); -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+[hidden]{display:none !important}
+button,input,textarea,select{font-family:inherit; font-size:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+
+/* 넓은 화면 — 폰을 가운데 세우고 둘레는 사선 줄무늬 */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-color:var(--bg2);
+  background-image:repeating-linear-gradient(
+    -45deg, #19131F 0 18px, #141019 18px 36px);
+}
+.app{
+  position:relative; z-index:1;
+  width:100%; max-width:var(--app); margin:0 auto; min-height:100dvh;
+  background:var(--bg); display:flex; flex-direction:column;
+  box-shadow:0 0 0 3px var(--line);
+}
+@media (max-width:520px){ .app{box-shadow:none} }
+
+/* 하프톤 — 페르소나식 망점 */
+.halftone{
+  position:fixed; inset:0; pointer-events:none; z-index:40;
+  background-image:radial-gradient(#FFFFFF 1.1px, transparent 1.2px);
+  background-size:14px 14px; opacity:.05;
+}
+
+/* ── 모양 조각 ─────────────────────────────────── */
+.cut{
+  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
+                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+.cut-s{
+  clip-path:polygon(0 var(--cut-s), var(--cut-s) 0, 100% 0,
+                    100% calc(100% - var(--cut-s)), calc(100% - var(--cut-s)) 100%, 0 100%);
+}
+.spacer{flex:1 1 auto}
+
+/* ── 패널 ──────────────────────────────────────── */
+.panel{
+  position:relative; background:var(--panel); border:3px solid var(--line);
+  padding:16px 16px 18px;
+  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
+                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+.panel.flat{padding:13px 14px; border-width:2px}
+.panel.hot{background:var(--hot); color:var(--ink); border-color:var(--line)}
+.panel.ink{background:var(--ink)}
+
+/* 제목 — 살짝 기울인 검정 띠 */
+.slab{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:5px 14px 6px; background:var(--line); color:var(--ink);
+  transform:skewX(-9deg); margin-left:-4px;
+}
+.slab > *{transform:skewX(9deg)}
+.slab .k{font-family:var(--num); font-size:9px; letter-spacing:.18em}
+.slab h2{margin:0; font-family:var(--disp); font-size:16px; line-height:1.1}
+.slab.hot{background:var(--hot); color:var(--line)}
+
+.eyebrow{font-family:var(--num); font-size:10px; letter-spacing:.22em; color:var(--hot)}
+.sect-h{display:flex; align-items:center; gap:10px}
+.sect-h h2{margin:0; font-family:var(--disp); font-size:17px; color:var(--line)}
+.hint{margin:0; font-size:12px; font-weight:700; color:var(--t2); line-height:1.7}
+.count{font-family:var(--num); font-size:13px; color:var(--hot); font-variant-numeric:tabular-nums}
+
+/* ── 버튼 — 기울인 평행사변형 + 단단한 그림자 ──── */
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; padding:0 20px; border:3px solid var(--line);
+  background:var(--hot); color:var(--line);
+  font-family:var(--disp); font-size:15px; line-height:1;
+  transform:skewX(-9deg); box-shadow:5px 5px 0 var(--line);
+}
+.btn > *{transform:skewX(9deg)}
+.btn:active{transform:skewX(-9deg) translate(3px,3px); box-shadow:2px 2px 0 var(--line)}
+.btn.ghost{background:transparent; color:var(--line); border-color:var(--dim); box-shadow:none}
+.btn.ghost:active{transform:skewX(-9deg); border-color:var(--line)}
+.btn.white{background:var(--line); color:var(--ink)}
+.btn.gold{background:var(--gold); color:var(--ink)}
+.btn.block{width:100%}
+.btn.lg{min-height:58px; font-size:21px; padding:0 26px; box-shadow:7px 7px 0 var(--line)}
+.btn[disabled]{opacity:.45; box-shadow:5px 5px 0 var(--dim)}
+.btn[disabled]:active{transform:skewX(-9deg)}
+
+/* ── 칩 ────────────────────────────────────────── */
+.chip{
+  display:inline-flex; align-items:center; gap:5px; min-height:26px; padding:0 10px;
+  border:2px solid var(--dim); color:var(--t2);
+  font-family:var(--num); font-size:9.5px; letter-spacing:.08em;
+  clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+}
+.chip.hot{background:var(--hot); border-color:var(--line); color:var(--line)}
+.chip.gold{background:var(--gold); border-color:var(--line); color:var(--ink)}
+.chip.on{background:var(--line); border-color:var(--line); color:var(--ink)}
+
+/* ── 막대 ──────────────────────────────────────── */
+.bar{height:13px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
+.bar > i{display:block; height:100%; background:var(--hot)}
+.bar.gold > i{background:var(--gold)}
+.bar.thin{height:9px; border-width:2px}
+
+/* ── 입력 ──────────────────────────────────────── */
+.field{display:flex; flex-direction:column; gap:7px}
+.field label{font-family:var(--num); font-size:9.5px; letter-spacing:.18em; color:var(--t3)}
+input[type=text],input[type=password],input[type=email]{
+  width:100%; min-height:48px; padding:0 14px;
+  border:2px solid var(--dim); background:var(--ink); color:var(--t1);
+  font-size:15px; font-weight:700;
+}
+input:focus{border-color:var(--hot); outline:none}
+input::placeholder{color:var(--t3)}
+
+/* ── 아바타 ────────────────────────────────────── */
+.ava{
+  display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
+  border:2px solid var(--line); overflow:hidden; background:var(--panel);
+  clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+}
+.ava.tone-lime{background:var(--gold)}
+.ava.tone-pink{background:var(--hot)}
+.ava img{width:100%; height:100%; object-fit:cover; display:block}
+.ava.xs{width:28px; height:28px}
+.ava.s{width:38px; height:38px}
+.ava.m{width:46px; height:46px}
+.ava.l{width:76px; height:76px; border-width:3px}
+
+/* ── 메시지 ────────────────────────────────────── */
+.msg{min-height:20px; font-size:12px; font-weight:700; color:var(--hot); line-height:1.6}
+.msg.ok{color:var(--gold)}
+.empty{
+  padding:22px 16px; border:2px dashed var(--dim);
+  text-align:center; font-size:12px; font-weight:700; color:var(--t3); line-height:1.8;
+}
+
+/* ── 다이얼로그 ────────────────────────────────── */
+dialog.dlg{
+  width:min(var(--app), calc(100vw - 24px)); padding:20px; border:3px solid var(--line);
+  background:var(--panel); color:var(--t1); box-shadow:7px 7px 0 var(--hot);
+  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
+                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+}
+dialog.dlg::backdrop{background:rgba(11,9,16,.86)}
+.dlg-hd{display:flex; align-items:center; gap:12px; margin-bottom:14px}
+.dlg-hd .who{display:flex; flex-direction:column; gap:3px; min-width:0}
+.dlg-hd .who .n{font-family:var(--disp); font-size:18px; color:var(--line); word-break:break-all}
+.dlg-hd .who .r{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
+.dlg-acts{display:flex; flex-direction:column; gap:9px}
+.dlg-acts > a{text-decoration:none}
+
+/* ── 입장 게이트 ───────────────────────────────── */
+#gate{
+  position:fixed; inset:0; z-index:60; background:var(--bg);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+#gate .box{display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; max-width:300px}
+#gate .ring{
+  width:56px; height:56px; background:var(--hot); border:3px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+#gate p{margin:0; font-family:var(--disp); font-size:19px; color:var(--line)}
+#gate small{font-size:12px; font-weight:700; color:var(--t2); line-height:1.6}
+#gate a{
+  min-height:44px; display:inline-flex; align-items:center; padding:0 18px;
+  border:3px solid var(--line); background:var(--hot); color:var(--line);
+  font-family:var(--disp); font-size:15px; text-decoration:none; transform:skewX(-9deg);
+}
+#gate a > *{transform:skewX(9deg)}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important}
+  .btn:active{transform:skewX(-9deg)}
+}
