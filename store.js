@@ -21,15 +21,24 @@ function size(s) {
   return Object.keys(s.owned || {}).length * 10 + (s.feed || []).length;
 }
 
+/* 클라우드가 늦거나 안 돌아와도 게임이 멈추면 안 된다. 일정 시간을 넘기면 포기한다. */
+function withTimeout(promise, ms, what) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(what + ' 시간 초과')), ms))
+  ]);
+}
+
 export async function attachStore(uid) {
   const local = readLocal(uid);
   let fs = null, ref = null, cloud = null, ok = false;
 
   try {
-    const [mod, init] = await Promise.all([import(SDK), import('./firebase-init.js')]);
+    const [mod, init] = await withTimeout(
+      Promise.all([import(SDK), import('./firebase-init.js')]), 6000, 'SDK 로드');
     fs = mod;
     ref = mod.doc(mod.getFirestore(init.app), 'users', uid, 'save', 'main');
-    const snap = await mod.getDoc(ref);
+    const snap = await withTimeout(mod.getDoc(ref), 5000, '첫 읽기');
     ok = true;
     if (snap.exists()) cloud = snap.data().state || null;
   } catch (err) {

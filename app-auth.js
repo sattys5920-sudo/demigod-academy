@@ -9,6 +9,21 @@ UI.paintAvatar = paintAvatar;
 
 const gate = document.getElementById('gate');
 
+/* 게이트에 갇히지 않게 — 무엇이 잘못됐는지 보여 주고 빠져나갈 길을 준다 */
+function fail(title, note) {
+  const t = document.getElementById('gateTitle');
+  const n = document.getElementById('gateNote');
+  if (t) t.textContent = title;
+  if (n) n.textContent = note;
+  const box = document.querySelector('#gate .box');
+  if (box && !box.querySelector('a')) {
+    const a = document.createElement('a');
+    a.href = 'index.html';
+    a.textContent = '로그인 화면으로';
+    box.appendChild(a);
+  }
+}
+
 onAuthStateChanged(auth, async (user) => {
   window.__authResolved = true;
   if (!user) { location.replace('index.html'); return; }
@@ -27,15 +42,27 @@ onAuthStateChanged(auth, async (user) => {
   paintAvatar(document.getElementById('dlgAva'), profile, 88);
   paintAvatar(document.getElementById('composerAva'), profile, 56);
 
-  const store = await attachStore(user.uid);
-  UI.put = store.put;
-  if (!store.cloud) console.info('[store] 브라우저에만 저장합니다. Firestore 를 켜면 기기 사이로 이어집니다.');
+  let store = { initial: null, put: null, cloud: false };
+  try {
+    store = await attachStore(user.uid);
+  } catch (err) {
+    console.warn('[store] 저장을 붙이지 못했습니다:', err);
+  }
+  if (store.put) UI.put = store.put;
+  if (!store.cloud) console.info('[store] 브라우저에만 저장합니다.');
 
-  const start = () => UI.boot(user.uid, store.initial);
+  const start = () => {
+    try {
+      UI.boot(user.uid, store.initial);
+    } catch (err) {
+      console.error('[app] 화면을 그리지 못했습니다:', err);
+      fail('화면을 그리지 못했습니다', String((err && err.message) || err));
+      return;
+    }
+    if (gate) gate.remove();
+  };
   if (typeof UI.boot === 'function') start();
   else UI.onReady = start;
-
-  if (gate) gate.remove();
 });
 
 document.getElementById('logout').addEventListener('click', async () => {

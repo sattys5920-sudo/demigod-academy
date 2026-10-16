@@ -1122,7 +1122,9 @@
   }
 
   /* ── 시작 ────────────────────────────────────── */
-  UI.boot = function (who, initial) {
+  /* 데이터가 다 읽히기 전에는 UI.boot 을 내놓지 않는다.
+     먼저 불리면 D 가 비어 있어 화면을 그리다 터지고, 게이트가 안 걷힌다. */
+  function boot(who, initial) {
     uid = who || 'local';
     S = initial || load() || fresh();
     if (!Object.keys(S.owned).length) {
@@ -1131,13 +1133,14 @@
       save();
     }
     paintAll();
-  };
+  }
 
   loadData().then(function () {
     wire();
     setTab('home'); setSeg('cards', 'dex'); setSeg('daily', 'time'); setSeg('shop', 'summon');
+    UI.boot = boot;                       /* 이제야 연다 */
     if (typeof UI.onReady === 'function') UI.onReady();
-    else UI.boot('local');
+    else boot('local');
   }).catch(function (e) {
     $('#gateTitle').textContent = '데이터를 못 읽었습니다';
     $('#gateNote').textContent = String(e.message || e) + ' — 서버로 열어야 합니다 (python3 -m http.server).';
