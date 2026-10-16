@@ -145,25 +145,27 @@ Firestore 를 붙여야 합니다.
 
 ## 배포
 
-### GitHub Pages
+**push 하면 자동으로 올라간다.** `.github/workflows/firebase.yml` 이 저장소 시크릿
+`FIREBASE_SERVICE_ACCOUNT` 로 보안 규칙과 호스팅을 함께 배포한다.
 
-저장소 **Settings → Pages** 에서 Source `Deploy from a branch`, Branch `main` / `/ (root)`.
+| 주소 | 무엇 |
+| --- | --- |
+| https://demig0d.web.app | Firebase Hosting (자동 배포) |
+| https://sattys5920-sudo.github.io/demigod-academy/ | GitHub Pages |
 
-게시 주소: `https://sattys5920-sudo.github.io/demigod-academy/`
+서비스 계정에는 **Firebase Admin** 역할이 필요하다. Admin SDK 기본 역할만으로는
+`firebaserules.googleapis.com` 에 403 이 난다.
 
-### Firebase Hosting
+수동으로 올릴 때:
 
 ```sh
-npm install -g firebase-tools
-firebase login
-firebase deploy --only hosting
+npm i -g firebase-tools && firebase login
+firebase deploy --only firestore:rules,hosting
 ```
-
-프로젝트는 `demig0d` 로 이미 지정돼 있습니다.
-게시 주소: `https://demig0d.web.app`
 
 파이어베이스 콘솔에서 미리 해둘 것:
 
 1. **Authentication → Sign-in method → 이메일/비밀번호** 사용 설정
 2. **Authentication → Settings → 승인된 도메인** 에 `sattys5920-sudo.github.io` 추가
-   (Pages 쪽에서도 로그인이 되게 하려면 필요합니다)
+   (Pages 쪽에서도 로그인이 되게 하려면 필요하다. `demig0d.web.app` 은 기본으로 들어 있다)
+3. **Firestore Database** 생성 (프로덕션 모드)
