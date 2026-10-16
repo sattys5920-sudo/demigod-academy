@@ -90,57 +90,91 @@ body.fullscreen-on .tabbar{display:none}
 .filter[aria-pressed="true"]{background:var(--hot); border-color:var(--line); color:var(--line)}
 
 /* ── 카드 ──────────────────────────────────────── */
+/* ══ 카드 ════════════════════════════════════════════════
+   그림이 주인공이다. 그래서 그림을 카드의 바닥으로 깔고, 나머지는
+   그 위에 얹거나 아래로 녹아들게 한다.
+
+   전에는 카드 테두리 안에 7px 여백, 그 안에 또 그림칸 테두리가 있어
+   '액자 안의 액자' 였다. 게다가 ATK 가 흰 상자라 카드에서 가장 밝은
+   것이 수치였고, 눈이 그림보다 숫자를 먼저 봤다. 둘 다 뒤집는다. */
 .card{
-  display:flex; flex-direction:column; gap:5px; padding:7px;
-  background:var(--panel); border:2px solid var(--line);
+  position:relative; display:flex; flex-direction:column; padding:0; overflow:hidden;
+  background:var(--ink); border:2px solid var(--line);
   clip-path:polygon(0 9px, 9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
 }
-/* 등급은 이제 틀이 말한다. 그림이 전부 풀컬러라 그림만 봐서는 도감에서
-   ★3 를 찾지 못한다(세 등급의 평균 밝기가 105·101·98 로 사실상 같다).
-   테두리와 그림칸 선을 등급색으로 맞춰 훑을 때 바로 걸리게 한다.
-   clip-path 가 box-shadow 를 잘라 먹으므로 두께와 색으로만 차이를 준다. */
+
+/* 등급은 틀이 말한다. 그림이 전부 풀컬러라 그림만 봐서는 도감에서 ★3 를
+   찾지 못한다(세 등급의 평균 밝기가 105·101·98 로 사실상 같다). */
 .card.g1{border-color:var(--line)}
 .card.g2{border-color:var(--gold); border-width:3px}
 .card.g3{border-color:var(--hot);  border-width:3px}
-.card.g2 .art{border-color:rgba(255,197,61,.55)}
-.card.g3 .art{border-color:rgba(255,43,62,.6)}
 .card.g2 .fam{color:var(--gold)}
 .card.g3 .fam{color:var(--hot)}
 
-.card-top{display:flex; align-items:center; justify-content:space-between; gap:4px}
+/* 그림 — 카드 폭을 가득 채운다. 테두리 없음, 여백 없음. */
+.art{
+  position:relative; flex:0 0 auto; aspect-ratio:4/3; width:100%; overflow:hidden;
+  background:var(--ink); border:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.art svg,.art-img{display:block; width:100%; height:100%; object-fit:cover}
+/* 그림 아래 끝만 어둠으로 녹인다 — 글자 띠와의 이음매일 뿐이다.
+   길게 깔면 그림을 잡아먹는다(인물의 손과 다리가 검정에 묻혔다). */
+.art::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:13%;
+  background:linear-gradient(to bottom, transparent 0%, rgba(11,9,16,.5) 70%, var(--ink) 100%);
+  pointer-events:none;
+}
+.art.sealed{aspect-ratio:auto; flex:1 1 auto; min-height:58px}
+.art.sealed::after{
+  height:100%;
+  background:repeating-linear-gradient(-45deg, rgba(255,43,62,.09) 0 5px, transparent 5px 11px);
+}
+
+/* 비용과 원소 — 그림 위에 얹는다 */
+.card-top{
+  position:absolute; top:6px; left:6px; right:6px; z-index:2;
+  display:flex; align-items:center; gap:5px; pointer-events:none;
+}
 .cost{
-  width:24px; height:24px; flex:0 0 24px; background:var(--hot); color:var(--line);
+  width:22px; height:22px; flex:0 0 22px; background:var(--hot); color:var(--line);
   border:2px solid var(--line);
   display:flex; align-items:center; justify-content:center; font-family:var(--num); font-size:11px;
 }
-.card.pinkish .cost{background:var(--gold); color:var(--ink)}
+.card-top .el{width:22px; height:22px; flex:0 0 22px; background:rgba(11,9,16,.86)}
+.card-top .el.el-none{color:var(--t2); border-color:var(--line)}
+.card-top .el.el-earth{background:rgba(11,9,16,.86)}
+
+/* 글자 띠 — 그림 밑에서 이어진다. 그림을 덮어 올라탄다. */
+.card-info{
+  position:relative; z-index:1; background:var(--ink);
+  display:flex; flex-direction:column; gap:3px; padding:5px 7px 7px;
+}
+.card-line{display:flex; align-items:center; gap:6px; min-width:0}
 /* 계보 이름은 길이가 제각각이다(공통 ~ HEPHAISTOS). 줄이지 않으면 320px
    에서 카드 밖으로 삐져나가 화면이 통째로 가로로 밀린다. */
-.fam{font-family:var(--num); font-size:8px; letter-spacing:.04em; color:var(--t3); text-align:right;
+.fam{flex:1 1 auto; font-family:var(--num); font-size:8px; letter-spacing:.06em; color:var(--t3);
      min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-/* 그림칸은 4:3 으로 고정한다. 2:1 레터박스에 진짜 그림을 넣으면
-   인물의 위아래가 잘린다. 생성 그림은 정사각으로 받아 여기서 자른다. */
-.art{
-  position:relative; flex:0 0 auto; aspect-ratio:4/3; width:100%; overflow:hidden;
-  background:var(--ink); border:2px solid var(--dim);
-  display:flex; align-items:center; justify-content:center;
-}
-.art.sealed{aspect-ratio:auto; flex:1 1 auto; min-height:58px}
-/* 빗금은 이제 '봉인된 카드'(뽑기 배너) 전용이다. 나머지 칸은 문장이 채운다. */
-.art.sealed::after{
-  content:""; position:absolute; inset:0;
-  background-image:repeating-linear-gradient(-45deg, rgba(255,43,62,.09) 0 5px, transparent 5px 11px);
-}
-.art svg,.art-img{display:block; width:100%; height:100%; object-fit:cover}
+.rank{flex:0 0 auto; display:inline-flex; align-items:center; gap:1px;
+      font-family:var(--num); font-size:9px; color:var(--gold)}
 .glyph{position:relative; z-index:1; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line); text-align:center}
-.rank{display:inline-flex; align-items:center; gap:2px; font-family:var(--num); font-size:9px; color:var(--gold)}
-.cname{margin:0; font-family:var(--ui-s); font-weight:600; font-size:11.5px; line-height:1.4; color:var(--line)}
-.stats{display:flex; gap:4px}
-.stat{
-  flex:1 1 0; min-width:0; height:20px; display:flex; align-items:center; justify-content:center;
-  border:2px solid var(--dim); font-family:var(--num); font-size:10px; color:var(--t2);
+
+/* 이름은 포스터 얼굴로. 본문체를 쓰면 그림만 포스터고 글자는 설명문이 된다. */
+.cname{margin:0; font-family:var(--ui); font-weight:400; font-size:13px; line-height:1.2;
+       color:var(--line); word-break:keep-all; overflow-wrap:break-word}
+
+/* 수치는 숫자 그 자체다 — 상자를 두르지 않는다 */
+.stats{display:flex; align-items:flex-end; gap:10px; margin-top:1px}
+.stat{display:flex; align-items:baseline; gap:3px}
+.stat b{font-family:var(--num); font-weight:400; font-size:15px; line-height:1; color:var(--line)}
+.stat i{font-family:var(--num); font-style:normal; font-size:7px; letter-spacing:.14em; color:var(--t3)}
+.stat.hp b{color:var(--t2)}
+.kindtag{
+  display:inline-flex; align-items:center; height:17px; padding:0 7px;
+  border:2px solid var(--dim); color:var(--t2);
+  font-family:var(--ui-s); font-weight:600; font-size:10px;
 }
-.stat.atk{background:var(--line); color:var(--ink); border-color:var(--line)}
+
 .grid6{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
 .grid6 .card{min-height:150px}
 .grid-sm{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}

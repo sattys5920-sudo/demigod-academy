@@ -188,13 +188,14 @@
     var o = S.owned[c.id];
     var s = stat(c);
     var n = el('article', 'card g' + (c.grade || 1) + (c.tone === 'pink' ? ' pinkish' : ''));
+    /* 비용과 원소는 그림 위에 얹는다 — 따로 칸을 내주면 그림이 줄고
+       카드가 '액자 안의 액자' 가 된다. */
     var top = el('span', 'card-top');
     top.appendChild(el('span', 'cost', c.cost == null ? '?' : String(c.cost)));
     var badge = el('span', 'el el-' + (c.element || 'none'));
     badge.title = elKo(c.element);
     badge.appendChild(elIcon(c.element, 13));
     top.appendChild(badge);
-    top.appendChild(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family));
     var art = el('span', 'art');
     /* 그림은 art.js 가 그린다. c.art 가 있으면 그 파일을, 없으면 문장을. */
     if (window.DGAArt) window.DGAArt.paint(art, c);
@@ -211,11 +212,30 @@
     }
     if (o && o.lv > 1) rank.appendChild(document.createTextNode(' LV ' + o.lv));
     var name = el('h3', 'cname', c.name);
+
+    /* 수치는 흰 상자가 아니라 숫자다. 상자로 두면 카드에서 가장 밝은 것이
+       수치가 되어, 눈이 그림보다 ATK 를 먼저 본다. */
     var stats = el('span', 'stats');
-    var a = el('span', 'stat atk', c.atk == null ? 'ATK ?' : 'ATK ' + s.atk);
-    var h = el('span', 'stat', c.hp == null ? 'HP ?' : 'HP ' + s.hp);
-    stats.append(a, h);
-    n.append(top, art, rank, name, stats);
+    if (c.atk == null && c.hp == null) {
+      /* 가호·신탁·계략에는 공격력도 체력도 없다. '? ATK ? HP' 로 두면
+         빈칸을 보여 주는 셈이라, 그 자리에 무슨 카드인지를 적는다. */
+      stats.appendChild(el('span', 'kindtag',
+        { unit: '인물', ward: '가호', oracle: '신탁', trap: '계략' }[c.kind] || ''));
+    } else {
+      [['atk', 'ATK', c.atk == null ? '-' : s.atk],
+       ['hp',  'HP',  c.hp  == null ? '-' : s.hp]].forEach(function (p) {
+        var box = el('span', 'stat ' + p[0]);
+        box.append(el('b', '', String(p[2])), el('i', '', p[1]));
+        stats.appendChild(box);
+      });
+    }
+
+    /* 그림 밑으로 글자가 녹아들게 — 띠를 하나로 묶는다 */
+    var info = el('span', 'card-info');
+    var line = el('span', 'card-line');
+    line.append(el('span', 'fam', c.family === 'COMMON' ? '공통' : c.family), rank);
+    info.append(line, name, stats);
+    n.append(art, top, info);
     if (!o && !opts.always) n.style.opacity = '.4';
     return n;
   }
