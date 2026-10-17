@@ -22,6 +22,12 @@
   --hero-mid:#141F4C;
   --hero-slab:#25398A;
 
+  /* 등급 — 카드 프레임이 쓴다. 동·은·금 세 단계로 한눈에 갈린다.
+     ★ 기호는 그대로 --reward 하나만 쓴다. */
+  --grade-1:#6F7DA0;
+  --grade-2:#CBD6F2;
+  --grade-3:#FFC857;
+
   /* 속성 — 아이콘에만 쓴다 */
   --el-bolt:#FFC857;
   --el-water:#55E6F2;

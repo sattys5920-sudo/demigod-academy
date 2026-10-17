@@ -253,6 +253,7 @@
     var have = v.owned > 0 || opts.always;
     var n = el('article', 'tcg' + (big ? ' big' : '') + (have ? '' : ' locked'));
     n.setAttribute('data-el', v.elKey);
+    n.setAttribute('data-grade', String(v.rarity));   /* 프레임 색은 등급이 정한다 */
 
     function stars() {
       var rk = el('span', 'tcg-stars'); rk.setAttribute('aria-label', '등급 ' + v.rarity);
@@ -307,8 +308,12 @@
       sv.appendChild(el('span', 'tcg-no', v.id));
       inner.appendChild(sv);
     } else {
+      /* 이름판은 두 줄 — 한 줄에 몰면 3열 격자에서 이름이 '올…' 로 잘린다 */
       var ft = el('span', 'tcg-ft');
-      ft.append(el('span', 'tcg-name', v.name), stars());
+      var meta = el('span', 'tcg-meta');
+      if (v.element) meta.appendChild(elIconBox(v.elKey, 14));
+      meta.appendChild(stars());
+      ft.append(el('span', 'tcg-name', v.name), meta);
       inner.appendChild(ft);
     }
 

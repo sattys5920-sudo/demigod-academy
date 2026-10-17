@@ -107,34 +107,46 @@
 .rule-note{font-size:13px; font-weight:500; color:var(--text-sub); padding:var(--s3) 0}
 
 /* ── 카드 ──────────────────────────────────────── */
-/* 요약 카드 — 그림과 이름과 등급만. 능력과 수치는 상세에서만 보여 준다. */
+/* 요약 카드 — 그림과 이름과 등급만. 능력과 수치는 상세에서만 보여 준다.
+   카드처럼 보이게 하는 것은 테를 두르는 일이 아니라 두 가지다 —
+   등급마다 다른 프레임 색(동·은·금), 그리고 그림을 안으로 물린 매트. */
 .tcg{
   position:relative; display:block; width:100%; aspect-ratio:63/88;
-  border:2px solid var(--text); border-radius:var(--r-card);
-  background:var(--surface); overflow:hidden; padding:0; text-align:left;
+  padding:3px; border:2px solid var(--grade); border-radius:var(--r-card);
+  background:var(--surface); overflow:hidden; text-align:left;
+  box-shadow:0 2px 0 rgba(0,0,0,.45);
+  --grade:var(--grade-1);
 }
-.tcg.big{border-width:3px}
-.tcg-in{display:flex; flex-direction:column; height:100%; min-height:0}
-.tcg-art{
-  flex:1 1 auto; min-height:0; position:relative; overflow:hidden; background:#0A0F22;
+.tcg[data-grade="2"]{--grade:var(--grade-2)}
+.tcg[data-grade="3"]{--grade:var(--grade-3)}
+.tcg.big{padding:5px; border-width:3px; box-shadow:0 4px 0 rgba(0,0,0,.5)}
+
+.tcg-in{
+  display:flex; flex-direction:column; height:100%; min-height:0;
+  border-radius:5px; overflow:hidden; background:var(--bg);
 }
+.tcg-art{flex:1 1 auto; min-height:0; position:relative; overflow:hidden; background:#0A0F22}
 .tcg-art svg,.tcg-art .art-img{display:block; width:100%; height:100%; object-fit:cover}
+
+/* 이름판 — 그림과 등급색 선으로 끊고, 위에서 아래로 한 겹만 밝힌다 */
 .tcg-ft{
-  flex:0 0 auto; display:flex; align-items:center; gap:var(--s1);
-  padding:6px var(--s2) 7px; background:var(--surface);
+  flex:0 0 auto; display:flex; flex-direction:column; align-items:stretch; gap:3px;
+  padding:6px var(--s2) 7px; border-top:2px solid var(--grade);
+  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0)), var(--surface);
 }
+.tcg-meta{display:flex; align-items:center; gap:5px}
 .tcg-name{
   flex:1 1 auto; min-width:0; font-size:13px; font-weight:800; line-height:1.25;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text);
 }
+
 .tcg-stars{flex:0 0 auto; display:inline-flex; gap:1px; color:var(--reward); font-size:11px; line-height:1}
-.tcg.big .tcg-ft{padding:var(--s2) var(--s3) 10px}
 .tcg.big .tcg-name{font-size:17px}
 .tcg.big .tcg-stars{font-size:13px}
 
 /* 미보유 — 테두리 없는 면에 자물쇠와 이름 */
 .tcg.locked{
-  border:0; background:var(--surface);
+  border:0; padding:0; box-shadow:none; background:var(--surface);
   display:flex; align-items:center; justify-content:center;
 }
 .tcg-lock{
@@ -147,7 +159,8 @@
 /* 상세 카드 — 이름 · 비용 · 속성 · 그림 · 타입 줄 · 능력 · ATK/HP */
 .tcg.big .tcg-hd{
   flex:0 0 auto; display:flex; align-items:center; gap:var(--s2);
-  padding:10px var(--s3); background:var(--surface);
+  padding:10px var(--s3); border-bottom:2px solid var(--grade);
+  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0)), var(--surface);
 }
 .tcg-cost{
   flex:0 0 auto; min-width:28px; height:28px; padding:0 7px; border-radius:var(--r-card);
@@ -183,7 +196,7 @@
 .tcg-flavor:first-child{margin-top:0}
 .tcg-stats{
   flex:0 0 auto; display:flex; align-items:center; gap:var(--s4);
-  padding:10px var(--s3); background:var(--elevated);
+  padding:10px var(--s3); border-top:2px solid var(--grade); background:var(--elevated);
 }
 .tcg-stat{display:inline-flex; align-items:baseline; gap:5px; font-size:12px; font-weight:500; color:var(--text-sub)}
 .tcg-stat i{font-style:normal}

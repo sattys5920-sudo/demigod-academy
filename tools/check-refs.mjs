@@ -44,9 +44,11 @@ fail('JS 가 찾는 id 가 전부 HTML 에 있다', [...wanted].filter((w) => !i
 const theme = read('theme.css');
 const root = theme.slice(theme.indexOf(':root{'), theme.indexOf('\n}', theme.indexOf(':root{')));
 const defined = new Set([...root.matchAll(/(--[a-z0-9-]+)\s*:/g)].map((m) => m[1]));
+/* 컴포넌트가 제 안에서 다시 잡는 토큰(.tcg 의 --grade 처럼)도 정의로 센다 */
+const local = new Set([...css.matchAll(/(--[a-z0-9-]+)\s*:/g)].map((m) => m[1]));
 const all = html + js + css;
 const usedTokens = new Set([...all.matchAll(/var\((--[a-z0-9-]+)/g)].map((m) => m[1]));
-fail('var(--토큰) 이 전부 정의돼 있다', [...usedTokens].filter((t) => !defined.has(t)).sort());
+fail('var(--토큰) 이 전부 정의돼 있다', [...usedTokens].filter((t) => !defined.has(t) && !local.has(t)).sort());
 fail('아무도 안 쓰는 토큰이 없다', [...defined].filter((t) => !usedTokens.has(t)).sort());
 
 /* 3 · CSS 에만 남은 class
