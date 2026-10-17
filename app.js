@@ -288,8 +288,8 @@
       tp.appendChild(stars());
       inner.appendChild(tp);
 
+      /* 능력이 없으면 없다고 쓰지 않는다 — 빈 칸이 그 자체로 답이다 */
       var ab = el('span', 'tcg-abil');
-      if (!v.abilities.length) ab.appendChild(el('span', 'tcg-noab', '특별한 능력 없이 수치로만 싸운다.'));
       v.abilities.forEach(function (a) {
         var h = el('span', 'ab-h');
         h.append(el('b', '', a.name), el('i', '', a.trigger));
@@ -338,7 +338,8 @@
     detCard = c;
     var v = cardView(c);
     var box = $('#detCard'); box.textContent = '';
-    box.appendChild(cardEl(c, { big: true }));
+    /* 도감은 아직 없는 카드도 펼쳐 보여 준다 — 못 가졌다는 말은 아래 '보유' 칸이 한다 */
+    box.appendChild(cardEl(c, { big: true, always: true }));
     box.setAttribute('data-el', v.elKey);
     $('#detNo').textContent = v.id;
 

@@ -174,11 +174,13 @@
   font-size:12px; font-weight:700; color:var(--text-sub);
 }
 .ab-t{margin:0; font-size:13px; font-weight:500; line-height:1.65; color:var(--text-sub)}
-.tcg-noab{font-size:13px; font-weight:500; color:var(--text-disabled)}
+/* 설정 문구 — 위에 능력이 있을 때만 가는 선으로 가른다 */
 .tcg-flavor{
-  margin-top:auto; padding-top:var(--s2); border-top:1px solid var(--elevated);
-  font-size:12px; font-weight:500; line-height:1.6; color:var(--text-disabled);
+  margin-top:auto; font-size:12px; font-weight:500; line-height:1.6; color:var(--text-disabled);
 }
+.ab-t + .tcg-flavor{padding-top:var(--s2); border-top:1px solid var(--elevated)}
+/* 능력이 없는 카드는 설정 문구가 띠 바로 밑에 붙는다 — 위에 구멍을 내지 않는다 */
+.tcg-flavor:first-child{margin-top:0}
 .tcg-stats{
   flex:0 0 auto; display:flex; align-items:center; gap:var(--s4);
   padding:10px var(--s3); background:var(--elevated);
@@ -206,22 +208,19 @@
 .elring::-webkit-scrollbar{display:none}
 .elring > *{flex:0 0 auto}
 .ring-it{display:inline-flex; align-items:center; gap:5px}
-.ring-ic{display:inline-flex; color:var(--el-none)}
-.ring-ic.el-bolt {color:var(--el-bolt)}
-.ring-ic.el-water{color:var(--el-water)}
-.ring-ic.el-fire {color:var(--el-fire)}
-.ring-ic.el-earth{color:var(--el-earth)}
-.ring-ic.el-wind {color:var(--el-wind)}
+.ring-ic{display:inline-flex}
 .ring-n{font-size:13px; font-weight:700; color:var(--text); white-space:nowrap}
 .ring-ar{color:var(--text-disabled); display:inline-flex; align-items:center}
 
-/* 속성 아이콘 — 색은 아이콘에만 준다 */
-.el{display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; color:var(--el-none)}
-.el.el-bolt {color:var(--el-bolt)}
-.el.el-water{color:var(--el-water)}
-.el.el-fire {color:var(--el-fire)}
-.el.el-earth{color:var(--el-earth)}
-.el.el-wind {color:var(--el-wind)}
+/* 속성색은 아이콘에만 준다. 카드 머리(.tcg-el) · 상성 줄(.ring-ic) · 전투(.el) 가
+   같은 클래스를 쓰므로 색은 el-* 한 벌로만 선언한다. */
+.el{display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto}
+.el-bolt {color:var(--el-bolt)}
+.el-water{color:var(--el-water)}
+.el-fire {color:var(--el-fire)}
+.el-earth{color:var(--el-earth)}
+.el-wind {color:var(--el-wind)}
+.el-none {color:var(--el-none)}
 
 /* ── 목록 행 ───────────────────────────────────── */
 .rows{display:flex; flex-direction:column; gap:var(--s2); list-style:none; margin:0; padding:0 var(--s4)}
