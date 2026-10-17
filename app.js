@@ -97,7 +97,7 @@
     var sv = document.createElementNS(ns, 'svg');
     sv.setAttribute('width', String(px || 12)); sv.setAttribute('height', String(px || 12));
     sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('fill', 'none');
-    sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '2.5');
+    sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '1.8');
     sv.setAttribute('stroke-linecap', 'round'); sv.setAttribute('stroke-linejoin', 'round');
     sv.setAttribute('aria-hidden', 'true');
     sv.innerHTML = EL_PATH[key] || EL_PATH.none;
@@ -109,7 +109,7 @@
     var sv = document.createElementNS(ns, 'svg');
     sv.setAttribute('width', String(px || 14)); sv.setAttribute('height', String(px || 14));
     sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('fill', 'none');
-    sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '2.4');
+    sv.setAttribute('stroke', 'currentColor'); sv.setAttribute('stroke-width', '1.8');
     sv.setAttribute('stroke-linecap', 'round'); sv.setAttribute('stroke-linejoin', 'round');
     sv.setAttribute('aria-hidden', 'true');
     sv.innerHTML = '<rect x="4" y="10.5" width="16" height="11"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>';
@@ -136,9 +136,9 @@
     return { atk: (c.atk || 1) + (lv - 1) + (st - 1) * 2, hp: (c.hp || 1) + (lv - 1) + (st - 1) };
   }
   /* ── 화면 이동 ───────────────────────────────── */
-  var TITLES = { home: '신탁', cards: '계보', daily: '일상', shop: '상점', bonds: '인연' };
-  var TITLES_EN = { home: '// ORACLE', cards: '// CODEX', daily: '// ROUTINE',
-                    shop: '// SHOP', bonds: '// BONDS' };
+  var TITLES = { home: '홈', cards: '계보', daily: '일상', shop: '상점', bonds: '인연' };
+  /* 재화는 쓰는 화면에서만 보여 준다 — 홈과 상점 */
+  var WALLET_ON = { home: 1, shop: 1 };
   var SEGS = {
     cards: ['dex', 'deck', 'grow', 'melt', 'bondmap'],
     daily: ['time', 'hunt'],
@@ -150,8 +150,12 @@
   function setTab(name) {
     if (!TITLES[name]) return;
     curTab = name;
+    /* 홈은 제목 자리에 플레이어를 세운다 — 배경 그라데이션도 홈에만 */
+    $('#stage').setAttribute('data-tab', name);
     $('#screenTitle').textContent = TITLES[name];
-    $('#screenEn').textContent = TITLES_EN[name] || '';
+    $('#screenTitle').hidden = name === 'home';
+    $('#hdMe').hidden = name !== 'home';
+    $('#wallets').hidden = !WALLET_ON[name];
     Object.keys(TITLES).forEach(function (k) { $('#tab-' + k).hidden = k !== name; });
     all('[data-tab]').forEach(function (b) {
       b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === name));
@@ -240,6 +244,8 @@
     return b;
   }
 
+  /* 요약 카드는 그림·이름·등급만 보여 준다. 능력과 수치는 상세에서.
+     미보유는 테두리 없는 면에 자물쇠와 이름만 둔다. */
   function cardEl(c, opts) {
     opts = opts || {};
     var v = cardView(c);
@@ -248,78 +254,79 @@
     var n = el('article', 'tcg' + (big ? ' big' : '') + (have ? '' : ' locked'));
     n.setAttribute('data-el', v.elKey);
 
+    function stars() {
+      var rk = el('span', 'tcg-stars'); rk.setAttribute('aria-label', '등급 ' + v.rarity);
+      for (var i = 0; i < v.rarity; i++) rk.appendChild(document.createTextNode('★'));
+      return rk;
+    }
+
+    if (!have) {
+      var lk = el('span', 'tcg-lock');
+      lk.appendChild(lockIcon(20));
+      lk.append(el('span', 'nm', v.name), el('span', 'no', '미보유'));
+      n.appendChild(lk);
+      return wireCard(n, c, v, opts);
+    }
+
     var inner = el('span', 'tcg-in');
 
-    /* 1 · 머리 줄 */
-    var hd = el('span', 'tcg-hd');
-    hd.appendChild(el('span', 'tcg-cost', v.cost == null ? '?' : String(v.cost)));
-    hd.appendChild(el('span', 'tcg-name', v.name));
-    if (v.element && have) hd.appendChild(elIconBox(v.elKey, big ? 15 : 11));
-    inner.appendChild(hd);
+    if (big) {
+      var hd = el('span', 'tcg-hd');
+      hd.appendChild(el('span', 'tcg-cost', v.cost == null ? '?' : String(v.cost)));
+      hd.appendChild(el('span', 'tcg-name', v.name));
+      if (v.element) hd.appendChild(elIconBox(v.elKey, 24));
+      inner.appendChild(hd);
+    }
 
-    /* 2 · 일러스트 */
     var art = el('span', 'tcg-art');
     if (window.DGAArt) DGAArt.paint(art, c);
     inner.appendChild(art);
 
-    /* 3 · 타입 띠 */
-    var tp = el('span', 'tcg-type' + (v.element && have ? '' : ' none'));
-    tp.appendChild(el('span', 't',
-      have ? [v.type + ' 카드', v.element, v.lineage].filter(Boolean).join(' · ')
-           : v.type + ' 카드'));
-    var rk = el('span', 'r');
-    for (var i = 0; i < v.rarity; i++) rk.appendChild(document.createTextNode('★'));
-    tp.appendChild(rk);
-    inner.appendChild(tp);
+    if (big) {
+      var tp = el('span', 'tcg-type');
+      tp.appendChild(el('span', 't', [v.type + ' 카드', v.element, v.lineage].filter(Boolean).join(' · ')));
+      tp.appendChild(stars());
+      inner.appendChild(tp);
 
-    /* 4 · 능력 박스 */
-    var ab = el('span', 'tcg-abil');
-    if (!have) {
-      var lk = el('span', 'tcg-lock');
-      lk.appendChild(lockIcon(big ? 22 : 14));
-      lk.appendChild(el('span', '', '미보유'));
-      ab.appendChild(lk);
-    } else {
-      if (!v.abilities.length) {
-        ab.appendChild(el('span', 'tcg-noab', big ? '특별한 능력 없이 수치로만 싸운다.' : '능력 없음'));
-      }
+      var ab = el('span', 'tcg-abil');
+      if (!v.abilities.length) ab.appendChild(el('span', 'tcg-noab', '특별한 능력 없이 수치로만 싸운다.'));
       v.abilities.forEach(function (a) {
-        var row = el('span', 'ab');
         var h = el('span', 'ab-h');
-        h.append(el('b', '', '◆ ' + a.name), el('i', '', a.trigger));
-        row.appendChild(h);
-        row.appendChild(el('span', 'ab-t', big ? a.text : a.short));
-        ab.appendChild(row);
+        h.append(el('b', '', a.name), el('i', '', a.trigger));
+        ab.append(h, el('p', 'ab-t', a.text));
       });
-      /* 설정 문구는 능력이 없는 카드에도 붙는다 — 없으면 종이 칸이 빈다 */
-      if (big && v.flavor) ab.appendChild(el('span', 'tcg-flavor', v.flavor));
-    }
-    inner.appendChild(ab);
+      if (v.flavor) ab.appendChild(el('span', 'tcg-flavor', v.flavor));
+      inner.appendChild(ab);
 
-    /* 5 · 아래 줄 */
-    var ft = el('span', 'tcg-ft');
-    var sv = el('span', 'tcg-stats');
-    [['ATK', v.atk], ['HP', v.hp]].forEach(function (p) {
-      var box = el('span', 'tcg-stat');
-      box.append(el('i', '', p[0]), el('b', '', have ? (p[1] == null ? '–' : String(p[1])) : '?'));
-      sv.appendChild(box);
-    });
-    ft.append(sv, el('span', 'tcg-no', v.id));
-    inner.appendChild(ft);
+      var sv = el('span', 'tcg-stats');
+      [['ATK', v.atk], ['HP', v.hp]].forEach(function (p) {
+        var box = el('span', 'tcg-stat');
+        box.append(el('i', '', p[0]), el('b', '', p[1] == null ? '–' : String(p[1])));
+        sv.appendChild(box);
+      });
+      sv.appendChild(el('span', 'tcg-no', v.id));
+      inner.appendChild(sv);
+    } else {
+      var ft = el('span', 'tcg-ft');
+      ft.append(el('span', 'tcg-name', v.name), stars());
+      inner.appendChild(ft);
+    }
 
     n.appendChild(inner);
-    if (!have && !opts.always) n.classList.add('faded');
-    if (opts.detail) {
-      n.classList.add('tappable');
-      n.setAttribute('role', 'button');
-      n.setAttribute('tabindex', '0');
-      n.setAttribute('aria-label', v.name + ' 자세히 보기');
-      var go = function () { openCard(c); };
-      n.addEventListener('click', go);
-      n.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
-      });
-    }
+    return wireCard(n, c, v, opts);
+  }
+
+  function wireCard(n, c, v, opts) {
+    if (!opts.detail) return n;
+    n.classList.add('tappable');
+    n.setAttribute('role', 'button');
+    n.setAttribute('tabindex', '0');
+    n.setAttribute('aria-label', v.name + ' 자세히 보기');
+    var go = function () { openCard(c); };
+    n.addEventListener('click', go);
+    n.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
     return n;
   }
 
@@ -344,7 +351,7 @@
     var inDeck = S.deck.indexOf(c.id) >= 0;
     var add = $('#detDeck');
     add.disabled = !v.owned;
-    add.querySelector('.lab').textContent = inDeck ? '덱에서 빼기' : '덱에 추가';
+    add.textContent = inDeck ? '덱에서 빼기' : '덱에 추가';
     $('#detGrow').disabled = !v.owned;
     $('#detMsg').textContent = '';
     setView('carddet');
@@ -357,7 +364,7 @@
     else { S.deck.push(detCard.id); $('#detMsg').textContent = '덱에 넣었다. (' + S.deck.length + ' / 30)'; }
     save();
     var inDeck = S.deck.indexOf(detCard.id) >= 0;
-    $('#detDeck').querySelector('.lab').textContent = inDeck ? '덱에서 빼기' : '덱에 추가';
+    $('#detDeck').textContent = inDeck ? '덱에서 빼기' : '덱에 추가';
     paintDex(); paintDeck();
   }
 
@@ -369,38 +376,56 @@
   }
   function paintHome() {
     var me = UI.player;
-    var on = $('#online'); on.textContent = '';
-    var a = el('span', 'ava s'); a.setAttribute('aria-hidden', 'true');
-    avatar(a, me.profile, 44); on.appendChild(a);
-    on.appendChild(el('span', 'n', '지금 들어와 있는 사람 1명 · 나만'));
+    avatar($('#hdAva'), me.profile, 80);
+    $('#hdName').textContent = me.name || '나';
+    $('#hdFam').textContent = (LINEAGE[String(me.fam).toUpperCase()] || me.fam || '') + (me.fam ? '의 혈통' : '혈통 미정');
 
     var ch = curChapter();
-    /* 장 번호는 배경에 거대하게 깔린다 — 그리는 쪽은 CSS(attr(data-n)) */
-    $('#nowch').setAttribute('data-n', String(ch.n).padStart(2, '0'));
-    $('#chEyebrow').textContent = 'CHAPTER ' + String(ch.n).padStart(2, '0') + ' · ' + ch.god;
-    /* 제목은 낱말마다 한 줄씩 — 스펙의 '도착하지 / 않는다'. 각 줄은
-       nowrap 이라 낱말 중간에서 끊길 수 없다. */
+    $('#chEyebrow').textContent = 'CHAPTER ' + String(ch.n).padStart(2, '0') + ' · ' + LINEAGE[String(ch.god).toUpperCase()];
+    /* 제목은 낱말마다 한 줄씩 — 낱말 중간에서 끊기지 않는다 */
     var t = $('#chTitle'); t.textContent = '';
     String(ch.title).split(/\s+/).forEach(function (w) { t.appendChild(el('span', 'ln', w)); });
     $('#chBoss').textContent = ch.boss.name + ' — ' + ch.boss.weaknessNote;
-    $('#chLeft').textContent = 'DAY ' + S.day;
-    /* 오른쪽 사선 칸에 그 장을 맡은 신의 ★3 그림을 넣는다 */
-    var pic = D.cards.cards.filter(function (c) {
-      return c.family === String(ch.god).toUpperCase() && c.art;
-    }).sort(function (a, b) { return b.grade - a.grade; })[0];
-    var img = $('#chArt');
-    if (img) { img.src = pic ? pic.art : ''; img.hidden = !pic; }
 
+    /* 오른쪽에 그 장을 맡은 신의 대표 카드 한 장 */
+    var pic = D.cards.cards.filter(function (c) {
+      return c.family === String(ch.god).toUpperCase();
+    }).sort(function (a, b) { return b.grade - a.grade; })[0];
+    var box = $('#chCard'); box.textContent = '';
+    if (pic) box.appendChild(cardEl(pic, { always: true }));
+
+    /* 지금 할 일 */
+    var PH = [['조사', '단서를 모은다'], ['대비', '쪽지시험을 치고 장비를 맞춘다'], ['결전', ch.boss.name + '과 맞선다']];
+    var day = Math.min(3, Math.max(1, S.day));
+    $('#chDay').textContent = 'DAY ' + day + ' / 3';
+    $('#missionLine').textContent = PH[day - 1][1] + '.';
+    var pct = ch.clues ? Math.min(100, Math.round(S.clues / ch.clues * 100)) : 0;
+    $('#clueBar').style.width = pct + '%';
+    $('#clueNum').textContent = S.clues + ' / ' + ch.clues;
     var ph = $('#phases'); ph.textContent = '';
-    [['DAY 1', '조사', '단서 ' + S.clues + ' / ' + ch.clues],
-     ['DAY 2', '대비', '쪽지시험 · 장비'],
-     ['DAY 3', '결전', ch.boss.name]].forEach(function (p, i) {
-      var d = el('span', 'phase' + (i + 1 === S.day ? ' on' : (i + 1 < S.day ? ' done' : '')));
-      d.append(el('span', 'd', p[0]), el('span', 't', p[1]), el('span', 's', p[2]));
-      ph.appendChild(d);
+    PH.forEach(function (p, i) {
+      if (i) ph.appendChild(el('span', 'sep', ' · '));
+      ph.appendChild(el('span', 'phase' + (i + 1 === day ? ' on' : ''), p[0]));
     });
+
+    paintShortcuts();
     paintFeed();
   }
+
+  /* 바로가기 — 전부 실제 상태에서 읽는다 */
+  function paintShortcuts() {
+    var used = S.slots.filter(Boolean).length;
+    $('#scTime').textContent = used + ' / 3';
+
+    var un = unreadTotal();
+    var talk = $('#scTalk'); talk.textContent = '';
+    talk.className = 'st' + (un ? ' alert' : '');
+    if (un) { talk.appendChild(el('span', 'dot')); talk.appendChild(document.createTextNode('안 읽음 ' + un)); }
+    else talk.textContent = '새 쪽지 없음';
+
+    $('#scBoard').textContent = S.feed.length ? '글 ' + S.feed.length : '새 글 없음';
+  }
+
   function paintFeed() {
     var f = $('#feed'); f.textContent = '';
     if (!S.feed.length) {
@@ -422,19 +447,25 @@
 
   /* ── 카드 탭 ─────────────────────────────────── */
   var dexFam = '전체';
+  function famKo(fam) {
+    if (fam === '전체') return '전체';
+    if (fam === 'COMMON') return '공통';
+    return LINEAGE[fam] || fam;
+  }
   function paintDex() {
     var fs = $('#dexFilters');
     if (!fs.children.length) {
       ['전체'].concat(D.cards.families).forEach(function (fam) {
-        var b = el('button', 'filter', fam);
+        var b = el('button', 'filter', famKo(fam));
         b.type = 'button';
+        b.setAttribute('data-fam', fam);
         b.setAttribute('aria-pressed', String(fam === dexFam));
         b.addEventListener('click', function () { dexFam = fam; paintDex(); });
         fs.appendChild(b);
       });
     } else {
       all('.filter', fs).forEach(function (b) {
-        b.setAttribute('aria-pressed', String(b.textContent === dexFam));
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-fam') === dexFam));
       });
     }
     paintRing();
@@ -442,7 +473,7 @@
     var g = $('#dexGrid'); g.textContent = '';
     list.forEach(function (c) { g.appendChild(cardEl(c, { detail: true })); });
     var have = D.cards.cards.filter(function (c) { return S.owned[c.id]; }).length;
-    $('#dexCount').innerHTML = have + ' <span style="color:var(--t3)">/ ' + D.cards.cards.length + '</span>';
+    $('#dexCount').textContent = have + ' / ' + D.cards.cards.length;
     $('#dexBar').style.width = Math.round(have / D.cards.cards.length * 100) + '%';
   }
 
@@ -454,19 +485,15 @@
       var e = D.elements.list[k];
       var it = el('span', 'ring-it');
       var ic = el('span', 'ring-ic el-' + k);
-      ic.appendChild(elIcon(k, 16));
+      ic.appendChild(elIcon(k, 18));
       it.append(ic, el('span', 'ring-n', e.ko));
       it.title = e.why;
       box.appendChild(it);
+      if (i === D.elements.cycle.length - 1) return;
       var ar = el('span', 'ring-ar');
-      ar.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12"/><path d="m12 6 6 6-6 6"/></svg>';
+      ar.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>';
       box.appendChild(ar);
     });
-    var first = el('span', 'ring-it');
-    var ic0 = el('span', 'ring-ic el-' + D.elements.cycle[0]);
-    ic0.appendChild(elIcon(D.elements.cycle[0], 16));
-    first.append(ic0, el('span', 'ring-n', D.elements.list[D.elements.cycle[0]].ko));
-    box.appendChild(first);
   }
 
   function paintDeck() {
@@ -493,7 +520,7 @@
       li.appendChild(rm);
       l.appendChild(li);
     });
-    $('#deckCount').innerHTML = S.deck.length + ' <span style="color:var(--t3)">/ 30</span>';
+    $('#deckCount').textContent = S.deck.length + ' / 30';
     $('#deckAvg').textContent = cnt ? '평균 코스트 ' + (sum / cnt).toFixed(1) : '평균 코스트 —';
 
     var b = $('#deckBonds'); b.textContent = '';
@@ -563,7 +590,7 @@
     var price = el('span', 'price');
     price.append(el('span', 'k', 'AITHER'), el('span', 'v', fmt(cost)));
     var go = el('button', 'btn', '강화하기'); go.type = 'button';
-    var msg = el('p', 'msg'); msg.style.cssText = 'min-height:22px;font-size:13px;font-weight:700;color:var(--neon);margin:0';
+    var msg = el('p', 'msg'); msg.classList.add('ok');
     go.addEventListener('click', function () {
       if (!spend('ether', cost)) { msg.style.color = 'var(--alert)'; msg.textContent = '에테르가 모자란다. ' + fmt(cost) + ' 필요.'; return; }
       o.lv += 1; save(); paintGrow();
@@ -620,7 +647,7 @@
       line.setAttribute('x1', pos[bd.a].x); line.setAttribute('y1', pos[bd.a].y);
       line.setAttribute('x2', pos[bd.b].x); line.setAttribute('y2', pos[bd.b].y);
       line.setAttribute('class', 'edge ' + (seen ? bd.kind : ''));
-      if (!seen) line.setAttribute('stroke', '#3B2450');
+      if (!seen) line.setAttribute('stroke', '#263253');
       svg.appendChild(line);
     });
     ids.forEach(function (id) {
@@ -630,7 +657,7 @@
       var ci = document.createElementNS(ns, 'rect');
       ci.setAttribute('x', pos[id].x - 19); ci.setAttribute('y', pos[id].y - 19);
       ci.setAttribute('width', '38'); ci.setAttribute('height', '38');
-      ci.setAttribute('transform', 'rotate(45 ' + pos[id].x + ' ' + pos[id].y + ')');
+      ci.setAttribute('rx', '8');
       var tx = document.createElementNS(ns, 'text');
       tx.setAttribute('x', pos[id].x); tx.setAttribute('y', pos[id].y + 40);
       tx.textContent = c.short || c.name;
@@ -654,20 +681,16 @@
   }
 
   function paintSlots() {
-    $('#capLeft').textContent = 'AITHER ' + fmt(capLeft()) + ' 남음';
+    $('#capLeft').textContent = '에테르 ' + fmt(capLeft()) + ' 남음';
     var box = $('#slots'); box.textContent = '';
     S.slots.forEach(function (sl, i) {
       var b = el('button', 'slot-card'); b.type = 'button';
       if (!sl) {
-        /* 빈 칸은 카드 비율(63:88) 점선 칸 — 가운데에 + 마름모와 '카드 보내기' */
+        /* 빈 칸 — 테두리 대신 면의 명도만 낮춘다 */
         b.className = 'slot-card empty-slot';
-        b.setAttribute('aria-label', 'SLOT ' + (i + 1) + ' — 카드 보내기');
-        b.append(el('span', 'k', 'SLOT ' + (i + 1)));
-        var mid = el('span', 'mid');
-        var dia = el('span', 'plus');
-        dia.appendChild(el('span', 'g', '+'));   /* 마름모는 돌리고 글자는 되돌린다 */
-        mid.append(dia, el('span', 'cta', '카드 보내기'));
-        b.appendChild(mid);
+        b.setAttribute('aria-label', (i + 1) + '번 칸 — 카드 보내기');
+        b.append(el('span', 'plus', '+'), el('span', 'cta', '카드 보내기'),
+                 el('span', 'k', (i + 1) + '번 칸'));
         b.addEventListener('click', function () { openSlotDlg(i); });
       } else {
         var left = Math.max(0, sl.until - Date.now());
@@ -809,7 +832,7 @@
     var foe = { name: z.name + '의 잡몹', element: z.element, deck: foeDeck(z) };
     runBattle(foe, z.name, function (r) {
       var got = r.win ? earnEther(state === 'tainted' ? 120 : 80) : 0;
-      showResult(r.win, z.name, [['AITHER', '+' + fmt(got)], ['TURNS', r.turns], ['MY HP', r.myHp]]);
+      showResult(r.win, z.name, [['에테르', '+' + fmt(got)], ['턴', r.turns], ['남은 체력', r.myHp]]);
     });
   }
 
@@ -856,7 +879,7 @@
     st.append(el('span', 'ba', String(u.atk)), el('span', 'bd', String(u.hp)));
     n.appendChild(st);
     n.appendChild(el('span', 'pos', u.pos === 'def' ? '수비' : '공격'));
-    if (u.shield) n.style.outline = '2px solid var(--neon)';
+    if (u.shield) n.classList.add('shield');
     return n;
   }
 
@@ -1016,7 +1039,7 @@
 
   function showResult(win, title, gains) {
     $('#resultWord').textContent = win ? '승리' : '패배';
-    $('#resultWord').style.color = win ? 'var(--neon)' : 'var(--alert)';
+    $('#resultWord').classList.toggle('bad', !win);
     $('#resultSub').textContent = title;
     var g = $('#resultGains'); g.textContent = '';
     gains.forEach(function (p) {
@@ -1047,8 +1070,8 @@
   }
   function paintSummon() {
     var e = D.economy.summon;
-    $('#cost1').textContent = '◆ ' + fmt(e.cost1);
-    $('#cost12').textContent = '◆ ' + fmt(e.cost12) + ' · ★3 GUARANTEED';
+    $('#cost1').textContent = '이코르 ' + fmt(e.cost1);
+    $('#cost12').textContent = '이코르 ' + fmt(e.cost12) + ' · ★3 확정';
     var set = function (id, v) { var n = $(id); if (n) n.textContent = v; };
     set('#pityVal', S.pity); set('#pityVal2', S.pity);
     set('#pityMax', e.pity);
@@ -1118,6 +1141,11 @@
     var tid = 'first-' + id;
     if (S.talkDone.indexOf(tid) >= 0) return null;
     return { id: tid, card: id, bondGain: dft.bondGain, lines: dft.lines };
+  }
+
+  function unreadTotal() {
+    if (!D.talks) return 0;
+    return Object.keys(S.owned).filter(function (id) { return !!threadFor(id); }).length;
   }
 
   function paintTalks() {
@@ -1268,6 +1296,16 @@
       b.addEventListener('click', function () { setView(null); paintAll(); });
     });
     $('#openChron').addEventListener('click', function () { paintChron(); setView('chron'); });
+    /* 바로가기 — 셋 다 이미 있는 화면으로만 보낸다 */
+    all('[data-go]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var to = b.getAttribute('data-go');
+        if (to === 'board') { $('#board').scrollIntoView({ block: 'start' }); return; }
+        setTab(to);
+        if (to === 'daily') setSeg('daily', 'time');
+        paintAll();
+      });
+    });
     $('#goPhase').addEventListener('click', function () {
       setTab('daily');
       setSeg('daily', S.day === 3 ? 'hunt' : 'time');

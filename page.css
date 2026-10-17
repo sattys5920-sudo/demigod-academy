@@ -1,111 +1,91 @@
-/* 입장(index) · 프로필 만들기(setup) — 공통 토큰은 theme.css */
+/* 입장(index) · 프로필 만들기(setup) — 공통 토큰과 컴포넌트는 theme.css */
 
-.app{padding-bottom:28px}
+.app{padding-bottom:var(--s8)}
 .hd{
-  position:relative; flex:0 0 auto; display:flex; align-items:center; gap:10px;
-  padding:0 14px; height:var(--hd); border-bottom:3px solid var(--line); background:var(--bg);
-}
-.hd::after{
-  content:""; position:absolute; left:0; right:0; bottom:-3px; height:3px; background:var(--hot);
-  clip-path:polygon(0 0, 38% 0, 34% 100%, 0 100%);
+  flex:0 0 auto; display:flex; align-items:center; gap:var(--s2);
+  height:56px; padding:0 var(--s4); background:var(--bg);
 }
 .logo{
-  width:34px; height:34px; flex:0 0 34px; background:var(--hot); border:2px solid var(--line);
+  width:36px; height:36px; flex:0 0 36px; border-radius:var(--r-card);
+  background:var(--elevated); color:var(--accent);
   display:flex; align-items:center; justify-content:center;
-  clip-path:polygon(0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
 }
-.hd h1{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); white-space:nowrap}
-.wordmark{font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line)}
+.hd h1,.wordmark{margin:0; font-size:17px; font-weight:800; white-space:nowrap}
 .build,.step{
-  display:inline-flex; align-items:center; min-height:22px; padding:0 9px;
-  border:2px solid var(--line); background:var(--line); color:var(--ink);
-  font-family:var(--num); font-size:9.5px; letter-spacing:.12em;
+  display:inline-flex; align-items:center; gap:5px; min-height:32px; padding:0 var(--s3);
+  border-radius:16px; background:rgba(255,255,255,.1);
 }
+.build .lbl,.step .lbl{font-size:12px; font-weight:500; color:var(--text-sub)}
+.build .val,.step .val{font-size:13px; font-weight:700}
 
 /* ── 입장 ──────────────────────────────────────── */
-.auth{padding:18px 14px; display:flex; flex-direction:column; gap:14px}
-.seg{display:flex; border:2px solid var(--line); background:var(--ink)}
-.seg-btn{
-  flex:1 1 0; min-height:44px; border:0; background:transparent; color:var(--t2);
-  font-family:var(--ui); font-weight:400; font-size:14.5px;
-}
-.seg-btn + .seg-btn{border-left:2px solid var(--dim)}
-.seg-btn[aria-selected="true"]{background:var(--hot); color:var(--line)}
-
-.pane{display:flex; flex-direction:column; gap:14px}
+.auth{padding:var(--s4); display:flex; flex-direction:column; gap:var(--s4)}
+.pane{display:flex; flex-direction:column; gap:var(--s4)}
+.field{display:flex; flex-direction:column; gap:6px}
+.field label{font-size:13px; font-weight:500; color:var(--text-sub)}
 .inputwrap{position:relative; display:flex; align-items:center}
-.inputwrap input{padding-right:50px}
+.inputwrap input{padding-right:52px}
 .peek{
-  position:absolute; right:5px; width:38px; height:38px; border:2px solid var(--dim);
-  background:transparent; color:var(--t3);
+  position:absolute; right:4px; width:44px; height:44px; border:0; border-radius:var(--r-btn);
+  background:transparent; color:var(--text-sub);
   display:inline-flex; align-items:center; justify-content:center;
 }
-.remember{display:flex; align-items:center; gap:9px; font-size:13px; font-weight:400; color:var(--t2)}
-.remember input{width:20px; height:20px; min-height:0; accent-color:var(--hot)}
-.rule{font-size:12.5px; font-weight:400; color:var(--t3); line-height:1.8; margin:0}
-.stack{display:flex; flex-direction:column; gap:9px}
-.admin-slot{display:flex; flex-direction:column; gap:9px; padding-top:4px; border-top:2px solid var(--dim)}
+.remember{display:flex; align-items:center; gap:var(--s2); font-size:13px; font-weight:500; color:var(--text-sub)}
+.remember input{width:20px; height:20px; min-height:0; accent-color:var(--accent)}
+.rule{margin:0; font-size:13px; font-weight:500; color:var(--text-sub); line-height:1.7}
+.stack{display:flex; flex-direction:column; gap:var(--s2)}
+.admin-slot{display:flex; flex-direction:column; gap:var(--s2); padding-top:var(--s3)}
 
 .result{
-  display:flex; flex-direction:column; gap:13px; align-items:center; text-align:center;
-  padding:20px 14px; border:3px solid var(--line); background:var(--panel);
-  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
-                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  display:flex; flex-direction:column; gap:var(--s3); align-items:center; text-align:center;
+  padding:var(--s6) var(--s4); border-radius:var(--r-surface); background:var(--surface);
 }
 .result .badge{
-  width:56px; height:56px; background:var(--hot); border:3px solid var(--line);
+  width:56px; height:56px; border-radius:var(--r-surface); background:var(--elevated); color:var(--accent);
   display:flex; align-items:center; justify-content:center;
 }
-.result h2{margin:0; font-family:var(--disp); font-weight:400; font-size:25px; color:var(--line)}
+.result h2{margin:0; font-size:22px; font-weight:800}
 .result .who{
-  display:inline-flex; align-items:center; gap:8px; min-height:34px; padding:0 13px;
-  border:2px solid var(--line); background:var(--ink);
+  display:inline-flex; align-items:center; gap:var(--s2); min-height:32px; padding:0 var(--s3);
+  border-radius:16px; background:rgba(255,255,255,.1);
 }
-.result .who .k{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.result .who .v{font-family:var(--ui); font-weight:400; font-size:15.5px; color:var(--line); word-break:break-all}
+.result .who .k{font-size:12px; font-weight:500; color:var(--text-sub)}
+.result .who .v{font-size:15px; font-weight:700; word-break:break-all}
 .result .stack{width:100%}
-.result.admin{border-color:var(--neon); box-shadow:6px 6px 0 rgba(63,224,255,.4)}
-.result.admin .badge{background:var(--neon); color:#02122b}
+.result.admin .badge{background:var(--accent); color:var(--bg)}
 
 /* ── 프로필 만들기 ─────────────────────────────── */
-.body{padding:16px 14px; display:flex; flex-direction:column; gap:14px}
-.col-main,.col-side{display:flex; flex-direction:column; gap:14px}
+.body{padding:var(--s4); display:flex; flex-direction:column; gap:var(--s4)}
+.col-main,.col-side{display:flex; flex-direction:column; gap:var(--s4)}
 
-.sigs{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:9px}
+.sigs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s2)}
 .sig{
-  display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 4px;
-  border:2px solid var(--dim); background:transparent; color:var(--t3);
+  display:flex; flex-direction:column; align-items:center; gap:6px; padding:var(--s3) var(--s1);
+  border:0; border-radius:var(--r-surface); background:var(--surface); color:var(--text-sub);
 }
-.sig[aria-pressed="true"]{border-color:var(--hot); background:var(--ink); color:var(--line)}
+.sig[aria-pressed="true"]{background:var(--elevated); color:var(--text)}
 .sig .mark{
-  width:44px; height:44px; border:2px solid var(--line);
+  width:44px; height:44px; border-radius:50%; background:var(--elevated); color:var(--text-sub);
   display:flex; align-items:center; justify-content:center;
-  clip-path:polygon(0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
 }
-.sig .mark.tone-lime{background:var(--neon)}
-.sig .mark.tone-pink{background:var(--hot)}
-.sig .nm{font-family:var(--ui-s); font-weight:600; font-size:12px; line-height:1.3; text-align:center}
-.sig .ln{font-size:10.5px; font-weight:400; color:var(--t3); text-align:center; line-height:1.4}
+.sig[aria-pressed="true"] .mark{background:var(--accent); color:var(--bg)}
+.sig .nm{font-size:13px; font-weight:700; line-height:1.3; text-align:center}
+.sig .ln{font-size:12px; font-weight:500; color:var(--text-sub); text-align:center; line-height:1.4}
 
-.upload{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.upload{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap}
 
+/* 미리보기 — 요약 카드와 같은 모양 */
 .card-prev{
-  display:flex; flex-direction:column; gap:10px; padding:11px;
-  background:var(--panel); border:3px solid var(--line); box-shadow:6px 6px 0 var(--hot);
-  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
-                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  display:flex; flex-direction:column; gap:var(--s2); padding:var(--s3);
+  border-radius:var(--r-surface); background:var(--surface);
 }
 .card-prev .art{
-  position:relative; height:156px; overflow:hidden; background:var(--ink); border:2px solid var(--dim);
+  position:relative; height:156px; border-radius:var(--r-card); overflow:hidden; background:var(--bg);
   display:flex; align-items:center; justify-content:center;
 }
-.card-prev .art::after{
-  content:""; position:absolute; inset:0;
-  background-image:repeating-linear-gradient(-45deg, rgba(255,43,62,.16) 0 5px, transparent 5px 11px);
-}
-.card-prev .ava{position:relative; z-index:1; width:88px; height:88px; border-width:3px}
-.card-prev .nm{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; line-height:1.25; color:var(--line); word-break:break-all}
-.card-prev .fam{font-family:var(--num); font-size:10px; letter-spacing:.1em; color:var(--t3)}
+.card-prev .ava{width:88px; height:88px}
+.card-prev .nm{margin:0; font-size:20px; font-weight:800; line-height:1.3; word-break:break-all}
+.card-prev .fam{font-size:12px; font-weight:500; color:var(--text-sub)}
 
-.foot{display:flex; align-items:baseline; gap:9px}
-.foot .len{font-family:var(--num); font-size:10.5px; color:var(--t3); font-variant-numeric:tabular-nums}
+.foot{display:flex; align-items:baseline; gap:var(--s2)}
+.foot .len{font-size:12px; font-weight:500; color:var(--text-disabled); font-variant-numeric:tabular-nums}

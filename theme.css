@@ -1,277 +1,269 @@
 /* ══════════════════════════════════════════════════════════
-   데미갓 아카데미 — 공통 테마
-   모바일 전용. 넓은 화면에서도 폰 폭으로 가운데 세운다.
-   톤: 검정 · 흰 아웃라인 · 주홍 한 점. 둥근 알약 대신 잘린 모서리와 기울임.
+   데미갓 아카데미 — 디자인 시스템 v1 · 토큰과 공통 컴포넌트
+   장식을 더해 고급스럽게 만들지 않는다. 빼고 정확하게 맞춘다.
+   한 화면에 시각적 중심은 하나, 강조색은 그 화면의 핵심 행동 하나에만.
+   구분은 테두리가 아니라 여백과 명도 차이로 준다.
    ══════════════════════════════════════════════════════════ */
 :root{
-  /* ── 디자인 시스템 ───────────────────────────
-     네이비와 시안 두 색으로 절제한다. 색은 카드 그림이 담당한다.
-     이름은 그대로 두고 값만 바꿔, 앱 전체가 한 번에 따라오게 한다. */
-  --bg:#030820;          /* 기본 배경 — 거의 검은 네이비 */
-  --bg2:#01040f;         /* 폰 바깥 */
-  --panel:#081a52;       /* 패널 · 사선 띠 */
-  --card-inner:#0b1638;  /* 카드 안쪽 바탕 */
-  --ink:#030820;
-  --line:#FFFFFF;
-  --neon:#3fe0ff;        /* 메인 포인트 · 활성 */
-  --hot:#3fe0ff;         /* 옛 이름 — 이제 네온을 가리킨다 */
-  --accent-blue:#2f6bff; /* 글자 그림자 오프셋 */
-  --alert:#ff3d8b;       /* 알림 점 */
-  --cost:#ff3d5a;        /* 카드 비용 칸 */
-  --paper:#f4f1e8;       /* 카드 능력 박스 바탕 */
-  --t1:#eaf4ff;
-  --t2:#8fb3d9;          /* text-sub */
-  --t3:#7f9cc7;          /* text-muted */
-  --dim:#14306b;
+  /* ── 색 ──────────────────────────────────────── */
+  --bg:#0B1024;             /* 화면 바탕 */
+  --surface:#121B38;        /* 영역 구분 면 */
+  --elevated:#1A2648;       /* Secondary 버튼 · 진행 바 트랙 */
+  --text:#F4F6FF;
+  --text-sub:#9CAAC9;
+  --text-disabled:#6F7DA0;
+  --accent:#55E6F2;         /* Primary 버튼 · 활성 탭 · 진행률 */
+  --accent-pressed:#3CC3D0;
+  --alert:#FF648D;          /* 알림 점 · 안 읽음 표시 전용 */
+  --reward:#FFC857;         /* 재화 아이콘 · 카드 등급(★) 전용 */
 
-  /* 속성 */
-  --el-bolt:#ffd23f;
-  --el-water:#3fe0ff;
-  --el-fire:#ff7a59;
-  --el-earth:#d9b36c;
-  --el-wind:#a8f0c6;
-  --el-none:#6b84b3;
+  /* 홈 전용 */
+  --hero-top:#1B2C66;
+  --hero-mid:#141F4C;
+  --hero-slab:#25398A;
 
-  --glow:0 0 12px rgba(63,224,255,.7);
-  /* 가세크 원은 한 굵기짜리 민짜 얼굴이라 한글 ㅇ·ㅎ 의 속공간이 먼저 메워진다.
-     바닥색 한 겹을 글자 위에 덮어 획을 깎는다 — 면이 바뀌는 곳에서 이 값을 다시 잡는다. */
-  --carve:var(--bg);
-  --skew:-14deg;
+  /* 속성 — 아이콘에만 쓴다 */
+  --el-bolt:#FFC857;
+  --el-water:#55E6F2;
+  --el-fire:#FF8A6B;
+  --el-earth:#D9B36C;
+  --el-wind:#A8F0C6;
+  --el-none:#6F7DA0;
+
+  /* ── 간격 · 라운드 ───────────────────────────── */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px;
+  --r-btn:12px; --r-surface:16px; --r-card:8px; --r-chip:18px;
 
   --app:480px;
-  --cut:14px;
-  --hd:70px;
-  --tb:72px;
+  --hd:56px;              /* 머리 줄 높이 */
+  --nav:64px;               /* 하단 내비 높이 — 안전 영역은 따로 더한다 */
 
-  /* 제목·버튼·카드 이름 Gasoek One · 숫자와 영문 라벨 Chakra Petch ·
-     본문 Gothic A1. 시스템 기본 폰트는 쓰지 않는다. */
-  --disp:'Gasoek One','Gothic A1',sans-serif;
-  --ui:'Gothic A1',sans-serif;
-  --num:'Chakra Petch','Gothic A1',sans-serif;
-  --ui-s:'Gothic A1',sans-serif;
-  --body:'Gothic A1',sans-serif;
+  --ui:'Noto Sans KR',sans-serif;
 }
-
-
-/* --disp · --ui · --num 은 굵기가 하나뿐인 얼굴이다. h1~h6 이나 strong 은
-   기본이 굵게라, 브라우저가 없는 굵기를 억지로 만들어(가짜 굵게) 한글을
-   뭉갠다. 위계는 굵기가 아니라 얼굴·크기·색으로만 준다. */
-h1,h2,h3,h4,h5,h6{font-weight:400}
-strong,b{font-weight:700}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 html,body{height:100%}
 body{
-  margin:0; background:var(--bg2); color:var(--t1);
-  font-family:var(--body); font-weight:500; line-height:1.6; -webkit-font-smoothing:antialiased;
-  overscroll-behavior-y:none;
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--ui); font-weight:500; font-size:15px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overscroll-behavior-y:none;
   /* 한글은 낱말 단위로만 끊는다 — 음절 중간에서 쪼개지면 안 된다 */
   word-break:keep-all; overflow-wrap:break-word;
 }
-/* 제목·칩·버튼·짧은 라벨은 아예 끊지 않는다 */
-h1, .chip, .btn, .eyebrow, .seg-btn, .tab, .wallet, .count{white-space:nowrap}
-/* <i> 를 라벨 조각으로 쓴다. 브라우저 기본이 italic 이라 못 박아 둔다 —
-   기울임은 transform: skewX 로만 준다. */
-i,em,address,cite,dfn,var{font-style:normal}
 [hidden]{display:none !important}
-button,input,textarea,select{font-family:inherit; font-size:inherit}
+button,input,textarea,select{font-family:inherit; font-size:inherit; color:inherit}
 button{cursor:pointer}
-:focus-visible{outline:3px solid var(--neon); outline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+img{max-width:100%}
 
-/* 배경 — -18° 사선 띠와 가는 네온 라인으로 속도감을 준다 */
-body::before{
-  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
-  background-color:var(--bg2);
-  background-image:repeating-linear-gradient(-18deg,
-    #05103a 0 26px, #01040f 26px 52px);
-}
+/* 숫자는 자리를 고정한다 — 값이 바뀔 때 글자가 흔들리지 않는다 */
+.num,.count,.bar-n,.wallet .val{font-variant-numeric:tabular-nums}
+
 .app{
-  position:relative; z-index:1;
-  width:100%; max-width:var(--app); margin:0 auto; min-height:100dvh;
-  background:var(--bg); display:flex; flex-direction:column;
-  box-shadow:0 0 0 2px var(--neon);
-}
-/* 화면 바닥에도 사선 띠를 깐다 — 위는 패널 색, 사이에 네온 실선 */
-.app::before{
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:
-    repeating-linear-gradient(-18deg, rgba(8,26,82,.55) 0 60px, transparent 60px 150px),
-    repeating-linear-gradient(-18deg, rgba(63,224,255,.1) 0 1px, transparent 1px 150px);
-}
-.app > *{position:relative; z-index:1}
-@media (max-width:520px){ .app{box-shadow:none} }
-
-/* 하프톤 — 페르소나식 망점 */
-.halftone{
-  position:fixed; inset:0; pointer-events:none; z-index:40;
-  background-image:radial-gradient(#3fe0ff 1px, transparent 1.1px);
-  background-size:13px 13px; opacity:.055;
+  position:relative; width:100%; max-width:var(--app); margin:0 auto;
+  min-height:100dvh; background:var(--bg);
+  display:flex; flex-direction:column;
 }
 .spacer{flex:1 1 auto}
 
-/* ── 패널 ──────────────────────────────────────── */
-.panel{
-  --carve:var(--panel);
-  position:relative; background:var(--panel); border:1.5px solid rgba(63,224,255,.45);
-  padding:16px 16px 18px;
-  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
-                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+/* ── 타이포 ────────────────────────────────────── */
+h1{margin:0; font-size:22px; font-weight:800; line-height:1.3}
+h2{margin:0; font-size:17px; font-weight:800; line-height:1.4}
+h3{margin:0; font-size:15px; font-weight:700; line-height:1.5}
+.hint{margin:0; font-size:13px; font-weight:500; color:var(--text-sub); line-height:1.7}
+.eyebrow{
+  font-size:12px; font-weight:700; letter-spacing:.1em; color:var(--accent);
 }
-.panel.flat{padding:13px 14px}
+.count{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums}
 
-.eyebrow{font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:2.5px; color:var(--neon)}
-.sect-h{display:flex; align-items:center; gap:10px}
-.sect-h h2{margin:0; font-family:var(--disp); font-weight:400; font-size:16px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
-/* 한글은 음절 단위로 끊으면 '쪽지시험 · 장 / 비' 처럼 낱말이 쪼개진다.
-   낱말 단위로 끊되, 끊을 데가 없는 긴 문자열은 그때만 쪼갠다. */
-.hint{margin:0; font-size:13px; font-weight:500; color:var(--t2); line-height:1.75;
-      word-break:keep-all; overflow-wrap:break-word}
-.count{font-family:var(--num); font-weight:700; font-size:13px; color:var(--neon); font-variant-numeric:tabular-nums}
+/* ── 면 ────────────────────────────────────────── */
+/* 테두리가 아니라 명도 차이로 구분한다 */
+.panel{background:var(--surface); border-radius:var(--r-surface); padding:var(--s4)}
+.sect-h{display:flex; align-items:center; gap:var(--s2); margin-bottom:var(--s3)}
+.sect-h h2{flex:0 1 auto; min-width:0}
 
-/* ── 버튼 ──────────────────────────────────────────
-   주 버튼 쌍은 사선으로 맞물린다 — 왼쪽은 외곽선형, 오른쪽은 채움형.
-   겹쳐 놓아야 '맞물렸다' 가 되므로 오른쪽에 음수 여백을 준다. */
+/* ── 버튼 — 세 종류만 쓴다 ─────────────────────── */
+/* 기본값은 Secondary. 화면의 핵심 행동 하나에만 .primary 를 붙인다. */
 .btn{
-  position:relative; display:inline-flex; align-items:center; justify-content:center;
-  min-height:46px; padding:0 20px; border:1.5px solid var(--neon);
-  background:transparent; color:var(--neon);
-  font-family:var(--disp); font-weight:400; font-size:15px; line-height:1;
-  transform:skewX(var(--skew));
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.4px var(--carve);
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
+  min-height:48px; padding:0 var(--s4); border:0; border-radius:var(--r-btn);
+  background:var(--elevated); color:var(--text);
+  font-size:15px; font-weight:700; line-height:1.2; text-align:center;
+  text-decoration:none; white-space:nowrap;
 }
-.btn > *{transform:skewX(14deg)}
-.btn:active{transform:skewX(var(--skew)) translate(2px,2px)}
-.btn.ghost{border-color:rgba(63,224,255,.4); color:var(--t2)}
-.btn.white{background:var(--line); border-color:var(--line); color:var(--bg)}
-.btn.gold{background:var(--neon); border-color:var(--neon); color:#02122b}
+.btn:active{background:#222F58; transform:translateY(1px)}
 .btn.block{width:100%}
-.btn.lg{min-height:56px; font-size:20px; padding:0 24px}
-.btn[disabled]{opacity:.4}
-.btn[disabled]:active{transform:skewX(var(--skew))}
 
-/* 강조형 — 시안으로 채우고 빛을 준다 */
-.btn.fill{background:var(--neon); border-color:var(--neon); color:#02122b; --carve:var(--neon);
-          box-shadow:var(--glow)}
+/* Primary — 오른쪽 끝만 사선으로 자른다. 사선은 앱에서 여기와 홈 챕터 면, 두 곳뿐. */
+.btn.primary{
+  min-height:56px; background:var(--accent); color:var(--bg);
+  font-size:17px; font-weight:800;
+  border-radius:var(--r-btn) 0 0 var(--r-btn);
+  clip-path:polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+  padding-right:var(--s8);
+}
+.btn.primary:active{background:var(--accent-pressed); transform:translateY(1px)}
 
-/* 맞물린 한 쌍 */
-.btnpair{display:flex; align-items:stretch}
-.btnpair > .btn{transform:none; flex:0 0 auto; min-height:54px}
-.btnpair > .btn > *{transform:none}
-.btnpair > .btn:first-child{
-  flex:1 1 42%; justify-content:center; padding-right:26px;
-  clip-path:polygon(0 0, 100% 0, 84% 100%, 0 100%);
+.btn[disabled],.btn[aria-disabled="true"]{
+  background:var(--elevated); color:var(--text-disabled); pointer-events:none;
 }
-.btnpair > .btn:last-child{
-  flex:1 1 58%; margin-left:-24px; padding-left:30px;
-  clip-path:polygon(16% 0, 100% 0, 100% 100%, 0 100%);
+/* 로딩 — 글자 대신 20px 스피너 하나 */
+.btn[aria-busy="true"]{color:transparent; position:relative}
+.btn[aria-busy="true"]::after{
+  content:""; position:absolute; width:20px; height:20px; border-radius:50%;
+  border:2px solid currentColor; border-top-color:transparent; color:var(--text);
+  animation:spin .7s linear infinite;
 }
-.btnpair .sub{display:block; font-family:var(--num); font-weight:700; font-size:9px;
-              letter-spacing:2px; opacity:.85; margin-top:3px}
-.btnpair .lab{display:flex; flex-direction:column; align-items:center; line-height:1.1}
+.btn.primary[aria-busy="true"]::after{color:var(--bg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Tertiary — 아이콘 버튼. 터치 영역 44, 아이콘 24 */
+.iconbtn{
+  display:inline-flex; align-items:center; justify-content:center; position:relative;
+  width:44px; height:44px; padding:0; border:0; border-radius:var(--r-btn);
+  background:transparent; color:var(--text-sub);
+}
+.iconbtn:active{background:var(--elevated); transform:translateY(1px)}
+.iconbtn .dot{
+  position:absolute; top:8px; right:8px; width:7px; height:7px; border-radius:50%;
+  background:var(--alert);
+}
+/* 텍스트 링크 — 터치 영역 44 를 지킨다 */
+.linkbtn{
+  display:inline-flex; align-items:center; gap:var(--s1); min-height:44px;
+  padding:0; border:0; background:transparent; color:var(--accent);
+  font-size:15px; font-weight:700; text-decoration:none;
+}
+.linkbtn:active{color:var(--accent-pressed)}
+
+/* ── 탭 (화면 상단) ────────────────────────────── */
+.seg{
+  display:flex; gap:var(--s6); padding:0 var(--s4);
+  border-bottom:1px solid var(--elevated); overflow-x:auto; scrollbar-width:none;
+}
+.seg::-webkit-scrollbar{display:none}
+.seg-btn{
+  position:relative; flex:0 0 auto; min-height:44px; padding:0 0 10px; border:0;
+  background:transparent; color:var(--text-sub);
+  font-size:15px; font-weight:500; white-space:nowrap;
+}
+.seg-btn[aria-selected="true"]{color:var(--text); font-weight:700}
+.seg-btn[aria-selected="true"]::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--accent);
+}
 
 /* ── 칩 ────────────────────────────────────────── */
-.chip{
-  display:inline-flex; align-items:center; gap:5px; min-height:26px; padding:0 11px;
-  border:1.5px solid rgba(63,224,255,.4); color:var(--t2); background:transparent;
-  font-family:var(--num); font-weight:700; font-size:10px; letter-spacing:2px;
-  transform:skewX(var(--skew));
+/* 필터 칩 — 높이 36 · 완전 둥근 */
+/* 보이는 높이는 36, 손가락이 닿는 영역은 44 */
+.filter{
+  position:relative; flex:0 0 auto; min-height:36px; padding:0 var(--s3); border:0;
+  border-radius:var(--r-chip); background:var(--elevated); color:var(--text-sub);
+  font-size:13px; font-weight:700; white-space:nowrap;
 }
-.chip > *{transform:skewX(14deg)}
-.chip.gold{background:transparent; border-color:var(--neon); color:var(--neon)}
-.chip.on{background:var(--neon); border-color:var(--neon); color:#02122b; box-shadow:var(--glow)}
-/* 알림은 핑크만 쓴다 */
-.chip.alert{background:var(--alert); border-color:var(--alert); color:#fff; box-shadow:0 0 10px rgba(255,61,139,.55)}
+.filter::after{content:""; position:absolute; inset:-4px 0}
+.filter[aria-pressed="true"],.filter.sel{background:var(--text); color:var(--bg)}
+.filters{display:flex; gap:var(--s2); overflow-x:auto; scrollbar-width:none; min-width:0}
+.filters::-webkit-scrollbar{display:none}
 
-/* ── 막대 ──────────────────────────────────────── */
-.bar{height:13px; border:1.5px solid var(--neon); background:var(--ink); overflow:hidden;
-     transform:skewX(-30deg)}
-.bar > i{display:block; height:100%; background:var(--neon); box-shadow:var(--glow)}
-.bar.gold > i{background:var(--neon); box-shadow:var(--glow)}
-/* 점선형 — 칸이 비어 있는 쪽을 점선으로 보여 준다 */
-.bar.dotted{
-  background-image:repeating-linear-gradient(90deg,
-    rgba(63,224,255,.28) 0 2px, transparent 2px 7px);
+/* 정보 칩 — 값을 담는다. 재화 칩도 이 모양이다. */
+.chip{
+  display:inline-flex; align-items:center; gap:var(--s2); min-height:32px; padding:0 var(--s3);
+  border:0; border-radius:16px; background:rgba(255,255,255,.1);
+  color:var(--text); font-size:13px; font-weight:700; white-space:nowrap;
 }
+.chip .k{color:var(--text-sub); font-size:12px; font-weight:500}
+.chip .v{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums}
+.chip.alert{color:var(--alert)}
+
+/* ── 진행 바 ───────────────────────────────────── */
+.barline{display:flex; align-items:center; gap:var(--s3)}
+.bar{flex:1 1 auto; height:6px; border-radius:3px; background:var(--elevated); overflow:hidden}
+.bar > i{display:block; height:100%; border-radius:3px; background:var(--accent)}
+.bar-n{flex:0 0 auto; font-size:13px; font-weight:700; color:var(--text-sub)}
 
 /* ── 입력 ──────────────────────────────────────── */
-.field{display:flex; flex-direction:column; gap:7px}
-.field label{font-family:var(--num); font-size:10px; letter-spacing:.16em; color:var(--t3)}
 input[type=text],input[type=password],input[type=email]{
-  width:100%; min-height:48px; padding:0 14px;
-  border:1.5px solid var(--dim); background:var(--ink); color:var(--t1);
-  font-size:15px; font-weight:500;
+  width:100%; min-height:48px; padding:0 var(--s3); border:0; border-radius:var(--r-btn);
+  background:var(--elevated); color:var(--text); font-size:15px; font-weight:500;
 }
-input:focus{border-color:var(--neon); outline:none; box-shadow:var(--glow)}
-input::placeholder{color:var(--t3)}
+input::placeholder{color:var(--text-disabled)}
+input:focus{outline:2px solid var(--accent); outline-offset:0}
 
 /* ── 아바타 ────────────────────────────────────── */
-/* 아바타도 시스템 안이다 — 노란 사각은 네이비·시안 밖이었다.
-   혈통 구분은 지금 색으로 하지 않는다. */
 .ava{
   display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
-  border:1.5px solid var(--neon); overflow:hidden;
-  background:var(--ink); color:var(--neon);
-  clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+  border-radius:50%; overflow:hidden; background:var(--elevated); color:var(--text-sub);
 }
 .ava img{width:100%; height:100%; object-fit:cover; display:block}
 .ava.xs{width:28px; height:28px}
-.ava.s{width:38px; height:38px}
-.ava.m{width:46px; height:46px}
-.ava.l{width:76px; height:76px; border-width:3px}
+.ava.s{width:36px; height:36px}
+.ava.m{width:40px; height:40px}
+.ava.l{width:72px; height:72px}
 
-/* ── 메시지 ────────────────────────────────────── */
+/* ── 메시지 · 빈 상태 ──────────────────────────── */
 .msg{min-height:20px; font-size:13px; font-weight:700; color:var(--alert); line-height:1.6}
-.msg.ok{color:var(--neon)}
+.msg.ok{color:var(--accent)}
 .empty{
-  position:relative; padding:22px 16px; border:0; border-left:3px solid var(--dim);
-  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.07) 0 2px, transparent 2px 13px);
-  text-align:center; font-size:13px; font-weight:500; color:var(--t3); line-height:1.8;
+  padding:var(--s6) var(--s4); border-radius:var(--r-surface); background:var(--surface);
+  text-align:center; font-size:13px; font-weight:500; color:var(--text-sub); line-height:1.8;
+}
+
+/* ── 하단 내비 ─────────────────────────────────── */
+.tabbar{
+  position:sticky; bottom:0; z-index:20; display:flex;
+  height:calc(var(--nav) + env(safe-area-inset-bottom));
+  padding-bottom:env(safe-area-inset-bottom);
+  background:var(--bg); border-top:1px solid var(--elevated);
+}
+.tab{
+  position:relative; flex:1 1 0; min-width:0; border:0; background:transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s1);
+  color:var(--text-sub); font-size:11px; font-weight:700; white-space:nowrap;
+}
+.tab[aria-selected="true"]{color:var(--accent)}
+/* 선택된 칸은 맨 위에 18×3 바 하나 */
+.tab[aria-selected="true"]::before{
+  content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:18px; height:3px; border-radius:0 0 2px 2px; background:var(--accent);
+}
+.tab .dot{
+  position:absolute; top:10px; right:calc(50% - 18px);
+  width:7px; height:7px; border-radius:50%; background:var(--alert);
 }
 
 /* ── 다이얼로그 ────────────────────────────────── */
 dialog.dlg{
-  width:min(var(--app), calc(100vw - 24px)); padding:20px; border:1.5px solid var(--neon);
-  background:var(--panel); color:var(--t1); box-shadow:10px 12px 0 #000, var(--glow);
-  clip-path:polygon(0 var(--cut), var(--cut) 0, 100% 0,
-                    100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  width:min(var(--app), calc(100vw - 32px)); padding:var(--s4); border:0;
+  border-radius:var(--r-surface); background:var(--surface); color:var(--text);
 }
-dialog.dlg::backdrop{background:rgba(3,8,32,.9)}
-.dlg-hd{display:flex; align-items:center; gap:12px; margin-bottom:14px}
-.dlg-hd .who{display:flex; flex-direction:column; gap:3px; min-width:0}
-.dlg-hd .who .n{font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); word-break:break-all; -webkit-text-stroke:.5px var(--carve);}
-.dlg-hd .who .r{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2px; color:var(--t3)}
-.dlg-acts{display:flex; flex-direction:column; gap:9px}
+dialog.dlg::backdrop{background:rgba(11,16,36,.82)}
+.dlg-hd{display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s4)}
+.dlg-hd .who{display:flex; flex-direction:column; gap:2px; min-width:0}
+.dlg-hd .who .n{font-size:17px; font-weight:800}
+.dlg-hd .who .r{font-size:12px; font-weight:500; color:var(--text-sub)}
+.dlg-acts{display:flex; flex-direction:column; gap:var(--s2)}
 .dlg-acts > a{text-decoration:none}
 
 /* ── 입장 게이트 ───────────────────────────────── */
 #gate{
   position:fixed; inset:0; z-index:60; background:var(--bg);
-  display:flex; align-items:center; justify-content:center; padding:20px;
+  display:flex; align-items:center; justify-content:center; padding:var(--s6);
 }
-#gate .box{display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; max-width:300px}
+#gate .box{display:flex; flex-direction:column; align-items:center; gap:var(--s3); text-align:center; max-width:300px}
 #gate .ring{
-  width:56px; height:56px; background:var(--neon); border:1.5px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  clip-path:polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  width:48px; height:48px; border-radius:var(--r-surface); background:var(--elevated);
+  display:flex; align-items:center; justify-content:center; color:var(--accent);
 }
-#gate p{margin:0; font-family:var(--disp); font-weight:400; font-size:20px; color:var(--line); -webkit-text-stroke:.5px var(--carve);}
-#gate small{font-size:13px; font-weight:400; color:var(--t2); line-height:1.7}
+#gate p{margin:0; font-size:17px; font-weight:800}
+#gate small{font-size:13px; font-weight:500; color:var(--text-sub); line-height:1.7}
 #gate a{
-  min-height:44px; display:inline-flex; align-items:center; padding:0 18px;
-  --carve:var(--neon);
-  border:1.5px solid var(--neon); background:var(--neon); color:#02122b;
-  font-family:var(--disp); font-weight:400; font-size:15px; text-decoration:none;
-  transform:skewX(var(--skew));
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.4px var(--carve);
+  min-height:48px; display:inline-flex; align-items:center; padding:0 var(--s4);
+  border-radius:var(--r-btn); background:var(--elevated); color:var(--text);
+  font-size:15px; font-weight:700; text-decoration:none;
 }
-#gate a > *{transform:skewX(14deg)}
 
 @media (prefers-reduced-motion:reduce){
-  *{transition:none !important}
-  .btn:active{transform:skewX(var(--skew))}
+  *{transition:none !important; animation:none !important}
+  .btn:active,.iconbtn:active{transform:none}
 }

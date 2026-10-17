@@ -3,98 +3,123 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
-<meta name="theme-color" content="#0B0910">
+<meta name="theme-color" content="#0B1024">
 <title>데미갓 아카데미</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Chakra+Petch:wght@500;700&family=Gothic+A1:wght@500;700;900&display=swap">
-<link rel="stylesheet" href="theme.css?v=db2e30c1">
-<link rel="stylesheet" href="app.css?v=b1ec558f">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="theme.css?v=b151dbf2">
+<link rel="stylesheet" href="app.css?v=b08cf91a">
 </head>
 <body>
-
-<div class="halftone" aria-hidden="true"></div>
 
 <div id="gate" role="status" aria-live="polite">
   <div class="box">
     <span class="ring" aria-hidden="true">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
     </span>
     <p id="gateTitle">입장 확인 중</p>
     <small id="gateNote">잠시만 기다려 주세요.</small>
-    <small id="gateStep" style="font-family:var(--num); font-size:10px; letter-spacing:.1em; color:var(--t3)">STEP 1 · 시작</small>
+    <small id="gateStep">STEP 1 · 시작</small>
   </div>
 </div>
 
 <div class="app" id="stage">
 
   <header class="hd">
-    <span class="logo" aria-hidden="true">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-    </span>
-    <h1 id="screenTitle">신탁</h1>
-    <span class="en" id="screenEn">// ORACLE</span>
-    <span class="spacer"></span>
-
-    <div class="icons">
-      <button type="button" class="iconbtn" aria-label="우편함 · 읽지 않음 있음">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
-        <span class="dot" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="iconbtn" id="profileOpen" aria-label="설정과 프로필">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10"/><path d="M18 7h2"/><path d="M4 17h4"/><path d="M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg>
-      </button>
+    <!-- 홈에서는 제목 대신 플레이어, 다른 화면에서는 화면 제목 -->
+    <div class="player" id="hdMe" hidden>
+      <span class="ava m" id="hdAva" aria-hidden="true"></span>
+      <span class="txt">
+        <span class="nm" id="hdName">—</span>
+        <span class="sub" id="hdFam">—</span>
+      </span>
     </div>
-
-    <div class="wallets">
-    <span class="wallet" title="이코르 — 뽑기에 쓴다">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.8 3.4 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2.2-5.6 5-9Z"/></svg>
-      <span class="lbl">ICHOR</span>
-      <span class="val" id="walletIchor">0</span>
-    </span>
-    <span class="wallet" id="walletEtherBox" title="에테르 — 강화에 쓴다">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
-      <span class="lbl">AITHER</span>
-      <span class="val" id="walletEther">0</span>
-    </span>
+    <h1 id="screenTitle">홈</h1>
+    <span class="spacer"></span>
+    <div class="icons">
+      <button type="button" class="iconbtn" id="profileOpen" aria-label="설정과 프로필">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 14.5a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.88 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.66 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.88.34H9a1.7 1.7 0 0 0 1-1.56V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.88V9a1.7 1.7 0 0 0 1.56 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1.03Z"/></svg>
+      </button>
     </div>
   </header>
+
+  <!-- 재화 — 홈과 상점에서만 보여 준다 -->
+  <div class="wallets" id="wallets">
+    <span class="wallet">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.8 3.4 5 6.2 5 9a5 5 0 0 1-10 0c0-2.8 2.2-5.6 5-9Z"/></svg>
+      <span class="lbl">이코르</span>
+      <span class="val" id="walletIchor">0</span>
+    </span>
+    <span class="wallet" id="walletEtherBox">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8Z"/></svg>
+      <span class="lbl">에테르</span>
+      <span class="val" id="walletEther">0</span>
+    </span>
+  </div>
 
   <div class="body">
 
     <!-- ══ 1) 홈 · 신탁 ══════════════════════════ -->
-    <section class="tabpanel" id="tab-home" role="tabpanel" aria-label="신탁">
+    <section class="tabpanel" id="tab-home" role="tabpanel" aria-label="홈">
 
-      <section class="panel flat strip">
-        <div class="online" id="online" aria-live="polite"></div>
-      </section>
-
-      <!-- 챕터 카드 — 왼쪽 글, 오른쪽 45% 사선 일러스트, 경계에 네온 라인 -->
-      <article class="nowch" id="nowch" data-n="01">
-        <div class="ch-art" aria-hidden="true"><img id="chArt" alt="" hidden src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
+      <!-- 이 화면의 시각적 중심. 아래 모서리만 사선으로 자른다. -->
+      <article class="nowch" id="nowch">
         <div class="txt">
-          <span class="eyebrow" id="chEyebrow">CHAPTER 01 · HERMES</span>
+          <span class="eyebrow" id="chEyebrow">CHAPTER 01 · 헤르메스</span>
           <h2 id="chTitle">—</h2>
           <p class="hint" id="chBoss">—</p>
+          <button type="button" class="linkbtn" id="openChron">연대기 보기 <span aria-hidden="true">›</span></button>
         </div>
-        <div class="phases" id="phases"></div>
-        <div class="btnpair">
-          <button type="button" class="btn" id="openChron"><span class="lab">연대기</span></button>
-          <button type="button" class="btn fill" id="goPhase"><span class="lab">지금 할 일</span></button>
-        </div>
-        <div class="side" aria-hidden="true">
-          <span class="big" id="chLeft">—</span>
-          <span class="cap">UNTIL CLOSE</span>
+        <div class="ch-art" aria-hidden="true">
+          <span class="glow"></span>
+          <span class="ghost"></span>
+          <div id="chCard"></div>
         </div>
       </article>
 
-      <section class="composer">
-        <span class="ava m" id="composerAva" aria-hidden="true"></span>
-        <input type="text" id="sayInput" maxlength="140" placeholder="아카데미에 한 줄 남기기" aria-label="피드에 남길 말" enterkeyhint="send">
-        <button type="button" class="btn fill" id="sayPost"><span>올리기</span></button>
+      <section class="todo" aria-labelledby="todoH">
+        <div class="sect-h">
+          <h2 id="todoH">지금 할 일</h2>
+          <span class="spacer"></span>
+          <span class="day" id="chDay">DAY 1 / 3</span>
+        </div>
+        <p class="mission" id="missionLine">—</p>
+        <div class="barline">
+          <span class="bar" role="img" aria-label="단서 진행률"><i id="clueBar" style="width:0%"></i></span>
+          <span class="bar-n" id="clueNum">0 / 0</span>
+        </div>
+        <p class="phases" id="phases"></p>
+        <button type="button" class="btn primary block" id="goPhase">지금 할 일</button>
       </section>
 
-      <ul class="feed" id="feed"></ul>
+      <section class="shortcuts" aria-label="바로가기">
+        <button type="button" class="shortcut" data-go="daily">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
+          <span class="nm">시간표</span>
+          <span class="st" id="scTime">0 / 3</span>
+        </button>
+        <button type="button" class="shortcut" data-go="bonds">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M9 10h6"/></svg>
+          <span class="nm">모모톡</span>
+          <span class="st" id="scTalk">안 읽음 0</span>
+        </button>
+        <button type="button" class="shortcut" data-go="board">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
+          <span class="nm">게시판</span>
+          <span class="st" id="scBoard">새 글 없음</span>
+        </button>
+      </section>
+
+      <section class="board" id="board" aria-labelledby="boardH">
+        <div class="sect-h"><h2 id="boardH">게시판</h2></div>
+        <div class="composer">
+          <span class="ava m" id="composerAva" aria-hidden="true"></span>
+          <input type="text" id="sayInput" maxlength="140" placeholder="아카데미에 한 줄 남기기" aria-label="게시판에 남길 말" enterkeyhint="send">
+          <button type="button" class="btn" id="sayPost">올리기</button>
+        </div>
+        <ul class="feed" id="feed"></ul>
+      </section>
     </section>
 
     <!-- ══ 2) 카드 · 계보 ═════════════════════════ -->
@@ -108,45 +133,48 @@
       </div>
 
       <div class="segpanel" id="seg-dex">
-        <section class="panel flat tophead">
-          <div class="sect-h" style="margin-bottom:14px">
-            <h2>수집 현황</h2><span class="spacer"></span>
-            <span class="count" id="dexCount">0 <span style="color:var(--t3)">/ 0</span></span>
+        <section class="dexhead" aria-label="수집 현황">
+          <div class="sect-h" style="margin-bottom:0">
+            <span class="k">수집 현황</span><span class="spacer"></span>
+            <span class="count" id="dexCount">0 / 0</span>
           </div>
-          <div class="bar dotted" role="img" aria-label="수집률"><i id="dexBar" style="width:0%"></i></div>
+          <div class="barline">
+            <span class="bar" role="img" aria-label="수집률"><i id="dexBar" style="width:0%"></i></span>
+          </div>
         </section>
-        <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:12px"><h2>상성</h2>
-            <span class="spacer"></span><span class="chip">이기면 ×1.5 · 지면 ×0.67</span></div>
-          <div class="ring" id="elRing" role="img" aria-label="원소 상극 고리"></div>
-          <p class="hint" style="margin-top:12px">
-            원소는 <b style="color:var(--line)">계보 카드</b>만 가진다.
-            공통 카드는 전부 무속성이라 상성이 없다 — 안전한 대신 보너스도 없다.
-          </p>
+
+        <section class="panel pad-x" aria-labelledby="elH">
+          <div class="sect-h">
+            <h2 id="elH">상성</h2><span class="spacer"></span>
+            <span class="hint">이기면 ×1.5 · 지면 ×0.67</span>
+          </div>
+          <div class="elring" id="elRing" role="img" aria-label="원소 상극 순환"></div>
+          <p class="hint">원소는 계보 카드만 가진다. 공통 카드는 무속성이라 상성이 없다.</p>
         </section>
+
         <div class="filters" role="group" aria-label="계보 필터" id="dexFilters"></div>
         <div class="grid6" id="dexGrid"></div>
       </div>
 
       <div class="segpanel" id="seg-deck" hidden>
-        <section class="panel flat">
+        <section class="panel pad-x">
           <div class="sect-h">
             <h2 id="deckName">심야의 포세이돈</h2>
-            <span class="count" id="deckCount">0 <span style="color:var(--t3)">/ 30</span></span>
+            <span class="count" id="deckCount">0 / 30</span>
             <span class="spacer"></span>
             <span class="chip" id="deckAvg">평균 코스트 —</span>
           </div>
         </section>
-        <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:12px"><h2>이 덱의 관계</h2></div>
+        <section class="panel pad-x">
+          <div class="sect-h"><h2>이 덱의 관계</h2></div>
           <ul class="rows" id="deckBonds"></ul>
         </section>
         <ul class="decklist" id="deckList"></ul>
       </div>
 
       <div class="segpanel" id="seg-grow" hidden>
-        <section class="panel">
-          <div class="sect-h" style="margin-bottom:18px">
+        <section class="panel pad-x">
+          <div class="sect-h">
             <span class="eyebrow">AWAKEN</span><h2>카드를 키운다</h2>
           </div>
           <div class="grow-wrap" id="growWrap"></div>
@@ -154,11 +182,11 @@
       </div>
 
       <div class="segpanel" id="seg-melt" hidden>
-        <section class="panel">
-          <div class="sect-h" style="margin-bottom:14px">
+        <section class="panel pad-x">
+          <div class="sect-h">
             <span class="eyebrow">OFFERING</span><h2>봉납</h2>
           </div>
-          <p class="hint" style="margin-bottom:18px">
+          <p class="hint">
             중복 카드를 녹여 에테르로 바꾼다. 같은 카드 셋이면 별 하나가 오른다.
           </p>
           <div class="melt">
@@ -169,26 +197,26 @@
               <span class="k">받을 에테르</span>
               <span class="v" id="meltSum">0</span>
               <span class="hint" id="meltNote">녹일 카드를 고르세요.</span>
-              <button type="button" class="btn" id="doMelt" style="width:100%">봉납하기</button>
+              <button type="button" class="btn primary block" id="doMelt">봉납하기</button>
             </div>
           </div>
         </section>
       </div>
 
       <div class="segpanel" id="seg-bondmap" hidden>
-        <section class="panel">
-          <div class="sect-h" style="margin-bottom:14px">
+        <section class="panel pad-x">
+          <div class="sect-h">
             <span class="eyebrow">BONDS</span><h2>관계도</h2>
           </div>
-          <p class="hint" style="margin-bottom:16px">
-            같은 덱에 넣으면 효과가 붙는다. <b style="color:var(--neon)">관계는 호감도를 올려야 드러난다.</b>
+          <p class="hint">
+            같은 덱에 넣으면 효과가 붙는다. <b>관계는 호감도를 올려야 드러난다.</b>
           </p>
           <div class="bondmap" id="bondMap"></div>
-          <div class="legend" style="margin-top:16px">
+          <div class="legend">
             <span class="it"><span class="sw"></span>연계</span>
             <span class="it"><span class="sw deep"></span>깊은 연계</span>
             <span class="it"><span class="sw clash"></span>불화</span>
-            <span class="it" style="color:var(--t3)">점선 없는 회색 — 아직 밝혀지지 않음</span>
+            <span class="it">점선 없는 회색 — 아직 밝혀지지 않음</span>
           </div>
         </section>
       </div>
@@ -202,27 +230,26 @@
       </div>
 
       <div class="segpanel" id="seg-time">
-        <section class="panel flat tophead">
+        <section class="panel pad-x" aria-labelledby="timeH">
           <div class="sect-h">
-            <h2>오늘의 시간표</h2><span class="spacer"></span>
-            <span class="chip" id="capLeft">AITHER —</span>
+            <h2 id="timeH">오늘의 시간표</h2><span class="spacer"></span>
+            <span class="chip" id="capLeft">에테르 —</span>
           </div>
-          <p class="hint" style="margin-top:12px">
-            걸어 두고 한 번 들른다. <b style="color:var(--neon)">안 들르면 보상이 절반</b>이다.
-            수업에 보낸 카드는 그동안 덱에 못 쓴다.
-          </p>
+          <p class="hint">걸어 두고 한 번 들른다. 안 들르면 보상이 절반이다. 수업에 보낸 카드는 그동안 덱에 못 쓴다.</p>
         </section>
+
         <div class="slots" id="slots"></div>
       </div>
 
       <div class="segpanel" id="seg-hunt" hidden>
-        <section class="panel flat">
-          <div class="sect-h"><h2>사냥터</h2><span class="spacer"></span>
-            <span class="chip" id="huntOpen">0곳 열림</span></div>
-          <p class="hint" style="margin-top:12px">
-            막아낸 장의 배경이 열린다. 덱 10장, 3~5턴. <b style="color:var(--neon)">파티는 지금 접속한 사람하고만.</b>
-          </p>
+        <section class="panel pad-x" aria-labelledby="huntH">
+          <div class="sect-h">
+            <h2 id="huntH">사냥터</h2><span class="spacer"></span>
+            <span class="chip" id="huntOpen">0곳 열림</span>
+          </div>
+          <p class="hint">막아낸 장의 배경이 열린다. 덱 10장, 3~5턴.</p>
         </section>
+
         <ul class="rows" id="huntList"></ul>
       </div>
 
@@ -237,18 +264,15 @@
 
       <div class="segpanel" id="seg-summon">
 
-        <!-- 배너 — 사선 평행사변형 안에 키 일러스트, 시안·검정 이중 테두리 -->
         <section class="banner" aria-labelledby="bannerTitle">
           <div class="banner-art">
-            <span class="banner-tag">BANNER_01 · LIMITED</span>
+            <span class="banner-tag">BANNER 01 · LIMITED</span>
             <img src="art/cards/zeus-4.webp" alt="" aria-hidden="true">
           </div>
-          <h2 class="banner-ttl" id="bannerTitle">
-            <span class="l1">심야의</span><span class="l2">폭풍</span>
-          </h2>
+          <h2 class="banner-ttl" id="bannerTitle">심야의 폭풍</h2>
           <dl class="banner-odds">
-            <div><dt>★3 RATE</dt><dd>3.00%</dd></div>
-            <div><dt>PITY</dt><dd><span id="pityVal2">0</span>/50</dd></div>
+            <div><dt>★3 확률</dt><dd>3.00%</dd></div>
+            <div><dt>천장까지</dt><dd><span id="pityVal2">0</span>/50</dd></div>
           </dl>
         </section>
 
@@ -258,28 +282,28 @@
           <div class="pickup-row" id="pickupRow"></div>
         </section>
 
-        <!-- 주 버튼 쌍 -->
-        <div class="btnpair">
-          <button type="button" class="btn" data-pull="1">
-            <span class="lab">1장<span class="sub" id="cost1">◆ —</span></span>
+        <!-- 화면의 핵심 행동 하나 — 12장 팩 -->
+        <div class="pulls">
+          <button type="button" class="btn primary block" data-pull="12">
+            12장 팩 <span class="sub" id="cost12">—</span>
           </button>
-          <button type="button" class="btn fill" data-pull="12">
-            <span class="lab">12장 팩<span class="sub" id="cost12">◆ — · ★3 GUARANTEED</span></span>
+          <button type="button" class="btn block" data-pull="1">
+            1장 <span class="sub" id="cost1">—</span>
           </button>
         </div>
 
-        <p class="msg" id="pullMsg" role="status" aria-live="polite" style="min-height:22px;font-size:13px;font-weight:700;color:var(--alert);margin:0"></p>
+        <p class="msg" id="pullMsg" role="status" aria-live="polite"></p>
 
       </div>
 
       <div class="segpanel" id="seg-goods" hidden>
-        <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:16px"><h2>이코르 보충</h2></div>
+        <section class="panel pad-x">
+          <div class="sect-h"><h2>이코르 보충</h2></div>
           <div class="goods" id="goods"></div>
         </section>
-        <section class="panel flat">
-          <div class="sect-h" style="margin-bottom:16px"><h2>선물</h2></div>
-          <p class="hint" style="margin-bottom:14px">카드마다 좋아하는 것이 다르다. 주면 호감도가 오른다.</p>
+        <section class="panel pad-x">
+          <div class="sect-h"><h2>선물</h2></div>
+          <p class="hint">카드마다 좋아하는 것이 다르다. 주면 호감도가 오른다.</p>
           <div class="goods" id="gifts"></div>
         </section>
       </div>
@@ -287,13 +311,14 @@
 
     <!-- ══ 5) 인연 · 모모톡 ═══════════════════════ -->
     <section class="tabpanel" id="tab-bonds" role="tabpanel" aria-label="인연" hidden>
-      <section class="panel flat tophead">
-        <div class="sect-h"><h2>모모톡</h2><span class="spacer"></span>
-          <span class="chip alert" id="unreadCount">안 읽음 0</span></div>
-        <p class="hint" style="margin-top:12px">
-          먼저 말을 걸어 온다. 답장을 고르면 이어지고, 호감도가 오르면 장면이 열린다.
-        </p>
+      <section class="panel pad-x" aria-labelledby="talkH">
+        <div class="sect-h">
+          <h2 id="talkH">모모톡</h2><span class="spacer"></span>
+          <span class="chip alert" id="unreadCount">안 읽음 0</span>
+        </div>
+        <p class="hint">먼저 말을 걸어 온다. 답장을 고르면 이어지고, 호감도가 오르면 장면이 열린다.</p>
       </section>
+
       <ul class="rows talk-list" id="talkList"></ul>
     </section>
 
@@ -301,23 +326,23 @@
 
   <nav class="tabbar" role="tablist" aria-label="주요 메뉴">
     <button type="button" class="tab" role="tab" data-tab="home" aria-selected="true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7"/><path d="M6.5 10v9h11v-9"/><path d="M10 19v-5h4v5"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7"/><path d="M6.5 10v9h11v-9"/><path d="M10 19v-5h4v5"/></svg>
       홈
     </button>
     <button type="button" class="tab" role="tab" data-tab="cards" aria-selected="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="16" rx="2.5"/><path d="M4.5 7v11a3 3 0 0 0 3 3H15"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="16" rx="2.5"/><path d="M4.5 7v11a3 3 0 0 0 3 3H15"/></svg>
       카드
     </button>
     <button type="button" class="tab" role="tab" data-tab="daily" aria-selected="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
       일상
     </button>
     <button type="button" class="tab" role="tab" data-tab="shop" aria-selected="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
       상점
     </button>
     <button type="button" class="tab" role="tab" data-tab="bonds" aria-selected="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M9 10h6"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/><path d="M9 10h6"/></svg>
       인연
       <span class="dot" id="tabDot" hidden aria-hidden="true"></span>
     </button>
@@ -329,7 +354,7 @@
 <div class="full" id="carddet" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="carddet" aria-label="뒤로가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
     </button>
     <span class="ttl"><span class="n">카드 상세</span><span class="s" id="detNo">—</span></span>
   </div>
@@ -340,9 +365,9 @@
       <div><dt>강함</dt><dd id="detStrong">—</dd></div>
       <div><dt>약함</dt><dd id="detWeak">—</dd></div>
     </dl>
-    <div class="btnpair">
-      <button type="button" class="btn" id="detGrow"><span class="lab">승급</span></button>
-      <button type="button" class="btn fill" id="detDeck"><span class="lab">덱에 추가</span></button>
+    <div class="detacts">
+      <button type="button" class="btn primary block" id="detDeck">덱에 추가</button>
+      <button type="button" class="btn block" id="detGrow">승급</button>
     </div>
     <p class="msg" id="detMsg" role="status" aria-live="polite"></p>
   </div>
@@ -351,7 +376,7 @@
 <div class="full" id="chron" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="chron" aria-label="연대기 닫기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
     </button>
     <span class="ttl"><span class="n">연대기</span><span class="s">THE CHRONICLE</span></span>
   </div>
@@ -362,7 +387,7 @@
 <div class="full" id="scout" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="scout" aria-label="조사 나가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
     </button>
     <span class="ttl"><span class="n">조사</span><span class="s" id="scoutSub">DAY 1</span></span>
     <span class="spacer"></span>
@@ -375,7 +400,7 @@
 <div class="full" id="quiz" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="quiz" aria-label="시험 나가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
     </button>
     <span class="ttl"><span class="n" id="quizTitle">쪽지시험</span><span class="s" id="quizCat">—</span></span>
   </div>
@@ -392,7 +417,7 @@
 <div class="full session" id="talk" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="talk" aria-label="대화방 나가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
     </button>
     <span class="ava s" id="talkAva" aria-hidden="true"></span>
     <span class="ttl"><span class="n" id="talkName">—</span><span class="s" id="talkFam">—</span></span>
@@ -409,7 +434,7 @@
 <div class="full" id="reveal" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="reveal" aria-label="소환 닫기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
     </button>
     <span class="ttl"><span class="n">심야의 폭풍</span><span class="s" id="revealSub">—</span></span>
   </div>
@@ -417,8 +442,8 @@
     <p class="hdline" id="revealTitle">소환 완료</p>
     <div class="pulled" id="revealCards"></div>
     <div class="acts">
-      <button type="button" class="btn white" id="revealAgain">한 번 더</button>
-      <button type="button" class="btn" id="revealToDex">도감에서 확인</button>
+      <button type="button" class="btn primary block" id="revealAgain">한 번 더</button>
+      <button type="button" class="btn block" id="revealToDex">도감에서 확인</button>
     </div>
   </div>
 </div>
@@ -427,7 +452,7 @@
 <div class="full" id="battle" hidden>
   <div class="topbar">
     <button type="button" class="exit" data-close="battle" aria-label="전투 나가기">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M18 12H10"/><path d="m14 8-4 4 4 4"/></svg>
     </button>
     <span class="ttl"><span class="n" id="battleTitle">전투</span><span class="s" id="battleSub">—</span></span>
     <span class="spacer"></span>
@@ -441,7 +466,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 3 7.4 7 9 4-1.6 7-4.8 7-9V6l-7-3Z"/></svg>
         </span>
         <span class="bname" id="foeName">—</span>
-        <span class="bhp"><i id="foeHp" style="width:100%"></i></span>
+        <span class="bhp"><i id="foeHp"></i></span>
         <span class="bnum" id="foeNum">30</span>
         <button type="button" class="btarget" id="foeFace" hidden>치기</button>
       </div>
@@ -463,7 +488,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
         </span>
         <span class="bname" id="battleMe">나</span>
-        <span class="bhp"><i id="myHp" style="width:100%"></i></span>
+        <span class="bhp"><i id="myHp"></i></span>
         <span class="bnum" id="myNum">30</span>
       </div>
     </div>
@@ -472,7 +497,7 @@
   <div class="bbottom">
     <div class="bacts" id="bActs"></div>
     <div class="bhand" id="hand"></div>
-    <button type="button" class="btn block" id="endTurn"><span>턴 종료</span></button>
+    <button type="button" class="btn primary block" id="endTurn">턴 종료</button>
   </div>
 </div>
 
@@ -482,7 +507,7 @@
     <span class="who"><span class="n">전투 기록</span><span class="r">BATTLE LOG</span></span>
   </div>
   <div class="blog" id="blog"></div>
-  <div class="dlg-acts"><button type="button" class="btn ghost block" id="logClose"><span>닫기</span></button></div>
+  <div class="dlg-acts"><button type="button" class="btn block" id="logClose">닫기</button></div>
 </dialog>
 
 <!-- ══ 풀스크린 · 결과 ═════════════════════════════ -->
@@ -492,8 +517,8 @@
     <span class="sub" id="resultSub">—</span>
     <div class="rewards"><div class="gains" id="resultGains"></div></div>
     <div class="acts">
-      <button type="button" class="btn white" id="resultToDex">도감에서 확인</button>
-      <button type="button" class="btn" id="resultBack">돌아가기</button>
+      <button type="button" class="btn block" id="resultToDex">도감에서 확인</button>
+      <button type="button" class="btn primary block" id="resultBack">돌아가기</button>
     </div>
   </div>
 </div>
@@ -505,26 +530,26 @@
     <span class="who"><span class="n" id="profileName">—</span><span class="r" id="profileFam">—</span></span>
   </div>
   <div class="dlg-acts">
-    <a class="btn white" href="setup.html" style="width:100%">프로필 고치기</a>
-    <button type="button" class="btn ghost" id="logout" style="width:100%">로그아웃</button>
-    <button type="button" class="btn ghost" id="profileClose" style="width:100%">닫기</button>
+    <a class="btn block" href="setup.html">프로필 고치기</a>
+    <button type="button" class="btn block" id="logout">로그아웃</button>
+    <button type="button" class="btn block" id="profileClose">닫기</button>
   </div>
 </dialog>
 
 <!-- ══ 시간표 걸기 ═════════════════════════════════ -->
 <dialog class="dlg" id="slotDlg" aria-labelledby="slotDlgTitle">
   <div class="dlg-hd">
-    <span class="ic" aria-hidden="true" style="width:56px;height:56px;flex:0 0 56px;background:var(--neon);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#14061F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
+    <span class="ava m" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/></svg>
     </span>
-    <span class="who"><span class="n" id="slotDlgTitle">무엇을 할까</span><span class="r">SET A SLOT</span></span>
+    <span class="who"><span class="n" id="slotDlgTitle">무엇을 할까</span><span class="r">시간표 한 칸</span></span>
   </div>
   <div class="dlg-acts" id="slotPick"></div>
 </dialog>
 
 <script src="art.js?v=246afaba"></script>
 <script src="battle.js?v=665fa5b2"></script>
-<script src="app.js?v=3ac0fdae"></script>
+<script src="app.js?v=7e9bcc19"></script>
 <script type="module" src="app-auth.js?v=5f2f5932"></script>
 
 </body>

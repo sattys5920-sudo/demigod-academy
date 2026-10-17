@@ -69,12 +69,29 @@ const dead = [...cssClasses].filter((c) => {
 }).sort();
 fail('CSS 에만 남은 class 가 없다', dead);
 
-/* 4 · 디자인 시스템이 금지한 것 */
+/* 4 · 디자인 시스템 v1 이 금지한 것 */
 const banned = [];
-if (/font-style\s*:\s*italic/.test(css)) banned.push('css 에 font-style:italic (기울임은 skewX 로만)');
-if (/border-radius\s*:\s*(?!0)/.test(css + html)) banned.push('border-radius 가 남아 있다 (모서리는 clip-path 로)');
-for (const m of (js + html).matchAll(/var\(--gold\)/g)) banned.push('UI 에 var(--gold) — 노랑은 번개 속성 전용');
-for (const m of css.matchAll(/var\(--gold\)/g)) banned.push('CSS 에 var(--gold) — 노랑은 번개 속성 전용');
+/* 네온 발광 — 강조색으로 번지는 그림자는 쓰지 않는다 */
+for (const m of css.matchAll(/box-shadow\s*:[^;]*rgba\(\s*85\s*,\s*230\s*,\s*242/gi))
+  banned.push('강조색 발광 box-shadow — 네온 발광 금지');
+for (const m of css.matchAll(/0 0 \d+px (var\(--accent\)|#55[Ee]6[Ff]2)/g))
+  banned.push('강조색 발광 box-shadow — 네온 발광 금지');
+/* 사선은 두 곳에만 — 홈 챕터 면(.nowch)과 Primary 버튼(.btn.primary) */
+for (const [block] of css.matchAll(/[^}]*\bclip-path\s*:\s*polygon[^}]*}/g)) {
+  const head = block.split('{')[0];
+  if (!/\.nowch|\.btn\.primary/.test(head)) banned.push('사선(clip-path polygon)이 ' + head.trim() + ' 에도 있다');
+}
+for (const m of css.matchAll(/skewX?\(/g)) banned.push('skew 는 더 쓰지 않는다 (사선은 두 곳의 clip-path 로만)');
+/* 모든 요소에 테두리를 두르지 않는다 — 1px 구분선과 카드 흰 테두리만 남긴다 */
+for (const [block] of css.matchAll(/[^{}]*\{[^}]*\}/g)) {
+  const [head, body] = [block.split('{')[0], block.split('{')[1]];
+  const m = body.match(/[^-]border\s*:\s*(\d(?:\.\d)?)px solid/);
+  if (m && Number(m[1]) > 1 && !/\.tcg|\.mini|\[aria-busy/.test(head))
+    banned.push('굵은 테두리 — ' + head.trim());
+}
+/* 이모지 금지 — 아이콘은 24px 라인 아이콘 한 세트로. ★ 는 등급 기호라 센다. */
+for (const [ch] of html.matchAll(/[\u{1F300}-\u{1FAFF}\u{2700}-\u{27BF}]/gu))
+  banned.push('마크업에 이모지 ' + ch);
 fail('디자인 시스템 금지 사항 없음', banned);
 
 console.log(bad ? '\n어긋남 ' + bad + '건' : '\n어긋남 0건');

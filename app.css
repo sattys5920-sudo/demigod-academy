@@ -1,659 +1,377 @@
-/* 본편 — 모바일 전용. 공통 토큰과 조각은 theme.css 에 있다. */
+/* ══════════════════════════════════════════════════════════
+   데미갓 아카데미 — 화면
+   공통 토큰과 컴포넌트는 theme.css. 여기는 화면별 배치만 맡는다.
+   사선은 두 곳에만 쓴다 — 홈 챕터 면의 아래 모서리, Primary 버튼의 오른쪽 끝.
+   ══════════════════════════════════════════════════════════ */
 
 /* ── 셸 ────────────────────────────────────────── */
+/* 홈에서만 화면 전체에 그라데이션 하나 */
+.app[data-tab="home"]{
+  background:linear-gradient(180deg, var(--hero-top) 0%, var(--hero-mid) 42%, var(--bg) 80%);
+}
 .hd{
   position:sticky; top:0; z-index:20; flex:0 0 auto;
-  display:flex; align-items:center; gap:9px; padding:0 12px; height:var(--hd);
-  background:var(--bg); border-bottom:1.5px solid var(--neon);
+  display:flex; align-items:center; gap:var(--s2);
+  height:var(--hd); padding:0 var(--s4); background:inherit;
 }
-/* 헤더 밑에 -18° 네온 실선 하나 */
-.hd::after{
-  content:""; position:absolute; left:0; right:0; bottom:-1.5px; height:3px;
-  background:var(--neon); box-shadow:var(--glow);
-  clip-path:polygon(0 0, 46% 0, 38% 100%, 0 100%);
-}
-.logo{
-  width:36px; height:36px; flex:0 0 36px; background:var(--neon); color:#02122b;
-  border:1.5px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  transform:skewX(var(--skew));
-}
-.logo > *{transform:skewX(14deg)}
-.hd h1{
-  margin:0; font-family:var(--disp); font-weight:400; font-size:28px; line-height:1;
-  color:var(--line); white-space:nowrap; transform:skewX(var(--skew));
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.5px var(--carve);
-  text-shadow:2px 2px 0 var(--accent-blue);
-}
-/* "// SHOP" 같은 영문 라벨 */
-.hd .en{
-  font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px;
-  color:var(--neon); white-space:nowrap; align-self:center;
-}
-.icons{display:flex; gap:6px}
-.iconbtn{
-  width:34px; height:34px; min-width:34px; position:relative; padding:0; overflow:visible;
-  border:1px solid var(--neon); background:transparent; color:var(--neon);
-  display:inline-flex; align-items:center; justify-content:center;
-}
-.iconbtn::after{content:""; position:absolute; inset:-6px}   /* 손가락이 닿는 넓이 44px */
-.iconbtn .dot{position:absolute; top:-3px; right:-3px; width:8px; height:8px;
-              background:var(--alert); box-shadow:0 0 8px var(--alert)}
-.wallets{display:flex; flex-direction:column; gap:3px}
+.hd h1{flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.hd .icons{display:flex; align-items:center; gap:var(--s1); margin-right:-10px}
+
+/* 홈 머리 — 아바타 · 이름 · 혈통.
+   이름을 .me 로 두면 전투의 .bside.me 까지 잡아 판이 접힌다. */
+.player{display:flex; align-items:center; gap:var(--s2); min-width:0}
+.player .txt{display:flex; flex-direction:column; gap:1px; min-width:0}
+.player .nm{font-size:15px; font-weight:700; line-height:1.25; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.player .sub{font-size:12px; font-weight:500; color:var(--text-sub); line-height:1.25}
+
+/* 재화 칩 줄 — 홈과 상점에만 */
+.wallets{display:flex; gap:var(--s2); padding:0 var(--s4) var(--s3)}
 .wallet{
-  display:inline-flex; align-items:center; gap:6px; min-height:21px; padding:0 9px;
-  border:1px solid rgba(63,224,255,.5); background:transparent; color:var(--t1);
-  justify-content:flex-end; transform:skewX(var(--skew));
+  display:inline-flex; align-items:center; gap:var(--s2); min-height:32px; padding:0 var(--s3);
+  border-radius:16px; background:rgba(255,255,255,.1); color:var(--text);
 }
-.wallet > *{transform:skewX(14deg)}
-.wallet svg{display:none}
-.wallet .lbl{font-family:var(--num); font-weight:700; font-size:8px; letter-spacing:2px; color:var(--t3)}
-.wallet .val{font-family:var(--num); font-weight:700; font-size:12px; font-variant-numeric:tabular-nums}
-#walletEtherBox{border-color:rgba(63,224,255,.5)}
-#walletEtherBox .val{color:var(--t1)}
+.wallet svg{color:var(--reward); flex:0 0 auto}
+.wallet .lbl{font-size:12px; font-weight:500; color:var(--text-sub)}
+.wallet .val{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums}
 
-/* 헤더는 390px 를 기준으로 짰다. 그보다 좁으면 영문 라벨부터 접고,
-   더 좁으면 제목과 재화를 줄인다 — 잘리는 것보다 작아지는 쪽이 낫다. */
-@media (max-width:389px){
-  .hd .en{display:none}
-}
-@media (max-width:359px){
-  .hd{gap:7px; padding:0 9px}
-  .hd h1{font-size:22px}
-  .logo{width:30px; height:30px; flex:0 0 30px}
-  .wallet{padding:0 7px; gap:4px}
-  .wallet .lbl{font-size:7px; letter-spacing:1.2px}
-  .wallet .val{font-size:11px}
-}
-
-.body{
-  flex:1 1 auto; padding:14px 12px;
-  padding-bottom:calc(var(--tb) + 22px + env(safe-area-inset-bottom, 0px));
-}
-.tabpanel{display:flex; flex-direction:column; gap:14px}
-
-/* 하단 내비 — 5칸. 활성 칸은 시안 글자 + 상단 3px 네온 바 */
-.tabbar{
-  position:fixed; bottom:0; left:50%; transform:translateX(-50%); z-index:30;
-  width:100%; max-width:var(--app);
-  display:flex; gap:0; height:var(--tb);
-  padding-bottom:env(safe-area-inset-bottom, 0px);
-  background:#020614; border-top:1px solid rgba(63,224,255,.3);
-}
-.tab{
-  flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:4px; position:relative;
-  border:0; background:transparent; color:var(--t3);
-  font-family:var(--ui); font-weight:700; font-size:11px; padding:0;
-}
-@media (max-width:360px){ .tab{font-size:10px; gap:3px} }
-.tab[aria-selected="true"]{color:var(--neon)}
-.tab[aria-selected="true"]::before{
-  content:""; position:absolute; top:0; left:12%; right:12%; height:3px;
-  background:var(--neon); box-shadow:var(--glow);
-}
-.tab .dot{position:absolute; top:10px; right:22%; width:7px; height:7px;
-          background:var(--alert); box-shadow:0 0 8px var(--alert)}
-body.fullscreen-on .tabbar{display:none}
-
-/* ── 세그먼트 탭 — 텍스트형 ───────────────────── */
-.seg{display:flex; gap:0; border:0; background:transparent; border-bottom:1px solid rgba(63,224,255,.25)}
-.seg-btn{
-  flex:1 1 0; min-width:0; min-height:44px; border:0; background:transparent; position:relative;
-  color:var(--t3); font-family:var(--ui); font-weight:700; font-size:13px; padding:0 2px;
-}
-.seg-btn[aria-selected="true"]{color:var(--line)}
-.seg-btn[aria-selected="true"]::after{
-  content:""; position:absolute; left:14%; right:14%; bottom:-1px; height:3px;
-  background:var(--neon); box-shadow:var(--glow);
-}
-
-.filters{
-  display:flex; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px;
-  scrollbar-width:none; -webkit-overflow-scrolling:touch;
-  /* .segpanel 이 세로 플렉스라 이 줄은 플렉스 아이템이고, 아이템의 min-width 는
-     기본이 auto 다. 그대로 두면 칩이 길어질 때 옆으로 안 밀고 상자를 넓혀 버려
-     화면 전체가 가로로 스크롤된다. 0 으로 못 박아야 여기서만 밀린다. */
-  min-width:0; max-width:100%;
-}
-.filters::-webkit-scrollbar{display:none}
-.filter{
-  flex:0 0 auto; white-space:nowrap; min-height:32px; padding:0 11px; border:2px solid var(--dim); background:transparent;
-  color:var(--t2); font-family:var(--ui-s); font-weight:600; font-size:12px;
-  clip-path:polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
-}
-.filter[aria-pressed="true"]{background:var(--hot); border-color:var(--line); color:var(--line)}
-
-/* ── 카드 ──────────────────────────────────────── */
-/* ══ 카드 ════════════════════════════════════════════════
-   실물 TCG 와 같은 63:88. 일러스트가 굵은 검은 외곽선의 팝아트라서
-   카드만은 UI 의 네온 규칙에서 빠져나와 '흰 테두리 + 검은 외곽선'
-   만화풍 프레임을 쓴다. 그래야 그림과 틀이 한 몸으로 읽힌다. */
-.tcg{
-  position:relative; display:block; width:100%; aspect-ratio:63/88;
-  background:var(--line); border:2px solid #000; padding:4px;
-  box-shadow:3px 4px 0 #000;
-}
-.tcg.big{padding:8px; border-width:3px; box-shadow:10px 12px 0 #000}
-.tcg-in{
-  --carve:var(--card-inner);
-  display:flex; flex-direction:column; height:100%;
-  background:var(--card-inner); border:2px solid #000; overflow:hidden;
-}
-
-/* 1 · 머리 줄 — 비용 · 이름 · 속성 */
-.tcg-hd{display:flex; align-items:stretch; gap:0; flex:0 0 auto; border-bottom:2px solid #000}
-.tcg-cost{
-  flex:0 0 auto; aspect-ratio:1; display:flex; align-items:center; justify-content:center;
-  background:var(--cost); color:#fff; border-right:2px solid #000;
-  font-family:var(--num); font-weight:700; font-size:11px;
-}
-.tcg.big .tcg-cost{font-size:18px}
-.tcg-name{
-  flex:1 1 auto; min-width:0; display:flex; align-items:center; padding:0 5px;
-  font-family:var(--disp); font-weight:400; font-size:9px; line-height:1.05; color:var(--line);
-  word-break:keep-all; overflow:hidden;
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.3px var(--carve);
-}
-.tcg.big .tcg-name{font-size:22px; padding:0 10px; -webkit-text-stroke-width:.5px}
-.tcg-el{
-  flex:0 0 auto; aspect-ratio:1; display:flex; align-items:center; justify-content:center;
-  border-left:2px solid #000; color:#000;
-}
-.tcg-el.el-bolt {background:var(--el-bolt)}
-.tcg-el.el-water{background:var(--el-water)}
-.tcg-el.el-fire {background:var(--el-fire)}
-.tcg-el.el-earth{background:var(--el-earth)}
-.tcg-el.el-wind {background:var(--el-wind)}
-.tcg-el.el-none {background:var(--el-none)}
-
-/* 2 · 일러스트 — 10:7, 큰 카드는 10:6.5 */
-.tcg-art{
-  position:relative; flex:0 0 auto; width:100%; aspect-ratio:10/7; overflow:hidden;
-  background:#000; border-bottom:2px solid #000; display:block;
-}
-.tcg.big .tcg-art{aspect-ratio:10/6.5}
-.tcg-art svg,.tcg-art .art-img{display:block; width:100%; height:100%; object-fit:cover}
-
-/* 3 · 타입 띠 — 속성 색 위에 검은 글씨 */
-.tcg-type{
-  flex:0 0 auto; display:flex; align-items:center; gap:4px; padding:2.5px 5px;
-  border-bottom:2px solid #000; color:#000; background:var(--el-none);
-  /* 작은데 굵으면 메워진다 — 크기를 조금 올리고 굵기를 내린다 */
-  font-family:var(--ui); font-weight:500; font-size:7px; letter-spacing:.2px; line-height:1;
-}
-.tcg.big .tcg-type{font-weight:700; font-size:10px; padding:6px 9px; line-height:1.2}
-.tcg[data-el=bolt]  .tcg-type:not(.none){background:var(--el-bolt)}
-.tcg[data-el=water] .tcg-type:not(.none){background:var(--el-water)}
-.tcg[data-el=fire]  .tcg-type:not(.none){background:var(--el-fire)}
-.tcg[data-el=earth] .tcg-type:not(.none){background:var(--el-earth)}
-.tcg[data-el=wind]  .tcg-type:not(.none){background:var(--el-wind)}
-.tcg-type.none{background:#9aa8c2}        /* 공통(무속성)은 회색 띠 */
-.tcg-type .t{flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.tcg-type .r{flex:0 0 auto; font-family:var(--num); font-weight:700; letter-spacing:-.5px}
-
-/* 4 · 능력 박스 — 남는 높이 전부. 종이 바탕에 검은 글씨 */
-.tcg-abil{
-  flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:2px;
-  padding:3px 5px; background:var(--paper); color:#101010; overflow:hidden;
-}
-/* 작은 카드는 능력명과 한 줄 요약까지만 — 넘치면 줄을 자른다 */
-.tcg:not(.big) .ab-t{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
-.tcg.big .tcg-abil{gap:7px; padding:10px 11px}
-.ab{display:flex; flex-direction:column; gap:1px; min-width:0; line-height:1}
-.tcg.big .ab{gap:3px}
-.ab-h{display:flex; align-items:center; gap:3px; min-width:0}
-.ab-h b{font-family:var(--ui); font-weight:700; font-size:7.5px; line-height:1.2; color:#101010;
-        overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.tcg.big .ab-h b{font-weight:900; font-size:13px}
-.ab-h i{
-  flex:0 0 auto; font-family:var(--ui); font-style:normal; font-weight:700; font-size:5.5px;
-  padding:1px 3px; background:#101010; color:var(--paper); letter-spacing:.3px;
-}
-.tcg.big .ab-h i{font-weight:700; font-size:9px; padding:2px 6px}
-.ab-t{font-family:var(--ui); font-weight:500; font-size:7px; line-height:1.25; color:#2a2a2a;
-      word-break:keep-all; overflow:hidden}
-.tcg.big .ab-t{font-size:11px; line-height:1.55}
-.tcg-noab{font-family:var(--ui); font-weight:500; font-size:7px; color:#5a5a5a}
-.tcg.big .tcg-noab{font-size:11px}
-.tcg-flavor{
-  margin-top:auto; padding-top:7px; border-top:1px solid rgba(16,16,16,.25);
-  /* 기울임은 italic 이 아니라 skewX 로만 준다 */
-  font-family:var(--ui); font-weight:500; font-size:10px; line-height:1.5;
-  color:#4a4a4a; word-break:keep-all; transform:skewX(var(--skew));
-}
-.tcg-lock{
-  /* 작은 카드의 능력 칸은 24px 뿐이다 — 세로로 쌓으면 글자가 잘린다 */
-  flex:1 1 auto; display:flex; flex-direction:row; align-items:center; justify-content:center;
-  gap:4px; color:#8795b8; font-family:var(--ui); font-weight:500; font-size:8.5px;
-  white-space:nowrap; letter-spacing:.5px;
-}
-.tcg.big .tcg-lock{flex-direction:column; gap:8px; font-size:12px}
-
-/* 5 · 아래 줄 — ATK · HP · 카드 번호 */
-.tcg-ft{
-  flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:4px;
-  padding:3px 5px; border-top:2px solid #000; background:var(--card-inner); line-height:1;
-}
-.tcg.big .tcg-ft{padding:8px 10px; line-height:1.2}
-.tcg-stats{display:flex; gap:7px}
-.tcg.big .tcg-stats{gap:14px}
-.tcg-stat{display:flex; align-items:baseline; gap:2px}
-.tcg-stat i{font-family:var(--num); font-style:normal; font-weight:700; font-size:5.5px;
-            letter-spacing:1.5px; color:var(--t3)}
-.tcg.big .tcg-stat i{font-size:9px; letter-spacing:2px}
-.tcg-stat b{font-family:var(--num); font-weight:700; font-size:10px; color:var(--line)}
-.tcg.big .tcg-stat b{font-size:20px}
-.tcg-no{font-family:var(--num); font-weight:500; font-size:5.5px; letter-spacing:1.5px; color:var(--t3)}
-.tcg.big .tcg-no{font-size:10px; letter-spacing:2px}
-
-/* 미보유 — 프레임을 죽이고 그림을 회색으로 */
-.tcg.locked{background:#3a4566; border-color:#1b2440; box-shadow:3px 4px 0 #0a1026}
-.tcg.locked .tcg-in{border-color:#1b2440}
-.tcg.locked .tcg-art{filter:grayscale(1) brightness(.35)}
-.tcg.locked .tcg-abil{background:#121b36}
-.tcg.locked .tcg-cost{background:#4a5577}
-.tcg.locked .tcg-name{color:#8e9bbd}
-.tcg.locked .tcg-type{background:#4a5577; color:#0e1430}
-.tcg.locked .tcg-stat b{color:#8e9bbd}
-.tcg.faded{opacity:.75}
-.tappable{cursor:pointer}
-.tappable:focus-visible{outline:3px solid var(--neon); outline-offset:3px}
-
-/* 카드 그리드 — 3열, 간격 10px */
-.grid6{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
-.grid-sm{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
-.grid-sm .tcg.sel{outline:3px solid var(--neon); outline-offset:-3px; box-shadow:var(--glow)}
+.body{flex:1 1 auto; min-width:0}
+/* 세그먼트 안쪽도 같은 간격 규칙을 따른다 */
+.segpanel{display:flex; flex-direction:column; gap:var(--s6)}
+.tabpanel{display:flex; flex-direction:column; gap:var(--s8); padding:0 0 var(--s8)}
+/* 탭 줄이 없는 화면은 머리 줄과 첫 덩어리 사이를 띄운다 */
+#tab-bonds{padding-top:var(--s6)}
 
 /* ── 홈 ────────────────────────────────────────── */
-/* 접속 표시 — 다른 상자와 폭이 같으면 격자가 안 깨진다. 내용만큼만 차지한다. */
-/* 접속 띠 — 내용만큼만 차지한다 */
-.strip{
-  align-self:flex-start; max-width:100%; padding:7px 18px 8px 11px;
-  background:var(--panel); border:0; border-left:3px solid var(--neon);
-  clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 100%, 0 100%);
-}
-.online{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-.online .n{font-size:12px; font-weight:500; color:var(--t2)}
-
-/* ══ 홈의 주인공 — 지금 장 ═══════════════════════════════
-   넓은 면은 패널 네이비(#081a52)다. 오른쪽 45% 를 사선으로 잘라 그 장을
-   맡은 신의 그림을 넣고, 경계에만 시안 네온 라인을 긋는다. */
+/* 시각적 중심 하나 — 챕터 면. 아래 모서리만 사선으로 자른다. */
 .nowch{
-  position:relative; overflow:hidden;
-  display:flex; flex-direction:column; gap:13px;
-  margin:0 -12px; padding:20px 18px 40px;
-  background:var(--panel); color:var(--t1);
-  border:0; border-top:1px solid rgba(63,224,255,.4); border-bottom:1px solid rgba(63,224,255,.4);
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 26px), 0 100%);
+  position:relative; min-height:330px; margin:0; padding:var(--s6) var(--s4) var(--s8);
+  background:var(--hero-slab); overflow:hidden;
+  clip-path:polygon(0 0, 100% 0, 100% 74%, 0 100%);
+  display:flex; gap:var(--s3);
 }
-.ch-art{
-  position:absolute; top:0; right:0; bottom:0; width:58%; z-index:0;
-  clip-path:polygon(30% 0, 100% 0, 100% 100%, 0 100%);
-}
-.ch-art img{width:100%; height:100%; object-fit:cover; display:block; opacity:.5}
-.ch-art::after{                    /* 글자 쪽으로 어둠을 깔아 읽히게 */
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(100deg, var(--panel) 16%, rgba(8,26,82,.72) 46%, rgba(8,26,82,.1) 100%);
-}
-/* 경계에 긋는 네온 라인 하나 */
-.ch-art::before{
-  content:""; position:absolute; top:-6%; left:28%; width:2px; height:120%; z-index:2;
-  background:var(--neon); box-shadow:var(--glow); transform:rotate(14deg); transform-origin:top;
-}
-.nowch::before{                   /* 장 번호 — 네온 외곽선만 */
-  content:attr(data-n); position:absolute; left:8px; top:4px; z-index:1;
-  font-family:var(--num); font-weight:700; font-size:92px; line-height:1; letter-spacing:-.05em;
-  color:transparent; -webkit-text-stroke:1.5px rgba(63,224,255,.16); pointer-events:none;
-}
-.nowch > *:not(.ch-art):not(.side){position:relative; z-index:2}
-
-.nowch .txt{display:flex; flex-direction:column; gap:10px; align-items:flex-start; max-width:72%}
-.nowch .eyebrow{
-  display:inline-block; padding:4px 11px 5px;
-  background:var(--neon); color:#02122b; transform:skewX(var(--skew));
-}
-/* 제목 — Gasoek One 40px, 검은 외곽선에 파란 오프셋 그림자 */
+.nowch .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:var(--s2)}
 .nowch h2{
-  margin:0; display:flex; flex-direction:column; align-items:flex-start;
-  font-family:var(--disp); font-weight:400; font-size:40px; line-height:1.06;
-  letter-spacing:-.01em; color:#fff;
-  /* 2px 는 40px 한글의 속공간을 메워 '않는다' 가 뭉갠다 */
-  -webkit-text-stroke:1px #000; paint-order:stroke fill;
-  text-shadow:3px 4px 0 var(--accent-blue);
+  margin:0; font-size:34px; font-weight:900; letter-spacing:-.03em; line-height:1.18; color:var(--text);
 }
-.nowch h2 .ln{display:block; white-space:nowrap}
-.nowch .hint{color:var(--t2); max-width:100%}
+.nowch h2 .ln{display:block}
+.nowch .hint{color:#C9D4F2}
+.nowch .linkbtn{margin-top:var(--s1)}
 
-/* DAY 도장 */
-.nowch .side{
-  position:absolute; top:14px; right:12px; z-index:3; display:block;
-  padding:5px 10px 6px; border:1.5px solid var(--neon); background:var(--bg);
-  transform:skewX(var(--skew)); text-align:center;
+/* 오른쪽 — 대표 카드 한 장과 빈 카드 면 하나만 겹친다 */
+.ch-art{position:relative; flex:0 0 132px; width:132px; align-self:flex-start; margin-top:var(--s6)}
+.ch-art .glow{
+  position:absolute; left:50%; top:46%; width:210px; height:210px; transform:translate(-50%,-50%);
+  background:radial-gradient(circle, rgba(85,230,242,.2) 0%, rgba(85,230,242,0) 68%);
+  pointer-events:none;
 }
-.nowch .side > *{transform:skewX(14deg)}
-.nowch .side .big{display:block; font-family:var(--num); font-weight:700; font-size:15px; line-height:1; color:var(--neon); white-space:nowrap}
-.nowch .side .cap{display:block; font-family:var(--num); font-weight:700; font-size:6.5px; letter-spacing:2px; color:var(--t3); white-space:nowrap}
-
-/* DAY 1~3 — 기울인 칸 셋. 진행 중인 날만 시안으로 채운다. */
-/* skew 가 칸의 바깥 폭을 넓힌다 — 양끝을 들여 셋이 다 보이게 한다 */
-.phases{display:flex; gap:7px; margin:0 9px}
-.phase{
-  flex:1 1 0; min-width:0; padding:9px 10px 10px;
-  background:transparent; border:1.5px solid rgba(63,224,255,.4); color:var(--t2);
-  display:flex; flex-direction:column; gap:3px;
-  transform:skewX(var(--skew));
+.ch-art .ghost{
+  position:absolute; left:-22px; top:14px; width:104px; aspect-ratio:63/88;
+  background:#4A63B8; border-radius:var(--r-card); transform:rotate(-8deg);
 }
-.phase > *{transform:skewX(14deg)}
-.phase .d{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3); white-space:nowrap}
-.phase .t{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); white-space:nowrap; -webkit-text-stroke:.4px var(--carve);}
-.phase .s{font-size:10.5px; font-weight:500; color:var(--t2); line-height:1.45}
-.phase.on{background:var(--neon); border-color:var(--neon); box-shadow:var(--glow)}
-.phase.on .d{color:rgba(2,18,43,.7)}
-.phase.on .t,.phase.on .s{color:#02122b}
-.phase.on .t{--carve:var(--neon)}
-.phase.done{border-color:rgba(63,224,255,.65)}
-.phase.done .t{color:var(--neon)}
-.nowch .btnpair{width:100%}
+.ch-art .tcg{position:relative; transform:rotate(4deg); box-shadow:0 18px 36px rgba(0,0,0,.4)}
 
-/* 게시판 — 입력창과 올리기를 한 줄에 */
-.composer{display:flex; align-items:center; gap:9px}
-.composer input{flex:1 1 auto; min-width:0; min-height:46px}
-.composer .btn{flex:0 0 auto; min-height:46px; padding:0 16px}
+/* 지금 할 일 — 박스 없이 바탕 위에 */
+.todo{display:flex; flex-direction:column; gap:var(--s3); padding:0 var(--s4)}
+.todo .sect-h{margin-bottom:0}
+.todo .day{flex:0 0 auto; font-size:15px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums}
+.todo .mission{margin:0; font-size:15px; font-weight:500; line-height:1.6}
+.phases{display:flex; flex-wrap:wrap; gap:var(--s2); font-size:13px; font-weight:500; color:var(--text-disabled)}
+.phases .phase.on{color:var(--text); font-weight:700}
+.phases .sep{color:var(--text-disabled)}
 
-/* 빈 상태 — 상자 없이 위아래 선 사이에 한 줄만 */
-.rule-note{
-  padding:16px 4px; text-align:center;
-  border-top:1px solid rgba(63,224,255,.25); border-bottom:1px solid rgba(63,224,255,.25);
-  font-size:13px; font-weight:500; color:var(--t3);
+/* 바로가기 — 박스 없는 3열 */
+.shortcuts{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s2); padding:0 var(--s4)}
+.shortcut{
+  display:flex; flex-direction:column; align-items:flex-start; gap:var(--s1);
+  min-height:76px; padding:var(--s2) 0; border:0; background:transparent;
+  color:var(--text); text-align:left;
 }
+.shortcut svg{color:var(--text-sub)}
+.shortcut .nm{font-size:14px; font-weight:700}
+.shortcut .st{font-size:12px; font-weight:500; color:var(--text-sub); display:inline-flex; align-items:center; gap:5px}
+.shortcut .st.alert{color:var(--alert)}
+.shortcut .st .dot{width:7px; height:7px; border-radius:50%; background:var(--alert); flex:0 0 auto}
 
-/* ══ 탭의 머리 ═══════════════════════════════════════════
-   빨간 면은 홈, 금색 면은 상점의 몫이다 — 세 번째 색 면을 만들면
-   어느 것도 주인공이 아니게 된다. 나머지 탭은 색이 아니라 크기로만
-   주인공을 세운다: 제목 하나를 30px 로 올리고 옆 숫자는 작게 둔다. */
-.tophead{padding:17px 16px 19px; border-left:3px solid var(--neon)}
-/* 제목 옆에 칩. 둘 다 nowrap 이라 낱말이 쪼개지지 않고, 폭이 모자라면
-   flex-wrap 이 칩만 아래로 내린다. */
-.tophead .sect-h{flex-wrap:wrap; align-items:center; gap:9px}
-.tophead .sect-h h2{
-  flex:0 1 auto; font-family:var(--disp); font-weight:400; font-size:26px; line-height:1;
-  letter-spacing:-.01em; color:var(--line); text-shadow:2px 2px 0 var(--accent-blue);
-  white-space:nowrap;
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.5px var(--carve);
-}
-.tophead .sect-h .spacer{display:none}
-.tophead .chip{white-space:nowrap}
-.tophead .count{font-size:15px}
-.tophead .bar{height:16px}
-
-/* 피드 — 한 줄씩 좌우로 어긋나게. 똑바로 쌓으면 목록처럼 읽힌다. */
-.feed{display:flex; flex-direction:column; gap:11px; list-style:none; margin:0; padding:0}
-.feed .post:nth-child(odd){margin-right:17px}
-.feed .post:nth-child(even){margin-left:17px}
-.post{
-  display:flex; flex-direction:column; gap:9px; padding:13px;
-  background:var(--panel); border:0; border-left:3px solid rgba(63,224,255,.4);
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
-}
-.post-hd{display:flex; align-items:center; gap:9px}
+/* 게시판 — 바로가기가 가리키는 곳 */
+.board{display:flex; flex-direction:column; gap:var(--s3); padding:0 var(--s4)}
+.composer{display:flex; align-items:center; gap:var(--s2)}
+.composer input{flex:1 1 auto; min-width:0}
+.feed{display:flex; flex-direction:column; gap:var(--s2); list-style:none; margin:0; padding:0}
+.post{display:flex; flex-direction:column; gap:var(--s2); padding:var(--s3); border-radius:var(--r-surface); background:var(--surface)}
+.post-hd{display:flex; align-items:center; gap:var(--s2)}
 .post-hd .who{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:1px}
-.post-hd .nm{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--line); word-break:break-all; -webkit-text-stroke:.4px var(--carve);}
-.post-hd .mt{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2px; color:var(--t3)}
-.post-hd .tm{font-family:var(--num); font-weight:700; font-size:9.5px; color:var(--t3)}
-.post .say{margin:0; font-size:14px; font-weight:500; line-height:1.75; color:var(--t1); word-break:break-word}
+.post-hd .nm{font-size:14px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.post-hd .mt{font-size:12px; font-weight:500; color:var(--text-sub)}
+.post-hd .tm{font-size:12px; font-weight:500; color:var(--text-disabled)}
+.post .say{margin:0; font-size:15px; font-weight:500; line-height:1.6}
+.rule-note{font-size:13px; font-weight:500; color:var(--text-sub); padding:var(--s3) 0}
+
+/* ── 카드 ──────────────────────────────────────── */
+/* 요약 카드 — 그림과 이름과 등급만. 능력과 수치는 상세에서만 보여 준다. */
+.tcg{
+  position:relative; display:block; width:100%; aspect-ratio:63/88;
+  border:2px solid var(--text); border-radius:var(--r-card);
+  background:var(--surface); overflow:hidden; padding:0; text-align:left;
+}
+.tcg.big{border-width:3px}
+.tcg-in{display:flex; flex-direction:column; height:100%; min-height:0}
+.tcg-art{
+  flex:1 1 auto; min-height:0; position:relative; overflow:hidden; background:#0A0F22;
+}
+.tcg-art svg,.tcg-art .art-img{display:block; width:100%; height:100%; object-fit:cover}
+.tcg-ft{
+  flex:0 0 auto; display:flex; align-items:center; gap:var(--s1);
+  padding:6px var(--s2) 7px; background:var(--surface);
+}
+.tcg-name{
+  flex:1 1 auto; min-width:0; font-size:13px; font-weight:800; line-height:1.25;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--text);
+}
+.tcg-stars{flex:0 0 auto; display:inline-flex; gap:1px; color:var(--reward); font-size:11px; line-height:1}
+.tcg.big .tcg-ft{padding:var(--s2) var(--s3) 10px}
+.tcg.big .tcg-name{font-size:17px}
+.tcg.big .tcg-stars{font-size:13px}
+
+/* 미보유 — 테두리 없는 면에 자물쇠와 이름 */
+.tcg.locked{
+  border:0; background:var(--surface);
+  display:flex; align-items:center; justify-content:center;
+}
+.tcg-lock{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  width:100%; height:100%; padding:var(--s2); text-align:center; color:var(--text-disabled);
+}
+.tcg-lock .nm{font-size:12px; font-weight:700; color:var(--text-sub); line-height:1.3}
+.tcg-lock .no{font-size:12px; font-weight:500; color:var(--text-sub)}
+
+/* 상세 카드 — 이름 · 비용 · 속성 · 그림 · 타입 줄 · 능력 · ATK/HP */
+.tcg.big .tcg-hd{
+  flex:0 0 auto; display:flex; align-items:center; gap:var(--s2);
+  padding:10px var(--s3); background:var(--surface);
+}
+.tcg-cost{
+  flex:0 0 auto; min-width:28px; height:28px; padding:0 7px; border-radius:var(--r-card);
+  background:var(--elevated); color:var(--text);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:15px; font-weight:800; font-variant-numeric:tabular-nums;
+}
+.tcg.big .tcg-hd .tcg-name{font-size:17px; white-space:normal}
+.tcg-el{flex:0 0 auto; display:inline-flex}
+.tcg.big .tcg-art{flex:0 0 auto; aspect-ratio:10/7}
+.tcg-type{
+  flex:0 0 auto; display:flex; align-items:center; gap:var(--s2); padding:7px var(--s3);
+  background:var(--elevated); font-size:12px; font-weight:700; color:var(--text-sub);
+}
+.tcg-type .t{flex:1 1 auto; min-width:0}
+.tcg-abil{
+  flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:var(--s2);
+  padding:var(--s3); background:var(--surface);
+}
+.ab-h{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap}
+.ab-h b{font-size:15px; font-weight:800; color:var(--text)}
+.ab-h i{font-style:normal; 
+  padding:2px 8px; border-radius:var(--r-chip); background:var(--elevated);
+  font-size:12px; font-weight:700; color:var(--text-sub);
+}
+.ab-t{margin:0; font-size:13px; font-weight:500; line-height:1.65; color:var(--text-sub)}
+.tcg-noab{font-size:13px; font-weight:500; color:var(--text-disabled)}
+.tcg-flavor{
+  margin-top:auto; padding-top:var(--s2); border-top:1px solid var(--elevated);
+  font-size:12px; font-weight:500; line-height:1.6; color:var(--text-disabled);
+}
+.tcg-stats{
+  flex:0 0 auto; display:flex; align-items:center; gap:var(--s4);
+  padding:10px var(--s3); background:var(--elevated);
+}
+.tcg-stat{display:inline-flex; align-items:baseline; gap:5px; font-size:12px; font-weight:500; color:var(--text-sub)}
+.tcg-stat i{font-style:normal}
+.tcg-stat b{font-size:17px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums}
+.tcg-no{margin-left:auto; font-size:12px; font-weight:500; color:var(--text-disabled); font-variant-numeric:tabular-nums}
+
+.tappable{cursor:pointer}
+
+/* 카드 격자 — 3열 · 가로 10 세로 12 */
+.grid6{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px 10px; padding:0 var(--s4)}
+.grid-sm{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--s2)}
+
+/* ── 계보 ──────────────────────────────────────── */
+.dexhead{display:flex; flex-direction:column; gap:var(--s2); padding:0 var(--s4)}
+.dexhead .k{font-size:13px; font-weight:500; color:var(--text-sub)}
+.dexhead .count{font-size:15px; font-weight:700}
+.filters{padding:0 var(--s4)}
+/* 상성 — 면 하나에 순환 한 줄 */
+/* 한 줄에 다섯 — 좁은 화면에서는 가로로 민다 */
+.elring{display:flex; align-items:center; gap:var(--s1); margin-bottom:var(--s3);
+        overflow-x:auto; scrollbar-width:none}
+.elring::-webkit-scrollbar{display:none}
+.elring > *{flex:0 0 auto}
+.ring-it{display:inline-flex; align-items:center; gap:5px}
+.ring-ic{display:inline-flex; color:var(--el-none)}
+.ring-ic.el-bolt {color:var(--el-bolt)}
+.ring-ic.el-water{color:var(--el-water)}
+.ring-ic.el-fire {color:var(--el-fire)}
+.ring-ic.el-earth{color:var(--el-earth)}
+.ring-ic.el-wind {color:var(--el-wind)}
+.ring-n{font-size:13px; font-weight:700; color:var(--text); white-space:nowrap}
+.ring-ar{color:var(--text-disabled); display:inline-flex; align-items:center}
+
+/* 속성 아이콘 — 색은 아이콘에만 준다 */
+.el{display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; color:var(--el-none)}
+.el.el-bolt {color:var(--el-bolt)}
+.el.el-water{color:var(--el-water)}
+.el.el-fire {color:var(--el-fire)}
+.el.el-earth{color:var(--el-earth)}
+.el.el-wind {color:var(--el-wind)}
 
 /* ── 목록 행 ───────────────────────────────────── */
-.rows{display:flex; flex-direction:column; gap:9px; list-style:none; margin:0; padding:0}
-/* 목록 행 — 왼쪽 네온 획과 사선 잘림. 둥근 모서리는 쓰지 않는다. */
+.rows{display:flex; flex-direction:column; gap:var(--s2); list-style:none; margin:0; padding:0 var(--s4)}
 .row-it{
-  position:relative; display:flex; align-items:center; gap:11px; padding:12px 13px;
-  width:100%; min-height:62px; text-align:left;
-  border:0; border-left:3px solid var(--neon); background:var(--panel); color:var(--t1);
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  display:flex; align-items:center; gap:var(--s3); width:100%; min-height:64px;
+  padding:var(--s3); border:0; border-radius:var(--r-surface);
+  background:var(--surface); color:var(--text); text-align:left;
 }
-.row-it::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.05) 0 2px, transparent 2px 14px);
-}
-.row-it > *{position:relative; z-index:1}
-.row-it[aria-disabled="true"],.row-it[disabled]{opacity:.35; border-left-color:var(--dim)}
+.row-it:active{background:#182448; transform:translateY(1px)}
+.row-it[aria-disabled="true"],.row-it[disabled]{opacity:.45; pointer-events:none}
 .row-it .mark{
-  width:40px; height:40px; flex:0 0 40px; border:1.5px solid var(--neon);
-  background:var(--ink); color:var(--neon);
+  width:40px; height:40px; flex:0 0 40px; border-radius:var(--r-card);
+  background:var(--elevated); color:var(--text-sub);
   display:flex; align-items:center; justify-content:center;
-  transform:skewX(var(--skew));
 }
-.row-it .mark > *{transform:skewX(14deg)}
-
-/* 대화 목록 아바타 — 카드 프레임을 그대로 줄인 것 */
-.mini{
-  flex:0 0 auto; width:50px; display:block;
-  background:var(--line); border:1.5px solid #000; padding:2.5px;
-}
-.mini-in{display:block; width:100%; aspect-ratio:10/7; overflow:hidden; background:#000}
-.mini-in svg,.mini-in .art-img{display:block; width:100%; height:100%; object-fit:cover}
-.row-it.pinky .mark{border-color:var(--neon); color:var(--neon)}
-.row-it .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px}
-.row-it .nm{font-family:var(--disp); font-weight:400; font-size:15px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
-.row-it .sub{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6}
-.row-it .go{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2px; color:var(--t3)}
+.row-it .txt{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px}
+.row-it .nm{font-size:15px; font-weight:700}
+.row-it .sub{font-size:13px; font-weight:500; color:var(--text-sub); line-height:1.5}
+.row-it .go{font-size:12px; font-weight:500; color:var(--text-disabled)}
 .row-it .unread{
-  width:21px; height:21px; flex:0 0 21px; background:var(--alert); border:0;
-  color:#fff; display:inline-flex; align-items:center; justify-content:center;
-  font-family:var(--num); font-weight:700; font-size:9px; box-shadow:0 0 9px var(--alert);
+  width:22px; height:22px; flex:0 0 22px; border-radius:11px; background:var(--alert); border:0;
+  color:#2A0A17; display:inline-flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700;
 }
+/* 대화 목록 아바타 — 요약 카드를 그대로 줄인 것 */
+.mini{flex:0 0 auto; width:44px; display:block; border:2px solid var(--text); border-radius:6px; overflow:hidden}
+.mini-in{display:block; width:100%; aspect-ratio:10/7; background:#0A0F22}
+.mini-in svg,.mini-in .art-img{display:block; width:100%; height:100%; object-fit:cover}
 
 /* ── 덱 ────────────────────────────────────────── */
-.decklist{display:flex; flex-direction:column; gap:7px; list-style:none; margin:0; padding:0}
+.decklist{display:flex; flex-direction:column; gap:var(--s2); list-style:none; margin:0; padding:0 var(--s4)}
 .deckrow{
-  display:flex; align-items:center; gap:9px; padding:8px 10px;
-  border:2px solid var(--dim); background:var(--panel);
+  display:flex; align-items:center; gap:var(--s2); padding:10px var(--s3);
+  border-radius:var(--r-btn); background:var(--surface);
 }
-.deckrow .nm{flex:1 1 auto; min-width:0; font-size:13px; font-weight:500; color:var(--line)}
-.deckrow .fm{font-family:var(--num); font-size:9px; color:var(--t3)}
+.deckrow .nm{flex:1 1 auto; min-width:0; font-size:14px; font-weight:700}
+.deckrow .fm{font-size:12px; font-weight:500; color:var(--text-sub)}
 .deckrow .rm{
-  width:30px; height:30px; border:2px solid var(--dim); background:transparent; color:var(--t3);
-  display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border:0; border-radius:var(--r-card); background:var(--elevated);
+  color:var(--text-sub); display:inline-flex; align-items:center; justify-content:center;
 }
 
 /* ── 승급 ──────────────────────────────────────── */
-.grow-wrap{display:flex; flex-direction:column; gap:14px}
+.grow-wrap{display:flex; flex-direction:column; gap:var(--s4)}
 .grow-wrap .tcg{width:132px; align-self:center}
-.grow-wrap .meter{display:flex; flex-direction:column; gap:12px}
-.lvrow{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+.grow-wrap .meter{display:flex; flex-direction:column; gap:var(--s3)}
+.lvrow{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap}
 .lvrow .lv{
-  min-width:66px; min-height:40px; padding:0 11px; border:2px solid var(--line); background:var(--ink);
-  display:inline-flex; align-items:center; justify-content:center; gap:5px;
+  min-width:72px; min-height:44px; padding:0 var(--s3); border-radius:var(--r-btn);
+  background:var(--elevated); display:inline-flex; align-items:center; justify-content:center; gap:6px;
 }
-.lvrow .lv .k{font-family:var(--num); font-size:9px; letter-spacing:.1em; color:var(--t3)}
-.lvrow .lv .v{font-family:var(--num); font-size:17px; color:var(--hot)}
-.lvrow .lv.next .v{color:var(--line)}
-.lvrow .arrow{color:var(--hot)}
-.deltas{display:flex; gap:8px}
+.lvrow .lv .k{font-size:12px; font-weight:500; color:var(--text-sub)}
+.lvrow .lv .v{font-size:17px; font-weight:800; font-variant-numeric:tabular-nums}
+.lvrow .lv.next .v{color:var(--accent)}
+.lvrow .arrow{color:var(--text-disabled)}
+.deltas{display:flex; gap:var(--s2)}
 .delta{
-  flex:1 1 0; display:flex; align-items:center; gap:7px; min-height:40px; padding:0 11px;
-  border:2px solid var(--dim); background:var(--panel);
+  flex:1 1 0; display:flex; align-items:center; gap:6px; min-height:44px; padding:0 var(--s3);
+  border-radius:var(--r-btn); background:var(--surface);
 }
-.delta .k{flex:1 1 auto; font-family:var(--num); font-size:10px; letter-spacing:.08em; color:var(--t3)}
-.delta .a{font-family:var(--num); font-size:12px; color:var(--t2)}
-.delta .b{font-family:var(--num); font-size:14px; color:var(--hot)}
-.fusefoot{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.delta .k{flex:1 1 auto; font-size:12px; font-weight:500; color:var(--text-sub)}
+.delta .a{font-size:13px; font-weight:500; color:var(--text-sub)}
+.delta .b{font-size:15px; font-weight:700; color:var(--accent)}
+.fusefoot{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap}
 .price{
-  display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 12px;
-  border:2px solid var(--line); background:var(--ink);
+  display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 var(--s3);
+  border-radius:var(--r-btn); background:var(--elevated);
 }
-.price .k{font-family:var(--num); font-size:9px; letter-spacing:.1em; color:var(--t3)}
-.price .v{font-family:var(--num); font-size:14px; color:var(--neon)}
+.price .k{font-size:12px; font-weight:500; color:var(--text-sub)}
+.price .v{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums}
 
 /* ── 봉납 ──────────────────────────────────────── */
-.melt{display:flex; flex-direction:column; gap:14px}
-.melt .out{display:flex; flex-direction:column; gap:10px; padding:14px; border:1.5px solid var(--neon); background:var(--ink)}
-.melt .out .k{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.melt .out .v{font-family:var(--num); font-size:25px; color:var(--neon)}
+.melt{display:flex; flex-direction:column; gap:var(--s4)}
+.melt .out{display:flex; flex-direction:column; gap:var(--s2); padding:var(--s3); border-radius:var(--r-btn); background:var(--elevated)}
+.melt .out .k{font-size:13px; font-weight:500; color:var(--text-sub)}
+.melt .out .v{font-size:25px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums}
 
 /* ── 관계도 ────────────────────────────────────── */
-.bondmap{position:relative; width:100%; height:300px; border:2px solid var(--dim); background:var(--ink); overflow:hidden}
-.bondmap::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(-45deg, rgba(255,255,255,.04) 0 6px, transparent 6px 13px);
-}
-.bondmap svg{position:relative; z-index:1; width:100%; height:100%; display:block}
+.bondmap{position:relative; width:100%; height:300px; border-radius:var(--r-btn); background:var(--bg); overflow:hidden}
+.bondmap svg{width:100%; height:100%; display:block}
 .bondmap .edge{stroke-width:3; stroke-linecap:round}
-.bondmap .edge.link{stroke:#2f6bff}
-.bondmap .edge.deep{stroke:#3fe0ff; stroke-width:5}
-.bondmap .edge.clash{stroke:#FF2B3E; stroke-dasharray:7 7}
-.bondmap .node rect{fill:#1A151F; stroke:#FFFFFF; stroke-width:3}
-.bondmap .node.lime rect{fill:#2f6bff}
-.bondmap .node.pink rect{fill:#FF2B3E}
-.bondmap .node text{font-family:'Gothic A1',sans-serif; font-weight:700; font-size:11px; fill:#F2EDF5; text-anchor:middle}
-.legend{display:flex; gap:10px; flex-wrap:wrap}
-.legend .it{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:400; color:var(--t2)}
-.legend .sw{width:20px; height:3px; background:var(--accent-blue)}
-.legend .sw.clash{background:var(--hot)}
-.legend .sw.deep{height:5px}
+.bondmap .edge.link{stroke:#4A63B8}
+.bondmap .edge.deep{stroke:#55E6F2; stroke-width:4}
+.bondmap .edge.clash{stroke:#FF648D; stroke-dasharray:7 7}
+.bondmap .node rect{fill:#1A2648; stroke:none}
+.bondmap .node.lime rect{fill:#25398A}
+.bondmap .node.pink rect{fill:#3A2140}
+.bondmap .node text{font-family:var(--ui); font-weight:700; font-size:11px; fill:#F4F6FF; text-anchor:middle}
+.legend{display:flex; gap:var(--s3); flex-wrap:wrap; margin-top:var(--s3)}
+.legend .it{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:var(--text-sub)}
+.legend .sw{width:20px; height:3px; border-radius:2px; background:#4A63B8}
+.legend .sw.deep{height:4px; background:var(--accent)}
+.legend .sw.clash{background:var(--alert)}
 
 /* ── 시간표 ────────────────────────────────────── */
-.slots{display:flex; flex-direction:column; gap:10px}
-/* 빈 칸만 남았을 때는 카드 세 장처럼 가로로 늘어놓는다 */
-.slots.row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
-.slots.row .slot-card{min-height:0}
+.slots{display:flex; flex-direction:column; gap:var(--s2); padding:0 var(--s4)}
+.slots.row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s2)}
 .slot-card{
-  position:relative; display:flex; flex-direction:column; gap:7px; padding:14px; min-height:96px;
-  border:0; border-left:3px solid rgba(63,224,255,.3); background:var(--panel); color:var(--t2);
-  text-align:left; align-items:flex-start; justify-content:center; width:100%;
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:6px;
+  width:100%; min-height:96px; padding:var(--s3); border:0; border-radius:var(--r-surface);
+  background:var(--surface); color:var(--text-sub); text-align:left;
 }
-/* 비어 있는 칸은 점선 대신 성긴 사선으로 — 둥근 점선 상자는 시스템 밖이다 */
-.slot-card::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(-18deg, rgba(63,224,255,.08) 0 2px, transparent 2px 12px);
-}
-.slot-card > *{position:relative; z-index:1}
-.slot-card .k{font-family:var(--num); font-weight:700; font-size:9.5px; letter-spacing:2.5px; color:var(--t3)}
-.slot-card .nm{font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
-.slot-card .left{font-family:var(--num); font-weight:700; font-size:19px; color:var(--neon)}
-.slot-card.busy{border-left-color:var(--neon)}
-.slot-card.busy::after{background-image:none}
-.slot-card.ready{border-left-color:var(--neon); background:var(--ink); box-shadow:inset 0 0 18px rgba(63,224,255,.16)}
-.slot-card.ready::after{background-image:none}
-.slot-card.ready .left{color:var(--neon)}
+.slot-card:active{background:#182448; transform:translateY(1px)}
+.slot-card .k{font-size:12px; font-weight:500; color:var(--text-sub)}
+.slot-card .nm{font-size:15px; font-weight:700; color:var(--text)}
+.slot-card .left{font-size:15px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums}
 .slot-card .call{
-  margin-top:6px; width:100%; min-height:40px; border:0;
-  --carve:var(--neon);
-  background:var(--neon); color:#02122b; font-family:var(--disp); font-weight:400; font-size:14px;
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.4px var(--carve);
-  display:inline-flex; align-items:center; justify-content:center;
-  transform:skewX(var(--skew)); box-shadow:var(--glow);
+  margin-top:var(--s2); width:100%; min-height:44px; border:0; border-radius:var(--r-btn);
+  background:var(--elevated); color:var(--text); font-size:14px; font-weight:700;
 }
-.slot-card .call > *{transform:skewX(14deg)}
-
-/* 빈 슬롯 — 카드 비율 점선 칸. 가운데에 + 마름모와 '카드 보내기' */
-.empty-slot{
-  aspect-ratio:63/88; padding:10px 8px; gap:0; justify-content:flex-start;
-  background:transparent; border:1.5px dashed rgba(63,224,255,.4); border-left-width:1.5px;
-  clip-path:none;
-}
-.empty-slot::after{background-image:none}
-.empty-slot .k{align-self:flex-start; white-space:nowrap}
-.empty-slot .mid{
-  flex:1 1 auto; width:100%; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:9px;
-}
+.slot-card.ready .call{background:var(--accent); color:var(--bg)}
+/* 빈 칸 — 테두리 대신 명도만 낮춘다 */
+.empty-slot{align-items:center; justify-content:center; gap:var(--s2); background:var(--surface); color:var(--text-disabled)}
 .empty-slot .plus{
-  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
-  border:1.5px solid var(--neon); color:var(--neon); transform:rotate(45deg);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:var(--r-card); background:var(--elevated);
+  color:var(--text-sub); font-size:18px; font-weight:700; line-height:1;
 }
-.empty-slot .plus .g{
-  transform:rotate(-45deg);
-  font-family:var(--num); font-weight:700; font-size:19px; line-height:1;
-}
-.empty-slot .cta{
-  font-family:var(--disp); font-weight:400; font-size:12px; color:var(--neon); white-space:nowrap;
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.3px var(--carve);
-}
+.empty-slot .cta{font-size:13px; font-weight:700; color:var(--text-sub)}
 
 /* ── 뽑기 ──────────────────────────────────────── */
-/* ══ 상점 ════════════════════════════════════════════════
-   사선 평행사변형 안에 키 일러스트. 시안·검정 이중 테두리. */
-.banner{position:relative; margin:0 -12px; padding-bottom:34px}
-.banner-art{
-  position:relative; height:186px; overflow:hidden;
-  background:var(--panel); border-top:1.5px solid var(--neon); border-bottom:1.5px solid var(--neon);
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 34px), 0 100%);
-  box-shadow:inset 0 0 0 3px #000;
-}
-.banner-art img{width:100%; height:100%; object-fit:cover; display:block; opacity:.92}
-.banner-art::after{                    /* 사선 띠를 한 겹 더 얹어 속도감 */
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:repeating-linear-gradient(-18deg, rgba(3,8,32,.42) 0 3px, transparent 3px 14px);
-}
+.banner{display:flex; flex-direction:column; gap:var(--s3); padding:0 var(--s4)}
+.banner-art{position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--r-surface); overflow:hidden; background:var(--surface)}
+.banner-art img{width:100%; height:100%; object-fit:cover; display:block}
 .banner-tag{
-  position:absolute; top:10px; left:12px; z-index:2;
-  padding:3px 9px; background:#000; color:var(--neon);
-  font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px;
-  transform:skewX(var(--skew));
+  position:absolute; left:var(--s3); top:var(--s3); padding:0 10px; min-height:26px;
+  display:inline-flex; align-items:center; border-radius:13px;
+  background:rgba(11,16,36,.72); color:var(--text); font-size:12px; font-weight:700; letter-spacing:.1em;
 }
-/* 제목은 배너 아래쪽에 겹친다 */
-.banner-ttl{
-  position:relative; width:fit-content; max-width:calc(100% - 28px);
-  margin:-46px 14px 0; z-index:2;
-  display:flex; align-items:flex-end; gap:8px; transform:skewX(var(--skew));
-}
-.banner-ttl .l1{
-  font-family:var(--disp); font-weight:400; font-size:26px; line-height:1;
-  /* 속 빈 글자는 획이 굵을수록 속공간부터 메워진다 — 1px 이 한글의 한계다 */
-  color:transparent; -webkit-text-stroke:1px var(--neon); padding-bottom:6px;
-}
-.banner-ttl .l2{
-  font-family:var(--disp); font-weight:400; font-size:68px; line-height:.82; color:#fff;
-  /* 3px 은 글자 뒤로 깔리며 양옆으로 1.5px 씩 번져 폭·풍의 속공간을 닫는다 */
-  -webkit-text-stroke:1.5px #000;
-  text-shadow:5px 6px 0 var(--accent-blue);
-  paint-order:stroke fill;
-}
-.banner-odds{
-  position:absolute; right:12px; bottom:40px; z-index:3; margin:0;
-  display:flex; gap:14px; text-align:right;
-}
+.banner-ttl{margin:0; font-size:22px; font-weight:800; line-height:1.3}
+.banner-odds{display:flex; gap:var(--s6); margin:0}
 .banner-odds div{display:flex; flex-direction:column; gap:2px}
-.banner-odds dt{font-family:var(--num); font-weight:700; font-size:8px; letter-spacing:2px; color:var(--t3)}
-.banner-odds dd{margin:0; font-family:var(--num); font-weight:700; font-size:15px; color:var(--neon)}
+.banner-odds dt{font-size:12px; font-weight:500; color:var(--text-sub)}
+.banner-odds dd{margin:0; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums}
 
-/* PICK UP ★3 — 좌우 ±2°, 가운데는 올리고 네온 */
-.pickup{margin-top:4px}
-.pickup-h{
-  margin:0 0 10px; font-family:var(--num); font-weight:700; font-size:11px; letter-spacing:3px;
-  color:var(--t2);
-}
-.pickup-h b{color:var(--neon)}
-.pickup-row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; align-items:end}
-.pick{display:block}
-.pick.p0{transform:rotate(-2deg)}
-.pick.p2{transform:rotate(2deg)}
-.pick.p1{transform:translateY(-12px)}
-.pick.p1 .tcg{box-shadow:3px 4px 0 #000, var(--glow)}
-.goods{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
+.pickup{display:flex; flex-direction:column; gap:var(--s3); padding:0 var(--s4)}
+.pickup-h{margin:0; font-size:17px; font-weight:800}
+.pickup-h b{color:var(--reward)}
+.pulls{display:flex; flex-direction:column; gap:var(--s2); padding:0 var(--s4)}
+/* 값은 버튼 글자보다 한 단계 낮춘다 */
+.btn .sub{font-size:13px; font-weight:500; opacity:.8}
+.pickup-row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.goods{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--s2); padding:0 var(--s4)}
 .good{
-  display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:11px;
-  border:2px solid var(--dim); background:var(--panel);
+  display:flex; flex-direction:column; gap:6px; align-items:flex-start;
+  padding:var(--s3); border:0; border-radius:var(--r-surface); background:var(--surface); color:var(--text);
 }
-.good .amt{font-family:var(--num); font-size:16px; color:var(--neon)}
-.good .nm{font-size:11.5px; font-weight:400; color:var(--t2)}
-.good button{
-  width:100%; min-height:32px; border:2px solid var(--line); background:var(--line); color:var(--ink);
-  font-family:var(--ui-s); font-weight:600; font-size:12px;
-}
+.good .amt{font-size:17px; font-weight:800; font-variant-numeric:tabular-nums}
+.good .nm{font-size:12px; font-weight:500; color:var(--text-sub)}
+.gifts{display:flex; flex-direction:column; gap:var(--s2); padding:0 var(--s4)}
 
 /* ── 풀스크린 ──────────────────────────────────── */
 .full{
@@ -663,267 +381,208 @@ body.fullscreen-on .tabbar{display:none}
 }
 .full > .topbar{
   position:sticky; top:0; z-index:3; flex:0 0 auto;
-  display:flex; align-items:center; gap:10px; padding:12px;
-  background:var(--bg); border-bottom:3px solid var(--line);
+  display:flex; align-items:center; gap:var(--s2); height:var(--hd); padding:0 var(--s2) 0 var(--s1);
+  background:var(--bg); border-bottom:1px solid var(--elevated);
 }
 .exit{
-  width:40px; height:40px; flex:0 0 40px; border:2px solid var(--line);
-  background:var(--panel); color:var(--line);
+  width:44px; height:44px; flex:0 0 44px; border:0; border-radius:var(--r-btn);
+  background:transparent; color:var(--text);
   display:inline-flex; align-items:center; justify-content:center;
 }
-.full > .topbar .ttl{display:flex; flex-direction:column; gap:1px; min-width:0}
-.full > .topbar .ttl .n{font-family:var(--ui); font-weight:400; font-size:15.5px; color:var(--line)}
-.full > .topbar .ttl .s{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
+.exit:active{background:var(--elevated)}
+.full > .topbar .ttl{display:flex; flex-direction:column; gap:0; min-width:0}
+.full > .topbar .ttl .n{font-size:17px; font-weight:800; line-height:1.3}
+.full > .topbar .ttl .s{font-size:12px; font-weight:500; color:var(--text-sub)}
 
-.log{flex:1 1 auto; display:flex; flex-direction:column; gap:11px; padding:14px}
-.bub{display:flex; gap:9px; align-items:flex-start}
-.bub .txt{flex:0 1 auto; min-width:0; padding:10px 13px; border:2px solid var(--dim); background:var(--panel)}
-.bub .nm{display:block; font-family:var(--ui-s); font-weight:600; font-size:11.5px; color:var(--t3); margin-bottom:5px}
-.bub .ln{margin:0; font-size:14px; font-weight:400; line-height:1.75; color:var(--t1); word-break:break-word}
-.bub.gm .txt{border-color:var(--hot); background:var(--ink)}
-.bub.gm .nm{color:var(--hot)}
+.log{flex:1 1 auto; display:flex; flex-direction:column; gap:var(--s3); padding:var(--s4)}
+.bub{display:flex; gap:var(--s2); align-items:flex-start}
+.bub .txt{flex:0 1 auto; min-width:0; padding:10px var(--s3); border-radius:var(--r-surface); background:var(--surface)}
+.bub .nm{display:block; font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:4px}
+.bub .ln{margin:0; font-size:15px; font-weight:500; line-height:1.65}
+.bub.gm .txt{background:var(--elevated)}
+.bub.gm .nm{color:var(--accent)}
 .bub.me{flex-direction:row-reverse}
-.bub.me .txt{border-color:var(--line); background:var(--line)}
-.bub.me .nm{color:var(--ink); text-align:right}
-.bub.me .ln{color:var(--ink)}
+.bub.me .txt{background:var(--accent)}
+.bub.me .nm{color:rgba(11,16,36,.7); text-align:right}
+.bub.me .ln{color:var(--bg)}
 .roll{
-  align-self:center; display:inline-flex; align-items:center; gap:9px; min-height:40px; padding:0 16px;
-  border:2px solid var(--line); background:var(--ink); transform:skewX(-9deg);
+  align-self:center; display:inline-flex; align-items:center; gap:var(--s2); min-height:44px;
+  padding:0 var(--s4); border-radius:var(--r-chip); background:var(--elevated);
 }
-.roll > *{transform:skewX(9deg)}
-.roll .d{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.roll .v{font-family:var(--num); font-size:16px; color:var(--neon)}
-.roll .j{font-family:var(--ui); font-weight:400; font-size:13px; color:var(--line)}
-.roll.fail .v{color:var(--hot)}
-.sysline{align-self:center; font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3); text-align:center}
+.roll .d{font-size:12px; font-weight:500; color:var(--text-sub)}
+.roll .v{font-size:17px; font-weight:800; color:var(--accent); font-variant-numeric:tabular-nums}
+.roll .j{font-size:13px; font-weight:700}
+.roll.fail .v{color:var(--alert)}
+.sysline{align-self:center; font-size:12px; font-weight:500; color:var(--text-disabled); text-align:center}
 
 .deck-bar{
   position:sticky; bottom:0; z-index:2; flex:0 0 auto;
-  display:flex; flex-direction:column; gap:9px; padding:12px;
-  padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));
-  border-top:3px solid var(--line); background:var(--bg);
+  display:flex; flex-direction:column; gap:var(--s2); padding:var(--s3) var(--s4);
+  padding-bottom:calc(var(--s3) + env(safe-area-inset-bottom, 0px));
+  border-top:1px solid var(--elevated); background:var(--bg);
 }
-.choices{display:flex; flex-direction:column; gap:8px}
+.choices{display:flex; flex-direction:column; gap:var(--s2)}
 .choice{
-  width:100%; min-height:48px; padding:9px 13px; border:2px solid var(--dim);
-  background:var(--panel); color:var(--line); font-family:var(--ui); font-weight:400; font-size:14px;
-  text-align:left; line-height:1.45; display:flex; align-items:center; gap:9px;
+  width:100%; min-height:48px; padding:10px var(--s3); border:0; border-radius:var(--r-btn);
+  background:var(--elevated); color:var(--text); font-size:14px; font-weight:500;
+  text-align:left; line-height:1.5; display:flex; align-items:center; gap:var(--s2);
 }
 .choice .no{
-  width:24px; height:24px; flex:0 0 24px; border:2px solid var(--hot); color:var(--hot);
-  display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:10px;
+  width:24px; height:24px; flex:0 0 24px; border-radius:12px; background:var(--surface);
+  color:var(--text-sub); display:inline-flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700;
 }
-.talk{display:flex; gap:8px}
-.talk input{flex:1 1 auto; min-width:0; min-height:44px}
+.talk{display:flex; gap:var(--s2)}
+.talk input{flex:1 1 auto; min-width:0}
 .talk .send{
-  min-height:44px; padding:0 15px; border:2px solid var(--line); background:var(--hot);
-  color:var(--line); font-family:var(--ui); font-weight:400; font-size:13px;
+  min-height:48px; padding:0 var(--s4); border:0; border-radius:var(--r-btn);
+  background:var(--elevated); color:var(--text); font-size:14px; font-weight:700;
 }
-.field{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
-.hand{position:relative; height:132px; flex:0 0 132px; display:flex; align-items:flex-end; justify-content:center}
 
 /* 결과 · 뽑기 연출 */
-.result{align-items:center; justify-content:center; padding:18px}
-.result .inner{width:100%; display:flex; flex-direction:column; gap:16px; align-items:center}
-.result .win{font-family:var(--disp); font-weight:400; font-size:48px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
-.result .sub{font-family:var(--num); font-size:10px; letter-spacing:.18em; color:var(--t2); text-align:center}
-.rewards{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; width:100%}
-.gains{display:flex; flex-direction:column; gap:8px; width:100%}
-.gain{display:flex; align-items:center; gap:9px; min-height:42px; padding:0 14px; border:2px solid var(--line); background:var(--panel)}
-.gain .k{font-family:var(--num); font-size:9.5px; letter-spacing:.1em; color:var(--t3)}
-.gain .v{font-family:var(--num); font-size:15px; color:var(--neon)}
-.result .acts{display:flex; flex-direction:column; gap:9px; width:100%}
-.reveal{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:18px}
-.reveal .hdline{font-family:var(--disp); font-weight:400; font-size:32px; line-height:1; color:var(--hot); text-align:center; transform:skewX(-7deg)}
-.reveal .pulled{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; width:100%}
-
-.reveal .acts{display:flex; flex-direction:column; gap:9px; width:100%}
+.result{align-items:center; justify-content:center; padding:var(--s4)}
+.result .inner{width:100%; display:flex; flex-direction:column; gap:var(--s4); align-items:center}
+.result .win{font-size:34px; font-weight:900; letter-spacing:-.03em; text-align:center; color:var(--accent)}
+.result .win.bad{color:var(--alert)}
+.result .sub{font-size:13px; font-weight:500; color:var(--text-sub); text-align:center}
+.rewards{display:flex; gap:var(--s3); flex-wrap:wrap; justify-content:center; width:100%}
+.gains{display:flex; flex-direction:column; gap:var(--s2); width:100%}
+.gain{display:flex; align-items:center; gap:var(--s2); min-height:44px; padding:0 var(--s3); border-radius:var(--r-btn); background:var(--surface)}
+.gain .k{font-size:13px; font-weight:500; color:var(--text-sub)}
+.gain .v{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums}
+.result .acts,.reveal .acts{display:flex; flex-direction:column; gap:var(--s2); width:100%}
+.reveal{flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--s4); padding:var(--s4)}
+.reveal .hdline{font-size:22px; font-weight:800; text-align:center}
+.reveal .pulled{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; width:100%}
 
 /* 연대기 */
-.chron{display:flex; flex-direction:column; gap:10px; padding:14px; border:2px solid var(--line); background:var(--panel)}
-.chron.lost{border-style:dashed; border-color:var(--dim); background:transparent; color:var(--t3)}
-.chron .hd-r{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
-.chron .n{font-family:var(--num); font-size:9.5px; letter-spacing:.12em; color:var(--t3)}
-.chron h3{margin:0; font-family:var(--ui); font-weight:400; font-size:17px; color:var(--line)}
-.chron .res{font-family:var(--ui); font-weight:400; font-size:13.5px; color:var(--neon)}
-.chron .res.bad{color:var(--hot)}
-.chron .body-t{margin:0; font-size:13.5px; font-weight:400; line-height:1.85; color:var(--t2)}
+.chron{display:flex; flex-direction:column; gap:var(--s2); padding:var(--s4); border-radius:var(--r-surface); background:var(--surface)}
+.chron.lost{background:transparent; color:var(--text-disabled)}
+.chron .hd-r{display:flex; align-items:center; gap:var(--s2); flex-wrap:wrap}
+.chron .n{font-size:12px; font-weight:700; letter-spacing:.1em; color:var(--accent)}
+.chron h3{margin:0; font-size:17px; font-weight:800}
+.chron .res{font-size:13px; font-weight:700; color:var(--accent)}
+.chron .res.bad{color:var(--alert)}
+.chron .body-t{margin:0; font-size:14px; font-weight:500; line-height:1.7; color:var(--text-sub)}
 
-/* 호감도 — 기울인 막대 다섯 칸 */
-.bondbar{display:flex; align-items:center; gap:4px}
-.bondbar .pip{width:15px; height:8px; border:1.5px solid rgba(63,224,255,.35);
-              transform:skewX(var(--skew))}
-.bondbar .pip.on{background:var(--neon); border-color:var(--neon); box-shadow:var(--glow)}
-
-/* ── 오원소 ────────────────────────────────────
-   색 셋(주홍·금색·흰색)과 모양만으로 가른다. 테두리 장난은 안 한다 —
-   점선이 크롭 마크처럼 보여서 뺐다. */
-.el{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:20px; height:20px; flex:0 0 20px; border:1.5px solid currentColor;
-  background:var(--ink);
-}
-.el.el-bolt {color:var(--el-bolt)}
-.el.el-water{color:var(--el-water)}
-.el.el-fire {color:var(--el-fire)}
-.el.el-earth{color:var(--el-earth)}
-.el.el-wind {color:var(--el-wind)}
-.el.el-none {color:var(--el-none)}
-
-.ring{display:flex; align-items:center; gap:2px; flex-wrap:wrap}
-.ring-it{display:inline-flex; align-items:center; gap:4px}
-.ring-ic{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:30px; height:30px; flex:0 0 30px; border:1.5px solid currentColor;
-  background:var(--ink);
-}
-.ring-ic.el-bolt {color:var(--el-bolt)}
-.ring-ic.el-water{color:var(--el-water)}
-.ring-ic.el-fire {color:var(--el-fire)}
-.ring-ic.el-earth{color:var(--el-earth)}
-.ring-ic.el-wind {color:var(--el-wind)}
-.ring-ic.el-none {color:var(--el-none)}
-.ring-n{font-family:var(--ui-s); font-weight:600; font-size:11px; color:var(--t1)}
-.ring-ar{color:var(--t3); display:inline-flex}
+/* 호감도 — 다섯 칸 */
+.bondbar{display:flex; align-items:center; gap:3px}
+.bondbar .pip{width:14px; height:4px; border-radius:2px; background:var(--elevated)}
+.bondbar .pip.on{background:var(--accent)}
 
 /* ── 전투 ──────────────────────────────────────── */
-.bwrap{flex:1 1 auto; display:flex; flex-direction:column; gap:10px; padding:10px 10px 0; min-height:0; justify-content:space-between; padding-bottom:10px}
-.bside{display:flex; flex-direction:column; gap:7px}
+.bwrap{flex:1 1 auto; display:flex; flex-direction:column; gap:var(--s2); padding:var(--s2) var(--s3); min-height:0; justify-content:space-between}
+.bside{display:flex; flex-direction:column; gap:6px}
 .bside.foe{order:0}
-.bhead{display:flex; align-items:center; gap:7px}
+.bhead{display:flex; align-items:center; gap:var(--s2)}
 .bface{
-  width:28px; height:28px; flex:0 0 28px; border:2px solid var(--line); background:var(--panel);
-  display:inline-flex; align-items:center; justify-content:center; color:var(--neon);
+  width:32px; height:32px; flex:0 0 32px; border-radius:var(--r-card); background:var(--elevated);
+  display:inline-flex; align-items:center; justify-content:center; color:var(--text-sub);
 }
-.bside.foe .bface{color:var(--hot)}
-.bname{font-family:var(--ui-s); font-weight:600; font-size:12px; color:var(--line); max-width:76px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.bhp{flex:1 1 auto; height:11px; border:2px solid var(--line); background:var(--ink); overflow:hidden; transform:skewX(-14deg)}
-.bhp > i{display:block; height:100%; background:var(--neon)}
-.bside.foe .bhp > i{background:var(--hot)}
-.bnum{font-family:var(--num); font-size:12px; color:var(--line); font-variant-numeric:tabular-nums; min-width:24px; text-align:right}
+.bname{font-size:13px; font-weight:700; max-width:84px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bhp{flex:1 1 auto; height:6px; border-radius:3px; background:var(--elevated); overflow:hidden}
+.bhp > i{display:block; height:100%; border-radius:3px; background:var(--accent)}
+.bside.foe .bhp > i{background:var(--alert)}
+.bnum{font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; min-width:26px; text-align:right}
 .btarget{
-  min-height:26px; padding:0 9px; border:2px solid var(--hot); background:var(--hot);
-  color:var(--line); font-family:var(--ui-s); font-weight:600; font-size:11px;
+  min-height:28px; padding:0 10px; border:0; border-radius:14px;
+  background:var(--elevated); color:var(--text); font-size:12px; font-weight:700;
 }
 
-.bfield{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px}
+.bfield{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px}
 .bslot{
-  position:relative; height:104px; border:2px dashed var(--dim); background:var(--panel);
+  position:relative; height:104px; border-radius:var(--r-card); background:var(--surface);
   display:flex; align-items:center; justify-content:center; overflow:hidden;
 }
-.bslot.pick{border-style:solid; border-color:var(--neon)}
+.bslot.pick{outline:2px solid var(--accent); outline-offset:-2px}
 .bunit{
-  position:absolute; inset:3px; display:flex; flex-direction:column; gap:3px; padding:5px;
-  border:2px solid var(--line); background:var(--ink); text-align:left;
+  position:absolute; inset:3px; display:flex; flex-direction:column; gap:3px; padding:6px;
+  border:0; border-radius:var(--r-card); background:var(--elevated); color:var(--text); text-align:left;
 }
-/* 수비 표시 — 유희왕처럼 눕힌다. 칸보다 가로가 기니 조금 줄인다 */
-.bunit.def{
-  inset:3px; transform:rotate(90deg) scale(.82); transform-origin:center;
-  background:var(--panel); border-color:var(--neon);
+.bunit.def{transform:rotate(90deg) scale(.82); transform-origin:center; background:var(--surface)}
+.bunit.sel{outline:2px solid var(--accent); outline-offset:-2px}
+.bunit.shield{outline:2px solid var(--accent); outline-offset:-2px}
+.bunit.sick{opacity:.55}
+.bunit .bn{
+  flex:1 1 auto; padding-left:20px; font-size:11px; font-weight:700; line-height:1.3;
+  overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
 }
-.bunit.sel{border-color:var(--neon); box-shadow:0 0 0 2px rgba(63,224,255,.5)}
-.bunit.sick{opacity:.6}
-.bunit .bn{flex:1 1 auto; padding-left:19px; font-family:var(--ui-s); font-weight:600; font-size:11px;
-  color:var(--line); line-height:1.25; overflow:hidden;
-  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
 .bunit .bs{flex:0 0 auto; display:flex; gap:3px; align-items:center}
 .bunit .ba,.bunit .bd{
-  flex:1 1 0; text-align:center; font-family:var(--num); font-size:11px; padding:2px 0;
-  border:2px solid var(--line); line-height:1;
+  flex:1 1 0; text-align:center; font-size:11px; font-weight:700; padding:3px 0;
+  border-radius:4px; line-height:1; font-variant-numeric:tabular-nums;
 }
-.bunit .ba{background:var(--line); color:var(--ink)}
-.bunit .bd{background:var(--ink); color:var(--t1)}
-.bunit .el{position:absolute; top:4px; left:4px; width:15px; height:15px; flex:0 0 15px; border-width:2px}
-.bunit .pos{position:absolute; top:5px; right:4px; font-family:var(--num); font-size:7.5px; color:var(--t3)}
-.bunit.def .pos{color:var(--neon)}
+.bunit .ba{background:var(--text); color:var(--bg)}
+.bunit .bd{background:var(--bg); color:var(--text)}
+.bunit .el{position:absolute; top:5px; left:5px}
+.bunit .pos{position:absolute; top:5px; right:6px; font-size:10px; font-weight:700; color:var(--text-disabled)}
+.bunit.def .pos{color:var(--accent)}
 
 .btraps{display:flex; gap:5px; justify-content:center}
 .btrap{
-  width:34px; height:22px; border:2px solid var(--dim); background:var(--panel);
+  width:36px; height:22px; border-radius:4px; background:var(--surface);
   display:inline-flex; align-items:center; justify-content:center;
-  font-family:var(--num); font-size:8px; color:var(--t3);
+  font-size:11px; font-weight:700; color:var(--text-disabled);
 }
-.btrap.set{border-color:var(--hot); color:var(--hot); background:var(--ink)}
+.btrap.set{background:var(--elevated); color:var(--accent)}
 
-.bbar{display:flex; align-items:center; gap:8px; padding:5px 8px; border:2px solid var(--line); background:var(--panel)}
-.bbar .t{font-family:var(--ui-s); font-weight:600; font-size:12px; color:var(--hot)}
-.ichor{display:inline-flex; flex-wrap:wrap; gap:2px; max-width:132px; justify-content:flex-end}
-.ichor i{width:9px; height:15px; border:2px solid var(--t3); display:block; background:var(--ink)}
-.ichor i.on{background:var(--neon); border-color:var(--neon)}
+.bbar{display:flex; align-items:center; gap:var(--s2); padding:6px var(--s3); border-radius:var(--r-btn); background:var(--surface)}
+.bbar .t{font-size:13px; font-weight:700; color:var(--accent)}
+.ichor{display:inline-flex; flex-wrap:wrap; gap:3px; max-width:140px; justify-content:flex-end}
+.ichor i{width:8px; height:14px; border-radius:2px; display:block; background:var(--elevated)}
+.ichor i.on{background:var(--accent)}
 
 .bbottom{
-  flex:0 0 auto; display:flex; flex-direction:column; gap:7px; padding:8px 10px;
-  padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));
-  border-top:3px solid var(--line); background:var(--bg);
+  flex:0 0 auto; display:flex; flex-direction:column; gap:var(--s2); padding:var(--s2) var(--s3);
+  padding-bottom:calc(var(--s2) + env(safe-area-inset-bottom, 0px));
+  border-top:1px solid var(--elevated); background:var(--bg);
 }
-/* 설명이 들어오면 줄을 바꿔야 한다 — 같은 줄에 두면 버튼이 세로로
-   찌그러져 '발 / 동 / 한 / 다' 가 된다. */
-.bacts{display:flex; flex-wrap:wrap; gap:6px; min-height:0}
+.bacts{display:flex; flex-wrap:wrap; gap:6px}
+.bacts:empty{display:none}
 /* 고른 카드가 무슨 일을 하는지 — 내는 자리에서 읽혀야 소용이 있다.
    버튼과 같은 줄에 두면 버튼이 세로로 찌그러져 '발 / 동 / 한 / 다' 가 된다. */
 .actnote{
-  flex:1 0 100%; display:flex; flex-direction:column; gap:3px; margin-bottom:2px;
-  padding:9px 12px; background:var(--panel); border-left:3px solid var(--neon);
+  flex:1 0 100%; display:flex; flex-direction:column; gap:2px;
+  padding:10px var(--s3); border-radius:var(--r-btn); background:var(--surface);
 }
-.actnote b{font-family:var(--disp); font-weight:400; font-size:14px; color:var(--neon); -webkit-text-stroke:.4px var(--carve);}
-.actnote span{font-size:12px; font-weight:500; color:var(--t2); line-height:1.6; word-break:keep-all}
-.bacts:empty{display:none}
+.actnote b{font-size:14px; font-weight:800; color:var(--text)}
+.actnote span{font-size:12px; font-weight:500; color:var(--text-sub); line-height:1.6}
 .bacts button{
-  --carve:var(--neon);
-  flex:1 1 0; min-height:40px; border:0; background:var(--neon); color:#02122b;
-  font-family:var(--disp); font-weight:400; font-size:13.5px;
-  transform:skewX(var(--skew));
-  /* 획 깎기 — 배경색 한 겹을 글자 위에 덮어 ㅇ·ㅎ 속공간을 돌려준다.
-     paint-order 를 주면 획이 글자 뒤로 가 깎이지 않는다. */
-  -webkit-text-stroke:.4px var(--carve);
+  flex:1 1 0; min-height:48px; border:0; border-radius:var(--r-btn);
+  background:var(--elevated); color:var(--text); font-size:15px; font-weight:700;
 }
-.bacts button > *{transform:skewX(14deg)}
-.bacts button.ghost{background:transparent; border:1.5px solid rgba(63,224,255,.4); color:var(--t2)}
-.bhand{display:flex; gap:5px; overflow-x:auto; padding-bottom:3px; scrollbar-width:none}
+.bacts button.primary{background:var(--accent); color:var(--bg)}
+.bhand{display:flex; gap:6px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none}
 .bhand::-webkit-scrollbar{display:none}
 .hcard{
-  flex:0 0 68px; height:94px; display:flex; flex-direction:column; gap:2px; padding:4px;
-  border:2px solid var(--line); background:var(--panel); text-align:left;
+  flex:0 0 70px; height:96px; display:flex; flex-direction:column; gap:3px; padding:6px;
+  border:0; border-radius:var(--r-card); background:var(--surface); color:var(--text); text-align:left;
 }
-.hcard.sel{border-color:var(--neon); box-shadow:0 0 0 2px rgba(63,224,255,.5)}
+.hcard.sel{outline:2px solid var(--accent); outline-offset:-2px}
 .hcard.no{opacity:.4}
-.hcard .hc{
-  width:17px; height:17px; border:2px solid var(--line); background:var(--hot); color:var(--line);
-  display:inline-flex; align-items:center; justify-content:center; font-family:var(--num); font-size:9px;
-}
-.hcard .hk{font-family:var(--num); font-size:6.5px; letter-spacing:.06em; color:var(--t3)}
-.hcard .hn{flex:1 1 auto; font-family:var(--ui-s); font-weight:600; font-size:9.5px; color:var(--line);
-  line-height:1.2; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
-.hcard .hs{flex:0 0 auto; font-family:var(--num); font-size:9px; color:var(--neon)}
 .hcard .top{display:flex; align-items:center; justify-content:space-between; gap:3px}
-
-.blog{display:flex; flex-direction:column; gap:5px; max-height:50vh; overflow-y:auto; margin-bottom:14px}
-.blog p{margin:0; font-size:12px; font-weight:400; line-height:1.6; color:var(--t2)}
-.blog p.good{color:var(--neon)}
-.blog p.bad{color:var(--hot)}
-
-
-/* ══ 카드 상세 ═══════════════════════════════════════════
-   큰 카드 300px 를 가운데 두고, 속성 색 빛과 검은 하드 그림자를 준다.
-   작은 카드에서 줄인 것(능력 전문·설정 문구)을 여기서 돌려받는다. */
-.detbody{padding:18px 12px 30px; display:flex; flex-direction:column; gap:18px; align-items:center}
-.detcard{width:min(300px, calc(100% - 24px))}
-.detcard .tcg{filter:drop-shadow(0 0 18px rgba(63,224,255,.35))}
-.detcard[data-el=bolt]  .tcg{filter:drop-shadow(0 0 18px rgba(255,210,63,.4))}
-.detcard[data-el=water] .tcg{filter:drop-shadow(0 0 18px rgba(63,224,255,.45))}
-.detcard[data-el=fire]  .tcg{filter:drop-shadow(0 0 18px rgba(255,122,89,.45))}
-.detcard[data-el=earth] .tcg{filter:drop-shadow(0 0 18px rgba(217,179,108,.45))}
-.detcard[data-el=wind]  .tcg{filter:drop-shadow(0 0 18px rgba(168,240,198,.45))}
-
-/* 카드 아래 정보 3칸 */
-.detfacts{--carve:var(--bg); display:flex; gap:0; width:min(340px,100%); margin:0; border:1px solid rgba(63,224,255,.35)}
-.detfacts div{
-  flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:4px;
-  padding:11px 6px 12px;
+.hcard .hc{
+  width:20px; height:20px; border-radius:var(--s1); background:var(--elevated); color:var(--text);
+  display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
 }
-.detfacts div + div{border-left:1px solid rgba(63,224,255,.22)}
-.detfacts dt{font-family:var(--num); font-weight:700; font-size:9px; letter-spacing:2.5px; color:var(--t3)}
-.detfacts dd{margin:0; font-family:var(--disp); font-weight:400; font-size:17px; color:var(--line); -webkit-text-stroke:.4px var(--carve);}
-.detbody .btnpair{width:min(340px,100%)}
+.hcard .hk{font-size:11px; font-weight:500; color:var(--text-disabled)}
+.hcard .hn{
+  flex:1 1 auto; font-size:11px; font-weight:700; line-height:1.25;
+  overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+}
+.hcard .hs{flex:0 0 auto; font-size:11px; font-weight:700; color:var(--text-sub); font-variant-numeric:tabular-nums}
+
+.blog{display:flex; flex-direction:column; gap:var(--s1); max-height:50vh; overflow-y:auto; margin-bottom:var(--s4)}
+.blog p{margin:0; font-size:13px; font-weight:500; line-height:1.6; color:var(--text-sub)}
+.blog p.good{color:var(--accent)}
+.blog p.bad{color:var(--alert)}
+
+/* ── 카드 상세 ─────────────────────────────────── */
+.detbody{padding:var(--s4) var(--s4) var(--s8); display:flex; flex-direction:column; gap:var(--s6); align-items:center}
+.detcard{width:min(300px, calc(100% - 32px))}
+.detfacts{display:flex; gap:0; width:min(340px,100%); margin:0; border-radius:var(--r-surface); background:var(--surface)}
+.detfacts div{flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:var(--s1); padding:var(--s3) var(--s2)}
+.detfacts dt{font-size:12px; font-weight:500; color:var(--text-sub)}
+.detfacts dd{margin:0; font-size:15px; font-weight:700}
+.detacts{display:flex; flex-direction:column; gap:var(--s2); width:min(340px,100%); align-items:stretch}
 .detbody .msg{text-align:center}
-#detNo{font-family:var(--num); font-weight:700; letter-spacing:2px}
